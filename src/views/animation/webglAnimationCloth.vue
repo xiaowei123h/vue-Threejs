@@ -73,7 +73,7 @@ export default {
             this.scene.background = new this.$THREE.Color(0xcce0ff)
             this.scene.fog = new this.$THREE.Fog(0xcce0ff, 500, 10000)
             // camera
-            this.camera = new this.$THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 1, 10000)
+            this.camera = new this.$THREE.PerspectiveCamera(30, (this.$webglInnerWidth) / window.innerHeight, 1, 10000)
             this.camera.position.set(1000, 50, 1500)
             // lights
             this.scene.add(new this.$THREE.AmbientLight(0x666666))
@@ -168,7 +168,7 @@ export default {
             // renderer
             this.renderer = new this.$THREE.WebGLRenderer({antialias: true})
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.renderer.shadowMap.enabled = true
@@ -179,6 +179,7 @@ export default {
             controls.maxDistance = 5000
             // performance monitor
             this.stats = new this.$Stats()
+            this.stats.dom.style.left = '280px'
             this.container.appendChild( this.stats.dom )
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -212,9 +213,7 @@ export default {
             this.renderer.render(this.scene, this.camera)
         },
         onWindowResize() {
-            this.camera.aspect = window.innerWidth / window.innerHeight
-            this.camera.updateProjectionMatrix()
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.$onWindowResize(this.camera, this.renderer)
         },
         initPinsFormation() {
             this.pins = [6]
@@ -316,7 +315,6 @@ export default {
 
 <style scoped>
 .webglAnimationCloth-container {
-    background-color: #cce0ff;
     color: #000;
 }
 a {

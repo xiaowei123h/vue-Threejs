@@ -1,6 +1,7 @@
 # vueThree
 
 > Vue implements threejs instance
+Live demo: https://xiaowei123h.github.io/vue-Threejs/
 
 ## Build Setup
 

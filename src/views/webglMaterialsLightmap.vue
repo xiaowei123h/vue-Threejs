@@ -27,7 +27,7 @@ export default {
         }
     },
     mounted() {
-        this.SCREEN_WIDTH = window.innerWidth
+        this.SCREEN_WIDTH = this.$webglInnerWidth
         this.SCREEN_HEIGHT = window.innerHeight
         this.initShaderMaterialsData()
         this.init()
@@ -118,9 +118,7 @@ export default {
             this.stats.update()
         },
         onWindowResize() {
-            this.camera.aspect = window.innerWidth / window.innerHeight
-            this.camera.updateProjectionMatrix()
-            this.renderer.setSize( window.innerWidth, window.innerHeight )
+            this.$onWindowResize(this.camera, this.renderer)
         }
     }
 }

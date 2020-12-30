@@ -25,7 +25,7 @@ export default {
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000)
+            this.camera = new this.$THREE.PerspectiveCamera(45, (this.$webglInnerWidth) / window.innerHeight, 1, 10000)
             this.camera.position.set(0, - 400, 600)
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0xf0f0f0)
@@ -79,7 +79,7 @@ export default {
             }) //end load function
             this.renderer = new this.$THREE.WebGLRenderer({antialias: true})
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglGeometryTextStroke-container')[0].appendChild(this.renderer.domElement)
             // document.body.appendChild(this.renderer.domElement)
             const controls = new OrbitControls(this.camera, this.renderer.domElement)
@@ -92,9 +92,7 @@ export default {
 			this.render()
         },
         onWindowResize() {
-            this.camera.aspect = window.innerWidth / window.innerHeight
-            this.camera.updateProjectionMatrix()
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.$onWindowResize(this.camera, this.renderer)
         },
         render() {
             this.renderer.render(this.scene, this.camera)
@@ -108,7 +106,10 @@ export default {
     background-color: #f0f0f0;
 	color: #444;
 }
-a {
+#info {
+    color: #000;
+}
+#info a {
     color: #08f;
 }
 </style>

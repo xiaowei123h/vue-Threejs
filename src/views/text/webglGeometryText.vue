@@ -93,14 +93,14 @@ export default {
 			for (var i in this.weightMap) {
                 this.reverseWeightMap[ this.weightMap[ i ] ] = i
             }
-            this.windowHalfX = (window.innerWidth - 297) / 2
+            this.windowHalfX = (this.$webglInnerWidth) / 2
         },
         init() {
             this.container = document.createElement( 'div' )
             document.getElementsByClassName('text-container')[0].appendChild(this.container)
             this.permalink = document.getElementById("permalink")
             // CAMERA
-            this.camera = new this.$THREE.PerspectiveCamera(30, (window.innerWidth - 297) / window.innerHeight, 1, 1500)
+            this.camera = new this.$THREE.PerspectiveCamera(30, (this.$webglInnerWidth) / window.innerHeight, 1, 1500)
             this.camera.position.set(0, 400, 700)
             this.cameraTarget = new this.$THREE.Vector3(0, 150, 0)
             // SCENE
@@ -151,7 +151,7 @@ export default {
             // RENDERER
             this.renderer = new this.$THREE.WebGLRenderer({antialias: true})
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth - 297, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             // STATS
             this.stats = new this.$Stats()
@@ -176,10 +176,8 @@ export default {
             this.renderer.render(this.scene, this.camera)
         },
         onWindowResize() {
-            this.windowHalfX = (window.innerWidth - 297) / 2
-            this.camera.aspect = (window.innerWidth - 297) / window.innerHeight
-            this.camera.updateProjectionMatrix()
-            this.renderer.setSize( window.innerWidth - 297, window.innerHeight )
+            this.windowHalfX = (this.$webglInnerWidth) / 2
+            this.$onWindowResize(this.camera, this.renderer)
         },
         onPointerDown(event) {
             if (event.isPrimary === false) {

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
 import Layout from '@/layout'
 
 Vue.use(Router)
@@ -16,26 +15,38 @@ export default new Router({
           path: '/webglGeometryText',
           name: 'Setone',
           component: () => import('@/views/text/webglGeometryText'),
-          meta: {title: 'webgl_geometry_text', icon: 'webgl_geometry_text'}
-        }
-      ]
-    },
-    {
-      path: '/set',
-      name: 'set',
-      component: Layout,
-      children: [
-        {
-          path: '/set',
-          name: 'Set',
-          component: () => import('@/views/test'),
-          meta: {title: '个人中心', icon: 'form'}
+          meta: {title: 'geometry_text', icon: 'webgl_geometry_text'}
         },
         {
-          path: '/setone',
-          name: 'Setone',
-          component: () => import('@/views/text/webglGeometryText'),
-          meta: {title: '123', icon: 'form'}
+          path: '/webglGeometryTextStroke',
+          name: 'webglGeometryTextStroke',
+          component: () => import('@/views/text/webglGeometryTextStroke'),
+          meta: {title: 'geometry_text_stroke', icon: 'webgl_geometry_text_stroke'}
+        },
+        {
+          path: '/webglGeometryTextShapes',
+          name: 'webglGeometryTextShapes',
+          component: () => import('@/views/text/webglGeometryTextShapes'),
+          meta: {title: 'geometry_text_shapes', icon: 'webgl_geometry_text_shapes'}
+        },
+        {
+          path: '/webglAnimationCloth',
+          name: 'webglAnimationCloth',
+          component: () => import('@/views/animation/webglAnimationCloth'),
+          meta: {title: 'animation_cloth', icon: 'webgl_animation_cloth'}
+        },
+        {
+          path: '/webglAnimationKeyframes',
+          name: 'webglAnimationKeyframes',
+          component: () => import('@/views/animation/webglAnimationKeyframes'),
+          meta: {title: 'animation_keyframes', icon: 'webgl_animation_keyframes'}
+        },
+        {
+          // 导入GLTF模型，打光两个方块,OrbitControls（轨道控制）
+          path: '/webglMaterialsLightmap',
+          name: 'webglMaterialsLightmap',
+          component: () => import('@/views/webglMaterialsLightmap'),
+          meta: {title: 'materials_lightmap', icon: 'webgl_materials_lightmap'}
         }
       ]
     },
@@ -55,50 +66,10 @@ export default new Router({
       name: 'testLine',
       component: () => import('@/views/testLine')
     },
-    {
-      // 创建文字，改变文字字体大小粗细颜色
-      path: '/webglGeometryText',
-      name: 'webglGeometryText',
-      component: () => import('@/views/text/webglGeometryText')
-    },
-    {
-      // 文字
-      path: '/webglGeometryTextStroke',
-      name: 'webglGeometryTextStroke',
-      component: () => import('@/views/text/webglGeometryTextStroke')
-    },
-    {
-      // 文字
-      path: '/webglGeometryTextShapes',
-      name: 'webglGeometryTextShapes',
-      component: () => import('@/views/text/webglGeometryTextShapes')
-    },
-    {
-      path: '/webglAnimationCloth',
-      name: 'webglAnimationCloth',
-      component: () => import('@/views/animation/webglAnimationCloth')
-    },
-    {
-      path: '/webglAnimationKeyframes',
-      name: 'webglAnimationKeyframes',
-      component: () => import('@/views/animation/webglAnimationKeyframes')
-    },
     // {
     //   path: '/webglAnimationSkinningBlending',
     //   name: 'webglAnimationSkinningBlending',
     //   component: () => import('@/views/animation/webglAnimationSkinningBlending')
     // },
-    {
-      // 导入GLTF模型，打光两个方块,OrbitControls（轨道控制）
-      path: '/webglMaterialsLightmap',
-      name: 'webglMaterialsLightmap',
-      component: () => import('@/views/webglMaterialsLightmap')
-    },
-    {
-      path: '/hello',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    
   ]
 })

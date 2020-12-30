@@ -6,7 +6,7 @@
             </div>
             <search :search="search" @changeSearch="setSearch"></search>
             <div class="layout-list">
-                <div class="layout-list-item" v-for="item in list" :key="item.title" @click="title=item.title" :class="title==item.title ? 'chose-list' : ''">
+                <div class="layout-list-item" v-for="(item, index) in list" :key="item.title" @click="title=item.title" :class="title==item.title ? 'chose-list' : ''" :style="{marginBottom: index==(list.length-1) ? '30px' : '0'}">
                     <router-link :to="item.path" class="list-router">
                         <div class="list-item-img">
                             <img :src="item.icon">
@@ -95,7 +95,8 @@ export default {
 }
 .view-container {
     width: calc(100% - 280px);
-    background: grey;
+    height: 100vh;
+    overflow: hidden;
 }
 .view-list {
     width: 280px;
@@ -120,23 +121,23 @@ export default {
     overflow-y: auto;
 }
 .layout-list-item {
-    width: 250px;
+    width: 240px;
     height: 180px;
     margin-left: 15px;
     margin-top: 15px;
     border-radius: 3px;
 }
 .list-item-img {
-    width: 250px;
+    width: 240px;
     height: 140px;
 }
 .list-item-img img {
-    width: 250px;
+    width: 240px;
     height: 140px;
 }
 .list-item-title {
     box-sizing: border-box;
-    width: 250px;
+    width: 240px;
     height: 40px;
     line-height: 40px;
     padding-left: 15px;
@@ -148,6 +149,6 @@ export default {
     color: #000;
 }
 .chose-list {
-    border: 3px solid #049EF4;
+    box-shadow: 0 0 0 3px #049EF4;
 }
 </style>

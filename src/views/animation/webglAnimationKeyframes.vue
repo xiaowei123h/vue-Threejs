@@ -44,7 +44,7 @@ export default {
             this.container.appendChild(this.renderer.domElement)
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0xbfe3dd)
-            this.camera = new this.$THREE.PerspectiveCamera(40, (this.$webglInnerWidth) / window.innerHeight, 1, 100)
+            this.camera = new this.$THREE.PerspectiveCamera(40, this.$webglInnerWidth / window.innerHeight, 1, 100)
             this.camera.position.set(5, 2, 8)
             this.controls = new OrbitControls(this.camera, this.renderer.domElement)
             this.controls.target.set(0, 0.5, 0)

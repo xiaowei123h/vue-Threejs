@@ -102,6 +102,7 @@ export default {
             this.controls.enableZoom = false
             // STATS
             this.stats = new this.$Stats()
+            this.stats.dom.style.left = '280px'
             this.container.appendChild(this.stats.dom)
             // MODEL
             this.loader = new this.$THREE.ObjectLoader()

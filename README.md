@@ -3,6 +3,9 @@
 > Vue implements threejs instance
 Live demo: https://xiaowei123h.github.io/vue-Threejs/
 
+> threejs -dat.GUI
+GUI: https://github.com/dataarts/dat.gui
+
 ## Build Setup
 
 ``` bash

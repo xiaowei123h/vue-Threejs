@@ -143,6 +143,9 @@ export default {
     padding-left: 15px;
     font-size: 16px;
     background: #F7F7F7;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .list-router {
     text-decoration: none;

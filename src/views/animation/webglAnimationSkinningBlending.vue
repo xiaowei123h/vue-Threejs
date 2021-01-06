@@ -34,16 +34,20 @@ export default {
             actions: null,
             settings: null,
             singleStepMode: false,
-            sizeOfNextStep: 0
+            sizeOfNextStep: 0,
+            gui: null
         }
     },
     mounted() {
         this.init()
     },
+    beforeDestroy() {
+        this.gui.hide()
+    },
     methods: {
         init() {
             var container = document.getElementById('container')
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.set(1, 2, - 3)
             this.camera.lookAt(0, 1, 0)
             this.clock = new this.$THREE.Clock()
@@ -98,22 +102,26 @@ export default {
             })
             this.renderer = new this.$THREE.WebGLRenderer({antialias: true})
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.renderer.shadowMap.enabled = true
             container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
+            this.stats.dom.style.left = '280px'
             container.appendChild(this.stats.dom)
-            window.addEventListener('resize', onWindowResize(this.camera, this.renderer), false)
+            window.addEventListener('resize', this.onWindowResize, false)
+        },
+        onWindowResize() {
+            this.$onWindowResize(this.camera, this.renderer)
         },
         createPanel() {
-            var panel = new GUI({width: 310})
-            var folder1 = panel.addFolder('Visibility')
-            var folder2 = panel.addFolder('Activation/Deactivation')
-            var folder3 = panel.addFolder('Pausing/Stepping')
-            var folder4 = panel.addFolder('Crossfading')
-            var folder5 = panel.addFolder('Blend Weights')
-            var folder6 = panel.addFolder('General Speed')
+            this.gui = new GUI({width: 310})
+            var folder1 = this.gui.addFolder('Visibility')
+            var folder2 = this.gui.addFolder('Activation/Deactivation')
+            var folder3 = this.gui.addFolder('Pausing/Stepping')
+            var folder4 = this.gui.addFolder('Crossfading')
+            var folder5 = this.gui.addFolder('Blend Weights')
+            var folder6 = this.gui.addFolder('General Speed')
             var that = this
             this.settings = {
                 'show model': true,
@@ -302,11 +310,6 @@ export default {
                 this.crossFadeControls[3].setEnabled()
             }
         },
-        // onWindowResize() {
-        //     this.camera.aspect = window.innerWidth / window.innerHeight
-        //     this.camera.updateProjectionMatrix()
-        //     this.renderer.setSize(window.innerWidth, window.innerHeight)
-        // },
         animate() {
             // Render loop
             requestAnimationFrame(this.animate)

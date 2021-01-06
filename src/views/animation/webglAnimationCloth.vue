@@ -47,7 +47,8 @@ export default {
             renderer: null,
             object: null,
             il: null,
-            constraints: null
+            constraints: null,
+            gui: null
         }
     },
     mounted() {
@@ -63,6 +64,9 @@ export default {
         this.initPinsFormation()
         this.init()
         this.animate(0)
+    },
+    beforeDestroy() {
+        this.gui.hide()
     },
     methods: {
         init() {
@@ -184,10 +188,10 @@ export default {
             //
             window.addEventListener('resize', this.onWindowResize, false)
             //
-            const gui = new GUI()
-            gui.add(this.params, 'enableWind').name('Enable wind')
-            gui.add(this.params, 'showBall').name('Show ball')
-            gui.add(this.params, 'togglePins').name('Toggle pins')
+            this.gui = new GUI()
+            this.gui.add(this.params, 'enableWind').name('Enable wind')
+            this.gui.add(this.params, 'showBall').name('Show ball')
+            this.gui.add(this.params, 'togglePins').name('Toggle pins')
             //
             if (typeof TESTING !== 'undefined') {
                 for (var i = 0; i < 50; i ++) {

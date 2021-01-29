@@ -47,9 +47,9 @@ export default {
     methods: {
         init() {
             var container = document.getElementById('container')
-            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 1000)
-            this.camera.position.set(1, 2, - 3)
-            this.camera.lookAt(0, 1, 0)
+            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera.position.set( 1, 2, - 3 )
+            this.camera.lookAt(0,1,0)
             this.clock = new this.$THREE.Clock()
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0xa0a0a0)
@@ -67,42 +67,44 @@ export default {
             dirLight.shadow.camera.near = 0.1
             dirLight.shadow.camera.far = 40
             this.scene.add(dirLight)
-            // this.scene.add(new this.$THREE.CameraHelper(dirLight.shadow.camera))
+            this.scene.add(new this.$THREE.CameraHelper(dirLight.shadow.camera))
             // ground
             var mesh = new this.$THREE.Mesh(new this.$THREE.PlaneBufferGeometry(100, 100), new this.$THREE.MeshPhongMaterial({color: 0x999999, depthWrite: false}))
             mesh.rotation.x = - Math.PI / 2
             mesh.receiveShadow = true
-            this.scene.add(mesh)
-            var that = this
+            // this.scene.add(mesh)
             var loader = new GLTFLoader()
-            loader.load('static/models/gltf/Soldier.glb', function(gltf) {
-                that.model = gltf.scene
-                that.scene.add(that.model)
-                that.model.traverse(function(object) {
+            
+            loader.load('static/models/gltf/Soldier.glb', (gltf) => {
+                console.log('gltf')
+                console.log(gltf.scene)
+                this.model = gltf.scene
+                this.scene.add(gltf.scene)
+                this.model.traverse((object) => {
                     if(object.isMesh) object.castShadow = true
                 })
                 //
-                that.skeleton = new that.$THREE.SkeletonHelper(that.model)
-                that.skeleton.visible = false
-                that.scene.add(that.skeleton)
+                this.skeleton = new this.$THREE.SkeletonHelper(this.model)
+                this.skeleton.visible = false
+                this.scene.add(this.skeleton)
                 //
-                that.createPanel()
+                this.createPanel()
                 //
                 console.log(gltf.animations)
                 var animations = gltf.animations
-                console.log('that.model')
-                console.log(that.model)
-                that.mixer = new that.$THREE.AnimationMixer(that.model)
-                that.idleAction = that.mixer.clipAction(animations[0])
-                that.walkAction = that.mixer.clipAction(animations[3])
-                that.runAction = that.mixer.clipAction(animations[1])
-                that.actions = [that.idleAction, that.walkAction, that.runAction]
-                that.activateAllActions()
-                that.animate()
+                console.log('this.model')
+                console.log(this.model)
+                this.mixer = new this.$THREE.AnimationMixer(this.model)
+                this.idleAction = this.mixer.clipAction(animations[0])
+                this.walkAction = this.mixer.clipAction(animations[3])
+                this.runAction = this.mixer.clipAction(animations[1])
+                this.actions = [this.idleAction, this.walkAction, this.runAction]
+                this.activateAllActions()
+                this.animate()
             })
             this.renderer = new this.$THREE.WebGLRenderer({antialias: true})
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
+            this.renderer.setSize(window.innerWidth, window.innerHeight)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.renderer.shadowMap.enabled = true
             container.appendChild(this.renderer.domElement)
@@ -122,7 +124,6 @@ export default {
             var folder4 = this.gui.addFolder('Crossfading')
             var folder5 = this.gui.addFolder('Blend Weights')
             var folder6 = this.gui.addFolder('General Speed')
-            var that = this
             this.settings = {
                 'show model': true,
                 'show skeleton': false,
@@ -131,17 +132,17 @@ export default {
                 'pause/continue': this.pauseContinue,
                 'make single step': this.toSingleStepMode,
                 'modify step size': 0.05,
-                'from walk to idle': function() {
-                    that.prepareCrossFade(that.walkAction, this.idleAction, 1.0)
+                'from walk to idle': () => {
+                    this.prepareCrossFade(this.walkAction, this.idleAction, 1.0)
                 },
-                'from idle to walk': function() {
-                    that.prepareCrossFade(this.idleAction, that.walkAction, 0.5)
+                'from idle to walk': () => {
+                    this.prepareCrossFade(this.idleAction, this.walkAction, 0.5)
                 },
-                'from walk to run': function() {
-                    that.prepareCrossFade(that.walkAction, that.runAction, 2.5)
+                'from walk to run': () => {
+                    this.prepareCrossFade(this.walkAction, this.runAction, 2.5)
                 },
-                'from run to walk': function() {
-                    that.prepareCrossFade(that.runAction, that.walkAction, 5.0)
+                'from run to walk': () => {
+                    this.prepareCrossFade(this.runAction, this.walkAction, 5.0)
                 },
                 'use default duration': true,
                 'set custom duration': 3.5,
@@ -163,15 +164,14 @@ export default {
             this.crossFadeControls.push(folder4.add(this.settings, 'from run to walk'))
             folder4.add(this.settings, 'use default duration')
             folder4.add(this.settings, 'set custom duration', 0, 10, 0.01)
-            var that = this
-            folder5.add(this.settings, 'modify idle weight', 0.0, 1.0, 0.01).listen().onChange(function(weight) {
-                that.setWeight(that.idleAction, weight)
+            folder5.add(this.settings, 'modify idle weight', 0.0, 1.0, 0.01).listen().onChange((weight) => {
+                this.setWeight(this.idleAction, weight)
             })
-            folder5.add(this.settings, 'modify walk weight', 0.0, 1.0, 0.01).listen().onChange(function(weight) {
-                that.setWeight(that.walkAction, weight)
+            folder5.add(this.settings, 'modify walk weight', 0.0, 1.0, 0.01).listen().onChange((weight) => {
+                this.setWeight(this.walkAction, weight)
             })
-            folder5.add(this.settings, 'modify run weight', 0.0, 1.0, 0.01).listen().onChange(function(weight) {
-                that.setWeight(that.runAction, weight)
+            folder5.add(this.settings, 'modify run weight', 0.0, 1.0, 0.01).listen().onChange((weight) => {
+                this.setWeight(this.runAction, weight)
             })
             folder6.add(this.settings, 'modify time scale', 0.0, 1.5, 0.01).onChange(this.modifyTimeScale)
             folder1.open()
@@ -180,21 +180,21 @@ export default {
             folder4.open()
             folder5.open()
             folder6.open()
-            this.crossFadeControls.forEach(function(control) {
+            this.crossFadeControls.forEach((control) => {
                 control.classList1 = control.domElement.parentElement.parentElement.classList
                 control.classList2 = control.domElement.previousElementSibling.classList
-                control.setDisabled = function () {
+                control.setDisabled = () => {
                     control.classList1.add('no-pointer-events')
                     control.classList2.add('control-disabled')
                 }
-                control.setEnabled = function () {
+                control.setEnabled = () => {
                     control.classList1.remove('no-pointer-events')
                     control.classList2.remove('control-disabled')
                 }
             })
         },
         deactivateAllActions() {
-            this.actions.forEach(function(action) {
+            this.actions.forEach((action) => {
                 action.stop()
             })
         },
@@ -202,7 +202,7 @@ export default {
             this.setWeight(this.idleAction, this.settings['modify idle weight'])
             this.setWeight(this.walkAction, this.settings['modify walk weight'])
             this.setWeight(this.runAction, this.settings['modify run weight'])
-            this.actions.forEach(function(action) {
+            this.actions.forEach((action) => {
                 action.play()
             })
         },
@@ -226,12 +226,12 @@ export default {
             }
         },
         unPauseAllActions() {
-            this.actions.forEach(function(action) {
+            this.actions.forEach((action) => {
                 action.paused = false
             })
         },
         pauseAllActions() {
-            this.actions.forEach(function(action) {
+            this.actions.forEach((action) => {
                 action.paused = true
             })
         },
@@ -340,7 +340,7 @@ export default {
 .webglAnimationSkinningBlending-container {
     width: 100%;
 }
-a {
+#info a {
     color: #f00;
 }
 .ac {  /* prevent dat-gui from being selected */

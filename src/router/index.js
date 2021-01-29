@@ -432,6 +432,156 @@ export default new Router({
             component: () => import('@/views/lights/webglLightsPointlights'),
             meta: {title: 'lights_pointlights', icon: 'webgl_lights_pointlights'}
         },
+        {
+            path: '/webglLightsPointlights2',
+            name: 'webglLightsPointlights2',
+            component: () => import('@/views/lights/webglLightsPointlights2'),
+            meta: {title: 'lights_pointlights2', icon: 'webgl_lights_pointlights2'}
+        },
+        {
+            path: '/webglLightsRectarealight',
+            name: 'webglLightsRectarealight',
+            component: () => import('@/views/lights/webglLightsRectarealight'),
+            meta: {title: 'lights_rectarealight', icon: 'webgl_lights_rectarealight'}
+        },
+        {
+            path: '/webglLightsSpotlight',
+            name: 'webglLightsSpotlight',
+            component: () => import('@/views/lights/webglLightsSpotlight'),
+            meta: {title: 'lights_spotlight', icon: 'webgl_lights_spotlight'}
+        },
+        {
+            path: '/webglLightsSpotlights',
+            name: 'webglLightsSpotlights',
+            component: () => import('@/views/lights/webglLightsSpotlights'),
+            meta: {title: 'lights_spotlights', icon: 'webgl_lights_spotlights'}
+        },
+        {
+            path: '/webglLinesColors',
+            name: 'webglLinesColors',
+            component: () => import('@/views/lines/webglLinesColors'),
+            meta: {title: 'lines_colors', icon: 'webgl_lines_colors'}
+        },
+        {
+            path: '/webglLinesDashed',
+            name: 'webglLinesDashed',
+            component: () => import('@/views/lines/webglLinesDashed'),
+            meta: {title: 'lines_dashed', icon: 'webgl_lines_dashed'}
+        },
+        {
+            path: '/webglLinesFatWireframe',
+            name: 'webglLinesFatWireframe',
+            component: () => import('@/views/lines/webglLinesFatWireframe'),
+            meta: {title: 'lines_fat_wireframe', icon: 'webgl_lines_fat_wireframe'}
+        },
+        {
+            path: '/webglLinesFat',
+            name: 'webglLinesFat',
+            component: () => import('@/views/lines/webglLinesFat'),
+            meta: {title: 'lines_fat', icon: 'webgl_lines_fat'}
+        },
+        {
+            path: '/webglLinesSphere',
+            name: 'webglLinesSphere',
+            component: () => import('@/views/lines/webglLinesSphere'),
+            meta: {title: 'lines_sphere', icon: 'webgl_lines_sphere'}
+        },
+        {
+            path: '/webglLoader3ds',
+            name: 'webglLoader3ds',
+            component: () => import('@/views/loader/webglLoader3ds'),
+            meta: {title: 'loader_3ds', icon: 'webgl_loader_3ds'}
+        },
+        {
+            path: '/webglLoader3mfMaterials',
+            name: 'webglLoader3mfMaterials',
+            component: () => import('@/views/loader/webglLoader3mfMaterials'),
+            meta: {title: 'loader_3mf_materials', icon: 'webgl_loader_3mf_materials'}
+        },
+        {
+            path: '/webglLoaderAmf',
+            name: 'webglLoaderAmf',
+            component: () => import('@/views/loader/webglLoaderAmf'),
+            meta: {title: 'loader_amf', icon: 'webgl_loader_amf'}
+        },
+        {
+            path: '/webglLoaderBvh',
+            name: 'webglLoaderBvh',
+            component: () => import('@/views/loader/webglLoaderBvh'),
+            meta: {title: 'loader_bvh', icon: 'webgl_loader_bvh'}
+        },
+        {
+            path: '/webglLoaderColladaKnematics',
+            name: 'webglLoaderColladaKnematics',
+            component: () => import('@/views/loader/webglLoaderColladaKnematics'),
+            meta: {title: 'loader_collada_kinematics', icon: 'webgl_loader_collada_kinematics'}
+        },
+        {
+            path: '/webglLoaderGcode',
+            name: 'webglLoaderGcode',
+            component: () => import('@/views/loader/webglLoaderGcode'),
+            meta: {title: 'loader_gcode', icon: 'webgl_loader_gcode'}
+        },
+        {
+            path: '/webglLoaderGltf',
+            name: 'webglLoaderGltf',
+            component: () => import('@/views/loader/webglLoaderGltf'),
+            meta: {title: 'loader_gltf', icon: 'webgl_loader_gltf'}
+        },
+        {
+            path: '/webglLoaderImagebitmap',
+            name: 'webglLoaderImagebitmap',
+            component: () => import('@/views/loader/webglLoaderImagebitmap'),
+            meta: {title: 'loader_imagebitmap', icon: 'webgl_loader_imagebitmap'}
+        },
+        {
+            path: '/webglLoaderKmz',
+            name: 'webglLoaderKmz',
+            component: () => import('@/views/loader/webglLoaderKmz'),
+            meta: {title: 'loader_kmz', icon: 'webgl_loader_kmz'}
+        },
+        {
+            path: '/webglLoaderLwo',
+            name: 'webglLoaderLwo',
+            component: () => import('@/views/loader/webglLoaderLwo'),
+            meta: {title: 'loader_lwo', icon: 'webgl_loader_lwo'}
+        },
+        {
+            path: '/webglLoaderMd2',
+            name: 'webglLoaderMd2',
+            component: () => import('@/views/loader/webglLoaderMd2'),
+            meta: {title: 'loader_md2', icon: 'webgl_loader_md2'}
+        },
+        {
+            path: '/webglLoaderMdd',
+            name: 'webglLoaderMdd',
+            component: () => import('@/views/loader/webglLoaderMdd'),
+            meta: {title: 'loader_mdd', icon: 'webgl_loader_mdd'}
+        },
+        {
+            path: '/webglLoaderNodes',
+            name: 'webglLoaderNodes',
+            component: () => import('@/views/loader/webglLoaderNodes'),
+            meta: {title: 'loader_nodes', icon: 'webgl_loader_nodes'}
+        },
+        {
+            path: '/webglLoaderNrrd',
+            name: 'webglLoaderNrrd',
+            component: () => import('@/views/loader/webglLoaderNrrd'),
+            meta: {title: 'loader_nrrd', icon: 'webgl_loader_nrrd'}
+        },
+        {
+            path: '/webglLoaderObjMtl',
+            name: 'webglLoaderObjMtl',
+            component: () => import('@/views/loader/webglLoaderObjMtl'),
+            meta: {title: 'loader_obj_mtl', icon: 'webgl_loader_obj_mtl'}
+        },
+        {
+            path: '/webglLoaderPcd',
+            name: 'webglLoaderPcd',
+            component: () => import('@/views/loader/webglLoaderPcd'),
+            meta: {title: 'loader_pcd', icon: 'webgl_loader_pcd'}
+        }
       ]
     },
     {
@@ -451,13 +601,122 @@ export default new Router({
       component: () => import('@/views/testLine')
     },
     // {
-    //     path: '/webglLightsPointlights',
-    //     name: 'webglLightsPointlights',
-    //     component: () => import('@/views/lights/webglLightsPointlights'),
-    //     meta: {title: 'lights_pointlights', icon: 'webgl_lights_pointlights'}
+    //     path: '/webglLoaderPdb',
+    //     name: 'webglLoaderPdb',
+    //     component: () => import('@/views/loader/webglLoaderPdb'),
+    //     meta: {title: 'loader_pdb', icon: 'webgl_loader_pdb'}
     // },
 
 
+
+    // {
+    //     path: '/webglLoaderPdb',
+    //     name: 'webglLoaderPdb',
+    //     component: () => import('@/views/loader/webglLoaderPdb'),
+    //     meta: {title: 'loader_pdb', icon: 'webgl_loader_pdb'}
+    // },
+    // {
+    //     path: '/webgLloaderObj2',
+    //     name: 'webgLloaderObj2',
+    //     component: () => import('@/views/loader/webgLloaderObj2'),
+    //     meta: {title: 'loader_obj2', icon: 'webgl_loader_obj2'}
+    // },
+    // {
+    //     path: '/webglLoaderObj2Options',
+    //     name: 'webglLoaderObj2Options',
+    //     component: () => import('@/views/loader/webglLoaderObj2Options'),
+    //     meta: {title: 'loader_obj2_options', icon: 'webgl_loader_obj2_options'}
+    // },
+    // {
+    //     path: '/webglLoaderObj',
+    //     name: 'webglLoaderObj',
+    //     component: () => import('@/views/loader/webglLoaderObj'),
+    //     meta: {title: 'loader_obj', icon: 'webgl_loader_obj'}
+    // },
+    // {
+    //     path: '/webglLoaderMmd',
+    //     name: 'webglLoaderMmd',
+    //     component: () => import('@/views/loader/webglLoaderMmd'),
+    //     meta: {title: 'loader_mmd', icon: 'webgl_loader_mmd'}
+    // },
+    // {
+    //     path: '/webglLoaderMmdPose',
+    //     name: 'webglLoaderMmdPose',
+    //     component: () => import('@/views/loader/webglLoaderMmdPose'),
+    //     meta: {title: 'loader_mmd_pose', icon: 'webgl_loader_mmd_pose'}
+    // },
+    // {
+    //     path: '/webglLoaderMmdAudio',
+    //     name: 'webglLoaderMmdAudio',
+    //     component: () => import('@/views/loader/webglLoaderMmdAudio'),
+    //     meta: {title: 'loader_mmd_audio', icon: 'webgl_loader_mmd_audio'}
+    // },
+    // {
+    //     path: '/webglLoaderMd2Control',
+    //     name: 'webglLoaderMd2Control',
+    //     component: () => import('@/views/loader/webglLoaderMd2Control'),
+    //     meta: {title: 'loader_md2_control', icon: 'webgl_loader_md2_control'}
+    // },
+    // {
+    //     path: '/webglLoaderLdraw',
+    //     name: 'webglLoaderLdraw',
+    //     component: () => import('@/views/loader/webglLoaderLdraw'),
+    //     meta: {title: 'loader_ldraw', icon: 'webgl_loader_ldraw'}
+    // },
+    // {
+    //     path: '/webglLoaderGltfExtensions',
+    //     name: 'webglLoaderGltfExtensions',
+    //     component: () => import('@/views/loader/webglLoaderGltfExtensions'),
+    //     meta: {title: 'loader_gltf_extensions', icon: 'webgl_loader_gltf_extensions'}
+    // },
+    // {
+    //     path: '/webglLoaderFbx',
+    //     name: 'webglLoaderFbx',
+    //     component: () => import('@/views/loader/webglLoaderFbx'),
+    //     meta: {title: 'loader_fbx', icon: 'webgl_loader_fbx'}
+    // },
+    // {
+    //     path: '/webglLoaderFbxNurbs',
+    //     name: 'webglLoaderFbxNurbs',
+    //     component: () => import('@/views/loader/webglLoaderFbxNurbs'),
+    //     meta: {title: 'loader_fbx_nurbs', icon: 'webgl_loader_fbx_nurbs'}
+    // },
+    // {
+    //     path: '/webglLoaderDraco',
+    //     name: 'webglLoaderDraco',
+    //     component: () => import('@/views/loader/webglLoaderDraco'),
+    //     meta: {title: 'webgl_loader_draco', icon: 'webgl_loader_draco'}
+    // },
+    // {
+    //     path: '/webglLoaderCollada',
+    //     name: 'webglLoaderCollada',
+    //     component: () => import('@/views/loader/webglLoaderCollada'),
+    //     meta: {title: 'webgl_loader_collada', icon: 'webgl_loader_collada'}
+    // },
+    // {
+    //     path: '/webglLoaderColladaSkinning',
+    //     name: 'webglLoaderColladaSkinning',
+    //     component: () => import('@/views/loader/webglLoaderColladaSkinning'),
+    //     meta: {title: 'webgl_loader_collada_skinning', icon: 'webgl_loader_collada_skinning'}
+    // },
+    // {
+    //     path: '/webglLoaderAssimp',
+    //     name: 'webglLoaderAssimp',
+    //     component: () => import('@/views/loader/webglLoaderAssimp'),
+    //     meta: {title: 'loader_assimp', icon: 'webgl_loader_assimp'}
+    // },
+    // {
+    //     path: '/webglLoader3mf',
+    //     name: 'webglLoader3mf',
+    //     component: () => import('@/views/loader/webglLoader3mf'),
+    //     meta: {title: 'loader_3mf', icon: 'webgl_loader_3mf'}
+    // },
+    // {
+    //     path: '/webglLoader3dm',
+    //     name: 'webglLoader3dm',
+    //     component: () => import('@/views/loader/webglLoader3dm'),
+    //     meta: {title: 'loader_3dm', icon: 'webgl_loader_3dm'}
+    // },
     // {
     //     path: '/webglLightningstrike',
     //     name: 'webglLightningstrike',

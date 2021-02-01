@@ -581,7 +581,79 @@ export default new Router({
             name: 'webglLoaderPcd',
             component: () => import('@/views/loader/webglLoaderPcd'),
             meta: {title: 'loader_pcd', icon: 'webgl_loader_pcd'}
-        }
+        },
+        {
+            path: '/webglLoaderPly',
+            name: 'webglLoaderPly',
+            component: () => import('@/views/loader/webglLoaderPly'),
+            meta: {title: 'loader_ply', icon: 'webgl_loader_ply'}
+        },
+        {
+            path: '/webglLoaderStl',
+            name: 'webglLoaderStl',
+            component: () => import('@/views/loader/webglLoaderStl'),
+            meta: {title: 'loader_stl', icon: 'webgl_loader_stl'}
+        },
+        {
+            path: '/webglLoaderTextureExr',
+            name: 'webglLoaderTextureExr',
+            component: () => import('@/views/loader/webglLoaderTextureExr'),
+            meta: {title: 'loader_texture_exr', icon: 'webgl_loader_texture_exr'}
+        },
+        {
+            path: '/webglLoaderTextureHdr',
+            name: 'webglLoaderTextureHdr',
+            component: () => import('@/views/loader/webglLoaderTextureHdr'),
+            meta: {title: 'loader_texture_hdr', icon: 'webgl_loader_texture_hdr'}
+        },
+        {
+            path: '/webglLoaderTextureKtx',
+            name: 'webglLoaderTextureKtx',
+            component: () => import('@/views/loader/webglLoaderTextureKtx'),
+            meta: {title: 'loader_texture_ktx', icon: 'webgl_loader_texture_ktx'}
+        },
+        {
+            path: '/webglLoaderTextureRgbm',
+            name: 'webglLoaderTextureRgbm',
+            component: () => import('@/views/loader/webglLoaderTextureRgbm'),
+            meta: {title: 'webgl_loader_texture_rgbm', icon: 'webgl_loader_texture_rgbm'}
+        },
+        {
+            path: '/webglLoaderTextureTga',
+            name: 'webglLoaderTextureTga',
+            component: () => import('@/views/loader/webglLoaderTextureTga'),
+            meta: {title: 'webgl_loader_texture_tga', icon: 'webgl_loader_texture_tga'}
+        },
+        {
+            path: '/webglLoaderTtf',
+            name: 'webglLoaderTtf',
+            component: () => import('@/views/loader/webglLoaderTtf'),
+            meta: {title: 'loader_ttf', icon: 'webgl_loader_ttf'}
+        },
+        {
+            path: '/webglLoaderVox',
+            name: 'webglLoaderVox',
+            component: () => import('@/views/loader/webglLoaderVox'),
+            meta: {title: 'loader_vox', icon: 'webgl_loader_vox'}
+        },
+        {
+            path: '/webglLoaderVrml',
+            name: 'webglLoaderVrml',
+            component: () => import('@/views/loader/webglLoaderVrml'),
+            meta: {title: 'webgl_loader_vrml', icon: 'webgl_loader_vrml'}
+        },
+        {
+            path: '/webglLoaderXyz',
+            name: 'webglLoaderXyz',
+            component: () => import('@/views/loader/webglLoaderXyz'),
+            meta: {title: 'webgl_loader_xyz', icon: 'webgl_loader_xyz'}
+        },
+        {
+            path: '/webglLod',
+            name: 'webglLod',
+            component: () => import('@/views/lod/webglLod'),
+            meta: {title: 'lod', icon: 'webgl_lod'}
+        },
       ]
     },
     {
@@ -601,14 +673,74 @@ export default new Router({
       component: () => import('@/views/testLine')
     },
     // {
-    //     path: '/webglLoaderPdb',
-    //     name: 'webglLoaderPdb',
-    //     component: () => import('@/views/loader/webglLoaderPdb'),
-    //     meta: {title: 'loader_pdb', icon: 'webgl_loader_pdb'}
+    //     path: '/webglLod',
+    //     name: 'webglLod',
+    //     component: () => import('@/views/lod/webglLod'),
+    //     meta: {title: 'lod', icon: 'webgl_lod'}
     // },
 
 
 
+    // {
+    //     path: '/webglLoaderX',
+    //     name: 'webglLoaderX',
+    //     component: () => import('@/views/loader/webglLoaderX'),
+    //     meta: {title: 'webgl_loader_x', icon: 'webgl_loader_x'}
+    // },
+    // {
+    //     path: '/webglLoaderVtk',
+    //     name: 'webglLoaderVtk',
+    //     component: () => import('@/views/loader/webglLoaderVtk'),
+    //     meta: {title: 'webgl_loader_vtk', icon: 'webgl_loader_vtk'}
+    // },
+    // {
+    //     path: '/webglLoaderVrm',
+    //     name: 'webglLoaderVrm',
+    //     component: () => import('@/views/loader/webglLoaderVrm'),
+    //     meta: {title: 'webgl_loader_vrm', icon: 'webgl_loader_vrm'}
+    // },
+    // {
+    //     path: '/webglLoaderTexturePvrtc',
+    //     name: 'webglLoaderTexturePvrtc',
+    //     component: () => import('@/views/loader/webglLoaderTexturePvrtc'),
+    //     meta: {title: 'webgl_loader_texture_pvrtc', icon: 'webgl_loader_texture_pvrtc'}
+    // },
+    // {
+    //     path: '/webglLoaderTextureLottie',
+    //     name: 'webglLoaderTextureLottie',
+    //     component: () => import('@/views/loader/webglLoaderTextureLottie'),
+    //     meta: {title: 'webgl_loader_texture_lottie', icon: 'webgl_loader_texture_lottie'}
+    // },
+    // {
+    //     path: '/webglLoaderTextureKtx2',
+    //     name: 'webglLoaderTextureKtx2',
+    //     component: () => import('@/views/loader/webglLoaderTextureKtx2'),
+    //     meta: {title: 'webgl_loader_texture_ktx2', icon: 'webgl_loader_texture_ktx2'}
+    // },
+    // {
+    //     path: '/webglLoaderTextureDds',
+    //     name: 'webglLoaderTextureDds',
+    //     component: () => import('@/views/loader/webglLoaderTextureDds'),
+    //     meta: {title: 'loader_texture_dds', icon: 'webgl_loader_texture_dds'}
+    // },
+    // {
+    //     path: '/webglLoaderTextureBasis',
+    //     name: 'webglLoaderTextureBasis',
+    //     component: () => import('@/views/loader/webglLoaderTextureBasis'),
+    //     meta: {title: 'loader_texture_basis', icon: 'webgl_loader_texture_basis'}
+    // },
+    // {
+    //     path: '/webglLoaderSvg',
+    //     name: 'webglLoaderSvg',
+    //     component: () => import('@/views/loader/webglLoaderSvg'),
+    //     meta: {title: 'loader_svg', icon: 'webgl_loader_svg'}
+    // },
+    // {
+    //     path: '/webglLoaderPrwm',
+    //     name: 'webglLoaderPrwm',
+    //     component: () => import('@/views/loader/webglLoaderPrwm'),
+    //     meta: {title: 'loader_prwm', icon: 'webgl_loader_prwm'}
+    // },
     // {
     //     path: '/webglLoaderPdb',
     //     name: 'webglLoaderPdb',

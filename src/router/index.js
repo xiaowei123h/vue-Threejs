@@ -42,13 +42,6 @@ export default new Router({
           meta: {title: 'animation_keyframes', icon: 'webgl_animation_keyframes'}
         },
         {
-          // 导入GLTF模型，打光两个方块,OrbitControls（轨道控制）
-          path: '/webglMaterialsLightmap',
-          name: 'webglMaterialsLightmap',
-          component: () => import('@/views/webglMaterialsLightmap'),
-          meta: {title: 'materials_lightmap', icon: 'webgl_materials_lightmap'}
-        },
-        {
             path: '/webglAnimationSkinningMorph',
             name: 'webglAnimationSkinningMorph',
             component: () => import('@/views/animation/webglAnimationSkinningMorph'),
@@ -654,6 +647,240 @@ export default new Router({
             component: () => import('@/views/lod/webglLod'),
             meta: {title: 'lod', icon: 'webgl_lod'}
         },
+        {
+            path: '/webglMarchingcubes',
+            name: 'webglMarchingcubes',
+            component: () => import('@/views/marchingcubes/webglMarchingcubes'),
+            meta: {title: 'marchingcubes', icon: 'webgl_marchingcubes'}
+        },
+        {
+            path: '/webglMaterialsBlending',
+            name: 'webglMaterialsBlending',
+            component: () => import('@/views/materials/webglMaterialsBlending'),
+            meta: {title: 'materials_blending', icon: 'webgl_materials_blending'}
+        },
+        {
+            path: '/webglMaterialsBumpmap',
+            name: 'webglMaterialsBumpmap',
+            component: () => import('@/views/materials/webglMaterialsBumpmap'),
+            meta: {title: 'materials_bumpmap', icon: 'webgl_materials_bumpmap'}
+        },
+        {
+            path: '/webglMaterialsChannels',
+            name: 'webglMaterialsChannels',
+            component: () => import('@/views/materials/webglMaterialsChannels'),
+            meta: {title: 'materials_channels', icon: 'webgl_materials_channels'}
+        },
+        {
+            path: '/webglMaterialsCompile',
+            name: 'webglMaterialsCompile',
+            component: () => import('@/views/materials/webglMaterialsCompile'),
+            meta: {title: 'materials_compile', icon: 'webgl_materials_compile'}
+        },
+        {
+            path: '/webglMaterialsCubemapBallsReflection',
+            name: 'webglMaterialsCubemapBallsReflection',
+            component: () => import('@/views/materials/webglMaterialsCubemapBallsReflection'),
+            meta: {title: 'materials_cubemap_balls_reflection', icon: 'webgl_materials_cubemap_balls_reflection'}
+        },
+        {
+            path: '/webglMaterialsCubemapBallsRefraction',
+            name: 'webglMaterialsCubemapBallsRefraction',
+            component: () => import('@/views/materials/webglMaterialsCubemapBallsRefraction'),
+            meta: {title: 'materials_cubemap_balls_refraction', icon: 'webgl_materials_cubemap_balls_refraction'}
+        },
+        {
+            path: '/webglMaterialsCubemapDynamic',
+            name: 'webglMaterialsCubemapDynamic',
+            component: () => import('@/views/materials/webglMaterialsCubemapDynamic'),
+            meta: {title: 'materials_cubemap_dynamic', icon: 'webgl_materials_cubemap_dynamic'}
+        },
+        {
+            path: '/webglMaterialsCubemapRefraction',
+            name: 'webglMaterialsCubemapRefraction',
+            component: () => import('@/views/materials/webglMaterialsCubemapRefraction'),
+            meta: {title: 'materials_cubemap_refraction', icon: 'webgl_materials_cubemap_refraction'}
+        },
+        {
+            path: '/webglMaterialsCurvature',
+            name: 'webglMaterialsCurvature',
+            component: () => import('@/views/materials/webglMaterialsCurvature'),
+            meta: {title: 'materials_curvature', icon: 'webgl_materials_curvature'}
+        },
+        {
+            path: '/webglMaterialsDisplacementmap',
+            name: 'webglMaterialsDisplacementmap',
+            component: () => import('@/views/materials/webglMaterialsDisplacementmap'),
+            meta: {title: 'materials_displacementmap', icon: 'webgl_materials_displacementmap'}
+        },
+        {
+            path: '/webglMaterialsEnvmapsExr',
+            name: 'webglMaterialsEnvmapsExr',
+            component: () => import('@/views/materials/webglMaterialsEnvmapsExr'),
+            meta: {title: 'materials_envmaps_exr', icon: 'webgl_materials_envmaps_exr'}
+        },
+        {
+            path: '/webglMaterialsEnvmapsHdrNodes',
+            name: 'webglMaterialsEnvmapsHdrNodes',
+            component: () => import('@/views/materials/webglMaterialsEnvmapsHdrNodes'),
+            meta: {title: 'materials_envmaps_hdr_nodes', icon: 'webgl_materials_envmaps_hdr_nodes'}
+        },
+        {
+            path: '/webglMaterialsEnvmapsHdr',
+            name: 'webglMaterialsEnvmapsHdr',
+            component: () => import('@/views/materials/webglMaterialsEnvmapsHdr'),
+            meta: {title: 'materials_envmaps_hdr', icon: 'webgl_materials_envmaps_hdr'}
+        },
+        {
+            path: '/webglMaterialsEnvmaps',
+            name: 'webglMaterialsEnvmaps',
+            component: () => import('@/views/materials/webglMaterialsEnvmaps'),
+            meta: {title: 'materials_envmaps', icon: 'webgl_materials_envmaps'}
+        },
+        {
+            path: '/webglMaterialsGrass',
+            name: 'webglMaterialsGrass',
+            component: () => import('@/views/materials/webglMaterialsGrass'),
+            meta: {title: 'materials_grass', icon: 'webgl_materials_grass'}
+        },
+        {
+            path: '/webglMaterialsLightmap',
+            name: 'webglMaterialsLightmap',
+            component: () => import('@/views/materials/webglMaterialsLightmap'),
+            meta: {title: 'materials_lightmap', icon: 'webgl_materials_lightmap'}
+        },
+        {
+            path: '/webglMaterialsMatcap',
+            name: 'webglMaterialsMatcap',
+            component: () => import('@/views/materials/webglMaterialsMatcap'),
+            meta: {title: 'materials_matcap', icon: 'webgl_materials_matcap'}
+        },
+        {
+            path: '/webglMaterialsModified',
+            name: 'webglMaterialsModified',
+            component: () => import('@/views/materials/webglMaterialsModified'),
+            meta: {title: 'materials_modified', icon: 'webgl_materials_modified'}
+        },
+        {
+            path: '/webglMaterialsNormalmapObjectSpace',
+            name: 'webglMaterialsNormalmapObjectSpace',
+            component: () => import('@/views/materials/webglMaterialsNormalmapObjectSpace'),
+            meta: {title: 'materials_normalmap_object_space', icon: 'webgl_materials_normalmap_object_space'}
+        },
+        {
+            path: '/webglMaterialsNormalmap',
+            name: 'webglMaterialsNormalmap',
+            component: () => import('@/views/materials/webglMaterialsNormalmap'),
+            meta: {title: 'materials_normalmap', icon: 'webgl_materials_normalmap'}
+        },
+        {
+            path: '/webglMaterialsParallaxmap',
+            name: 'webglMaterialsParallaxmap',
+            component: () => import('@/views/materials/webglMaterialsParallaxmap'),
+            meta: {title: 'materials_parallaxmap', icon: 'webgl_materials_parallaxmap'}
+        },
+        {
+            path: '/webglMaterialsPhysicalClearcoat',
+            name: 'webglMaterialsPhysicalClearcoat',
+            component: () => import('@/views/materials/webglMaterialsPhysicalClearcoat'),
+            meta: {title: 'materials_physical_clearcoat', icon: 'webgl_materials_physical_clearcoat'}
+        },
+        {
+            path: '/webglMaterialsPhysicalSheen',
+            name: 'webglMaterialsPhysicalSheen',
+            component: () => import('@/views/materials/webglMaterialsPhysicalSheen'),
+            meta: {title: 'materials_physical_sheen', icon: 'webgl_materials_physical_sheen'}
+        },
+        {
+            path: '/webglMaterialsPhysicalTransmission',
+            name: 'webglMaterialsPhysicalTransmission',
+            component: () => import('@/views/materials/webglMaterialsPhysicalTransmission'),
+            meta: {title: 'materials_physical_transmission', icon: 'webgl_materials_physical_transmission'}
+        },
+        {
+            path: '/webglMaterialsShadersFresnel',
+            name: 'webglMaterialsShadersFresnel',
+            component: () => import('@/views/materials/webglMaterialsShadersFresnel'),
+            meta: {title: 'materials_shaders_fresnel', icon: 'webgl_materials_shaders_fresnel'}
+        },
+        {
+            path: '/webglMaterialsStandard',
+            name: 'webglMaterialsStandard',
+            component: () => import('@/views/materials/webglMaterialsStandard'),
+            meta: {title: 'materials_standard', icon: 'webgl_materials_standard'}
+        },
+        {
+            path: '/webglMaterialsTextureCanvas',
+            name: 'webglMaterialsTextureCanvas',
+            component: () => import('@/views/materials/webglMaterialsTextureCanvas'),
+            meta: {title: 'materials_texture_canvas', icon: 'webgl_materials_texture_canvas'}
+        },
+        {
+            path: '/webglMaterialsTexturePartialupdate',
+            name: 'webglMaterialsTexturePartialupdate',
+            component: () => import('@/views/materials/webglMaterialsTexturePartialupdate'),
+            meta: {title: 'materials_texture_partialupdate', icon: 'webgl_materials_texture_partialupdate'}
+        },
+        {
+            path: '/webglMaterialsTextureRotation',
+            name: 'webglMaterialsTextureRotation',
+            component: () => import('@/views/materials/webglMaterialsTextureRotation'),
+            meta: {title: 'materials_texture_rotation', icon: 'webgl_materials_texture_rotation'}
+        },
+        {
+            path: '/webglMaterialsVariationsBasic',
+            name: 'webglMaterialsVariationsBasic',
+            component: () => import('@/views/materials/webglMaterialsVariationsBasic'),
+            meta: {title: 'materials_variations_basic', icon: 'webgl_materials_variations_basic'}
+        },
+        {
+            path: '/webglMaterialsVariationsLambert',
+            name: 'webglMaterialsVariationsLambert',
+            component: () => import('@/views/materials/webglMaterialsVariationsLambert'),
+            meta: {title: 'materials_variations_lambert', icon: 'webgl_materials_variations_lambert'}
+        },
+        {
+            path: '/webglMaterialsVariationsPhong',
+            name: 'webglMaterialsVariationsPhong',
+            component: () => import('@/views/materials/webglMaterialsVariationsPhong'),
+            meta: {title: 'materials_variations_phong', icon: 'webgl_materials_variations_phong'}
+        },
+        {
+            path: '/webglMaterialsVariationsPhysical',
+            name: 'webglMaterialsVariationsPhysical',
+            component: () => import('@/views/materials/webglMaterialsVariationsPhysical'),
+            meta: {title: 'materials_variations_physical', icon: 'webgl_materials_variations_physical'}
+        },
+        {
+            path: '/webglMaterialsVariationsStandard',
+            name: 'webglMaterialsVariationsStandard',
+            component: () => import('@/views/materials/webglMaterialsVariationsStandard'),
+            meta: {title: 'materials_variations_standard', icon: 'webgl_materials_variations_standard'}
+        },
+        {
+            path: '/webglMaterialsVariationsToon',
+            name: 'webglMaterialsVariationsToon',
+            component: () => import('@/views/materials/webglMaterialsVariationsToon'),
+            meta: {title: 'materials_variations_toon', icon: 'webgl_materials_variations_toon'}
+        },
+        {
+            path: '/webglMaterialsVideo',
+            name: 'webglMaterialsVideo',
+            component: () => import('@/views/materials/webglMaterialsVideo'),
+            meta: {title: 'materials_video', icon: 'webgl_materials_video'}
+        },
+        {
+            path: '/webglMaterialsWireframe',
+            name: 'webglMaterialsWireframe',
+            component: () => import('@/views/materials/webglMaterialsWireframe'),
+            meta: {title: 'materials_wireframe', icon: 'webgl_materials_wireframe'}
+        },
+        {
+            path: '/webglMaterials',
+            name: 'webglMaterials',
+            component: () => import('@/views/materials/webglMaterials'),
+            meta: {title: 'materials', icon: 'webgl_materials'}
+        },
       ]
     },
     {
@@ -673,14 +900,91 @@ export default new Router({
       component: () => import('@/views/testLine')
     },
     // {
-    //     path: '/webglLod',
-    //     name: 'webglLod',
-    //     component: () => import('@/views/lod/webglLod'),
-    //     meta: {title: 'lod', icon: 'webgl_lod'}
+    //     path: '/webglMaterials',
+    //     name: 'webglMaterials',
+    //     component: () => import('@/views/materials/webglMaterials'),
+    //     meta: {title: 'materials', icon: 'webgl_materials'}
     // },
 
 
-
+    // {
+    //     path: '/webglMaterialsVideoWebcam',
+    //     name: 'webglMaterialsVideoWebcam',
+    //     component: () => import('@/views/materials/webglMaterialsVideoWebcam'),
+    //     meta: {title: 'materials_video_webcam', icon: 'webgl_materials_video_webcam'}
+    // },
+    // {
+    //     path: '/webglMaterialsTextureManualmipmap',
+    //     name: 'webglMaterialsTextureManualmipmap',
+    //     component: () => import('@/views/materials/webglMaterialsTextureManualmipmap'),
+    //     meta: {title: 'materials_texture_manualmipmap', icon: 'webgl_materials_texture_manualmipmap'}
+    // },
+    // {
+    //     path: '/webglMaterialsTextureFilters',
+    //     name: 'webglMaterialsTextureFilters',
+    //     component: () => import('@/views/materials/webglMaterialsTextureFilters'),
+    //     meta: {title: 'materials_texture_filters', icon: 'webgl_materials_texture_filters'}
+    // },
+    // {
+    //     path: '/webglMaterialsTextureAnisotropy',
+    //     name: 'webglMaterialsTextureAnisotropy',
+    //     component: () => import('@/views/materials/webglMaterialsTextureAnisotropy'),
+    //     meta: {title: 'materials_texture_anisotropy', icon: 'webgl_materials_texture_anisotropy'}
+    // },
+    // {
+    //     path: '/webglMaterialsSubsurfaceScattering',
+    //     name: 'webglMaterialsSubsurfaceScattering',
+    //     component: () => import('@/views/materials/webglMaterialsSubsurfaceScattering'),
+    //     meta: {title: 'materials_subsurface_scattering', icon: 'webgl_materials_subsurface_scattering'}
+    // },
+    // {
+    //     path: '/webglMaterialsPhysicalReflectivity',
+    //     name: 'webglMaterialsPhysicalReflectivity',
+    //     component: () => import('@/views/materials/webglMaterialsPhysicalReflectivity'),
+    //     meta: {title: 'materials_physical_reflectivity', icon: 'webgl_materials_physical_reflectivity'}
+    // },
+    // {
+    //     path: '/webglMaterialsNodes',
+    //     name: 'webglMaterialsNodes',
+    //     component: () => import('@/views/materials/webglMaterialsNodes'),
+    //     meta: {title: 'materials_nodes', icon: 'webgl_materials_nodes'}
+    // },
+    // {
+    //     path: '/webglMaterialsEnvmapsPmremNodes',
+    //     name: 'webglMaterialsEnvmapsPmremNodes',
+    //     component: () => import('@/views/materials/webglMaterialsEnvmapsPmremNodes'),
+    //     meta: {title: 'materials_envmaps_pmrem_nodes', icon: 'webgl_materials_envmaps_pmrem_nodes'}
+    // },
+    // {
+    //     path: '/webglMaterialsEnvmapsParallax',
+    //     name: 'webglMaterialsEnvmapsParallax',
+    //     component: () => import('@/views/materials/webglMaterialsEnvmapsParallax'),
+    //     meta: {title: 'materials_envmaps_parallax', icon: 'webgl_materials_envmaps_parallax'}
+    // },
+    // {
+    //     path: '/webglMaterialsCubemap',
+    //     name: 'webglMaterialsCubemap',
+    //     component: () => import('@/views/materials/webglMaterialsCubemap'),
+    //     meta: {title: 'materials_cubemap', icon: 'webgl_materials_cubemap'}
+    // },
+    // {
+    //     path: '/webglMaterialsCubemapMipmaps',
+    //     name: 'webglMaterialsCubemapMipmaps',
+    //     component: () => import('@/views/materials/webglMaterialsCubemapMipmaps'),
+    //     meta: {title: 'materials_cubemap_mipmaps', icon: 'webgl_materials_cubemap_mipmaps'}
+    // },
+    // {
+    //     path: '/webglMaterialsCar',
+    //     name: 'webglMaterialsCar',
+    //     component: () => import('@/views/materials/webglMaterialsCar'),
+    //     meta: {title: 'materials_car', icon: 'webgl_materials_car'}
+    // },
+    // {
+    //     path: '/webglMaterialsBlendingCustom',
+    //     name: 'webglMaterialsBlendingCustom',
+    //     component: () => import('@/views/materials/webglMaterialsBlendingCustom'),
+    //     meta: {title: 'materials_blending_custom', icon: 'webgl_materials_blending_custom'}
+    // },
     // {
     //     path: '/webglLoaderX',
     //     name: 'webglLoaderX',

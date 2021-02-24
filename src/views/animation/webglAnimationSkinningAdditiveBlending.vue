@@ -46,7 +46,7 @@ export default {
         this.init()
     },
     beforeDestroy() {
-        this.gui.hide()
+        this.gui.destroy()
     },
     methods: {
         init() {

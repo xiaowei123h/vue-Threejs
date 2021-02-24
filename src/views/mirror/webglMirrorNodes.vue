@@ -62,7 +62,7 @@ export default {
         this.update()
     },
     beforeDestroy() {
-        this.gui.hide()
+        this.gui.destroy()
     },
     methods: {
         init() {

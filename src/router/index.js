@@ -965,6 +965,162 @@ export default new Router({
             component: () => import('@/views/points/webglPointsBillboards'),
             meta: {title: 'points_billboards', icon: 'webgl_points_billboards'}
         },
+        {
+            path: '/webglPointsDynamic',
+            name: 'webglPointsDynamic',
+            component: () => import('@/views/points/webglPointsDynamic'),
+            meta: {title: 'points_dynamic', icon: 'webgl_points_dynamic'}
+        },
+        {
+            path: '/webglPointsSprites',
+            name: 'webglPointsSprites',
+            component: () => import('@/views/points/webglPointsSprites'),
+            meta: {title: 'points_sprites', icon: 'webgl_points_sprites'}
+        },
+        {
+            path: '/webglPointsWaves',
+            name: 'webglPointsWaves',
+            component: () => import('@/views/points/webglPointsWaves'),
+            meta: {title: 'points_waves', icon: 'webgl_points_waves'}
+        },
+        {
+            path: '/webglPostprocessing3dlut',
+            name: 'webglPostprocessing3dlut',
+            component: () => import('@/views/postprocessing/webglPostprocessing3dlut'),
+            meta: {title: 'postprocessing_3dlut', icon: 'webgl_postprocessing_3dlut'}
+        },
+        {
+            path: '/webglPostprocessingAdvanced',
+            name: 'webglPostprocessingAdvanced',
+            component: () => import('@/views/postprocessing/webglPostprocessingAdvanced'),
+            meta: {title: 'postprocessing_advanced', icon: 'webgl_postprocessing_advanced'}
+        },
+        {
+            path: '/webglPostprocessingAfterimage',
+            name: 'webglPostprocessingAfterimage',
+            component: () => import('@/views/postprocessing/webglPostprocessingAfterimage'),
+            meta: {title: 'postprocessing_afterimage', icon: 'webgl_postprocessing_afterimage'}
+        },
+        {
+            path: '/webglPostprocessingBackgrounds',
+            name: 'webglPostprocessingBackgrounds',
+            component: () => import('@/views/postprocessing/webglPostprocessingBackgrounds'),
+            meta: {title: 'postprocessing_backgrounds', icon: 'webgl_postprocessing_backgrounds'}
+        },
+        {
+            path: '/webglPostprocessingDof',
+            name: 'webglPostprocessingDof',
+            component: () => import('@/views/postprocessing/webglPostprocessingDof'),
+            meta: {title: 'postprocessing_dof', icon: 'webgl_postprocessing_dof'}
+        },
+        {
+            path: '/webglPostprocessingDof2',
+            name: 'webglPostprocessingDof2',
+            component: () => import('@/views/postprocessing/webglPostprocessingDof2'),
+            meta: {title: 'postprocessing_dof2', icon: 'webgl_postprocessing_dof2'}
+        },
+        {
+            path: '/webglPostprocessingGlitch',
+            name: 'webglPostprocessingGlitch',
+            component: () => import('@/views/postprocessing/webglPostprocessingGlitch'),
+            meta: {title: 'postprocessing_glitch', icon: 'webgl_postprocessing_glitch'}
+        },
+        {
+            path: '/webglPostprocessingGodrays',
+            name: 'webglPostprocessingGodrays',
+            component: () => import('@/views/postprocessing/webglPostprocessingGodrays'),
+            meta: {title: 'postprocessing_godrays', icon: 'webgl_postprocessing_godrays'}
+        },
+        {
+            path: '/webglPostprocessingMasking',
+            name: 'webglPostprocessingMasking',
+            component: () => import('@/views/postprocessing/webglPostprocessingMasking'),
+            meta: {title: 'postprocessing_masking', icon: 'webgl_postprocessing_masking'}
+        },
+        {
+            path: '/webglPostprocessingOutline',
+            name: 'webglPostprocessingOutline',
+            component: () => import('@/views/postprocessing/webglPostprocessingOutline'),
+            meta: {title: 'postprocessing_outline', icon: 'webgl_postprocessing_outline'}
+        },
+        {
+            path: '/webglPostprocessingPixel',
+            name: 'webglPostprocessingPixel',
+            component: () => import('@/views/postprocessing/webglPostprocessingPixel'),
+            meta: {title: 'postprocessing_pixel', icon: 'webgl_postprocessing_pixel'}
+        },
+        {
+            path: '/webglPostprocessingProcedural',
+            name: 'webglPostprocessingProcedural',
+            component: () => import('@/views/postprocessing/webglPostprocessingProcedural'),
+            meta: {title: 'postprocessing_procedural', icon: 'webgl_postprocessing_procedural'}
+        },
+        {
+            path: '/webglPostprocessingRgbHalftone',
+            name: 'webglPostprocessingRgbHalftone',
+            component: () => import('@/views/postprocessing/webglPostprocessingRgbHalftone'),
+            meta: {title: 'postprocessing_rgb_halftone', icon: 'webgl_postprocessing_rgb_halftone'}
+        },
+        {
+            path: '/webglPostprocessingSao',
+            name: 'webglPostprocessingSao',
+            component: () => import('@/views/postprocessing/webglPostprocessingSao'),
+            meta: {title: 'postprocessing_sao', icon: 'webgl_postprocessing_sao'}
+        },
+        {
+            path: '/webglPostprocessingSmaa',
+            name: 'webglPostprocessingSmaa',
+            component: () => import('@/views/postprocessing/webglPostprocessingSmaa'),
+            meta: {title: 'postprocessing_smaa', icon: 'webgl_postprocessing_smaa'}
+        },
+        {
+            path: '/webglPostprocessingSobel',
+            name: 'webglPostprocessingSobel',
+            component: () => import('@/views/postprocessing/webglPostprocessingSobel'),
+            meta: {title: 'postprocessing_sobel', icon: 'webgl_postprocessing_sobel'}
+        },
+        {
+            path: '/webglPostprocessingSsaaUnbiased',
+            name: 'webglPostprocessingSsaaUnbiased',
+            component: () => import('@/views/postprocessing/webglPostprocessingSsaaUnbiased'),
+            meta: {title: 'postprocessing_ssaa_unbiased', icon: 'webgl_postprocessing_ssaa_unbiased'}
+        },
+        {
+            path: '/webglPostprocessingSsaa',
+            name: 'webglPostprocessingSsaa',
+            component: () => import('@/views/postprocessing/webglPostprocessingSsaa'),
+            meta: {title: 'postprocessing_ssaa', icon: 'webgl_postprocessing_ssaa'}
+        },
+        {
+            path: '/webglPostprocessingSsao',
+            name: 'webglPostprocessingSsao',
+            component: () => import('@/views/postprocessing/webglPostprocessingSsao'),
+            meta: {title: 'postprocessing_ssao', icon: 'webgl_postprocessing_ssao'}
+        },
+        {
+            path: '/webglPostprocessingTaa',
+            name: 'webglPostprocessingTaa',
+            component: () => import('@/views/postprocessing/webglPostprocessingTaa'),
+            meta: {title: 'postprocessing_taa', icon: 'webgl_postprocessing_taa'}
+        },
+        {
+            path: '/webglPostprocessingUnrealBloomSelective',
+            name: 'webglPostprocessingUnrealBloomSelective',
+            component: () => import('@/views/postprocessing/webglPostprocessingUnrealBloomSelective'),
+            meta: {title: 'postprocessing_unreal_bloom_selective', icon: 'webgl_postprocessing_unreal_bloom_selective'}
+        },
+        {
+            path: '/webglPostprocessingUnrealBloom',
+            name: 'webglPostprocessingUnrealBloom',
+            component: () => import('@/views/postprocessing/webglPostprocessingUnrealBloom'),
+            meta: {title: 'postprocessing_unreal_bloom', icon: 'webgl_postprocessing_unreal_bloom'}
+        },
+        {
+            path: '/webglPostprocessing',
+            name: 'webglPostprocessing',
+            component: () => import('@/views/postprocessing/webglPostprocessing'),
+            meta: {title: 'postprocessing', icon: 'webgl_postprocessing'}
+        },
       ]
     },
     {
@@ -984,14 +1140,38 @@ export default new Router({
       component: () => import('@/views/testLine')
     },
     // {
-    //     path: '/webglPointsBillboards',
-    //     name: 'webglPointsBillboards',
-    //     component: () => import('@/views/points/webglPointsBillboards'),
-    //     meta: {title: 'points_billboards', icon: 'webgl_points_billboards'}
+    //     path: '/webglPostprocessing',
+    //     name: 'webglPostprocessing',
+    //     component: () => import('@/views/postprocessing/webglPostprocessing'),
+    //     meta: {title: 'postprocessing', icon: 'webgl_postprocessing'}
     // },
 
 
 
+    // {
+    //     path: '/webglPostprocessingNodes',
+    //     name: 'webglPostprocessingNodes',
+    //     component: () => import('@/views/postprocessing/webglPostprocessingNodes'),
+    //     meta: {title: 'postprocessing_nodes', icon: 'webgl_postprocessing_nodes'}
+    // },
+    // {
+    //     path: '/webglPostprocessingNodesPass',
+    //     name: 'webglPostprocessingNodesPass',
+    //     component: () => import('@/views/postprocessing/webglPostprocessingNodesPass'),
+    //     meta: {title: 'postprocessing_nodes_pass', icon: 'webgl_postprocessing_nodes_pass'}
+    // },
+    // {
+    //     path: '/webglPostprocessingFxaa',
+    //     name: 'webglPostprocessingFxaa',
+    //     component: () => import('@/views/postprocessing/webglPostprocessingFxaa'),
+    //     meta: {title: 'postprocessing_fxaa', icon: 'webgl_postprocessing_fxaa'}
+    // },
+    // {
+    //     path: '/webglPostprocessingCrossfade',
+    //     name: 'webglPostprocessingCrossfade',
+    //     component: () => import('@/views/postprocessing/webglPostprocessingCrossfade'),
+    //     meta: {title: 'postprocessing_crossfade', icon: 'webgl_postprocessing_crossfade'}
+    // },
     // {
     //     path: '/webglPerformanceNodes',
     //     name: 'webglPerformanceNodes',

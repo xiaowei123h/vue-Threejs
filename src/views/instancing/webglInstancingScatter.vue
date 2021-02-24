@@ -96,7 +96,7 @@ export default {
         })
     },
     beforeDestroy() {
-        this.gui.hide()
+        this.gui.destroy()
     },
     methods: {
         easeOutCubic(t) {

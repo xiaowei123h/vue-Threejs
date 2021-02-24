@@ -43,7 +43,7 @@ export default {
         this.initGui()
     },
     beforeDestroy() {
-        this.gui.hide()
+        this.gui.destroy()
     },
     methods: {
         initGui() {

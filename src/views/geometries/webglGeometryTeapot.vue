@@ -50,7 +50,7 @@ export default {
         this.render()
     },
     beforeDestroy() {
-        this.gui.hide()
+        this.gui.destroy()
     },
     methods: {
         init() {

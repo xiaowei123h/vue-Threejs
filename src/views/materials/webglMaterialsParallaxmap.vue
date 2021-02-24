@@ -37,7 +37,7 @@ export default {
         this.animate()
     },
     beforeDestroy() {
-        this.gui.hide()
+        this.gui.destroy()
     },
     methods: {
         init() {

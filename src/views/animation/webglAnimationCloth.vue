@@ -66,7 +66,7 @@ export default {
         this.animate(0)
     },
     beforeDestroy() {
-        this.gui.hide()
+        this.gui.destroy()
     },
     methods: {
         init() {

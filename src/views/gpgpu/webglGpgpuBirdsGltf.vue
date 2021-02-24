@@ -247,7 +247,7 @@ export default {
         })
     },
     beforeDestroy() {
-        this.gui.hide()
+        this.gui.destroy()
     },
     methods: {
         nextPowerOf2(n) {

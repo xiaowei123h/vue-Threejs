@@ -149,7 +149,7 @@ export default {
         this.onload()
     },
     beforeDestroy() {
-        this.gui.hide()
+        this.gui.destroy()
     },
     methods: {
         onload() {

@@ -11,7 +11,7 @@ import WebGPURenderLists from './WebGPURenderLists.js';
 import WebGPUTextures from './WebGPUTextures.js';
 import WebGPUBackground from './WebGPUBackground.js';
 
-import { Frustum, Matrix4, Vector3, Color } from '../../../../build/three.module.js';
+import { Frustum, Matrix4, Vector3, Color } from '@/components//build/three.module.js';
 
 console.info( 'THREE.WebGPURenderer: Modified Matrix4.makePerspective() and Matrix4.makeOrtographic() to work with WebGPU, see https://github.com/mrdoob/three.js/issues/20276.' );
 

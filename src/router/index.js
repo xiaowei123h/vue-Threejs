@@ -1319,6 +1319,144 @@ export default new Router({
             component: () => import('@/views/volume/webgl2VolumePerlin'),
             meta: {title: 'volume_perlin', icon: 'webgl2_volume_perlin'}
         },
+        {
+            path: '/css2dLabel',
+            name: 'css2dLabel',
+            component: () => import('@/views/css2d/css2dLabel'),
+            meta: {title: 'css2d_label', icon: 'css2d_label'}
+        },
+        {
+            path: '/css3dOrthographic',
+            name: 'css3dOrthographic',
+            component: () => import('@/views/css3d/css3dOrthographic'),
+            meta: {title: 'css3d_orthographic', icon: 'css3d_orthographic'}
+        },
+        {
+            path: '/css3dPanoramaDeviceorientation',
+            name: 'css3dPanoramaDeviceorientation',
+            component: () => import('@/views/css3d/css3dPanoramaDeviceorientation'),
+            meta: {title: 'css3d_panorama_deviceorientation', icon: 'css3d_panorama_deviceorientation'}
+        },
+        {
+            path: '/css3dPanorama',
+            name: 'css3dPanorama',
+            component: () => import('@/views/css3d/css3dPanorama'),
+            meta: {title: 'css3d_panorama', icon: 'css3d_panorama'}
+        },
+        {
+            path: '/css3dSandbox',
+            name: 'css3dSandbox',
+            component: () => import('@/views/css3d/css3dSandbox'),
+            meta: {title: 'css3d_sandbox', icon: 'css3d_sandbox'}
+        },
+        {
+            path: '/css3dYoutube',
+            name: 'css3dYoutube',
+            component: () => import('@/views/css3d/css3dYoutube'),
+            meta: {title: 'css3d_youtube', icon: 'css3d_youtube'}
+        },
+        {
+            path: '/miscAnimationGroups',
+            name: 'miscAnimationGroups',
+            component: () => import('@/views/misc/miscAnimationGroups'),
+            meta: {title: 'misc_animation_groups', icon: 'misc_animation_groups'}
+        },
+        {
+            path: '/miscAnimationKeys',
+            name: 'miscAnimationKeys',
+            component: () => import('@/views/misc/miscAnimationKeys'),
+            meta: {title: 'misc_animation_keys', icon: 'misc_animation_keys'}
+        },
+        {
+            path: '/miscControlsDeviceorientation',
+            name: 'miscControlsDeviceorientation',
+            component: () => import('@/views/misc/miscControlsDeviceorientation'),
+            meta: {title: 'misc_controls_deviceorientation', icon: 'misc_controls_deviceorientation'}
+        },
+        {
+            path: '/miscControlsDrag',
+            name: 'miscControlsDrag',
+            component: () => import('@/views/misc/miscControlsDrag'),
+            meta: {title: 'misc_controls_drag', icon: 'misc_controls_drag'}
+        },
+        {
+            path: '/miscControlsFly',
+            name: 'miscControlsFly',
+            component: () => import('@/views/misc/miscControlsFly'),
+            meta: {title: 'misc_controls_fly', icon: 'misc_controls_fly'}
+        },
+        {
+            path: '/miscControlsMap',
+            name: 'miscControlsMap',
+            component: () => import('@/views/misc/miscControlsMap'),
+            meta: {title: 'misc_controls_map', icon: 'misc_controls_map'}
+        },
+        {
+            path: '/miscControlsOrbit',
+            name: 'miscControlsOrbit',
+            component: () => import('@/views/misc/miscControlsOrbit'),
+            meta: {title: 'misc_controls_orbit', icon: 'misc_controls_orbit'}
+        },
+        {
+            path: '/miscControlsTrackball',
+            name: 'miscControlsTrackball',
+            component: () => import('@/views/misc/miscControlsTrackball'),
+            meta: {title: 'misc_controls_trackball', icon: 'misc_controls_trackball'}
+        },
+        {
+            path: '/miscControlsTransform',
+            name: 'miscControlsTransform',
+            component: () => import('@/views/misc/miscControlsTransform'),
+            meta: {title: 'misc_controls_transform', icon: 'misc_controls_transform'}
+        },
+        {
+            path: '/miscExporterCollada',
+            name: 'miscExporterCollada',
+            component: () => import('@/views/misc/miscExporterCollada'),
+            meta: {title: 'misc_exporter_collada', icon: 'misc_exporter_collada'}
+        },
+        {
+            path: '/miscExporterObj',
+            name: 'miscExporterObj',
+            component: () => import('@/views/misc/miscExporterObj'),
+            meta: {title: 'misc_exporter_obj', icon: 'misc_exporter_obj'}
+        },
+        {
+            path: '/miscExporterPly',
+            name: 'miscExporterPly',
+            component: () => import('@/views/misc/miscExporterPly'),
+            meta: {title: 'misc_exporter_ply', icon: 'misc_exporter_ply'}
+        },
+        {
+            path: '/miscExporterStl',
+            name: 'miscExporterStl',
+            component: () => import('@/views/misc/miscExporterStl'),
+            meta: {title: 'misc_exporter_stl', icon: 'misc_exporter_stl'}
+        },
+        {
+            path: '/miscLookat',
+            name: 'miscLookat',
+            component: () => import('@/views/misc/miscLookat'),
+            meta: {title: 'misc_lookat', icon: 'misc_lookat'}
+        },
+        {
+            path: '/webaudioOrientation',
+            name: 'webaudioOrientation',
+            component: () => import('@/views/webaudio/webaudioOrientation'),
+            meta: {title: 'webaudio_orientation', icon: 'webaudio_orientation'}
+        },
+        {
+            path: '/webaudioTiming',
+            name: 'webaudioTiming',
+            component: () => import('@/views/webaudio/webaudioTiming'),
+            meta: {title: 'webaudio_timing', icon: 'webaudio_timing'}
+        },
+        {
+            path: '/webaudioVisualizer',
+            name: 'webaudioVisualizer',
+            component: () => import('@/views/webaudio/webaudioVisualizer'),
+            meta: {title: 'webaudio_visualizer', icon: 'webaudio_visualizer'}
+        },
       ]
     },
     {
@@ -1337,8 +1475,92 @@ export default new Router({
       name: 'testLine',
       component: () => import('@/views/testLine')
     },
+    // {
+    //     path: '/webaudioVisualizer',
+    //     name: 'webaudioVisualizer',
+    //     component: () => import('@/views/webaudio/webaudioVisualizer'),
+    //     meta: {title: 'webaudio_visualizer', icon: 'webaudio_visualizer'}
+    // },
 
 
+    // {
+    //     path: '/webaudioSandbox',
+    //     name: 'webaudioSandbox',
+    //     component: () => import('@/views/webaudio/webaudioSandbox'),
+    //     meta: {title: 'webaudio_sandbox', icon: 'webaudio_sandbox'}
+    // },
+    // {
+    //     path: '/svgSandbox',
+    //     name: 'svgSandbox',
+    //     component: () => import('@/views/svg/svgSandbox'),
+    //     meta: {title: 'svg_sandbox', icon: 'svg_sandbox'}
+    // },
+    // {
+    //     path: '/svgLines',
+    //     name: 'svgLines',
+    //     component: () => import('@/views/svg/svgLines'),
+    //     meta: {title: 'svg_lines', icon: 'svg_lines'}
+    // },
+    // {
+    //     path: '/physicsAmmoBreak',
+    //     name: 'physicsAmmoBreak',
+    //     component: () => import('@/views/physics/physicsAmmoBreak'),
+    //     meta: {title: 'physics_ammo_break', icon: 'physics_ammo_break'}
+    // },
+    // {
+    //     path: '/miscUvTests',
+    //     name: 'miscUvTests',
+    //     component: () => import('@/views/misc/miscUvTests'),
+    //     meta: {title: 'misc_uv_tests', icon: 'misc_uv_tests'}
+    // },
+    // {
+    //     path: '/miscLegacy',
+    //     name: 'miscLegacy',
+    //     component: () => import('@/views/misc/miscLegacy'),
+    //     meta: {title: 'misc_legacy', icon: 'misc_legacy'}
+    // },
+    // {
+    //     path: '/miscExporterGltf',
+    //     name: 'miscExporterGltf',
+    //     component: () => import('@/views/misc/miscExporterGltf'),
+    //     meta: {title: 'misc_exporter_gltf', icon: 'misc_exporter_gltf'}
+    // },
+    // {
+    //     path: '/miscExporterDraco',
+    //     name: 'miscExporterDraco',
+    //     component: () => import('@/views/misc/miscExporterDraco'),
+    //     meta: {title: 'misc_exporter_draco', icon: 'misc_exporter_draco'}
+    // },
+    // {
+    //     path: '/miscControlsPointerlock',
+    //     name: 'miscControlsPointerlock',
+    //     component: () => import('@/views/misc/miscControlsPointerlock'),
+    //     meta: {title: 'misc_controls_pointerlock', icon: 'misc_controls_pointerlock'}
+    // },
+    // {
+    //     path: '/miscBoxselection',
+    //     name: 'miscBoxselection',
+    //     component: () => import('@/views/misc/miscBoxselection'),
+    //     meta: {title: 'misc_boxselection', icon: 'misc_boxselection'}
+    // },
+    // {
+    //     path: '/css3dSprites',
+    //     name: 'css3dSprites',
+    //     component: () => import('@/views/css3d/css3dSprites'),
+    //     meta: {title: 'css3d_sprites', icon: 'css3d_sprites'}
+    // },
+    // {
+    //     path: '/css3dPeriodictable',
+    //     name: 'css3dPeriodictable',
+    //     component: () => import('@/views/css3d/css3dPeriodictable'),
+    //     meta: {title: 'css3d_periodictable', icon: 'css3d_periodictable'}
+    // },
+    // {
+    //     path: '/css3dMolecules',
+    //     name: 'css3dMolecules',
+    //     component: () => import('@/views/css3d/css3dMolecules'),
+    //     meta: {title: 'css3d_molecules', icon: 'css3d_molecules'}
+    // },
     // {
     //     path: '/webxrVrVideo',
     //     name: 'webxrVrVideo',

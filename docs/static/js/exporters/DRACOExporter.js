@@ -22,6 +22,7 @@ THREE.DRACOExporter.prototype = {
 
 	parse: function ( geometry, options ) {
 
+
 		if ( DracoEncoderModule === undefined ) {
 
 			throw new Error( 'THREE.DRACOExporter: required the draco_decoder to work.' );

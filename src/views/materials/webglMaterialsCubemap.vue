@@ -56,7 +56,7 @@ export default {
             var cubeMaterial1 = new this.$THREE.MeshLambertMaterial({ color: 0xffffff, envMap: reflectionCube })
             //models
             var objLoader = new OBJLoader()
-            objLoader.setPath('models/obj/walt/')
+            objLoader.setPath('static/models/obj/walt/')
             objLoader.load('WaltHead.obj', (object) => {
                 var head = object.children[ 0 ]
                 head.scale.multiplyScalar(15)

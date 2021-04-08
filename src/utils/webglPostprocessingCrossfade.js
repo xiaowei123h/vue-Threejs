@@ -29,7 +29,7 @@ export function FXScene(type, numObjects, cameraZ, fov, rotationSpeed, clearColo
         }
     };
 }
-export function Transition(sceneA, sceneB, THREE, transitionParams, renderer) {
+export function Transition(sceneA, sceneB, THREE, transitionParams, renderer, clock) {
     this.scene = new THREE.Scene();
     this.cameraOrtho = new THREE.OrthographicCamera((window.innerWidth - 281) / - 2, (window.innerWidth - 281) / 2, window.innerHeight / 2, window.innerHeight / - 2, - 10, 10);
     this.textures = [];

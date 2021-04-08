@@ -154,7 +154,7 @@ export default {
             var bpcemGui = this.gui.add(params, 'box projected')
             bpcemGui.onChange((value) => {
                 if (value) {
-                    this.groundPlane.material = this.boxProjectedMat
+                    this.groundPlane.material = boxProjectedMat
                 } else {
                     this.groundPlane.material = defaultMat
                 }
@@ -191,25 +191,26 @@ export default {
                 envMap: cubeRenderTarget.texture,
                 roughnessMap: rMap
             })
+            var that = this
             var boxProjectedMat = new this.$THREE.MeshPhysicalMaterial({
                 color: new this.$THREE.Color('#ffffff'),
                 roughness: 1,
                 envMap: cubeRenderTarget.texture,
                 roughnessMap: rMap
             });
-            boxProjectedMat.onBeforeCompile = (shader) => {
+            boxProjectedMat.onBeforeCompile = function (shader) {
                 //these parameters are for the this.cubeCamera texture
-                shader.uniforms.cubeMapSize = { value: new this.$THREE.Vector3(200, 200, 100) }
-                shader.uniforms.cubeMapPos = { value: new this.$THREE.Vector3(0, - 50, 0) }
+                shader.uniforms.cubeMapSize = { value: new that.$THREE.Vector3(200, 200, 100) }
+                shader.uniforms.cubeMapPos = { value: new that.$THREE.Vector3(0, - 50, 0) }
                 //replace shader chunks with box projection chunks
                 shader.vertexShader = 'varying vec3 vWorldPosition;\n' + shader.vertexShader
                 shader.vertexShader = shader.vertexShader.replace(
                     '#include <worldpos_vertex>',
-                    this.worldposReplace
+                    that.worldposReplace
                 )
                 shader.fragmentShader = shader.fragmentShader.replace(
                     '#include <envmap_physical_pars_fragment>',
-                    this.envmapPhysicalParsReplace
+                    that.envmapPhysicalParsReplace
                 )
             }
             this.groundPlane = new this.$THREE.Mesh(new this.$THREE.PlaneBufferGeometry(200, 100, 100), boxProjectedMat)

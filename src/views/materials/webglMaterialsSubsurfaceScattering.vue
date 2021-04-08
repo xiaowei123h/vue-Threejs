@@ -36,7 +36,7 @@ export default {
         init() {
 			this.container = document.createElement('div')
 			document.getElementsByClassName('webglMaterialsSubsurfaceScattering-container')[0].appendChild(this.container)
-			this.camera = new this.$THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 5000)
+			this.camera = new this.$THREE.PerspectiveCamera(40, this.$webglInnerWidth / window.innerHeight, 1, 5000)
 			this.camera.position.set(0.0, 300, 400 * 4)
 			this.scene = new this.$THREE.Scene()
 			// Lights
@@ -58,7 +58,7 @@ export default {
 			pointLight2.position.z = - 260
 			this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
 			this.renderer.setPixelRatio(window.devicePixelRatio)
-			this.renderer.setSize(window.innerWidth, window.innerHeight)
+			this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
 			this.container.appendChild(this.renderer.domElement)
 			this.renderer.outputEncoding = this.$THREE.sRGBEncoding
 			//
@@ -108,7 +108,7 @@ export default {
         },
         initGUI(uniforms) {
 			this.gui = new GUI()
-			var ThicknessControls = () => {
+			var ThicknessControls = function () {
 				this.distortion = uniforms[ 'thicknessDistortion' ].value
 				this.ambient = uniforms[ 'thicknessAmbient' ].value
 				this.attenuation = uniforms[ 'thicknessAttenuation' ].value

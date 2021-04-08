@@ -34,7 +34,7 @@ export default {
         }
     },
     mounted() {
-        this.clock = new this.$THREE.Clock()
+        this.clock = new this.$moduleTHREE.Clock()
     },
     methods: {
         handleStartButton() {
@@ -47,24 +47,24 @@ export default {
             var overlay = document.getElementById('overlay')
             overlay.remove()
             var container = document.createElement('div')
-            document.body.appendChild(container)
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000)
+            document.getElementsByClassName('webglLoaderMmdAudio-container')[0].appendChild(container)
+            this.camera = new this.$moduleTHREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 2000)
             // scene
-            this.scene = new this.$THREE.Scene()
-            this.scene.background = new this.$THREE.Color(0xffffff)
-            this.scene.add(new this.$THREE.PolarGridHelper(30, 10))
-            var listener = new this.$THREE.AudioListener()
+            this.scene = new this.$moduleTHREE.Scene()
+            this.scene.background = new this.$moduleTHREE.Color(0xffffff)
+            this.scene.add(new this.$moduleTHREE.PolarGridHelper(30, 10))
+            var listener = new this.$moduleTHREE.AudioListener()
             this.camera.add(listener)
             this.scene.add(this.camera)
-            var ambient = new this.$THREE.AmbientLight(0x666666)
+            var ambient = new this.$moduleTHREE.AmbientLight(0x666666)
             this.scene.add(ambient)
-            var directionalLight = new this.$THREE.DirectionalLight(0x887766)
+            var directionalLight = new this.$moduleTHREE.DirectionalLight(0x887766)
             directionalLight.position.set(- 1, 1, 1).normalize()
             this.scene.add(directionalLight)
             //
-            this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
+            this.renderer = new this.$moduleTHREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             container.appendChild(this.renderer.domElement)
             this.effect = new OutlineEffect(this.renderer)
             // model
@@ -91,8 +91,8 @@ export default {
                     this.helper.add(this.camera, {
                         animation: cameraAnimation
                     })
-                    new this.$THREE.AudioLoader().load(audioFile, (buffer) => {
-                        var audio = new this.$THREE.Audio(listener).setBuffer(buffer)
+                    new this.$moduleTHREE.AudioLoader().load(audioFile, (buffer) => {
+                        var audio = new this.$moduleTHREE.Audio(listener).setBuffer(buffer)
                         this.helper.add(audio, audioParams)
                         this.scene.add(this.mesh)
                         this.ready = true
@@ -100,22 +100,22 @@ export default {
                 }, onProgress, null)
             }, onProgress, null)
             //
-            window.addEventListener('resize', onWindowResize, false)
+            window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight
-            camera.updateProjectionMatrix()
-            this.effect.setSize(window.innerWidth, window.innerHeight)
+            this.camera.aspect = (window.innerWidth - 281) / window.innerHeight
+            this.camera.updateProjectionMatrix()
+            this.effect.setSize((window.innerWidth - 281), window.innerHeight)
         },
         animate() {
             requestAnimationFrame(this.animate)
             this.render()
         },
         render() {
-            if (ready) {
+            if (this.ready) {
                 this.helper.update(this.clock.getDelta())
             }
-            this.effect.render(scene, camera)
+            this.effect.render(this.scene, this.camera)
         }
     }
 }
@@ -123,9 +123,16 @@ export default {
 
 <style scoped>
 .webglLoaderMmdAudio-container {
+    position: relative;
     width: 100%;
+    height: 100vh;
+}
+#overlay {
+    text-align: center;
+    line-height: 100vh;
 }
 #info {
+    margin-left: -175px;
     color: #444;
 }
 #info a {

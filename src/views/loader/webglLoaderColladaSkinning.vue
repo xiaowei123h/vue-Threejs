@@ -32,10 +32,10 @@ export default {
     methods: {
         init() {
             this.container = document.getElementById('container')
-            this.camera = new this.$THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$moduleTHREE.PerspectiveCamera(25, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.set(15, 10, - 15)
-            this.scene = new this.$THREE.Scene()
-            this.clock = new this.$THREE.Clock()
+            this.scene = new this.$moduleTHREE.Scene()
+            this.clock = new this.$moduleTHREE.Clock()
             // collada
             var loader = new ColladaLoader()
             loader.load('static/models/collada/stormtrooper/stormtrooper.dae', (collada) => {
@@ -46,23 +46,23 @@ export default {
                         node.frustumCulled = false
                     }
                 })
-                this.mixer = new this.$THREE.AnimationMixer(avatar)
+                this.mixer = new this.$moduleTHREE.AnimationMixer(avatar)
                 this.mixer.clipAction(animations[ 0 ]).play()
                 this.scene.add(avatar)
             })
             //
-            var gridHelper = new this.$THREE.GridHelper(10, 20, 0x888888, 0x444444)
+            var gridHelper = new this.$moduleTHREE.GridHelper(10, 20, 0x888888, 0x444444)
             this.scene.add(gridHelper)
             //
-            var ambientLight = new this.$THREE.AmbientLight(0xffffff, 0.2)
+            var ambientLight = new this.$moduleTHREE.AmbientLight(0xffffff, 0.2)
             this.scene.add(ambientLight)
-            var pointLight = new this.$THREE.PointLight(0xffffff, 0.8)
+            var pointLight = new this.$moduleTHREE.PointLight(0xffffff, 0.8)
             this.scene.add(this.camera)
             this.camera.add(pointLight)
             //
-            this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
+            this.renderer = new this.$moduleTHREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             //
             this.controls = new OrbitControls(this.camera, this.renderer.domElement)
@@ -88,7 +88,7 @@ export default {
         },
         render() {
             var delta = this.clock.getDelta()
-            if (this.mixer !== undefined) {
+            if (this.mixer !== null) {
                 this.mixer.update(delta)
             }
             this.renderer.render(this.scene, this.camera)

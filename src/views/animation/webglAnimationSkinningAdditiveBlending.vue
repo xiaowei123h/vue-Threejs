@@ -51,14 +51,14 @@ export default {
     methods: {
         init() {
             var container = document.getElementById('container')
-            this.clock = new this.$THREE.Clock()
-            this.scene = new this.$THREE.Scene()
-            this.scene.background = new this.$THREE.Color(0xa0a0a0)
-            this.scene.fog = new this.$THREE.Fog(0xa0a0a0, 10, 50)
-            var hemiLight = new this.$THREE.HemisphereLight(0xffffff, 0x444444)
+            this.clock = new this.$moduleTHREE.Clock()
+            this.scene = new this.$moduleTHREE.Scene()
+            this.scene.background = new this.$moduleTHREE.Color(0xa0a0a0)
+            this.scene.fog = new this.$moduleTHREE.Fog(0xa0a0a0, 10, 50)
+            var hemiLight = new this.$moduleTHREE.HemisphereLight(0xffffff, 0x444444)
             hemiLight.position.set(0, 20, 0)
             this.scene.add(hemiLight)
-            var dirLight = new this.$THREE.DirectionalLight(0xffffff)
+            var dirLight = new this.$moduleTHREE.DirectionalLight(0xffffff)
             dirLight.position.set(3, 10, 10)
             dirLight.castShadow = true
             dirLight.shadow.camera.top = 2
@@ -69,7 +69,7 @@ export default {
             dirLight.shadow.camera.far = 40
             this.scene.add(dirLight)
             // ground
-            var mesh = new this.$THREE.Mesh(new this.$THREE.PlaneBufferGeometry(100, 100), new this.$THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false }))
+            var mesh = new this.$moduleTHREE.Mesh(new this.$moduleTHREE.PlaneBufferGeometry(100, 100), new this.$moduleTHREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false }))
             mesh.rotation.x = - Math.PI / 2
             mesh.receiveShadow = true
             this.scene.add(mesh)
@@ -81,11 +81,11 @@ export default {
                 that.model.traverse(function (object) {
                     if (object.isMesh) object.castShadow = true
                 })
-                that.skeleton = new that.$THREE.SkeletonHelper(that.model)
+                that.skeleton = new that.$moduleTHREE.SkeletonHelper(that.model)
                 that.skeleton.visible = false
                 that.scene.add(that.skeleton)
                 var animations = gltf.animations
-                that.mixer = new that.$THREE.AnimationMixer(that.model)
+                that.mixer = new that.$moduleTHREE.AnimationMixer(that.model)
                 that.numAnimations = animations.length
                 for (var i = 0; i !== that.numAnimations; ++ i) {
                     var clip = animations[i]
@@ -97,9 +97,9 @@ export default {
                         that.allActions.push(action)
                     } else if (that.additiveActions[name]) {
                         // Make the clip additive and remove the reference frame
-                        that.$THREE.AnimationUtils.makeClipAdditive(clip)
+                        that.$moduleTHREE.AnimationUtils.makeClipAdditive(clip)
                         if (clip.name.endsWith('_pose')) {
-                            clip = that.$THREE.AnimationUtils.subclip(clip, clip.name, 2, 3, 30)
+                            clip = that.$moduleTHREE.AnimationUtils.subclip(clip, clip.name, 2, 3, 30)
                         }
                         var action = that.mixer.clipAction(clip)
                         that.activateAction(action)
@@ -110,14 +110,14 @@ export default {
                 that.createPanel()
                 that.animate()
             })
-            this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
+            this.renderer = new this.$moduleTHREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
-            this.renderer.outputEncoding = this.$THREE.sRGBEncoding
+            this.renderer.outputEncoding = this.$moduleTHREE.sRGBEncoding
             this.renderer.shadowMap.enabled = true
             container.appendChild(this.renderer.domElement)
             // camera
-            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 100)
+            this.camera = new this.$moduleTHREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 100)
             this.camera.position.set(- 1, 2, 3)
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
             controls.enablePan = false

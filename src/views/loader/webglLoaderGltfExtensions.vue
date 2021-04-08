@@ -35,15 +35,15 @@ export default {
         }
     },
     mounted() {
-        this.clock = new this.$THREE.Clock()
+        this.clock = new this.$moduleTHREE.Clock()
         this.scenes = {
             Boombox: {
                 name: 'BoomBox (PBR)',
                 url: 'static/models/gltf/BoomBox/%s/BoomBox.gltf',
                 author: 'Microsoft',
                 authorURL: 'https://www.microsoft.com/',
-                cameraPos: new this.$THREE.Vector3(0.02, 0.01, 0.03),
-                objectRotation: new this.$THREE.Euler(0, Math.PI, 0),
+                cameraPos: new this.$moduleTHREE.Vector3(0.02, 0.01, 0.03),
+                objectRotation: new this.$moduleTHREE.Euler(0, Math.PI, 0),
                 extensions: ['glTF', 'glTF-pbrSpecularGlossiness', 'glTF-Binary', 'glTF-dds'],
                 addEnvMap: true
             },
@@ -52,9 +52,9 @@ export default {
                 url: 'static/models/gltf/BotSkinned/%s/Bot_Skinned.gltf',
                 author: 'MozillaVR',
                 authorURL: 'https://vr.mozilla.org/',
-                cameraPos: new this.$THREE.Vector3(0.5, 2, 2),
-                center: new this.$THREE.Vector3(0, 1.2, 0),
-                objectRotation: new this.$THREE.Euler(0, 0, 0),
+                cameraPos: new this.$moduleTHREE.Vector3(0.5, 2, 2),
+                center: new this.$moduleTHREE.Vector3(0, 1.2, 0),
+                objectRotation: new this.$moduleTHREE.Euler(0, 0, 0),
                 addLights: true,
                 addGround: true,
                 shadows: true,
@@ -65,8 +65,8 @@ export default {
                 url: 'static/models/gltf/MetalRoughSpheres/%s/MetalRoughSpheres.gltf',
                 author: '@emackey',
                 authorURL: 'https://twitter.com/emackey',
-                cameraPos: new this.$THREE.Vector3(2, 1, 15),
-                objectRotation: new this.$THREE.Euler(0, 0, 0),
+                cameraPos: new this.$moduleTHREE.Vector3(2, 1, 15),
+                objectRotation: new this.$moduleTHREE.Euler(0, 0, 0),
                 extensions: ['glTF', 'glTF-Embedded'],
                 addEnvMap: true
             },
@@ -75,7 +75,7 @@ export default {
                 url: 'static/models/gltf/ClearcoatTest/ClearcoatTest.glb',
                 author: 'Ed Mackey (Analytical Graphics, Inc.)',
                 authorURL: 'https://www.agi.com/',
-                cameraPos: new this.$THREE.Vector3(0, 0, 20),
+                cameraPos: new this.$moduleTHREE.Vector3(0, 0, 20),
                 extensions: ['glTF'],
                 addEnvMap: true
             },
@@ -84,7 +84,7 @@ export default {
                 url: 'static/models/gltf/Duck/%s/Duck.gltf',
                 author: 'Sony',
                 authorURL: 'https://www.playstation.com/en-us/corporate/about/',
-                cameraPos: new this.$THREE.Vector3(0, 3, 5),
+                cameraPos: new this.$moduleTHREE.Vector3(0, 3, 5),
                 addLights: true,
                 addGround: true,
                 shadows: true,
@@ -95,10 +95,10 @@ export default {
                 url: 'static/models/gltf/Monster/%s/Monster.gltf',
                 author: '3drt.com',
                 authorURL: 'http://www.3drt.com/downloads.htm',
-                cameraPos: new this.$THREE.Vector3(3, 1, 7),
-                objectScale: new this.$THREE.Vector3(0.04, 0.04, 0.04),
-                objectPosition: new this.$THREE.Vector3(0.2, 0.1, 0),
-                objectRotation: new this.$THREE.Euler(0, - 3 * Math.PI / 4, 0),
+                cameraPos: new this.$moduleTHREE.Vector3(3, 1, 7),
+                objectScale: new this.$moduleTHREE.Vector3(0.04, 0.04, 0.04),
+                objectPosition: new this.$moduleTHREE.Vector3(0.2, 0.1, 0),
+                objectRotation: new this.$moduleTHREE.Euler(0, - 3 * Math.PI / 4, 0),
                 animationTime: 3,
                 addLights: true,
                 shadows: true,
@@ -110,8 +110,8 @@ export default {
                 url: 'static/models/gltf/CesiumMan/%s/CesiumMan.gltf',
                 author: 'Cesium',
                 authorURL: 'https://cesiumjs.org/',
-                cameraPos: new this.$THREE.Vector3(0, 3, 10),
-                objectRotation: new this.$THREE.Euler(0, 0, 0),
+                cameraPos: new this.$moduleTHREE.Vector3(0, 3, 10),
+                objectRotation: new this.$moduleTHREE.Euler(0, 0, 0),
                 addLights: true,
                 addGround: true,
                 shadows: true,
@@ -122,7 +122,7 @@ export default {
                 url: 'static/models/gltf/CesiumMilkTruck/%s/CesiumMilkTruck.gltf',
                 author: 'Cesium',
                 authorURL: 'https://cesiumjs.org/',
-                cameraPos: new this.$THREE.Vector3(0, 3, 10),
+                cameraPos: new this.$moduleTHREE.Vector3(0, 3, 10),
                 addLights: true,
                 addGround: true,
                 shadows: true,
@@ -133,9 +133,9 @@ export default {
                 url: 'static/models/gltf/OutlinedBox/OutlinedBox.gltf',
                 author: '@twittmann',
                 authorURL: 'https://github.com/twittmann',
-                cameraPos: new this.$THREE.Vector3(0, 5, 15),
-                objectScale: new this.$THREE.Vector3(0.01, 0.01, 0.01),
-                objectRotation: new this.$THREE.Euler(0, 90, 0),
+                cameraPos: new this.$moduleTHREE.Vector3(0, 5, 15),
+                objectScale: new this.$moduleTHREE.Vector3(0.01, 0.01, 0.01),
+                objectRotation: new this.$moduleTHREE.Euler(0, 90, 0),
                 addLights: true,
                 shadows: true,
                 extensions: ['glTF']
@@ -153,18 +153,18 @@ export default {
     },
     methods: {
         onload() {
-            this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
+            this.renderer = new this.$moduleTHREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
-            this.renderer.outputEncoding = this.$THREE.sRGBEncoding
-            this.renderer.toneMapping = this.$THREE.ACESFilmicToneMapping
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
+            this.renderer.outputEncoding = this.$moduleTHREE.sRGBEncoding
+            this.renderer.toneMapping = this.$moduleTHREE.ACESFilmicToneMapping
             this.renderer.toneMappingExposure = 1
             this.renderer.physicallyCorrectLights = true
             document.getElementsByClassName('webglLoaderGltfExtensions-container')[0].appendChild(this.renderer.domElement)
             window.addEventListener('resize', this.onWindowResize, false)
             // Load background and generate envMap
             new RGBELoader()
-                .setDataType(this.$THREE.UnsignedByteType)
+                .setDataType(this.$moduleTHREE.UnsignedByteType)
                 .setPath('static/textures/equirectangular/')
                 .load('venice_sunset_1k.hdr', (texture) => {
                     this.envMap = pmremGenerator.fromEquirectangular(texture).texture
@@ -175,7 +175,7 @@ export default {
                     this.initScene(this.scenes[this.state.scene])
                     this.animate()
                 })
-            var pmremGenerator = new this.$THREE.PMREMGenerator(this.renderer)
+            var pmremGenerator = new this.$moduleTHREE.PMREMGenerator(this.renderer)
             pmremGenerator.compileEquirectangularShader()
         },
         initScene(sceneInfo) {
@@ -183,18 +183,18 @@ export default {
             if (sceneInfo.author && sceneInfo.authorURL) {
                 descriptionEl.innerHTML = sceneInfo.name + ' by <a href="' + sceneInfo.authorURL + '" target="_blank" rel="noopener">' + sceneInfo.author + '</a>'
             }
-            this.scene = new this.$THREE.Scene()
-            this.scene.background = new this.$THREE.Color(0x222222)
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.001, 1000)
+            this.scene = new this.$moduleTHREE.Scene()
+            this.scene.background = new this.$moduleTHREE.Color(0x222222)
+            this.camera = new this.$moduleTHREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 0.001, 1000)
             this.scene.add(this.camera)
             var spot1
             if (sceneInfo.addLights) {
-                var ambient = new this.$THREE.AmbientLight(0x222222)
+                var ambient = new this.$moduleTHREE.AmbientLight(0x222222)
                 this.scene.add(ambient)
-                var directionalLight = new this.$THREE.DirectionalLight(0xdddddd, 4)
+                var directionalLight = new this.$moduleTHREE.DirectionalLight(0xdddddd, 4)
                 directionalLight.position.set(0, 0, 1).normalize()
                 this.scene.add(directionalLight)
-                spot1 = new this.$THREE.SpotLight(0xffffff, 1)
+                spot1 = new this.$moduleTHREE.SpotLight(0xffffff, 1)
                 spot1.position.set(5, 10, 5)
                 spot1.angle = 0.50
                 spot1.penumbra = 0.75
@@ -210,13 +210,13 @@ export default {
             }
             if (sceneInfo.shadows) {
                 this.renderer.shadowMap.enabled = true
-                this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap
+                this.renderer.shadowMap.type = this.$moduleTHREE.PCFSoftShadowMap
             }
             // TODO: Reuse existing OrbitControls, GLTFLoaders, and so on
             this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement)
             if (sceneInfo.addGround) {
-                var groundMaterial = new this.$THREE.MeshPhongMaterial({ color: 0xFFFFFF })
-                var ground = new this.$THREE.Mesh(new this.$THREE.PlaneBufferGeometry(512, 512), groundMaterial)
+                var groundMaterial = new this.$moduleTHREE.MeshPhongMaterial({ color: 0xFFFFFF })
+                var ground = new this.$moduleTHREE.Mesh(new this.$moduleTHREE.PlaneBufferGeometry(512, 512), groundMaterial)
                 ground.receiveShadow = !! sceneInfo.shadows
                 if (sceneInfo.groundPos) {
                     ground.position.copy(sceneInfo.groundPos)
@@ -228,7 +228,7 @@ export default {
             }
             this.loader = new GLTFLoader()
             var dracoLoader = new DRACOLoader()
-            dracoLoader.setDecoderPath('@/components/js/libs/draco/gltf/')
+            dracoLoader.setDecoderPath('static/js/libs/draco/gltf/')
             this.loader.setDRACOLoader(dracoLoader)
             this.loader.setDDSLoader(new DDSLoader())
             var url = sceneInfo.url.replace(/%s/g, this.state.extension)
@@ -273,7 +273,7 @@ export default {
                 })
                 var animations = this.gltf.animations
                 if (animations && animations.length) {
-                    this.mixer = new this.$THREE.AnimationMixer(object)
+                    this.mixer = new this.$moduleTHREE.AnimationMixer(object)
                     for (var i = 0; i < animations.length; i ++) {
                         var animation = animations[i]
                         // There's .3333 seconds junk at the tail of the Monster animation that
@@ -340,5 +340,8 @@ export default {
 <style scoped>
 .webglLoaderGltfExtensions-container {
     width: 100%;
+}
+#info {
+    margin-left: 35px;
 }
 </style>

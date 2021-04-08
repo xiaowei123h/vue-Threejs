@@ -98,7 +98,7 @@ export default {
 			this.geometry.setAttribute('translate', new this.$THREE.InstancedBufferAttribute(translateArray, 3))
 			this.material = new this.$THREE.RawShaderMaterial({
 				uniforms: {
-					"map": { value: new this.$THREE.TextureLoader().load('textures/sprites/circle.png') },
+					"map": { value: new this.$THREE.TextureLoader().load('static/textures/sprites/circle.png') },
 					"time": { value: 0.0 }
 				},
 				vertexShader: this.vshader,

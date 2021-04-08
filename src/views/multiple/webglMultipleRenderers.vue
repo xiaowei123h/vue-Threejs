@@ -19,12 +19,13 @@ export default {
         }
     },
     mounted() {
+        this.color = new this.$THREE.Color()
         this.init()
 		this.animate()
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(20, window.innerWidth / (window.innerHeight / 2), 1, 10000)
+            this.camera = new this.$THREE.PerspectiveCamera(20, this.$webglInnerWidth / (window.innerHeight / 2), 1, 10000)
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0xffffff)
             var light1 = new this.$THREE.DirectionalLight(0xffffff)
@@ -106,12 +107,12 @@ export default {
             //
             this.renderer1 = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer1.setPixelRatio(window.devicePixelRatio)
-            this.renderer1.setSize(window.innerWidth, window.innerHeight / 2)
-            document.body.appendChild(this.renderer1.domElement)
+            this.renderer1.setSize(this.$webglInnerWidth, window.innerHeight / 2)
+            document.getElementsByClassName('webglMultipleRenderers-container')[0].appendChild(this.renderer1.domElement)
             this.renderer2 = new this.$THREE.WebGLRenderer()
             this.renderer2.setPixelRatio(window.devicePixelRatio)
-            this.renderer2.setSize(window.innerWidth, window.innerHeight / 2)
-            document.body.appendChild(this.renderer2.domElement)
+            this.renderer2.setSize(this.$webglInnerWidth, window.innerHeight / 2)
+            document.getElementsByClassName('webglMultipleRenderers-container')[0].appendChild(this.renderer2.domElement)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -149,6 +150,7 @@ export default {
 #info {
     background-color: #fff;
     color: #444;
+    margin-left: 0;
 }
 #info a {
     color: #08f;

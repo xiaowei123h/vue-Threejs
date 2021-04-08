@@ -33,7 +33,7 @@ export default {
             this.$THREE.Object3D.DefaultUp = new this.$THREE.Vector3(0, 0, 1)
             this.container = document.createElement('div')
             document.getElementsByClassName('webglLoader3dm-container')[0].appendChild(this.container)
-            this.camera = new this.$THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$THREE.PerspectiveCamera(60, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.set(26, - 40, 5)
             this.scene = new this.$THREE.Scene()
             var directionalLight = new this.$THREE.DirectionalLight(0xffffff)
@@ -42,12 +42,12 @@ export default {
             directionalLight.intensity = 2
             this.scene.add(directionalLight)
             var loader = new Rhino3dmLoader()
-            loader.setLibraryPath('@/components/jsm/libs/rhino3dm/')
+            loader.setLibraryPath('static/jsm/libs/rhino3dm/')
             loader.load('static/models/3dm/Rhino_Logo.3dm', (object) => {
                 this.scene.add(object)
                 this.initGUI(object.userData.layers)
             })
-            var width = window.innerWidth
+            var width = this.$webglInnerWidth
             var height = window.innerHeight
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
@@ -65,14 +65,15 @@ export default {
             requestAnimationFrame(this.animate)
         },
         initGUI(layers) {
+            var that = this
             this.gui = new GUI({ width: 300 })
             var layersControl = this.gui.addFolder('layers')
             layersControl.open()
             for (var i = 0; i < layers.length; i ++) {
                 var layer = layers[ i ]
-                layersControl.add(layer, 'visible').name(layer.name).onChange((val) => {
+                layersControl.add(layer, 'visible').name(layer.name).onChange(function (val) {
                     var name = this.object.name
-                    this.scene.traverse((child) => {
+                    that.scene.traverse((child) => {
                         if (child.userData.hasOwnProperty('attributes')) {
                             if ('layerIndex' in child.userData.attributes) {
                                 var layerName = layers[ child.userData.attributes.layerIndex ].name
@@ -93,5 +94,8 @@ export default {
 <style scoped>
 .webglLoader3dm-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

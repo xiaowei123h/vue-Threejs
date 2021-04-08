@@ -9,10 +9,13 @@ import { WEBGL } from 'three/examples/jsm/WebGL.js'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css'
 import { onWindowResize } from '@/utils/common.js'
+import * as moduleTHREE from '@/components/build/three.module.js'
+import 'babel-polyfill'
 
 Vue.config.productionTip = false
 
 Vue.prototype.$THREE = THREE
+Vue.prototype.$moduleTHREE = moduleTHREE
 Vue.prototype.$Stats = Stats
 Vue.prototype.$WEBGL = WEBGL
 Vue.prototype.$onWindowResize = onWindowResize

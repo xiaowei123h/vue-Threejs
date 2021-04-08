@@ -45,9 +45,9 @@ export default {
         }
     },
     mounted() {
-        this.SCREEN_WIDTH = window.innerWidth
+        this.SCREEN_WIDTH = this.$webglInnerWidth
         this.SCREEN_HEIGHT = window.innerHeight
-        this.windowHalfX = window.innerWidth / 2
+        this.windowHalfX = this.$webglInnerWidth / 2
         this.windowHalfY = window.innerHeight / 2
         this.init()
         this.animate()
@@ -102,27 +102,28 @@ export default {
             meshCanvas2.rotation.x = - Math.PI / 2
             meshCanvas2.scale.set(1000, 1000, 1000)
             // PAINTING
-            var callbackPainting = () => {
+            var that = this
+            var callbackPainting = function () {
                 var image = texturePainting1.image
                 texturePainting2.image = image
                 texturePainting2.needsUpdate = true
-                this.scene1.add(meshCanvas1)
-                this.scene2.add(meshCanvas2)
-                var geometry = new this.$THREE.PlaneBufferGeometry(100, 100)
-                var mesh1 = new this.$THREE.Mesh(geometry, materialPainting1)
-                var mesh2 = new this.$THREE.Mesh(geometry, materialPainting2)
-                addPainting(this.scene1, mesh1)
-                addPainting(this.scene2, mesh2)
+                that.scene1.add(meshCanvas1)
+                that.scene2.add(meshCanvas2)
+                var geometry = new that.$THREE.PlaneBufferGeometry(100, 100)
+                var mesh1 = new that.$THREE.Mesh(geometry, materialPainting1)
+                var mesh2 = new that.$THREE.Mesh(geometry, materialPainting2)
+                addPainting(that.scene1, mesh1)
+                addPainting(that.scene2, mesh2)
                 function addPainting(zscene, zmesh) {
                     zmesh.scale.x = image.width / 100
                     zmesh.scale.y = image.height / 100
                     zscene.add(zmesh)
-                    var meshFrame = new this.$THREE.Mesh(geometry, new this.$THREE.MeshBasicMaterial({ color: 0x000000 }))
+                    var meshFrame = new that.$THREE.Mesh(geometry, new that.$THREE.MeshBasicMaterial({ color: 0x000000 }))
                     meshFrame.position.z = - 10.0
                     meshFrame.scale.x = 1.1 * image.width / 100
                     meshFrame.scale.y = 1.1 * image.height / 100
                     zscene.add(meshFrame)
-                    var meshShadow = new this.$THREE.Mesh(geometry, new this.$THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0.75, transparent: true }))
+                    var meshShadow = new that.$THREE.Mesh(geometry, new that.$THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0.75, transparent: true }))
                     meshShadow.position.y = - 1.1 * image.height / 2
                     meshShadow.position.z = - 1.1 * image.height / 2
                     meshShadow.rotation.x = - Math.PI / 2
@@ -178,6 +179,7 @@ export default {
 
 <style scoped>
 .webglMaterialsTextureManualmipmap-container {
+    position: relative;
     width: 100%;
 }
 .lbl { color:#fff; font-size:16px; font-weight:bold; position: absolute; bottom:0px; z-index:100; text-shadow:#000 1px 1px 1px; background-color:rgba(0,0,0,0.85); padding:1em }

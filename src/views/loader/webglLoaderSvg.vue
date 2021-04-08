@@ -33,18 +33,19 @@ export default {
         init() {
             var container = document.getElementById('container')
             //
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.set(0, 0, 200)
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             container.appendChild(this.renderer.domElement)
             //
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
             controls.screenSpacePanning = true
             //
             this.stats = new this.$Stats()
+            this.stats.dom.style.left = '280px'
             container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -59,6 +60,7 @@ export default {
             this.createGUI()
         },
         createGUI() {
+            var that = this
             if (this.gui) this.gui.destroy()
             this.gui = new GUI({ width: 350 })
             this.gui.add(this.guiData, 'currentURL', {
@@ -86,7 +88,7 @@ export default {
             this.gui.add(this.guiData, 'strokesWireframe').name('Wireframe strokes').onChange(update)
             this.gui.add(this.guiData, 'fillShapesWireframe').name('Wireframe fill shapes').onChange(update)
             function update() {
-                this.loadSVG(this.guiData.currentURL)
+                that.loadSVG(that.guiData.currentURL)
             }
         },
         loadSVG(url) {
@@ -168,5 +170,8 @@ export default {
 .webglLoaderSvg-container {
     width: 100%;
     background-color: #b0b0b0;
+}
+#info {
+    margin-left: 0;
 }
 </style>

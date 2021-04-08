@@ -25,8 +25,8 @@ export default {
     methods: {
         init() {
             var container = document.createElement('div')
-            document.getElementsByClassName('webglLoaderFbxNurbs-container')[0].appendChild(this.container)
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000)
+            document.getElementsByClassName('webglLoaderFbxNurbs-container')[0].appendChild(container)
+            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 2000)
             this.camera.position.set(2, 18, 28)
             this.scene = new this.$THREE.Scene()
             var hemiLight = new this.$THREE.HemisphereLight(0xffffff, 0x444444)
@@ -40,7 +40,8 @@ export default {
             this.scene.add(gridHelper)
             // stats
             this.stats = new this.$Stats()
-            this.container.appendChild(this.stats.dom)
+            this.stats.dom.style.left = '280px'
+            container.appendChild(this.stats.dom)
             // model
             var loader = new FBXLoader()
             loader.load('static/models/fbx/nurbs.fbx', (object) => {
@@ -48,8 +49,8 @@ export default {
             })
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
-            this.container.appendChild(this.renderer.domElement)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
+            container.appendChild(this.renderer.domElement)
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
             controls.target.set(0, 12, 0)
             controls.update()

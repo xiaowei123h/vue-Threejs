@@ -28,26 +28,38 @@ export default {
     mounted() {
         this.vertexshader = `
             uniform float amplitude;
+
 			attribute vec3 customColor;
 			attribute vec3 displacement;
+
 			varying vec3 vNormal;
 			varying vec3 vColor;
+
 			void main() {
+
 				vNormal = normal;
 				vColor = customColor;
+
 				vec3 newPosition = position + normal * amplitude * displacement;
-				gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
-            }`
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+
+			}`
         this.fragmentshader = `
             varying vec3 vNormal;
 			varying vec3 vColor;
+
 			void main() {
-				float ambient = 0.4;
-				vec3 light = vec3(1.0);
-				light = normalize(light);
-				float directional = max(dot(vNormal, light), 0.0);
-				gl_FragColor = vec4((directional + ambient) * vColor, 1.0);
-            }`
+
+				const float ambient = 0.4;
+
+				vec3 light = vec3( 1.0 );
+				light = normalize( light );
+
+				float directional = max( dot( vNormal, light ), 0.0 );
+
+				gl_FragColor = vec4( ( directional + ambient ) * vColor, 1.0 );
+
+			}`
         this.WIDTH = window.innerWidth
         this.HEIGHT = window.innerHeight
         this.loader = new this.$THREE.FontLoader()
@@ -63,7 +75,7 @@ export default {
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0x050505)
             //
-            var geometry = new this.$THREE.TextGeometry("this.$THREE.JS", {
+            var geometry = new this.$THREE.TextGeometry("THREE.JS", {
                 font: font,
                 size: 40,
                 height: 5,
@@ -72,6 +84,7 @@ export default {
                 bevelSize: 1,
                 bevelEnabled: true
             })
+            console.log(geometry)
             geometry.center()
             var tessellateModifier = new TessellateModifier(8, 6)
             geometry = tessellateModifier.modify(geometry)

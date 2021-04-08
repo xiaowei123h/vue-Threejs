@@ -160,4 +160,7 @@ export default {
 .webglShadersOcean2-container {
     width: 100%;
 }
+#info {
+    margin-left: 0;
+}
 </style>

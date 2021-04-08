@@ -107,7 +107,7 @@ export default {
                 // set the viewport
                 var width = rect.right - rect.left
                 var height = rect.bottom - rect.top
-                var left = rect.left
+                var left = rect.left - 281
                 var bottom = this.renderer.domElement.clientHeight - rect.bottom
                 this.renderer.setViewport(left, bottom, width, height)
                 this.renderer.setScissor(left, bottom, width, height)
@@ -124,49 +124,56 @@ export default {
 
 <style scoped>
 .webglMultipleElements-container {
+    position: relative;
     width: 100%;
-}
-* {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-}
-
-body {
+    height: 100vh;
     background-color: #fff;
     color: #444;
 }
 
-a {
+</style>
+
+<style>
+/* * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+} */
+
+.webglMultipleElements-container #info a {
     color: #08f;
 }
 
-#content {
+.webglMultipleElements-container #info {
+    color: #444;
+}
+
+.webglMultipleElements-container #content {
     position: absolute;
     top: 0; width: 100%;
     z-index: 1;
     padding: 3em 0 0 0;
 }
 
-#c {
+.webglMultipleElements-container #c {
     position: absolute;
     left: 0;
     width: 100%;
     height: 100%;
 }
 
-.list-item {
+.webglMultipleElements-container .list-item {
     display: inline-block;
     margin: 1em;
     padding: 1em;
     box-shadow: 1px 2px 4px 0px rgba(0,0,0,0.25);
 }
 
-.list-item > div:nth-child(1) {
+.webglMultipleElements-container .list-item > div:nth-child(1) {
     width: 200px;
     height: 200px;
 }
 
-.list-item > div:nth-child(2) {
+.webglMultipleElements-container .list-item > div:nth-child(2) {
     color: #888;
     font-family: sans-serif;
     font-size: large;

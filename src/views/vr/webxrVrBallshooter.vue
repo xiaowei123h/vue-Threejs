@@ -39,7 +39,7 @@ export default {
         init() {
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0x505050)
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 0.1, 10)
             this.camera.position.set(0, 1.6, 3)
             this.room = new this.$THREE.LineSegments(
                 new BoxLineGeometry(6, 6, 6, 10, 10, 10),
@@ -51,7 +51,7 @@ export default {
             var light = new this.$THREE.DirectionalLight(0xffffff)
             light.position.set(1, 1, 1).normalize()
             this.scene.add(light)
-            var geometry = new this.$THREE.IcosahedronBufferGeometry(radius, 3)
+            var geometry = new this.$THREE.IcosahedronBufferGeometry(this.radius, 3)
             for (var i = 0; i < 200; i ++) {
                 var object = new this.$THREE.Mesh(geometry, new this.$THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }))
                 object.position.x = Math.random() * 4 - 2
@@ -66,7 +66,7 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.renderer.xr.enabled = true
             document.getElementsByClassName('webxrVrBallshooter-container')[0].appendChild(this.renderer.domElement)
@@ -129,9 +129,7 @@ export default {
             }
         },
         onWindowResize() {
-            this.camera.aspect = window.innerWidth / window.innerHeight
-            this.camera.updateProjectionMatrix()
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.$onWindowResize(this.camera, this.renderer)
         },
         handleController(controller) {
             if (controller.userData.isSelecting) {
@@ -182,8 +180,8 @@ export default {
                         object.position.sub(this.normal)
                         object2.position.add(this.normal)
                         this.normal.normalize()
-                        relativeVelocity.copy(object.userData.velocity).sub(object2.userData.velocity)
-                        this.normal = this.normal.multiplyScalar(relativeVelocity.dot(this.normal))
+                        this.relativeVelocity.copy(object.userData.velocity).sub(object2.userData.velocity)
+                        this.normal = this.normal.multiplyScalar(this.relativeVelocity.dot(this.normal))
                         object.userData.velocity.sub(this.normal)
                         object2.userData.velocity.add(this.normal)
                     }
@@ -198,6 +196,7 @@ export default {
 
 <style scoped>
 .webxrVrBallshooter-container {
+    position: relative;
     width: 100%;
 }
 </style>

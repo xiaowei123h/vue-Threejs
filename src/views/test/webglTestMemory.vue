@@ -23,14 +23,18 @@ export default {
         init() {
             var container = document.createElement('div')
             document.getElementsByClassName('webglTestMemory-container')[0].appendChild(container)
-            this.camera = new this.$THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000)
+            this.camera = new this.$THREE.PerspectiveCamera(60, this.$webglInnerWidth / window.innerHeight, 1, 10000)
             this.camera.position.z = 200
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0xffffff)
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             container.appendChild(this.renderer.domElement)
+            window.addEventListener('resize', this.onWindowResize, false)
+        },
+        onWindowResize() {
+            this.$onWindowResize(this.camera, this.renderer)
         },
         createImage() {
             var canvas = document.createElement('canvas')
@@ -69,6 +73,7 @@ export default {
 #info {
     background-color: #fff;
     color: #000;
+    margin-left: 45px;
 }
 #info a {
     color: #08f;

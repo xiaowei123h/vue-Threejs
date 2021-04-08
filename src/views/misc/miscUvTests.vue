@@ -1,6 +1,6 @@
 <template>
     <div class="miscUvTests-container">
-        
+        <div class="canvas-container"></div>
     </div>
 </template>
 
@@ -32,7 +32,8 @@ export default {
             var d = document.createElement('div')
             d.innerHTML = '<h3>' + name + '</h3>'
             d.appendChild(UVsDebug(geometry))
-            document.getElementsByClassName('miscUvTests-container')[0].appendChild(d)
+            console.log(UVsDebug(geometry))
+            document.getElementsByClassName('canvas-container')[0].appendChild(d)
         }
     },
 }
@@ -40,7 +41,9 @@ export default {
 
 <style scoped>
 .miscUvTests-container {
-    width: calc(100vh - 281px);
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
     background: #ffffff;
     color: #000000;
     text-align: center;
@@ -51,7 +54,10 @@ h3 {
     margin-bottom: 30px;
     font-weight: normal;
 }
-canvas {
-    width: calc(100vh - 281px);
+</style>
+
+<style>
+.canvas-container canvas {
+    width: 100%;
 }
 </style>

@@ -8,8 +8,8 @@
 
 <script>
 import { DDSLoader } from '@/components/jsm/loaders/DDSLoader.js'
-import WebGPURenderer from '@/components/jsm/renderers/webgpu/WebGPURenderer.js'
-import WebGPU from '@/components/jsm/renderers/webgpu/WebGPU.js'
+// import { WebGPURenderer } from '@/components/jsm/renderers/webgpu/WebGPURenderer.js'
+// import WebGPU from '@/components/jsm/renderers/webgpu/WebGPU.js'
 export default {
     data() {
         return {

@@ -45,7 +45,7 @@ export default {
         init() {
             var overlay = document.getElementById('overlay')
             overlay.remove()
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 1, 10000)
             this.camera.position.set(0, 25, 0)
             var listener = new this.$THREE.AudioListener()
             this.camera.add(listener)
@@ -111,17 +111,16 @@ export default {
             helper.position.y = 0.1
             this.scene.add(helper)
             //
-            var that = this
             var SoundControls = function () {
-                that.master = listener.getMasterVolume()
-                that.firstSphere = sound1.getVolume()
-                that.secondSphere = sound2.getVolume()
-                that.thirdSphere = sound3.getVolume()
-                that.Ambient = sound4.getVolume()
+                this.master = listener.getMasterVolume()
+                this.firstSphere = sound1.getVolume()
+                this.secondSphere = sound2.getVolume()
+                this.thirdSphere = sound3.getVolume()
+                this.Ambient = sound4.getVolume()
             }
             var GeneratorControls = function () {
-                that.frequency = oscillator.frequency.value
-                that.wavetype = oscillator.type
+                this.frequency = oscillator.frequency.value
+                this.wavetype = oscillator.type
             }
             this.gui = new GUI()
             var soundControls = new SoundControls()
@@ -154,7 +153,7 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webaudioSandbox-container')[0].appendChild(this.renderer.domElement)
             //
             this.controls = new FirstPersonControls(this.camera, this.renderer.domElement)
@@ -189,6 +188,7 @@ export default {
 <style scoped>
 .webaudioSandbox-container {
     width: 100%;
+    background-color: rgba(0, 0, 0, .95);
 }
 #overlay {
     text-align: center;

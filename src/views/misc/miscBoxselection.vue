@@ -26,12 +26,13 @@ export default {
         this.animate()
         this.selectionBox = new SelectionBox(this.camera, this.scene)
         this.helper = new SelectionHelper(this.selectionBox, this.renderer, 'selectBox')
+        console.log(this.helper)
         document.addEventListener('pointerdown', (event) => {
             for (var item of this.selectionBox.collection) {
                 item.material.emissive.set(0x000000)
             }
             this.selectionBox.startPoint.set(
-                (event.clientX / window.innerWidth) * 2 - 1,
+                ((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1,
                 - (event.clientY / window.innerHeight) * 2 + 1,
                 0.5)
         })
@@ -41,18 +42,19 @@ export default {
                     this.selectionBox.collection[ i ].material.emissive.set(0x000000)
                 }
                 this.selectionBox.endPoint.set(
-                    (event.clientX / window.innerWidth) * 2 - 1,
+                    ((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1,
                     - (event.clientY / window.innerHeight) * 2 + 1,
                     0.5)
                 var allSelected = this.selectionBox.select()
                 for (var i = 0; i < allSelected.length; i ++) {
                     allSelected[ i ].material.emissive.set(0xffffff)
                 }
+
             }
         })
         document.addEventListener('pointerup', (event) => {
             this.selectionBox.endPoint.set(
-                (event.clientX / window.innerWidth) * 2 - 1,
+                ((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1,
                 - (event.clientY / window.innerHeight) * 2 + 1,
                 0.5)
             var allSelected = this.selectionBox.select()
@@ -134,7 +136,10 @@ export default {
 #info a {
     color: #08e;
 }
-.selectBox {
+</style>
+
+<style>
+.miscBoxselection-container .selectBox {
     border: 1px solid #55aaff;
     background-color: rgba(75, 160, 255, 0.3);
     position: fixed;

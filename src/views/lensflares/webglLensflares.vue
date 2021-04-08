@@ -33,7 +33,7 @@ export default {
             this.container = document.createElement('div')
             document.getElementsByClassName('webglLensflares-container')[0].appendChild(this.container)
             // camera
-            this.camera = new this.$THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 15000)
+            this.camera = new this.$THREE.PerspectiveCamera(40, this.$webglInnerWidth / window.innerHeight, 1, 15000)
             this.camera.position.z = 250
             // scene
             this.scene = new this.$THREE.Scene()
@@ -64,10 +64,10 @@ export default {
             var textureLoader = new this.$THREE.TextureLoader()
             var textureFlare0 = textureLoader.load('static/textures/lensflare/lensflare0.png')
             var textureFlare3 = textureLoader.load('static/textures/lensflare/lensflare3.png')
+            var that = this
             addLight(0.55, 0.9, 0.5, 5000, 0, - 1000)
             addLight(0.08, 0.8, 0.5, 0, 0, - 1000)
             addLight(0.995, 0.5, 0.9, 5000, 5000, - 1000)
-            var that = this
             function addLight(h, s, l, x, y, z) {
                 var light = new that.$THREE.PointLight(0xffffff, 1.5, 2000)
                 light.color.setHSL(h, s, l)
@@ -84,7 +84,7 @@ export default {
             // renderer
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.container.appendChild(this.renderer.domElement)
             //
@@ -121,5 +121,8 @@ export default {
 <style scoped>
 .webglLensflares-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

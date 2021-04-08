@@ -38,7 +38,7 @@ export default {
             document.getElementsByClassName('webxrVrHandinput-container')[0].appendChild(this.container)
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0x444444)
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 0.1, 10)
             this.camera.position.set(0, 1.6, 3)
             this.controls = new OrbitControls(this.camera, this.container)
             this.controls.target.set(0, 1.6, 0)
@@ -62,7 +62,7 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.renderer.shadowMap.enabled = true
             this.renderer.xr.enabled = true
@@ -114,6 +114,7 @@ export default {
 
 <style scoped>
 .webxrVrHandinput-container {
+    position: relative;
     width: 100%;
 }
 </style>

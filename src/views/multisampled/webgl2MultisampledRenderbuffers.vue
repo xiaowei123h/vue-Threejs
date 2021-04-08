@@ -115,6 +115,7 @@ export default {
 
 <style scoped>
 .webgl2MultisampledRenderbuffers-container {
+    position: relative;
     width: 100%;
 }
 #info {
@@ -128,7 +129,7 @@ export default {
 
 #container {
     position: absolute;
-    top: 70px;
+    top: 90px;
     width: 100%;
     bottom: 0px;
 }

@@ -64,7 +64,7 @@ export default {
             this.gui.add(this.effectController, "maxConnections", 0, 30, 1)
             this.gui.add(this.effectController, "particleCount", 0, this.maxParticleCount, 1).onChange((value) => {
                 this.particleCount = parseInt(value)
-                particles.setDrawRange(0, this.particleCount)
+                this.particles.setDrawRange(0, this.particleCount)
             })
         },
         init() {
@@ -78,7 +78,7 @@ export default {
             this.scene = new this.$THREE.Scene()
             this.group = new this.$THREE.Group()
             this.scene.add(this.group)
-            var helper = new this.$THREE.BoxHelper(new this.$THREE.Mesh(new this.$THREE.BoxBufferGeometry(r, r, r)))
+            var helper = new this.$THREE.BoxHelper(new this.$THREE.Mesh(new this.$THREE.BoxBufferGeometry(this.r, this.r, this.r)))
             helper.material.color.setHex(0x101010)
             helper.material.blending = this.$THREE.AdditiveBlending
             helper.material.transparent = true
@@ -96,9 +96,9 @@ export default {
             this.particles = new this.$THREE.BufferGeometry()
             this.particlePositions = new Float32Array(this.maxParticleCount * 3)
             for (var i = 0; i < this.maxParticleCount; i ++) {
-                var x = Math.random() * r - r / 2
-                var y = Math.random() * r - r / 2
-                var z = Math.random() * r - r / 2
+                var x = Math.random() * this.r - this.r / 2
+                var y = Math.random() * this.r - this.r / 2
+                var z = Math.random() * this.r - this.r / 2
                 this.particlePositions[ i * 3 ] = x
                 this.particlePositions[ i * 3 + 1 ] = y
                 this.particlePositions[ i * 3 + 2 ] = z
@@ -108,7 +108,7 @@ export default {
                     numConnections: 0
                 })
             }
-            this.particles.setDrawRange(0, particleCount)
+            this.particles.setDrawRange(0, this.particleCount)
             this.particles.setAttribute('position', new this.$THREE.BufferAttribute(this.particlePositions, 3).setUsage(this.$THREE.DynamicDrawUsage))
             // create the particle system
             this.pointCloud = new this.$THREE.Points(this.particles, pMaterial)
@@ -135,7 +135,7 @@ export default {
             this.stats = new this.$Stats()
             this.stats.dom.style.left = '280px'
             this.container.appendChild(this.stats.dom)
-            window.addEventListener('resize', onWindowResize, false)
+            window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
@@ -209,5 +209,8 @@ export default {
 <style scoped>
 .webglBuffergeometryDrawrange-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

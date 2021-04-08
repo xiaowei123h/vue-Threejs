@@ -34,7 +34,7 @@ export default {
             container.addEventListener('click', () => {
                 video.play()
             })
-            this.camera = new this.$THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 2000)
+            this.camera = new this.$THREE.PerspectiveCamera(70, this.$webglInnerWidth / window.innerHeight, 1, 2000)
             this.camera.layers.enable(1) // render left view when no stereo available
             // video
             var video = document.getElementById('video')
@@ -76,7 +76,7 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.xr.enabled = true
             this.renderer.xr.setReferenceSpaceType('local')
             container.appendChild(this.renderer.domElement)
@@ -99,6 +99,11 @@ export default {
 
 <style scoped>
 .webxrVrVideo-container {
+    position: relative;
     width: 100%;
 }
+#info {
+    margin-left: -230px;
+}
 </style>
+

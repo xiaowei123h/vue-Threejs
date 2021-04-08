@@ -15,6 +15,8 @@
 			<label><input id="option_binary" name="visible" type="checkbox">Binary (<code>.glb</code>)</label>
 			<label><input id="option_forcepot" name="visible" type="checkbox">Force POT textures</label>
 			<label><input id="option_maxsize" name="maxSize" type="number" value="4096" min="2" max="8192" step="1"> Max texture size</label>
+
+            <button id="export_scene">Export Scene1</button>
 		</div>
     </div>
 </template>
@@ -45,7 +47,7 @@ export default {
         this.link.style.display = 'none'
         document.getElementsByClassName('miscExporterGltf-container')[0].appendChild(this.link) // Firefox workaround, see #6594
         this.init()
-		this.animate()
+        this.animate()
     },
     methods: {
         exportGLTF(input) {
@@ -58,15 +60,22 @@ export default {
                 forcePowerOfTwoTextures: document.getElementById('option_forcepot').checked,
                 maxTextureSize: Number(document.getElementById('option_maxsize').value) || Infinity // To prevent NaN value
             }
-            gltfExporter.parse(input, (result) => {
-                if (result instanceof ArrayBuffer) {
-                    this.saveArrayBuffer(result, 'scene.glb')
-                } else {
-                    var output = JSON.stringify(result, null, 2)
-                    console.log(output)
-                    this.saveString(output, 'scene.gltf')
-                }
+            console.log('1111')
+            console.log(gltfExporter)
+            console.log(input)
+            gltfExporter.parse(input, function (result) {
+                console.log(result)
+                // if (result instanceof ArrayBuffer) {
+                //     console.log('222222')
+                //     this.saveArrayBuffer(result, 'scene.glb')
+                // } else {
+                //     console.log('33333')
+                //     var output = JSON.stringify(result, null, 2)
+                //     console.log(output)
+                //     this.saveString(output, 'scene.gltf')
+                // }
             }, options)
+            console.log('4444444')
         },
         handleExportScene() {
             this.exportGLTF(this.scene1)

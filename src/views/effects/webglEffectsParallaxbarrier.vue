@@ -71,14 +71,14 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            this.windowHalfX = this.$webglInnerWidth / 2
+            this.windowHalfX = (window.innerWidth - 281) / 2
             this.windowHalfY = window.innerHeight / 2
-            this.camera.aspect = this.$webglInnerWidth / window.innerHeight
+            this.camera.aspect = (window.innerWidth - 281) / window.innerHeight
             this.camera.updateProjectionMatrix()
-            this.effect.setSize(this.$webglInnerWidth, window.innerHeight)
+            this.effect.setSize((window.innerWidth - 281), window.innerHeight)
         },
         onDocumentMouseMove(event) {
-            this.mouseX = (event.clientX - this.windowHalfX) / 100
+            this.mouseX = (event.clientX - 281 - this.windowHalfX) / 100
             this.mouseY = (event.clientY - this.windowHalfY) / 100
         },
         animate() {
@@ -104,5 +104,8 @@ export default {
 <style scoped>
 .webglEffectsParallaxbarrier-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

@@ -36,7 +36,7 @@ export default {
             this.scene = new this.$THREE.Scene()
             this.camera = new this.$THREE.PerspectiveCamera(
                 40,
-                window.innerWidth / window.innerHeight,
+                this.$webglInnerWidth / window.innerHeight,
                 1,
                 1000
             )
@@ -121,14 +121,14 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglModifierCurveInstanced-container')[0].appendChild(this.renderer.domElement)
             this.renderer.domElement.addEventListener('pointerdown', this.onPointerDown, false)
             this.rayCaster = new this.$THREE.Raycaster()
             this.control = new TransformControls(this.camera, this.renderer.domElement)
             this.control.addEventListener("dragging-changed", (event) => {
                 if (! event.value) {
-                    curves.forEach(function ({ curve, line }, i) {
+                    curves.forEach(({ curve, line }, i) => {
                         var points = curve.getPoints(50)
                         line.geometry.setFromPoints(points)
                         this.flow.updateCurve(i, curve)
@@ -145,7 +145,7 @@ export default {
         },
         onPointerDown(event) {
             this.action = this.ACTION_SELECT
-            this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+            this.mouse.x = ((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1
             this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
         },
         animate() {

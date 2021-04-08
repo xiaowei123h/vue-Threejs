@@ -24,14 +24,14 @@ export default {
         this.container = document.querySelector('#container');
 		// Configure and create Draco decoder.
 		this.dracoLoader = new DRACOLoader();
-		this.dracoLoader.setDecoderPath('@/components/js/libs/draco/');
+		this.dracoLoader.setDecoderPath('static/js/libs/draco/');
 		this.dracoLoader.setDecoderConfig({ type: 'js' });
 		this.init();
 		this.animate();
     },
     methods: {
         init() {
-			this.camera = new this.$THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 15);
+			this.camera = new this.$THREE.PerspectiveCamera(35, this.$webglInnerWidth / window.innerHeight, 0.1, 15);
 			this.camera.position.set(3, 0.25, 3);
 			this.scene = new this.$THREE.Scene();
 			this.scene.background = new this.$THREE.Color(0x443333);
@@ -67,7 +67,7 @@ export default {
 			// renderer
 			this.renderer = new this.$THREE.WebGLRenderer({ antialias: true });
 			this.renderer.setPixelRatio(window.devicePixelRatio);
-			this.renderer.setSize(window.innerWidth, window.innerHeight);
+			this.renderer.setSize(this.$webglInnerWidth, window.innerHeight);
 			this.renderer.outputEncoding = this.$THREE.sRGBEncoding;
 			this.renderer.shadowMap.enabled = true;
 			this.container.appendChild(this.renderer.domElement);
@@ -94,5 +94,8 @@ export default {
 <style scoped>
 .webglLoaderDraco-container {
     width: 100%;
+}
+#info {
+	margin-left: 60px;
 }
 </style>

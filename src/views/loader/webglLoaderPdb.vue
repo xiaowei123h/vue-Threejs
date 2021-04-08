@@ -187,6 +187,7 @@ export default {
 
 <style scoped>
 .webglLoaderPdb-container {
+    position: relative;
     width: 100%;
 }
 #menu {

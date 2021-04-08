@@ -47,7 +47,7 @@ export default {
             this.camera.position.z = 300
             this.scene = new this.$THREE.Scene()
             this.uniforms = {
-                pointTexture: { value: new this.$THREE.TextureLoader().load("textures/sprites/spark1.png") }
+                pointTexture: { value: new this.$THREE.TextureLoader().load("static/textures/sprites/spark1.png") }
             }
             var shaderMaterial = new this.$THREE.ShaderMaterial({
                 uniforms: this.uniforms,
@@ -113,5 +113,8 @@ export default {
 <style scoped>
 .webglBuffergeometryCustomAttributesParticles-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

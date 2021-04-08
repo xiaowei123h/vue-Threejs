@@ -175,13 +175,13 @@ export default {
                     // PASS
                     screen = new Nodes.ScreenNode()
                     var sat = new Nodes.FloatNode(0)
-                    var satrgb = new Nodes.FunctionNode([
-                        "vec3 satrgb(vec3 rgb, float adjustment) {",
-                        // include luminance function from LuminanceNode
-                        "	vec3 intensity = vec3(luminance(rgb))",
-                        "	return mix(intensity, rgb, adjustment)",
-                        "}"
-                    ].join("\n"), [ Nodes.LuminanceNode.Nodes.luminance ])
+                    var satrgb = new Nodes.FunctionNode( [
+							"vec3 satrgb( vec3 rgb, float adjustment ) {",
+							// include luminance function from LuminanceNode
+							"	vec3 intensity = vec3( luminance( rgb ) );",
+							"	return mix( intensity, rgb, adjustment );",
+							"}"
+						].join( "\n" ), [ Nodes.LuminanceNode.Nodes.luminance ] )
                     var saturation = new Nodes.FunctionCallNode(satrgb)
                     saturation.inputs.rgb = screen
                     saturation.inputs.adjustment = sat
@@ -315,11 +315,11 @@ export default {
         init() {
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglPostprocessingNodes-container')[0].appendChild(this.renderer.domElement)
             this.nodepost = new Nodes.NodePostProcessing(this.renderer)
             //
-            this.camera = new this.$THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$THREE.PerspectiveCamera(70, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.z = 400
             this.scene = new this.$THREE.Scene()
             this.scene.fog = new this.$THREE.Fog(0x0066FF, 1, 1000)
@@ -344,9 +344,7 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            this.camera.aspect = window.innerWidth / window.innerHeight
-            this.camera.updateProjectionMatrix()
-            this.nodepost.setSize(window.innerWidth, window.innerHeight)
+            this.$onWindowResize(this.camera, this.renderer)
         },
         animate() {
             requestAnimationFrame(this.animate)

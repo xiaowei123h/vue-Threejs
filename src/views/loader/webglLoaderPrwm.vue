@@ -2,9 +2,9 @@
     <div class="webglLoaderPrwm-container">
         <div id="info">
 			<strong>Models</strong>:
-			<a class="model" href="models/prwm/faceted-nefertiti.*.prwm">Faceted Nefertiti</a>,
-			<a class="model" href="models/prwm/smooth-suzanne.*.prwm">Smooth Suzanne</a>,
-			<a class="model" href="models/prwm/vive-controller.*.prwm">Vive Controller</a>
+			<a class="model" href="static/models/prwm/faceted-nefertiti.*.prwm">Faceted Nefertiti</a>,
+			<a class="model" href="static/models/prwm/smooth-suzanne.*.prwm">Smooth Suzanne</a>,
+			<a class="model" href="static/models/prwm/vive-controller.*.prwm">Vive Controller</a>
 			<div class="notes">
 				The parsing of PRWM file is especially fast when the endianness of the file is the same as the endianness of the client platform.
 				The loader will automatically replace the <strong>*</strong> in the model url by either <strong>le</strong> or <strong>be</strong> depending on the client platform's endianness to download the most appropriate file. <a href="https://github.com/kchapelier/PRWM" target="_blank" rel="noopener noreferrer">Specifications and implementations</a><br><br>
@@ -30,7 +30,7 @@ export default {
         }
     },
     mounted() {
-        this.windowHalfX = window.innerWidth / 2
+        this.windowHalfX = this.$webglInnerWidth / 2
         this.windowHalfY = window.innerHeight / 2
         this.init()
         this.animate()
@@ -39,8 +39,8 @@ export default {
         init() {
             document.getElementById('endianness').innerHTML = PRWMLoader.isBigEndianPlatform() ? 'big-endian' : 'little-endian'
             var container = document.createElement('div')
-            document.body.appendChild(container)
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000)
+            document.getElementsByClassName('webglLoaderPrwm-container')[0].appendChild(container)
+            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 2000)
             this.camera.position.z = 250
             // scene
             this.scene = new this.$THREE.Scene()
@@ -54,7 +54,7 @@ export default {
             var material = new this.$THREE.MeshPhongMaterial({})
             var busy = false
             var mesh = null
-            var onProgress = (xhr) => {
+            var onProgress = function (xhr) {
                 if (xhr.lengthComputable) {
                     var percentComplete = xhr.loaded / xhr.total * 100
                     console.log(Math.round(percentComplete, 2) + '% downloaded')
@@ -67,19 +67,20 @@ export default {
             var onError = function () {
                 busy = false
             }
+            var that = this
             function loadGeometry(url) {
                 if (busy) return
                 busy = true
                 if (mesh !== null) {
-                    scene.remove(mesh)
+                    that.scene.remove(mesh)
                     mesh.geometry.dispose()
                 }
                 console.log('-- Loading', url)
                 console.time('Download')
                 loader.load(url, function (geometry) {
-                    mesh = new this.$THREE.Mesh(geometry, material)
+                    mesh = new that.$THREE.Mesh(geometry, material)
                     mesh.scale.set(50, 50, 50)
-                    scene.add(mesh)
+                    that.scene.add(mesh)
                     console.log(geometry.index ? 'indexed geometry' : 'non-indexed geometry')
                     console.log('# of vertices: ' + geometry.attributes.position.count)
                     console.log('# of polygons: ' + (geometry.index ? geometry.index.count / 3 : geometry.attributes.position.count / 3))
@@ -89,12 +90,12 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             container.appendChild(this.renderer.domElement)
             document.addEventListener('mousemove', this.onDocumentMouseMove, false)
             //
-            document.querySelectorAll('a.model').forEach((anchor) => {
-                anchor.addEventListener('click', (e) => {
+            document.querySelectorAll('a.model').forEach(function (anchor) {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault()
                     loadGeometry(anchor.href)
                 })

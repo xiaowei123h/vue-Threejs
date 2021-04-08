@@ -51,32 +51,32 @@ export default {
                 new this.$THREE.TextureLoader().load('static/textures/matcaps/matcap-porcelain-white.jpg', (texture) => {
                     texture.encoding = this.$THREE.sRGBEncoding
                     var material = new this.$THREE.MeshMatcapMaterial({ color: 0xaaaaff, matcap: texture })
-                    var colorParsChunk = [
-                        'attribute vec3 instanceColor',
-                        'varying vec3 vInstanceColor',
+                    const colorParsChunk = [
+                        'attribute vec3 instanceColor;',
+                        'varying vec3 vInstanceColor;',
                         '#include <common>'
-                    ].join('\n')
-                    var instanceColorChunk = [
+                    ].join( '\n' )
+                    const instanceColorChunk = [
                         '#include <begin_vertex>',
-                        '\tvInstanceColor = instanceColor'
-                    ].join('\n')
-                    var fragmentParsChunk = [
-                        'varying vec3 vInstanceColor',
+                        '\tvInstanceColor = instanceColor;'
+                    ].join( '\n' )
+                    const fragmentParsChunk = [
+                        'varying vec3 vInstanceColor;',
                         '#include <common>'
-                    ].join('\n')
-                    var colorChunk = [
-                        'vec4 diffuseColor = vec4(diffuse * vInstanceColor, opacity)'
-                    ].join('\n')
-                    material.onBeforeCompile = function (shader) {
+                    ].join( '\n' )
+                    const colorChunk = [
+                        'vec4 diffuseColor = vec4( diffuse * vInstanceColor, opacity );'
+                    ].join( '\n' )
+                    material.onBeforeCompile = function ( shader ) {
                         shader.vertexShader = shader.vertexShader
-                            .replace('#include <common>', colorParsChunk)
-                            .replace('#include <begin_vertex>', instanceColorChunk)
+                            .replace( '#include <common>', colorParsChunk )
+                            .replace( '#include <begin_vertex>', instanceColorChunk );
                         shader.fragmentShader = shader.fragmentShader
-                            .replace('#include <common>', fragmentParsChunk)
-                            .replace('vec4 diffuseColor = vec4(diffuse, opacity)', colorChunk)
-                        //console.log(shader.uniforms)
-                        //console.log(shader.vertexShader)
-                        //console.log(shader.fragmentShader)
+                            .replace( '#include <common>', fragmentParsChunk )
+                            .replace( 'vec4 diffuseColor = vec4( diffuse, opacity );', colorChunk );
+                        //console.log( shader.uniforms );
+                        //console.log( shader.vertexShader );
+                        //console.log( shader.fragmentShader );
                     }
                     this.mesh = new this.$THREE.InstancedMesh(geometry, material, this.count)
                     this.mesh.instanceMatrix.setUsage(this.$THREE.DynamicDrawUsage) // will be updated every frame
@@ -127,5 +127,8 @@ export default {
 <style scoped>
 .webglInstancingModified-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

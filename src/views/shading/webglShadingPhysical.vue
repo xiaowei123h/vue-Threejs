@@ -36,9 +36,9 @@ export default {
         }
     },
     mounted() {
+        this.clock = new this.$THREE.Clock()
         this.init()
         this.animate()
-        this.clock = new this.$THREE.Clock()
     },
     beforeDestroy() {
         this.gui.destroy()
@@ -48,7 +48,7 @@ export default {
             var container = document.createElement('div')
             document.getElementsByClassName('webglShadingPhysical-container')[0].appendChild(container)
             // CAMERA
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 2, 10000)
+            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 2, 10000)
             this.camera.position.set(500, 400, 1200)
             // SCENE
             this.scene = new this.$THREE.Scene()
@@ -167,7 +167,7 @@ export default {
             // RENDERER
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             container.appendChild(this.renderer.domElement)
             //
             this.renderer.shadowMap.enabled = true
@@ -183,6 +183,7 @@ export default {
             this.controls.keys = [ 65, 83, 68 ]
             // STATS
             this.stats = new this.$Stats()
+            this.stats.dom.style.left = '280px'
             container.appendChild(this.stats.dom)
             // EVENTS
             window.addEventListener('resize', this.onWindowResize, false)
@@ -239,5 +240,8 @@ export default {
 <style scoped>
 .webglShadingPhysical-container {
     width: 100%;
+}
+#info {
+    margin-left: 40px;
 }
 </style>

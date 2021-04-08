@@ -63,7 +63,7 @@ export default {
             this.renderer.setPixelRatio(window.devicePixelRatio)
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
-            // window.addEventListener('resize', this.onWindowResize, false)
+            window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
@@ -95,6 +95,7 @@ export default {
 #info {
     background-color: #fff;
     color: #000;
+    margin-left: 45px;
 }
 #info a {
     color: #08f;

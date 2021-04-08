@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import '@/components/js/libs/lottie_canvas.js'
 import { RoomEnvironment } from '@/components/jsm/environments/RoomEnvironment.js';
 import { RoundedBoxBufferGeometry } from '@/components/jsm/geometries/RoundedBoxBufferGeometry.js';
 import { LottieLoader } from '@/components/jsm/loaders/LottieLoader.js';
@@ -27,7 +26,7 @@ export default {
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 0.1, 10)
             this.camera.position.z = 2.5
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0x111111)
@@ -43,7 +42,7 @@ export default {
             })
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglLoaderTextureLottie-container')[0].appendChild(this.renderer.domElement)
             var environment = new RoomEnvironment()
             var pmremGenerator = new this.$THREE.PMREMGenerator(this.renderer)
@@ -88,5 +87,8 @@ export default {
 <style scoped>
 .webglLoaderTextureLottie-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

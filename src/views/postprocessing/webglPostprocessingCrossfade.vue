@@ -47,13 +47,17 @@ export default {
             this.container = document.getElementById("container")
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
             this.container.appendChild(this.stats.dom)
             var sceneA = new FXScene("cube", 5000, 1200, 120, new this.$THREE.Vector3(0, - 0.4, 0), 0xffffff, this.$THREE, this.renderer, this.generateGeometry)
             var sceneB = new FXScene("sphere", 500, 2000, 50, new this.$THREE.Vector3(0, 0.2, 0.1), 0x000000, this.$THREE, this.renderer, this.generateGeometry)
-            this.transition = new Transition(sceneA, sceneB, this.$THREE, this.transitionParams, this.renderer)
+            this.transition = new Transition(sceneA, sceneB, this.$THREE, this.transitionParams, this.renderer, this.clock)
+            window.addEventListener('resize', this.onWindowResize, false)
+        },
+        onWindowResize() {
+            this.renderer.setSize( window.innerWidth - 281, window.innerHeight )
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -80,13 +84,14 @@ export default {
             this.transition.render(this.clock.getDelta())
         },
         generateGeometry(objectType, numObjects) {
+            var that = this
             function applyVertexColors(geometry, color) {
                 var position = geometry.attributes.position
                 var colors = []
                 for (var i = 0; i < position.count; i ++) {
                     colors.push(color.r, color.g, color.b)
                 }
-                geometry.setAttribute('color', new this.$THREE.Float32BufferAttribute(colors, 3))
+                geometry.setAttribute('color', new that.$THREE.Float32BufferAttribute(colors, 3))
             }
             var geometries = []
             var matrix = new this.$THREE.Matrix4()

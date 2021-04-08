@@ -23,7 +23,7 @@ export default {
         }
     },
     mounted() {
-        this.windowHalfX = window.innerWidth / 2
+        this.windowHalfX = this.$webglInnerWidth / 2
         this.lwindowHalfY = window.innerHeight / 2
         this.init()
         this.animate()
@@ -32,7 +32,7 @@ export default {
         init() {
             this.container = document.createElement('div')
             document.getElementsByClassName('webglLoaderObj-container')[0].appendChild(this.container)
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000)
+            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 2000)
             this.camera.position.z = 250
             // scene
             this.scene = new this.$THREE.Scene()
@@ -41,13 +41,14 @@ export default {
             var pointLight = new this.$THREE.PointLight(0xffffff, 0.8)
             this.camera.add(pointLight)
             this.scene.add(this.camera)
+            var that = this
             // manager
             function loadModel() {
-                this.object.traverse((child) => {
+                that.object.traverse((child) => {
                     if (child.isMesh) child.material.map = texture
                 })
-                this.object.position.y = - 95
-                this.scene.add(this.object)
+                that.object.position.y = - 95
+                that.scene.add(that.object)
             }
             var manager = new this.$THREE.LoadingManager(loadModel)
             manager.onProgress = (item, loaded, total) => {
@@ -71,7 +72,7 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             document.addEventListener('mousemove', this.onDocumentMouseMove, false)
             //
@@ -103,5 +104,8 @@ export default {
 <style scoped>
 .webglLoaderObj-container {
     width: 100%;
+}
+#info {
+    margin-left: 30px;
 }
 </style>

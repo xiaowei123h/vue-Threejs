@@ -28,8 +28,8 @@ export default {
     methods: {
         init() {
             this.container = document.createElement('div')
-            document.body.appendChild(this.container)
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000)
+            document.getElementsByClassName('webglMaterialsCubemapMipmaps-container')[0].appendChild(this.container)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 1, 10000)
             this.camera.position.z = 500
             this.scene = new this.$THREE.Scene()
             loadCubeTextureWithMipmaps().then((cubeTexture) => {
@@ -56,7 +56,7 @@ export default {
             //renderer
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             //controls
             var controls = new OrbitControls(this.camera, this.renderer.domElement)

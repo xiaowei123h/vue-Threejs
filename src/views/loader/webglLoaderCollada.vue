@@ -29,7 +29,7 @@ export default {
     methods: {
         init() {
             this.container = document.getElementById('container')
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000)
+            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 0.1, 2000)
             this.camera.position.set(8, 10, 8)
             this.camera.lookAt(0, 3, 0)
             this.scene = new this.$THREE.Scene()
@@ -41,7 +41,7 @@ export default {
             // collada
             var loader = new ColladaLoader(loadingManager)
             loader.load('static/models/collada/elf/elf.dae', (collada) => {
-                this.elf = collada.this.scene
+                this.elf = collada.scene
             })
             //
             var ambientLight = new this.$THREE.AmbientLight(0xcccccc, 0.4)
@@ -52,10 +52,11 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             //
             this.stats = new this.$Stats()
+            this.stats.dom.style.left = '280px'
             this.container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -70,7 +71,7 @@ export default {
         },
         render() {
             var delta = this.clock.getDelta()
-            if (this.elf !== undefined) {
+            if (this.elf !== null) {
                 this.elf.rotation.z += delta * 0.5
             }
             this.renderer.render(this.scene, this.camera)
@@ -82,5 +83,8 @@ export default {
 <style scoped>
 .webglLoaderCollada-container {
     width: 100%;
+}
+#info {
+    margin-left: 30px;
 }
 </style>

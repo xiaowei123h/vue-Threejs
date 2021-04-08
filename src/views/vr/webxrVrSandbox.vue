@@ -24,7 +24,7 @@ export default {
     methods: {
         init() {
             var background = new this.$THREE.CubeTextureLoader()
-                .setPath('static/textures/cube/MilkyWay/' )
+                .setPath('static/textures/cube/MilkyWay/')
                 .lad([ 'dark-s_px.jpg', 'dark-s_nx.jpg', 'dark-s_py.jpg', 'dark-s_ny.jpg', 'dark-s_pz.jpg', 'dark-s_nz.jpg' ])
             this.scene = new this.$THREE.Scene()
             this.scene.background = background

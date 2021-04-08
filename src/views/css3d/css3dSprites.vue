@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import { TWEEN } from '@/compontents/jsm/libs/tween.module.min.js'
-// import { TrackballControls } from '@/compontents/jsm/controls/TrackballControls.js'
-// import { CSS3DRenderer, CSS3DSprite } from '@/compontents/jsm/renderers/CSS3DRenderer.js'
+import { TWEEN } from '@/components/jsm/libs/tween.module.min.js'
+import { TrackballControls } from '@/components/jsm/controls/TrackballControls.js'
+import { CSS3DRenderer, CSS3DSprite } from '@/components/jsm/renderers/CSS3DRenderer.js'
 export default {
     data() {
         return {
@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 5000)
+            this.camera = new this.$THREE.PerspectiveCamera(75, this.$webglInnerWidth / window.innerHeight, 1, 5000)
             this.camera.position.set(600, 400, 1500)
             this.camera.lookAt(0, 0, 0)
             this.scene = new this.$THREE.Scene()
@@ -88,10 +88,10 @@ export default {
             }
             //
             this.renderer = new CSS3DRenderer()
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementById('container').appendChild(this.renderer.domElement)
             //
-            this.controls = new TrackballControls(camera, this.renderer.domElement)
+            this.controls = new TrackballControls(this.camera, this.renderer.domElement)
             //
             window.addEventListener('resize', this.onWindowResize, false)
         },
@@ -114,7 +114,7 @@ export default {
             }
             new TWEEN.Tween(this)
                 .to({}, duration * 3)
-                .onComplete(transition)
+                .onComplete(this.transition)
                 .start()
             this.current = (this.current + 1) % 4
         },
@@ -144,5 +144,11 @@ export default {
 }
 #info a {
     color: #48f;
+}
+</style>
+
+<style>
+.css3dSprites-container #info {
+    margin-left: 0;
 }
 </style>

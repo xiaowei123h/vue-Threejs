@@ -6,7 +6,7 @@
         <!-- LDraw.org CC BY 2.0 Parts Library attribution -->
 		<div style="display: block; position: absolute; bottom: 8px; left: 8px; width: 160px; padding: 10px; background-color: #F3F7F8;">
 			<center>
-				<a href="http://www.ldraw.org"><img style="width: 145px" src="models/ldraw/ldraw_org_logo/Stamp145.png"></a>
+				<a href="http://www.ldraw.org"><img style="width: 145px" src="static/models/ldraw/ldraw_org_logo/Stamp145.png"></a>
 				<br />
 				<a href="http://www.ldraw.org/">This software uses the LDraw Parts Library</a>
 			</center>
@@ -127,12 +127,13 @@ export default {
             this.model = null
             this.updateProgressBar(0)
             this.showProgressBar()
+            var that = this
             var lDrawLoader = new LDrawLoader()
             lDrawLoader.separateObjects = this.guiData.separateObjects
             lDrawLoader.smoothNormals = this.guiData.smoothNormals
             lDrawLoader
                 .setPath(this.ldrawPath)
-                .load(this.guiData.modelFileName, (group2) => {
+                .load(this.guiData.modelFileName, function (group2) {
                     if (this.model) {
                         this.scene.remove(this.model)
                     }

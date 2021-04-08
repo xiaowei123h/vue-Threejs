@@ -81,17 +81,17 @@ export default {
 			 * Initialize ThreeJS THREE.Scene
         */
         initScene() {
-            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 10000)
+            this.camera = new this.$moduleTHREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 10000)
             this.camera.position.set( 3, 6, - 10 )
             this.camera.lookAt( 0, 1, 0 )
-            this.clock = new this.$THREE.Clock()
-            this.worldScene = new this.$THREE.Scene()
-            this.worldScene.background = new this.$THREE.Color(0xa0a0a0)
-            this.worldScene.fog = new this.$THREE.Fog(0xa0a0a0, 10, 22)
-            const hemiLight = new this.$THREE.HemisphereLight(0xffffff, 0x444444)
+            this.clock = new this.$moduleTHREE.Clock()
+            this.worldScene = new this.$moduleTHREE.Scene()
+            this.worldScene.background = new this.$moduleTHREE.Color(0xa0a0a0)
+            this.worldScene.fog = new this.$moduleTHREE.Fog(0xa0a0a0, 10, 22)
+            const hemiLight = new this.$moduleTHREE.HemisphereLight(0xffffff, 0x444444)
             hemiLight.position.set(0, 20, 0)
             this.worldScene.add(hemiLight)
-            const dirLight = new this.$THREE.DirectionalLight(0xffffff)
+            const dirLight = new this.$moduleTHREE.DirectionalLight(0xffffff)
             dirLight.position.set(-3, 10, -10)
             dirLight.castShadow = true
             dirLight.shadow.camera.top = 10
@@ -102,9 +102,9 @@ export default {
             dirLight.shadow.camera.far = 40
             this.worldScene.add(dirLight)
             // ground
-            const groundMesh = new this.$THREE.Mesh(
-                new this.$THREE.PlaneBufferGeometry( 40, 40 ),
-                new this.$THREE.MeshPhongMaterial({
+            const groundMesh = new this.$moduleTHREE.Mesh(
+                new this.$moduleTHREE.PlaneBufferGeometry( 40, 40 ),
+                new this.$moduleTHREE.MeshPhongMaterial({
                     color: 0x999999,
                     depthWrite: false
                 })
@@ -126,12 +126,12 @@ export default {
          */
         initRenderer() {
             const container = document.getElementById('container')
-            this.renderer = new this.$THREE.WebGLRenderer({antialias: true})
+            this.renderer = new this.$moduleTHREE.WebGLRenderer({antialias: true})
             this.renderer.setPixelRatio(window.devicePixelRatio)
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
-            this.renderer.outputEncoding = this.$THREE.sRGBEncoding
+            this.renderer.outputEncoding = this.$moduleTHREE.sRGBEncoding
             this.renderer.shadowMap.enabled = true
-            this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap
+            this.renderer.shadowMap.type = this.$moduleTHREE.PCFSoftShadowMap
             container.appendChild(this.renderer.domElement)
         },
         //////////////////////////////
@@ -251,8 +251,8 @@ export default {
 			 * @return {THREE.AnimationMixer} Mixer to be used in the render loop
         */
         startAnimation(skinnedMesh, animations, animationName) {
-            var mixer = new this.$THREE.AnimationMixer(skinnedMesh)
-            var clip = this.$THREE.AnimationClip.findByName(animations, animationName)
+            var mixer = new this.$moduleTHREE.AnimationMixer(skinnedMesh)
+            var clip = this.$moduleTHREE.AnimationClip.findByName(animations, animationName)
             if (clip) {
                 var action = mixer.clipAction(clip)
                 action.play()

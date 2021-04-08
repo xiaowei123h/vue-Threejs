@@ -116,15 +116,15 @@ export default {
             this.container.appendChild(this.stats.dom)
             this.valueNode = document.getElementById('values')
             document.addEventListener('mousemove', this.onDocumentMouseMove, false)
-            // window.addEventListener('resize', this.onWindowResize, false)
+            window.addEventListener('resize', this.onWindowResize, false)
         },
         onDocumentMouseMove(event) {
             this.mouseX = (event.clientX - this.windowHalfX)
             this.mouseY = (event.clientY - this.windowHalfY)
         },
-        // onWindowResize() {
-        //     this.$onWindowResize(this.camera, this.renderer)
-        // },
+        onWindowResize() {
+            this.$onWindowResize(this.cameraRTT, this.renderer)
+        },
         animate() {
             requestAnimationFrame(this.animate)
             this.render()
@@ -159,5 +159,8 @@ export default {
 <style scoped>
 .webglReadFloatBuffer-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

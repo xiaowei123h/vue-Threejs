@@ -30,25 +30,26 @@ export default {
     methods: {
         init() {
             this.container = document.getElementById('container')
-            this.camera = new this.$THREE.PerspectiveCamera(25, window.innerWidth / window.innerHeight, 1, 10000)
+            this.camera = new this.$moduleTHREE.PerspectiveCamera(25, this.$webglInnerWidth / window.innerHeight, 1, 10000)
             this.camera.position.set(600, 1150, 5)
             this.camera.up.set(0, 0, 1)
             this.camera.lookAt(- 100, 0, 0)
-            this.scene = new this.$THREE.Scene()
-            var ambient = new this.$THREE.HemisphereLight(0x8888fff, 0xff8888, 0.5)
+            this.scene = new this.$moduleTHREE.Scene()
+            var ambient = new this.$moduleTHREE.HemisphereLight(0x8888fff, 0xff8888, 0.5)
             ambient.position.set(0, 1, 0)
             this.scene.add(ambient)
-            var light = new this.$THREE.DirectionalLight(0xffffff, 1)
+            var light = new this.$moduleTHREE.DirectionalLight(0xffffff, 1)
             light.position.set(0, 4, 4).normalize()
             this.scene.add(light)
-            this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
+            this.renderer = new this.$moduleTHREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
             controls.minDistance = 750
             controls.maxDistance = 2500
             this.stats = new this.$Stats()
+            this.stats.dom.style.left = '280px'
             this.container.appendChild(this.stats.dom)
             var loader = new AssimpLoader()
             loader.load('static/models/assimp/octaminator/Octaminator.assimp', (result) => {
@@ -77,5 +78,8 @@ export default {
 <style scoped>
 .webglLoaderAssimp-container {
     width: 100%;
+}
+#info {
+    margin-left: -50px;
 }
 </style>

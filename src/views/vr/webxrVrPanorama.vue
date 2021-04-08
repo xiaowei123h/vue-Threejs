@@ -22,18 +22,18 @@ export default {
         init() {
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.xr.enabled = true
             this.renderer.xr.setReferenceSpaceType('local')
             document.getElementsByClassName('webxrVrPanorama-container')[0].appendChild(this.renderer.domElement)
             document.getElementsByClassName('webxrVrPanorama-container')[0].appendChild(VRButton.createButton(this.renderer))
             //
             this.scene = new this.$THREE.Scene()
-            this.camera = new this.$THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$THREE.PerspectiveCamera(70, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.layers.enable(1)
             var geometry = new this.$THREE.BoxBufferGeometry(100, 100, 100)
             geometry.scale(1, 1, - 1)
-            var textures = getTexturesFromAtlasFile("static/textures/cube/sun_temple_stripe_stereo.jpg", 12)
+            var textures = this.getTexturesFromAtlasFile("static/textures/cube/sun_temple_stripe_stereo.jpg", 12)
             var materials = []
             for (var i = 0; i < 6; i ++) {
                 materials.push(new this.$THREE.MeshBasicMaterial({ map: textures[ i ] }))
@@ -86,6 +86,7 @@ export default {
 
 <style scoped>
 .webxrVrPanorama-container {
+    position: relative;
     width: 100%;
 }
 </style>

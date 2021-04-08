@@ -68,14 +68,14 @@ export default {
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 5000)
+            this.camera = new this.$THREE.PerspectiveCamera(70, this.$webglInnerWidth / window.innerHeight, 1, 5000)
             this.camera.position.z = 1000
             this.scene = new this.$THREE.Scene()
             this.root = new this.$THREE.Object3D()
             this.scene.add(this.root)
             //
             this.renderer = new CSS3DRenderer()
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementById('container').appendChild(this.renderer.domElement)
             //
             this.controls = new TrackballControls(this.camera, this.renderer.domElement)
@@ -300,12 +300,15 @@ export default {
 
 <style scoped>
 .css3dMolecules-container {
+    position: relative;
     width: 100%;
     background-color: #050505;
     background: radial-gradient(ellipse at center,  rgba(43,45,48,1) 0%,rgba(0,0,0,1) 100%);
 }
+</style>
 
-#topmenu {
+<style>
+.css3dMolecules-container #topmenu {
     position: absolute;
     top: 50px;
     width: 100%;
@@ -313,8 +316,7 @@ export default {
     box-sizing: border-box;
     text-align: center;
 }
-
-#menu {
+.css3dMolecules-container #menu {
     position: absolute;
     bottom: 20px;
     width: 100%;
@@ -322,8 +324,7 @@ export default {
     box-sizing: border-box;
     text-align: center;
 }
-
-button {
+.css3dMolecules-container button {
     color: rgb(255,255,255);
     background: rgb(255,255,255,0.1);
     border: 0px;
@@ -332,17 +333,14 @@ button {
     font-size: 14px;
     cursor: pointer;
 }
-
-    button:hover {
-        background-color: rgba(0,255,255,0.5);
-    }
-
-    button:active {
-        color: #000000;
-        background-color: rgba(0,255,255,1);
-    }
-
-.bond {
+.css3dMolecules-container button:hover {
+    background-color: rgba(0,255,255,0.5);
+}
+.css3dMolecules-container button:active {
+    color: #000000;
+    background-color: rgba(0,255,255,1);
+}
+.css3dMolecules-container .bond {
     width: 5px;
     height: 10px;
     background: #eee;

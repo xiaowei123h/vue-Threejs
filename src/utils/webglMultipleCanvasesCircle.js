@@ -1,4 +1,4 @@
-export function View(canvas, rotateY, THREE, mouseX, mouseY, scene) {
+export function View(canvas, rotateY, THREE, scene, renderer) {
     canvas.width = canvas.clientWidth * window.devicePixelRatio
     canvas.height = canvas.clientHeight * window.devicePixelRatio
     var context = canvas.getContext('2d')
@@ -8,7 +8,7 @@ export function View(canvas, rotateY, THREE, mouseX, mouseY, scene) {
     // You need to move the post (ie, the virtualCamera) to move all 5 cameras together.
     var virtualCamera = new THREE.Camera()
     virtualCamera.add(camera)
-    this.render = () => {
+    this.render = (mouseX, mouseY) => {
         virtualCamera.position.x = - mouseX * 4
         virtualCamera.position.y = - mouseY * 4
         virtualCamera.position.z = 1800

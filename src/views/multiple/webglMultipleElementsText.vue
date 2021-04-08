@@ -2,6 +2,8 @@
     <div class="webglMultipleElementsText-container">
         <canvas id="c"></canvas>
 		<div id="info"><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - multiple elements with text - webgl</div>
+
+        <p>Sound waves whose geometry is determined by a single dimension, plane waves, obey the wave equation</p>
     </div>
 </template>
 
@@ -18,113 +20,116 @@ export default {
         }
     },
     mounted() {
-        window.onload = init;
+        this.init()
     },
     methods: {
         init() {
-            const balls = 20;
-            const size = .25;
-            const colors = [
+            var balls = 20
+            var size = .25
+            var colors = [
                 'rgb(0,127,255)', 'rgb(255,0,0)', 'rgb(0,255,0)', 'rgb(0,255,255)',
                 'rgb(255,0,255)', 'rgb(255,0,127)', 'rgb(255,255,0)', 'rgb(0,255,127)'
-            ];
-            canvas = document.getElementById('c');
-            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-            renderer.setPixelRatio(window.devicePixelRatio);
-            views = document.querySelectorAll('.view');
-            for (let n = 0; n < views.length; n ++) {
-                const scene = new THREE.Scene();
-                scene.background = new THREE.Color(0xffffff);
-                const geometry0 = new THREE.BufferGeometry();
-                const geometry1 = new THREE.BufferGeometry();
-                const vertices = [];
-                if (views[ n ].lattice) {
-                    const range = balls / 2;
-                    for (let i = - range; i <= range; i ++) {
-                        for (let j = - range; j <= range; j ++) {
-                            for (let k = - range; k <= range; k ++) {
-                                vertices.push(i, j, k);
+            ]
+            this.canvas = document.getElementById('c')
+            this.renderer = new this.$THREE.WebGLRenderer({ canvas: this.canvas, antialias: true })
+            this.renderer.setPixelRatio(window.devicePixelRatio)
+            this.views = document.querySelectorAll('.view')
+            console.log(this.views)
+            for (var n = 0; n < this.views.length; n ++) {
+                var scene = new this.$THREE.Scene()
+                scene.background = new this.$THREE.Color(0xffffff)
+                var geometry0 = new this.$THREE.BufferGeometry()
+                var geometry1 = new this.$THREE.BufferGeometry()
+                var vertices = []
+                if (this.views[ n ].lattice) {
+                    var range = balls / 2
+                    for (var i = - range; i <= range; i ++) {
+                        for (var j = - range; j <= range; j ++) {
+                            for (var k = - range; k <= range; k ++) {
+                                vertices.push(i, j, k)
                             }
                         }
                     }
                 } else {
-                    for (let m = 0; m < Math.pow(balls, 3); m ++) {
-                        const i = balls * Math.random() - balls / 2;
-                        const j = balls * Math.random() - balls / 2;
-                        const k = balls * Math.random() - balls / 2;
-                        vertices.push(i, j, k);
+                    for (var m = 0; m < Math.pow(balls, 3); m ++) {
+                        var i = balls * Math.random() - balls / 2
+                        var j = balls * Math.random() - balls / 2
+                        var k = balls * Math.random() - balls / 2
+                        vertices.push(i, j, k)
                     }
                 }
-                geometry0.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-                geometry1.setAttribute('position', new THREE.Float32BufferAttribute(vertices.slice(), 3));
-                const index = Math.floor(colors.length * Math.random());
-                const canvas2 = document.createElement('canvas');
-                canvas2.width = 128;
-                canvas2.height = 128;
-                const context = canvas2.getContext('2d');
-                context.arc(64, 64, 64, 0, 2 * Math.PI);
-                context.fillStyle = colors[ index ];
-                context.fill();
-                const texture = new THREE.CanvasTexture(canvas2);
-                const material = new THREE.PointsMaterial({ size: size, map: texture, transparent: true, alphaTest: 0.1 });
-                scene.add(new THREE.Points(geometry0, material));
-                scene.userData.view = views[ n ];
-                scene.userData.geometry1 = geometry1;
-                const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 100);
-                camera.position.set(0, 0, 1.2 * balls);
-                scene.userData.camera = camera;
-                const controls = new OrbitControls(camera, views[ n ]);
-                scene.userData.controls = controls;
-                scenes.push(scene);
+                geometry0.setAttribute('position', new this.$THREE.Float32BufferAttribute(vertices, 3))
+                geometry1.setAttribute('position', new this.$THREE.Float32BufferAttribute(vertices.slice(), 3))
+                var index = Math.floor(colors.length * Math.random())
+                var canvas2 = document.createElement('canvas')
+                canvas2.width = 128
+                canvas2.height = 128
+                var context = canvas2.getContext('2d')
+                context.arc(64, 64, 64, 0, 2 * Math.PI)
+                context.fillStyle = colors[ index ]
+                context.fill()
+                var texture = new this.$THREE.CanvasTexture(canvas2)
+                var material = new this.$THREE.PointsMaterial({ size: size, map: texture, transparent: true, alphaTest: 0.1 })
+                scene.add(new this.$THREE.Points(geometry0, material))
+                scene.userData.view = this.views[ n ]
+                scene.userData.geometry1 = geometry1
+                var camera = new this.$THREE.PerspectiveCamera(75, 1, 0.1, 100)
+                camera.position.set(0, 0, 1.2 * balls)
+                scene.userData.camera = camera
+                var controls = new OrbitControls(camera, this.views[ n ])
+                scene.userData.controls = controls
+                console.log(scene)
+                this.scenes.push(scene)
             }
-            t = 0;
-            animate();
+            console.log(this.scenes)
+            this.t = 0
+            this.animate()
         },
         updateSize() {
-            const width = canvas.clientWidth;
-            const height = canvas.clientHeight;
-            if (canvas.width !== width || canvas.height != height) {
-                renderer.setSize(width, height, false);
+            var width = this.canvas.clientWidth
+            var height = this.canvas.clientHeight
+            if (this.canvas.width !== width || this.canvas.height != height) {
+                this.renderer.setSize(width, height, false)
             }
         },
         animate() {
-            render();
-            requestAnimationFrame(animate);
+            this.render()
+            requestAnimationFrame(this.animate)
         },
         render() {
-            updateSize();
-            renderer.setClearColor(0xffffff);
-            renderer.setScissorTest(false);
-            renderer.clear();
-            renderer.setClearColor(0x000000);
-            renderer.setScissorTest(true);
-            scenes.forEach(function (scene) {
-                const rect = scene.userData.view.getBoundingClientRect();
+            this.updateSize()
+            this.renderer.setClearColor(0xffffff)
+            this.renderer.setScissorTest(false)
+            this.renderer.clear()
+            this.renderer.setClearColor(0x000000)
+            this.renderer.setScissorTest(true)
+            this.scenes.forEach((scene) => {
+                var rect = scene.userData.view.getBoundingClientRect()
                 // check if it's offscreen. If so skip it
-                if (rect.bottom < 0 || rect.top > renderer.domElement.clientHeight ||
-                        rect.right < 0 || rect.left > renderer.domElement.clientWidth) {
-                    return; // it's off screen
+                if (rect.bottom < 0 || rect.top > this.renderer.domElement.clientHeight ||
+                        rect.right < 0 || rect.left > this.renderer.domElement.clientWidth) {
+                    return // it's off screen
                 }
                 // set the viewport
-                const width = rect.right - rect.left;
-                const height = rect.bottom - rect.top;
-                const left = rect.left;
-                const bottom = renderer.domElement.clientHeight - rect.bottom;
-                renderer.setViewport(left, bottom, width, height);
-                renderer.setScissor(left, bottom, width, height);
-                renderer.render(scene, scene.userData.camera);
-                const points = scene.children[ 0 ];
-                const position = points.geometry.attributes.position;
-                const point = new THREE.Vector3();
-                const offset = new THREE.Vector3();
-                for (let i = 0; i < position.count; i ++) {
-                    point.fromBufferAttribute(scene.userData.geometry1.attributes.position, i);
-                    scene.userData.view.displacement(point.x, point.y, point.z, t / 5, offset);
-                    position.setXYZ(i, point.x + offset.x, point.y + offset.y, point.z + offset.z);
+                var width = rect.right - rect.left
+                var height = rect.bottom - rect.top
+                var left = rect.left
+                var bottom = this.renderer.domElement.clientHeight - rect.bottom
+                this.renderer.setViewport(left, bottom, width, height)
+                this.renderer.setScissor(left, bottom, width, height)
+                this.renderer.render(scene, scene.userData.camera)
+                var points = scene.children[ 0 ]
+                var position = points.geometry.attributes.position
+                var point = new this.$THREE.Vector3()
+                var offset = new this.$THREE.Vector3()
+                for (var i = 0; i < position.count; i ++) {
+                    point.fromBufferAttribute(scene.userData.geometry1.attributes.position, i)
+                    scene.userData.view.displacement(point.x, point.y, point.z, t / 5, offset)
+                    position.setXYZ(i, point.x + offset.x, point.y + offset.y, point.z + offset.z)
                 }
-                position.needsUpdate = true;
-            });
-            t ++;
+                position.needsUpdate = true
+            })
+            this.t ++
         }
     },
 }
@@ -132,14 +137,9 @@ export default {
 
 <style scoped>
 .webglMultipleElementsText-container {
+    position: relative;
+    height: 100vh;
     width: 100%;
-}
-* {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-}
-
-body {
     background-color: #fff;
     color: #444;
     margin: auto;
@@ -147,22 +147,30 @@ body {
     max-width: 7in;
     text-align: justify;
 }
+</style>
 
-a {
+<style>
+/* * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+} */
+
+
+.webglMultipleElementsText-container #info a {
     color: #08f;
 }
 
-#info {
+.webglMultipleElementsText-container #info {
     left: 0px;
 }
 
-.view {
+.webglMultipleElementsText-container .view {
     width: 5in;
     height: 5in;
     margin: auto;
 }
 
-#c {
+.webglMultipleElementsText-container #c {
     position: fixed;
     left: 0px; top: 0px;
     width: 100%;
@@ -171,30 +179,30 @@ a {
     z-index: -1;
 }
 
-.math {
+.webglMultipleElementsText-container .math {
     text-align: center;
 }
 
-.math-frac {
+.webglMultipleElementsText-container .math-frac {
     display: inline-block;
     vertical-align: middle;
 }
 
-.math-num {
+.webglMultipleElementsText-container .math-num {
     display: block;
 }
 
-.math-denom {
+.webglMultipleElementsText-container .math-denom {
     display: block;
     border-top: 1px solid;
 }
 
-.math-sqrt {
+.webglMultipleElementsText-container .math-sqrt {
     display: inline-block;
     transform: scale(1, 1.3);
 }
 
-.math-sqrt-stem {
+.webglMultipleElementsText-container .math-sqrt-stem {
     display: inline-block;
     border-top: 1px solid;
     margin-top: 5px;

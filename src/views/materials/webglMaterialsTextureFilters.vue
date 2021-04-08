@@ -43,9 +43,9 @@ export default {
         }
     },
     mounted() {
-        this.SCREEN_WIDTH = window.innerWidth
+        this.SCREEN_WIDTH = this.$webglInnerWidth
         this.SCREEN_HEIGHT = window.innerHeight
-        this.windowHalfX = window.innerWidth / 2
+        this.windowHalfX = this.$webglInnerWidth / 2
         this.windowHalfY = window.innerHeight / 2
         this.init()
         this.animate()
@@ -87,19 +87,19 @@ export default {
             var meshCanvas2 = new this.$THREE.Mesh(geometry, materialCanvas2)
             meshCanvas2.rotation.x = - Math.PI / 2
             meshCanvas2.scale.set(1000, 1000, 1000)
+            var that = this
             // PAINTING
-            var callbackPainting = () => {
+            var callbackPainting = function () {
                 var image = texturePainting.image
                 texturePainting2.image = image
                 texturePainting2.needsUpdate = true
-                this.scene.add(meshCanvas)
-                this.scene2.add(meshCanvas2)
-                var geometry = new this.$THREE.PlaneBufferGeometry(100, 100)
-                var mesh = new this.$THREE.Mesh(geometry, materialPainting)
-                var mesh2 = new this.$THREE.Mesh(geometry, materialPainting2)
-                addPainting(this.scene, mesh)
-                addPainting(this.scene2, mesh2)
-                var that = this
+                that.scene.add(meshCanvas)
+                that.scene2.add(meshCanvas2)
+                var geometry = new that.$THREE.PlaneBufferGeometry(100, 100)
+                var mesh = new that.$THREE.Mesh(geometry, materialPainting)
+                var mesh2 = new that.$THREE.Mesh(geometry, materialPainting2)
+                addPainting(that.scene, mesh)
+                addPainting(that.scene2, mesh2)
                 function addPainting(zscene, zmesh) {
                     zmesh.scale.x = image.width / 100
                     zmesh.scale.y = image.height / 100
@@ -120,7 +120,7 @@ export default {
                     meshCanvas.position.y = meshCanvas2.position.y = floorHeight
                 }
             }
-            var texturePainting = new this.$THREE.TextureLoader().load("textures/758px-Canestra_di_frutta_(Caravaggio).jpg", callbackPainting)
+            var texturePainting = new this.$THREE.TextureLoader().load("static/textures/758px-Canestra_di_frutta_(Caravaggio).jpg", callbackPainting)
             var texturePainting2 = new this.$THREE.Texture()
             var materialPainting = new this.$THREE.MeshBasicMaterial({ color: 0xffffff, map: texturePainting })
             var materialPainting2 = new this.$THREE.MeshBasicMaterial({ color: 0xffccaa, map: texturePainting2 })
@@ -165,6 +165,7 @@ export default {
 
 <style scoped>
 .webglMaterialsTextureFilters-container {
+    position: relative;
     width: 100%;
 }
 .lbl { color:#fff; font-size:16px; font-weight:bold; position: absolute; bottom:0px; z-index:100; text-shadow:#000 1px 1px 1px; background-color:rgba(0,0,0,0.85); padding:1em }

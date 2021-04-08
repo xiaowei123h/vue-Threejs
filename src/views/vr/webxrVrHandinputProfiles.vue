@@ -47,7 +47,7 @@ export default {
             this.scene = new this.$THREE.Scene()
             window.scene = this.scene
             this.scene.background = new this.$THREE.Color(0x444444)
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 0.1, 10)
             this.camera.position.set(0, 1.6, 3)
             this.controls = new OrbitControls(this.camera, this.container)
             this.controls.target.set(0, 1.6, 0)
@@ -71,7 +71,7 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.renderer.shadowMap.enabled = true
             this.renderer.xr.enabled = true
@@ -90,21 +90,22 @@ export default {
             this.scene.add(this.controllerGrip1)
             this.hand1 = this.renderer.xr.getHand(0)
             this.scene.add(this.hand1)
-            handModels.left = [
+            this.handModels.left = [
                 handModelFactory.createHandModel(this.hand1, "boxes"),
                 handModelFactory.createHandModel(this.hand1, "spheres"),
                 handModelFactory.createHandModel(this.hand1, "oculus", { model: "lowpoly" }),
                 handModelFactory.createHandModel(this.hand1, "oculus")
             ]
-            handModels.left.forEach(model => {
+            this.handModels.left.forEach(model => {
                 model.visible = false
                 this.hand1.add(model)
             })
-            handModels.left[ this.currentHandModel.left ].visible = true
+            this.handModels.left[ this.currentHandModel.left ].visible = true
+            var that = this
             function cycleHandModel(hand) {
-                handModels[ hand ][ this.currentHandModel[ hand ] ].visible = false
-                this.currentHandModel[ hand ] = (this.currentHandModel[ hand ] + 1) % handModels[ hand ].length
-                handModels[ hand ][ this.currentHandModel[ hand ] ].visible = true
+                that.handModels[ hand ][ that.currentHandModel[ hand ] ].visible = false
+                that.currentHandModel[ hand ] = (that.currentHandModel[ hand ] + 1) % that.handModels[ hand ].length
+                that.handModels[ hand ][ that.currentHandModel[ hand ] ].visible = true
             }
             this.hand1.addEventListener('pinchend', evt => {
                 cycleHandModel(evt.handedness)
@@ -156,6 +157,7 @@ export default {
 
 <style scoped>
 .webxrVrHandinputProfiles-container {
+    position: relative;
     width: 100%;
 }
 </style>

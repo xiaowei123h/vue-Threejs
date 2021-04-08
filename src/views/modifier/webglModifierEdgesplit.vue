@@ -110,6 +110,7 @@ export default {
 
 <style scoped>
 .webglModifierEdgesplit-container {
+    position: relative;
     width: 100%;
 }
 </style>

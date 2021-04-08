@@ -31,11 +31,11 @@ export default {
             this.container = document.createElement('div')
             document.getElementsByClassName('webxrArPaint-container')[0].appendChild(this.container)
             this.scene = new this.$THREE.Scene()
-            this.camera = new this.$THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20)
+            this.camera = new this.$THREE.PerspectiveCamera(70, this.$webglInnerWidth / window.innerHeight, 0.01, 20)
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true, alpha: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.xr.enabled = true
             this.container.appendChild(this.renderer.domElement)
             //
@@ -96,6 +96,8 @@ export default {
 
 <style scoped>
 .webxrArPaint-container {
+    position: relative;
     width: 100%;
+    background-color: #000;
 }
 </style>

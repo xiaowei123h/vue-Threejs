@@ -26,14 +26,14 @@ export default {
             var container = document.createElement('div')
             document.getElementsByClassName('webxrArCones-container')[0].appendChild(container)
             this.scene = new this.$THREE.Scene()
-            this.camera = new this.$THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20)
+            this.camera = new this.$THREE.PerspectiveCamera(70, this.$webglInnerWidth / window.innerHeight, 0.01, 20)
             var light = new this.$THREE.HemisphereLight(0xffffff, 0xbbbbff, 1)
             light.position.set(0.5, 1, 0.25)
             this.scene.add(light)
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true, alpha: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.xr.enabled = true
             container.appendChild(this.renderer.domElement)
             //
@@ -69,6 +69,8 @@ export default {
 
 <style scoped>
 .webxrArCones-container {
+    position: relative;
     width: 100%;
+    background-color: #000;
 }
 </style>

@@ -14,17 +14,37 @@
 </template>
 
 <script>
+import { OBJLoader2Example } from '@/utils/webglLoaderObj2.js'
 export default {
     data() {
         return {
-
+            app: null
         }
-    }
+    },
+    mounted() {
+        this.app = new OBJLoader2Example(document.getElementById('example'), this.$THREE)
+        window.addEventListener('resize', this.resizeWindow, false)
+        console.log('Starting initialisation phase...')
+        this.app.initGL()
+        this.app.resizeDisplayGL()
+        this.app.initContent()
+        this.render()
+    },
+    methods: {
+        resizeWindow() {
+            this.app.resizeDisplayGL()
+        },
+        render() {
+            requestAnimationFrame(this.render)
+            this.app.render()
+        }
+    },
 }
 </script>
 
 <style scoped>
 .webgLloaderObj2-container{
+    position: relative;
     width: 100%;
 }
 #glFullscreen {

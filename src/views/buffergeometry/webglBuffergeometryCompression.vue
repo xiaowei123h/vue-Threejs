@@ -112,7 +112,7 @@ export default {
             }
             function generateGeometry() {
                 geom = newGeometry(that.data)
-                updateGroupGeometry(
+                that.updateGroupGeometry(
                     mesh,
                     lineSegments,
                     geom,

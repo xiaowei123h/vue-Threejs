@@ -68,9 +68,9 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            this.camera.aspect = this.$webglInnerWidth / window.innerHeight
+            this.camera.aspect = (window.innerWidth - 281) / window.innerHeight
             this.camera.updateProjectionMatrix()
-            this.effect.setSize(this.$webglInnerWidth, window.innerHeight)
+            this.effect.setSize((window.innerWidth - 281), window.innerHeight)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -83,6 +83,7 @@ export default {
 
 <style scoped>
 .webglEffectsPeppersghost-container {
+    position: relative;
     width: 100%;
 }
 </style>

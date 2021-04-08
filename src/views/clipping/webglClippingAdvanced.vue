@@ -118,7 +118,7 @@ export default {
             }
         },
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(36, window.innerWidth / window.innerHeight, 0.25, 16)
+            this.camera = new this.$THREE.PerspectiveCamera(36, this.$webglInnerWidth / window.innerHeight, 0.25, 16)
             this.camera.position.set(0, 1.5, 3)
             this.scene = new this.$THREE.Scene()
             // Lights
@@ -201,7 +201,7 @@ export default {
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.shadowMap.enabled = true
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             window.addEventListener('resize', this.onWindowResize, false)
             container.appendChild(this.renderer.domElement)
             // Clipping setup:

@@ -46,12 +46,12 @@ export default {
         init() {
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglLoader3mf-container')[0].appendChild(this.renderer.domElement)
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0x333333)
             this.scene.add(new this.$THREE.AmbientLight(0xffffff, 0.2))
-            this.camera = new this.$THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 500)
+            this.camera = new this.$THREE.PerspectiveCamera(35, this.$webglInnerWidth / window.innerHeight, 1, 500)
             // Z is up for objects intended to be 3D printed.
             this.camera.up.set(0, 0, 1)
             this.camera.position.set(- 100, - 250, 100)
@@ -85,7 +85,7 @@ export default {
             })
         },
         loadAsset(asset) {
-            this.loader.load('static/models/3mf/' + this.asset + '.3mf', (group) => {
+            this.loader.load('static/models/3mf/' + asset + '.3mf', (group) => {
                 if (this.object) {
                     this.object.traverse((child) => {
                         if (child.material) child.material.dispose()
@@ -113,5 +113,8 @@ export default {
 .webglLoader3mf-container {
     width: 100%;
     background-color: #333;
+}
+#info {
+    margin-left: 0;
 }
 </style>

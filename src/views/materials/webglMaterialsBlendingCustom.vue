@@ -315,7 +315,9 @@ export default {
 
 <style scoped>
 .webglMaterialsBlendingCustom-container {
+    position: relative;
     width: 100%;
+    height: 100vh;
     margin: 0px;
     background-color: #111;
     overflow: hidden;

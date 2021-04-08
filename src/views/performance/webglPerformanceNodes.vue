@@ -47,7 +47,7 @@ export default {
         }
     },
     mounted() {
-        this.windowHalfX = window.innerWidth / 2
+        this.windowHalfX = this.$webglInnerWidth / 2
         this.windowHalfY = window.innerHeight / 2
         document.addEventListener('mousemove', this.onDocumentMouseMove, false)
         this.init()
@@ -114,7 +114,7 @@ export default {
         init() {
             var container = document.createElement('div')
             document.getElementsByClassName('webglPerformanceNodes-container')[0].appendChild(container)
-            this.camera = new this.$THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 10000)
+            this.camera = new this.$THREE.PerspectiveCamera(60, this.$webglInnerWidth / window.innerHeight, 1, 10000)
             this.camera.position.z = 1800
             this.scene = new this.$THREE.Scene()
             this.scene.add(new this.$THREE.PointLight(0xFFFFFF))
@@ -126,7 +126,7 @@ export default {
             })
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
             this.stats.dom.style.left = '280px'
@@ -135,7 +135,7 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            this.windowHalfX = window.innerWidth / 2
+            this.windowHalfX = (window.innerWidth - 281) / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
         },
@@ -161,5 +161,8 @@ export default {
 <style scoped>
 .webglPerformanceNodes-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

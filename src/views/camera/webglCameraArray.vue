@@ -68,8 +68,8 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            var ASPECT_RATIO = this.$webglInnerWidth / window.innerHeight
-            var WIDTH = (this.$webglInnerWidth / this.AMOUNT) * window.devicePixelRatio
+            var ASPECT_RATIO = (window.innerWidth - 281) / window.innerHeight
+            var WIDTH = ((window.innerWidth - 281) / this.AMOUNT) * window.devicePixelRatio
             var HEIGHT = (window.innerHeight / this.AMOUNT) * window.devicePixelRatio
             this.camera.aspect = ASPECT_RATIO
             this.camera.updateProjectionMatrix()
@@ -85,7 +85,7 @@ export default {
                     subcamera.updateProjectionMatrix()
                 }
             }
-            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
+            this.renderer.setSize((window.innerWidth - 281), window.innerHeight)
         },
         animate() {
             this.mesh.rotation.x += 0.005

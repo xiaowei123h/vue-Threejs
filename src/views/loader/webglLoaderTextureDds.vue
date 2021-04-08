@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 2000)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 1, 2000)
             this.camera.position.z = 1000
             this.scene = new this.$THREE.Scene()
             var geometry = new this.$THREE.BoxBufferGeometry(200, 200, 200)
@@ -35,7 +35,7 @@ export default {
             DXT5 - RGBA - transparent textures with full alpha range
             */
             var loader = new DDSLoader()
-            var map1 = loader.load('static/static/textures/compressed/disturb_dxt1_nomip.dds')
+            var map1 = loader.load('static/textures/compressed/disturb_dxt1_nomip.dds')
             map1.minFilter = map1.magFilter = this.$THREE.LinearFilter
             map1.anisotropy = 4
             var map2 = loader.load('static/textures/compressed/disturb_dxt1_mip.dds')
@@ -117,7 +117,7 @@ export default {
             this.meshes.push(mesh)
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglLoaderTextureDds-container')[0].appendChild(this.renderer.domElement)
             window.addEventListener('resize', this.onWindowResize, false)
         },

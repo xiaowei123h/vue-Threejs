@@ -111,9 +111,11 @@ export default {
 			//
 			var geometryByteLength = this.getGeometryByteLength(geometry)
 			this.guiStatsEl.innerHTML = [
+
 				'<i>GPU draw calls</i>: 1',
-				'<i>GPU memory</i>: ' + this.formatBytes(this.api.count * 16 + geometryByteLength, 2)
-			].join('<br/>')
+				'<i>GPU memory</i>: ' + this.formatBytes( this.api.count * 16 + geometryByteLength, 2 )
+
+			].join( '<br/>' )
         },
         makeMerged(geometry) {
 			var geometries = []
@@ -128,9 +130,11 @@ export default {
 			this.scene.add(new this.$THREE.Mesh(mergedGeometry, this.material))
 			//
 			this.guiStatsEl.innerHTML = [
+
 				'<i>GPU draw calls</i>: 1',
-				'<i>GPU memory</i>: ' + this.formatBytes(this.getGeometryByteLength(mergedGeometry), 2)
-			].join('<br/>')
+				'<i>GPU memory</i>: ' + this.formatBytes( getGeometryByteLength( mergedGeometry ), 2 )
+
+			].join( '<br/>' )
         },
         makeNaive(geometry) {
 			var matrix = new this.$THREE.Matrix4()
@@ -143,9 +147,11 @@ export default {
 			//
 			var geometryByteLength = this.getGeometryByteLength(geometry)
 			this.guiStatsEl.innerHTML = [
+
 				'<i>GPU draw calls</i>: ' + this.api.count,
-				'<i>GPU memory</i>: ' + this.formatBytes(this.api.count * 16 + geometryByteLength, 2)
-			].join('<br/>')
+				'<i>GPU memory</i>: ' + this.formatBytes( this.api.count * 16 + geometryByteLength, 2 )
+
+			].join( '<br/>' )
         },
         init() {
 			var width = this.$webglInnerWidth

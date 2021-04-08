@@ -140,6 +140,7 @@ export default {
 
 <style scoped>
 .webglMaterialsEnvmapsPmremNodes-container {
+    position: relative;
     width: 100%;
     color: #fff;
     font-family:Monospace;

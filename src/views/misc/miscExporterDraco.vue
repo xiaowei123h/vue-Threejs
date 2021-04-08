@@ -51,12 +51,14 @@ export default {
             this.scene.add(this.mesh)
         },
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.set(200, 100, 200)
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0xa0a0a0)
             this.scene.fog = new this.$THREE.Fog(0xa0a0a0, 200, 1000)
             this.exporter = new DRACOExporter()
+            console.log('22222222')
+            console.log(this.exporter)
             //
             var hemiLight = new this.$THREE.HemisphereLight(0xffffff, 0x444444)
             hemiLight.position.set(0, 200, 0)
@@ -93,11 +95,11 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.shadowMap.enabled = true
             document.getElementsByClassName('miscExporterDraco-container')[0].appendChild(this.renderer.domElement)
             //
-            var controls = new OrbitControls(camera, this.renderer.domElement)
+            var controls = new OrbitControls(this.camera, this.renderer.domElement)
             controls.target.set(0, 25, 0)
             controls.update()
             //
@@ -117,7 +119,7 @@ export default {
             this.renderer.render(this.scene, this.camera)
         },
         exportFile() {
-            var result = exporter.parse(this.mesh.geometry)
+            var result = this.exporter.parse(this.mesh.geometry)
             this.saveArrayBuffer(result, 'file.drc')
         },
         save(blob, filename) {
@@ -143,5 +145,11 @@ export default {
 
 #info a {
     color: #0f0;
+}
+</style>
+
+<style>
+.miscExporterDraco-container #info {
+    margin-left: 0;
 }
 </style>

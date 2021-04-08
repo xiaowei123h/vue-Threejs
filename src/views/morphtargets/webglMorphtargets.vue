@@ -23,6 +23,7 @@ export default {
         }
     },
     mounted() {
+        this.mouse = new this.$THREE.Vector2()
         this.init()
 		this.animate()
     },
@@ -32,7 +33,7 @@ export default {
     methods: {
         init() {
             var container = document.getElementById('container')
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000)
+            this.camera = new this.$THREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 2000)
             this.camera.position.z = 500
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0x222222)
@@ -101,7 +102,7 @@ export default {
             this.raycaster = new this.$THREE.Raycaster()
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             container.appendChild(this.renderer.domElement)
             //
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
@@ -113,7 +114,7 @@ export default {
         },
         onClick(event) {
             event.preventDefault()
-            this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+            this.mouse.x = (event.clientX / (window.innerWidth - 281)) * 2 - 1
             this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
             this.raycaster.setFromCamera(this.mouse, this.camera)
             var intersects = this.raycaster.intersectObject(this.mesh)
@@ -139,5 +140,8 @@ export default {
 <style scoped>
 .webglMorphtargets-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

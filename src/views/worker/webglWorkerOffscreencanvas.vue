@@ -21,14 +21,40 @@ import init from '@/components/jsm/offscreen/scene.js'
 export default {
     data() {
         return {
-            
+            // onscreen
+			canvas1: null,
+			canvas2: null,
+			width: null,
+			height: null,
+			pixelRatio: null,
         }
     },
     mounted() {
-        
+        this.canvas1 = document.getElementById('canvas1')
+        this.canvas2 = document.getElementById('canvas2')
+        this.width = canvas1.clientWidth
+        this.height = canvas1.clientHeight
+        this.pixelRatio = window.devicePixelRatio
+        init(this.canvas1, this.width, this.height, this.pixelRatio, './')
+        initJank()
+        this.offscreen()
     },
     methods: {
-        
+        offscreen() {
+            if ('transferControlToOffscreen' in this.canvas2) {
+				const offscreen = this.canvas2.transferControlToOffscreen()
+                const worker = new Worker('components/jsm/offscreen/offscreen.js', { type: 'module' })
+				worker.postMessage({
+					drawingSurface: offscreen,
+					width: this.canvas2.clientWidth,
+					height: this.canvas2.clientHeight,
+					pixelRatio: window.devicePixelRatio,
+					path: './'
+                }, [ offscreen ])
+			} else {
+				document.getElementById('message').style.display = 'block'
+			}
+        }
     },
 }
 </script>
@@ -37,43 +63,39 @@ export default {
 .webglWorkerOffscreencanvas-container {
     width: 100%;
 }
-#info {
+</style>
+
+<style>
+.webglWorkerOffscreencanvas-container #info {
     background-color: #fff;
     color: #444;
 }
-
-#info a {
+.webglWorkerOffscreencanvas-container #info a {
     color: #08f;
 }
-
-canvas {
+.webglWorkerOffscreencanvas-container canvas {
     display: inline-block;
 }
-
-#message {
+.webglWorkerOffscreencanvas-container #message {
     color: #ff0000;
     display: none;
 }
-
-#message > a {
+.webglWorkerOffscreencanvas-container #message > a {
     color: #ff0000;
 }
-
-#container {
+.webglWorkerOffscreencanvas-container #container {
     position: absolute;
     top: 50px;
     bottom: 70px;
     width: 100%;
 }
-
-#ui {
+.webglWorkerOffscreencanvas-container #ui {
     position: absolute;
     bottom: 20px;
     width: 100%;
     text-align: center;
 }
-
-#button {
+.webglWorkerOffscreencanvas-container #button {
     border: 0;
     padding: 4px 6px;
     background: #dddddd;

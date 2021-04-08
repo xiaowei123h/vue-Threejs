@@ -32,41 +32,42 @@ export default {
     mounted() {
         Ammo().then((AmmoLib) => {
             Ammo = AmmoLib;
-            this.init();
-            this.animate();
-        });
+            this.init()
+            this.animate()
+        })
     },
     beforeDestroy() {
         this.gui.destroy()
     },
     methods: {
         init() {
-            var container = document.createElement('div');
-            document.body.appendChild(container);
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-            this.camera.position.z = 25;
+            var container = document.createElement('div')
+            document.getElementsByClassName('webglLoaderMmdPose-container')[0].appendChild(container)
+            this.camera = new this.$moduleTHREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 2000)
+            this.camera.position.z = 25
             // scene
-            this.scene = new this.$THREE.Scene();
-            this.scene.background = new this.$THREE.Color(0xffffff);
-            var ambient = new this.$THREE.AmbientLight(0x666666);
-            this.scene.add(ambient);
-            var directionalLight = new this.$THREE.DirectionalLight(0x887766);
-            directionalLight.position.set(- 1, 1, 1).normalize();
-            this.scene.add(directionalLight);
+            this.scene = new this.$moduleTHREE.Scene()
+            this.scene.background = new this.$moduleTHREE.Color(0xffffff)
+            var ambient = new this.$moduleTHREE.AmbientLight(0x666666)
+            this.scene.add(ambient)
+            var directionalLight = new this.$moduleTHREE.DirectionalLight(0x887766)
+            directionalLight.position.set(- 1, 1, 1).normalize()
+            this.scene.add(directionalLight)
             //
-            this.renderer = new this.$THREE.WebGLRenderer({ antialias: true });
-            this.renderer.setPixelRatio(window.devicePixelRatio);
-            this.renderer.setSize(window.innerWidth, window.innerHeight);
-            container.appendChild(this.renderer.domElement);
-            this.effect = new OutlineEffect(this.renderer);
+            this.renderer = new this.$moduleTHREE.WebGLRenderer({ antialias: true })
+            this.renderer.setPixelRatio(window.devicePixelRatio)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
+            container.appendChild(this.renderer.domElement)
+            this.effect = new OutlineEffect(this.renderer)
             // model
+            var that = this
             function onProgress(xhr) {
                 if (xhr.lengthComputable) {
-                    var percentComplete = xhr.loaded / xhr.total * 100;
-                    console.log(Math.round(percentComplete, 2) + '% downloaded');
+                    var percentComplete = xhr.loaded / xhr.total * 100
+                    console.log(Math.round(percentComplete, 2) + '% downloaded')
                 }
             }
-            var modelFile = 'static/models/mmd/miku/miku_v2.pmd';
+            var modelFile = 'static/models/mmd/miku/miku_v2.pmd'
             var vpdFiles = [
                 'static/models/mmd/vpds/01.vpd',
                 'static/models/mmd/vpds/02.vpd',
@@ -79,102 +80,102 @@ export default {
                 //'static/models/mmd/vpds/09.vpd',
                 //'static/models/mmd/vpds/10.vpd',
                 'static/models/mmd/vpds/11.vpd'
-            ];
-            this.helper = new MMDAnimationHelper();
-            var loader = new MMDLoader();
+            ]
+            this.helper = new MMDAnimationHelper()
+            var loader = new MMDLoader()
             loader.load(modelFile, (object) => {
-                this.mesh = object;
-                this.mesh.position.y = - 10;
-                this.scene.add(this.mesh);
-                var vpdIndex = 0;
+                that.mesh = object
+                that.mesh.position.y = - 10
+                that.scene.add(that.mesh)
+                var vpdIndex = 0
                 function loadVpd() {
-                    var vpdFile = vpdFiles[ vpdIndex ];
+                    var vpdFile = vpdFiles[ vpdIndex ]
                     loader.loadVPD(vpdFile, false, (vpd) => {
-                        this.vpds.push(vpd);
-                        vpdIndex ++;
+                        that.vpds.push(vpd)
+                        vpdIndex ++
                         if (vpdIndex < vpdFiles.length) {
-                            loadVpd();
+                            loadVpd()
                         } else {
-                            initGui();
+                            initGui()
                         }
-                    }, onProgress, null);
+                    }, onProgress, null)
                 }
-                loadVpd();
-            }, onProgress, null);
+                loadVpd()
+            }, onProgress, null)
             //
-            window.addEventListener('resize', this.onWindowResize, false);
+            window.addEventListener('resize', this.onWindowResize, false)
             function initGui() {
-                this.gui = new GUI();
-                var dictionary = this.mesh.morphTargetDictionary;
-                var controls = {};
-                var keys = [];
-                var poses = this.gui.addFolder('Poses');
-                var morphs = this.gui.addFolder('Morphs');
+                that.gui = new GUI()
+                var dictionary = that.mesh.morphTargetDictionary
+                var controls = {}
+                var keys = []
+                var poses = that.gui.addFolder('Poses')
+                var morphs = that.gui.addFolder('Morphs')
                 function getBaseName(s) {
-                    return s.slice(s.lastIndexOf('/') + 1);
+                    return s.slice(s.lastIndexOf('/') + 1)
                 }
                 function initControls() {
                     for (var key in dictionary) {
-                        controls[ key ] = 0.0;
+                        controls[ key ] = 0.0
                     }
-                    controls.pose = - 1;
+                    controls.pose = - 1
                     for (var i = 0; i < vpdFiles.length; i ++) {
-                        controls[ getBaseName(vpdFiles[ i ]) ] = false;
+                        controls[ getBaseName(vpdFiles[ i ]) ] = false
                     }
                 }
                 function initKeys() {
                     for (var key in dictionary) {
-                        keys.push(key);
+                        keys.push(key)
                     }
                 }
                 function initPoses() {
-                    var files = { default: - 1 };
+                    var files = { default: - 1 }
                     for (var i = 0; i < vpdFiles.length; i ++) {
-                        files[ getBaseName(vpdFiles[ i ]) ] = i;
+                        files[ getBaseName(vpdFiles[ i ]) ] = i
                     }
-                    poses.add(controls, 'pose', files).onChange(onChangePose);
+                    poses.add(controls, 'pose', files).onChange(onChangePose)
                 }
                 function initMorphs() {
                     for (var key in dictionary) {
-                        morphs.add(controls, key, 0.0, 1.0, 0.01).onChange(onChangeMorph);
+                        morphs.add(controls, key, 0.0, 1.0, 0.01).onChange(onChangeMorph)
                     }
                 }
                 function onChangeMorph() {
                     for (var i = 0; i < keys.length; i ++) {
-                        var key = keys[ i ];
-                        var value = controls[ key ];
-                        this.mesh.morphTargetInfluences[ i ] = value;
+                        var key = keys[ i ]
+                        var value = controls[ key ]
+                        that.mesh.morphTargetInfluences[ i ] = value
                     }
                 }
                 function onChangePose() {
-                    var index = parseInt(controls.pose);
+                    var index = parseInt(controls.pose)
                     if (index === - 1) {
-                        mesh.pose();
+                        that.mesh.pose()
                     } else {
-                        helper.pose(mesh, vpds[ index ]);
+                        that.helper.pose(that.mesh, that.vpds[ index ])
                     }
                 }
-                initControls();
-                initKeys();
-                initPoses();
-                initMorphs();
-                onChangeMorph();
-                onChangePose();
-                poses.open();
-                morphs.open();
+                initControls()
+                initKeys()
+                initPoses()
+                initMorphs()
+                onChangeMorph()
+                onChangePose()
+                poses.open()
+                morphs.open()
             }
         },
         onWindowResize() {
-            this.camera.aspect = window.innerWidth / window.innerHeight;
-            this.camera.updateProjectionMatrix();
-            this.effect.setSize(window.innerWidth, window.innerHeight);
+            this.camera.aspect = (window.innerWidth - 281) / window.innerHeight
+            this.camera.updateProjectionMatrix()
+            this.effect.setSize((window.innerWidth - 281), window.innerHeight)
         },
         animate() {
-            requestAnimationFrame(this.animate);
-            this.render();
+            requestAnimationFrame(this.animate)
+            this.render()
         },
         render() {
-            this.effect.render(this.scene, this.camera);
+            this.effect.render(this.scene, this.camera)
         }
     }
 }

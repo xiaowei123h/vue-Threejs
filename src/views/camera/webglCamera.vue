@@ -30,7 +30,7 @@ export default {
         }
     },
     mounted() {
-        this.SCREEN_WIDTH = window.innerWidth
+        this.SCREEN_WIDTH = this.$webglInnerWidth
         this.SCREEN_HEIGHT = window.innerHeight
         this.aspect = this.SCREEN_WIDTH / this.SCREEN_HEIGHT
         this.init()
@@ -117,13 +117,13 @@ export default {
             }
         },
         onWindowResize() {
-            this.SCREEN_WIDTH = window.innerWidth
+            this.SCREEN_WIDTH = window.innerWidth - 281
             this.SCREEN_HEIGHT = window.innerHeight
             this.aspect = this.SCREEN_WIDTH / this.SCREEN_HEIGHT
             this.renderer.setSize(this.SCREEN_WIDTH, this.SCREEN_HEIGHT)
-            this.camera.this.aspect = 0.5 * this.aspect
+            this.camera.aspect = 0.5 * this.aspect
             this.camera.updateProjectionMatrix()
-            this.cameraPerspective.this.aspect = 0.5 * this.aspect
+            this.cameraPerspective.aspect = 0.5 * this.aspect
             this.cameraPerspective.updateProjectionMatrix()
             this.cameraOrtho.left = - 0.5 * this.frustumSize * this.aspect / 2
             this.cameraOrtho.right = 0.5 * this.frustumSize * this.aspect / 2
@@ -176,5 +176,8 @@ export default {
 }
 b {
     color: lightgreen;
+}
+#info {
+    margin-left: 0;
 }
 </style>

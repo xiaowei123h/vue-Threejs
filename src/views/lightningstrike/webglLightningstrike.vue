@@ -50,7 +50,7 @@ export default {
             this.container = document.getElementById('container')
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.container.appendChild(this.renderer.domElement)
             this.composer = new EffectComposer(this.renderer)
@@ -65,10 +65,10 @@ export default {
             this.createGUI()
         },
         onWindowResize() {
-            this.scene.userData.camera.aspect = window.innerWidth / window.innerHeight
+            this.scene.userData.camera.aspect = (window.innerWidth - 281) / window.innerHeight
             this.scene.userData.camera.updateProjectionMatrix()
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
-            this.composer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize((window.innerWidth - 281), window.innerHeight)
+            this.composer.setSize((window.innerWidth - 281), window.innerHeight)
         },
         createGUI() {
             if (this.gui) {
@@ -77,7 +77,7 @@ export default {
             this.gui = new GUI({ width: 350 })
             var sceneFolder = this.gui.addFolder("Scene")
             this.scene.userData.sceneIndex = this.currentSceneIndex
-            sceneFolder.add(scene.userData, 'sceneIndex', { "Electric Cones": 0, "Plasma Ball": 1, "Storm": 2 }).name('Scene').onChange((value) => {
+            sceneFolder.add(this.scene.userData, 'sceneIndex', { "Electric Cones": 0, "Plasma Ball": 1, "Storm": 2 }).name('Scene').onChange((value) => {
                 this.currentSceneIndex = value
                 this.createScene()
             })
@@ -115,7 +115,7 @@ export default {
             rayFolder.add(this.scene.userData.rayParams, 'subrayDutyCycle', 0, 1).name('Subray duty cycle')
             if (this.scene.userData.recreateRay) {
                 // Parameters which need to recreate the ray after modification
-                var raySlowFolder = gui.addFolder("Ray parameters (slow)")
+                var raySlowFolder = this.gui.addFolder("Ray parameters (slow)")
                 raySlowFolder.add(this.scene.userData.rayParams, 'ramification', 0, 15).step(1).name('Ramification').onFinishChange(() => {
                     this.scene.userData.recreateRay()
                 })
@@ -142,7 +142,7 @@ export default {
             this.scene.userData.render(this.currentTime)
         },
         createOutline(scene, objectsArray, visibleColor) {
-            var outlinePass = new OutlinePass(new this.$THREE.Vector2(window.innerWidth, window.innerHeight), scene, scene.userData.camera, objectsArray)
+            var outlinePass = new OutlinePass(new this.$THREE.Vector2(this.$webglInnerWidth, window.innerHeight), scene, scene.userData.camera, objectsArray)
             outlinePass.edgeStrength = 2.5
             outlinePass.edgeGlow = 0.7
             outlinePass.edgeThickness = 2.8
@@ -156,7 +156,7 @@ export default {
             var scene = new this.$THREE.Scene()
             scene.background = new this.$THREE.Color(0x050505)
             scene.userData.canGoBackwardsInTime = true
-            scene.userData.camera = new this.$THREE.PerspectiveCamera(27, window.innerWidth / window.innerHeight, 200, 100000)
+            scene.userData.camera = new this.$THREE.PerspectiveCamera(27, this.$webglInnerWidth / window.innerHeight, 200, 100000)
             // Lights
             scene.userData.lightningColor = new this.$THREE.Color(0xB0FFFF)
             scene.userData.outlineColor = new this.$THREE.Color(0x00FFFF)
@@ -204,12 +204,13 @@ export default {
             var lightningStrike
             var lightningStrikeMesh
             var outlineMeshArray = []
+            var that = this
             scene.userData.recreateRay = function () {
                 if (lightningStrikeMesh) {
                     scene.remove(lightningStrikeMesh)
                 }
                 lightningStrike = new LightningStrike(scene.userData.rayParams)
-                lightningStrikeMesh = new this.$THREE.Mesh(lightningStrike, scene.userData.lightningMaterial)
+                lightningStrikeMesh = new that.$THREE.Mesh(lightningStrike, scene.userData.lightningMaterial)
                 outlineMeshArray.length = 0
                 outlineMeshArray.push(lightningStrikeMesh)
                 scene.add(lightningStrikeMesh)
@@ -220,11 +221,11 @@ export default {
             this.composer.addPass(new RenderPass(scene, scene.userData.camera))
             this.createOutline(scene, outlineMeshArray, scene.userData.outlineColor)
             // Controls
-            var controls = new OrbitControls(scene.userData.camera, renderer.domElement)
+            var controls = new OrbitControls(scene.userData.camera, this.renderer.domElement)
             controls.target.y = (conesDistance + coneHeight) * 0.5
             controls.enableDamping = true
             controls.dampingFactor = 0.05
-            scene.userData.render = (time) => {
+            scene.userData.render = function (time) {
                 // Move cones and Update ray position
                 coneMesh1.position.set(Math.sin(0.5 * time) * conesDistance * 0.6, conesDistance + coneHeight, Math.cos(0.5 * time) * conesDistance * 0.6)
                 coneMesh2.position.set(Math.sin(0.9 * time) * conesDistance, coneHeightHalf, 0)
@@ -237,9 +238,9 @@ export default {
                 // Update point light position to the middle of the ray
                 posLight.position.lerpVectors(lightningStrike.rayParameters.sourceOffset, lightningStrike.rayParameters.destOffset, 0.5)
                 if (scene.userData.outlineEnabled) {
-                    this.composer.render()
+                    that.composer.render()
                 }	else {
-                    this.renderer.render(scene, scene.userData.camera)
+                    that.renderer.render(scene, scene.userData.camera)
                 }
             }
             return scene
@@ -247,7 +248,7 @@ export default {
         createPlasmaBallScene() {
             var scene = new this.$THREE.Scene()
             scene.userData.canGoBackwardsInTime = true
-            scene.userData.camera = new this.$THREE.PerspectiveCamera(27, window.innerWidth / window.innerHeight, 100, 50000)
+            scene.userData.camera = new this.$THREE.PerspectiveCamera(27, this.$webglInnerWidth / window.innerHeight, 100, 50000)
             var ballScene = new this.$THREE.Scene()
             ballScene.background = new this.$THREE.Color(0x454545)
             // Lights
@@ -338,12 +339,13 @@ export default {
             var lightningStrike
             var lightningStrikeMesh
             var outlineMeshArray = []
-            scene.userData.recreateRay = () => {
+            var that = this
+            scene.userData.recreateRay = function () {
                 if (lightningStrikeMesh) {
                     scene.remove(lightningStrikeMesh)
                 }
                 lightningStrike = new LightningStrike(scene.userData.rayParams)
-                lightningStrikeMesh = new this.$THREE.Mesh(lightningStrike, scene.userData.lightningMaterial)
+                lightningStrikeMesh = new that.$THREE.Mesh(lightningStrike, scene.userData.lightningMaterial)
                 outlineMeshArray.length = 0
                 outlineMeshArray.push(lightningStrikeMesh)
                 outlineMeshArray.push(spherePlasma)
@@ -356,7 +358,7 @@ export default {
             var rayPass = new RenderPass(scene, scene.userData.camera)
             rayPass.clear = false
             this.composer.addPass(rayPass)
-            var outlinePass = createOutline(scene, outlineMeshArray, scene.userData.outlineColor)
+            var outlinePass = this.createOutline(scene, outlineMeshArray, scene.userData.outlineColor)
             scene.userData.render = (time) => {
                 rayDirection.subVectors(lightningStrike.rayParameters.destOffset, lightningStrike.rayParameters.sourceOffset)
                 rayLength = rayDirection.length()
@@ -367,23 +369,24 @@ export default {
                 this.composer.render()
             }
             // Controls
-            var controls = new OrbitControls(scene.userData.camera, renderer.domElement)
+            var controls = new OrbitControls(scene.userData.camera, this.renderer.domElement)
             controls.target.copy(sphereMesh.position)
             controls.enableDamping = true
             controls.dampingFactor = 0.05
             // this.$THREE.Sphere this.mouse raycasting
             container.style.touchAction = 'none'
             container.addEventListener('pointermove', onPointerMove, false)
+            var that = this
             function onPointerMove(event) {
                 if (event.isPrimary === false) return
-                this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1
-                this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
+                that.mouse.x = (event.clientX / this.$webglInnerWidth) * 2 - 1
+                that.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
                 checkIntersection()
             }
             var intersection = new this.$THREE.Vector3()
             function checkIntersection() {
-                this.raycaster.setFromCamera(this.mouse, scene.userData.camera)
-                var result = this.raycaster.ray.intersectSphere(sphere, intersection)
+                that.raycaster.setFromCamera(that.mouse, scene.userData.camera)
+                var result = that.raycaster.ray.intersectSphere(sphere, intersection)
                 if (result !== null) {
                     lightningStrike.rayParameters.destOffset.copy(intersection)
                 }
@@ -394,7 +397,7 @@ export default {
             var scene = new this.$THREE.Scene()
             scene.background = new this.$THREE.Color(0x050505)
             scene.userData.canGoBackwardsInTime = false
-            scene.userData.camera = new this.$THREE.PerspectiveCamera(27, window.innerWidth / window.innerHeight, 20, 10000)
+            scene.userData.camera = new this.$THREE.PerspectiveCamera(27, this.$webglInnerWidth / window.innerHeight, 20, 10000)
             // Lights
             scene.add(new this.$THREE.AmbientLight(0x444444))
             var light1 = new this.$THREE.DirectionalLight(0xffffff, 0.5)
@@ -486,19 +489,20 @@ export default {
             // Compose rendering
             this.composer.passes = []
             this.composer.addPass(new RenderPass(scene, scene.userData.camera))
-            createOutline(scene, storm.lightningsMeshes, scene.userData.outlineColor)
+            this.createOutline(scene, storm.lightningsMeshes, scene.userData.outlineColor)
             // Controls
-            var controls = new OrbitControls(scene.userData.camera, renderer.domElement)
+            var controls = new OrbitControls(scene.userData.camera, this.renderer.domElement)
             controls.target.y = GROUND_SIZE * 0.05
             controls.enableDamping = true
             controls.dampingFactor = 0.05
+            var that = this
             scene.userData.render = function (time) {
                 storm.update(time)
                 controls.update()
                 if (scene.userData.outlineEnabled) {
-                    this.composer.render()
+                    that.composer.render()
                 }	else {
-                    renderer.render(scene, scene.userData.camera)
+                    that.renderer.render(scene, scene.userData.camera)
                 }
             }
             return scene

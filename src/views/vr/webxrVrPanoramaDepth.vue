@@ -33,7 +33,7 @@ export default {
             this.scene.background = new this.$THREE.Color(0x101010)
             var light = new this.$THREE.AmbientLight(0xffffff, 1)
             this.scene.add(light)
-            this.camera = new this.$THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 2000)
+            this.camera = new this.$THREE.PerspectiveCamera(70, this.$webglInnerWidth / window.innerHeight, 1, 2000)
             this.scene.add(this.camera)
             // Create the panoramic sphere geometery
             var panoSphereGeo = new this.$THREE.SphereBufferGeometry(6, 256, 256)
@@ -58,12 +58,12 @@ export default {
                 this.sphere.material.displacementMap = depth
             })
             // On load complete add the panoramic this.sphere to the this.scene
-            this.manager.onLoad = () => {
+            manager.onLoad = () => {
                 this.scene.add(this.sphere)
             }
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.xr.enabled = true
             this.renderer.xr.setReferenceSpaceType('local')
             container.appendChild(this.renderer.domElement)
@@ -93,6 +93,7 @@ export default {
 
 <style scoped>
 .webxrVrPanoramaDepth-container {
+    position: relative;
     width: 100%;
 }
 </style>

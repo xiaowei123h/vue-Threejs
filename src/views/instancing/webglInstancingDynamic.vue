@@ -32,7 +32,7 @@ export default {
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100)
+            this.camera = new this.$THREE.PerspectiveCamera(60, this.$webglInnerWidth / window.innerHeight, 0.1, 100)
             this.camera.position.set(this.amount * 0.9, this.amount * 0.9, this.amount * 0.9)
             this.camera.lookAt(0, 0, 0)
             this.scene = new this.$THREE.Scene()
@@ -53,8 +53,8 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
-            document.body.appendChild(this.renderer.domElement)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
+            document.getElementsByClassName('webglInstancingDynamic-container')[0].appendChild(this.renderer.domElement)
             //
             this.stats = new this.$Stats()
             this.stats.dom.style.left = '280px'

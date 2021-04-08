@@ -74,7 +74,8 @@ export default {
                 this.removeDecals()
             }
         }
-        window.addEventListener('load', this.init)
+        this.init()
+        // window.addEventListener('load', this.init)
     },
     beforeDestroy() {
         this.gui.destroy()
@@ -134,7 +135,7 @@ export default {
             var that = this
             function checkIntersection(x, y) {
                 if (that.mesh === undefined) return
-                that.mouse.x = (x / that.$webglInnerWidth) * 2 - 1
+                that.mouse.x = ((x - 281) / that.$webglInnerWidth) * 2 - 1
                 that.mouse.y = - (y / window.innerHeight) * 2 + 1
                 that.raycaster.setFromCamera(that.mouse, that.camera)
                 that.raycaster.intersectObject(that.mesh, false, that.intersects)
@@ -216,5 +217,8 @@ export default {
 <style scoped>
 .webglDecals-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

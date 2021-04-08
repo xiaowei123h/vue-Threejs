@@ -2,6 +2,8 @@ import {
 	BufferGeometry
 } from "@/components/build/three.module.js";
 
+var DracoEncoderModule = require('@/components/js/libs/draco/draco_encoder.js')
+
 /**
  * Export draco compressed files from threejs geometry objects.
  *
@@ -25,6 +27,8 @@ DRACOExporter.prototype = {
 	constructor: DRACOExporter,
 
 	parse: function ( geometry, options ) {
+		console.log('11111')
+		console.log(DracoEncoderModule)
 
 
 		if ( DracoEncoderModule === undefined ) {

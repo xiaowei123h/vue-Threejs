@@ -38,7 +38,7 @@ export default {
             var container = document.getElementById('container')
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.setAnimationLoop(this.render)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.renderer.toneMapping = this.$THREE.ACESFilmicToneMapping
@@ -49,7 +49,7 @@ export default {
             this.stats.dom.style.left = '280px'
             container.appendChild(this.stats.dom)
             //
-            this.camera = new this.$THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100)
+            this.camera = new this.$THREE.PerspectiveCamera(40, this.$webglInnerWidth / window.innerHeight, 0.1, 100)
             this.camera.position.set(4.25, 1.4, - 4.5)
             this.controls = new OrbitControls(this.camera, container)
             this.controls.target.set(0, 0.5, 0)
@@ -76,21 +76,21 @@ export default {
                 color: 0xffffff, metalness: 0, roughness: 0.1, transmission: 0.9, transparent: true
             })
             var bodyColorInput = document.getElementById('body-color')
-            bodyColorInput.addEventListener('input', () => {
+            bodyColorInput.addEventListener('input', function () {
                 bodyMaterial.color.set(this.value)
             })
             var detailsColorInput = document.getElementById('details-color')
-            detailsColorInput.addEventListener('input', () => {
+            detailsColorInput.addEventListener('input', function () {
                 detailsMaterial.color.set(this.value)
             })
             var glassColorInput = document.getElementById('glass-color')
-            glassColorInput.addEventListener('input', () => {
+            glassColorInput.addEventListener('input', function () {
                 glassMaterial.color.set(this.value)
             })
             // Car
             var shadow = new this.$THREE.TextureLoader().load('static/models/gltf/ferrari_ao.png')
             var dracoLoader = new DRACOLoader()
-            dracoLoader.setDecoderPath('@/components/js/libs/draco/gltf/')
+            dracoLoader.setDecoderPath('static/js/libs/draco/gltf/')
             var loader = new GLTFLoader()
             loader.setDRACOLoader(dracoLoader)
             loader.load('static/models/gltf/ferrari.glb', (gltf) => {

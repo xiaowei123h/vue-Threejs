@@ -192,14 +192,14 @@ export default {
             window.addEventListener("pointerup", this.onBorderPointerUp)
         },
         onBorderPointerMove(ev) {
-            this.screensplit = Math.max(0, Math.min(1, ev.clientX / this.$webglInnerWidth))
+            this.screensplit = Math.max(0, Math.min(1, (ev.clientX - 281) / this.$webglInnerWidth))
         },
         onBorderPointerUp() {
             window.removeEventListener("pointermove", this.onBorderPointerMove)
             window.removeEventListener("pointerup", this.onBorderPointerUp)
         },
         onMouseMove(ev) {
-            this.mouse[0] = ev.clientX / this.$webglInnerWidth
+            this.mouse[0] = (ev.clientX - 281) / this.$webglInnerWidth
             this.mouse[1] = ev.clientY / window.innerHeight
         },
         onMouseWheel(ev) {
@@ -216,6 +216,7 @@ export default {
 
 <style scoped>
 .webglCameraLogarithmicdepthbuffer-this {
+    position: relative;
     width: 100%;
     touch-action: none;
 }
@@ -248,7 +249,7 @@ export default {
 #renderer_border {
     position: absolute;
     top: 0;
-    left: 25%;
+    left: 68% !important;
     bottom: 0;
     width: 2px;
     z-index: 10;
@@ -256,5 +257,8 @@ export default {
     background: #ccc;
     border: 1px inset #ccc;
     cursor: col-resize;
+}
+#info {
+    margin-left: 0;
 }
 </style>

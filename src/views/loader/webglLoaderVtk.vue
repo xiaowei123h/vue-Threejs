@@ -28,7 +28,7 @@ export default {
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.01, 1e10)
+            this.camera = new this.$THREE.PerspectiveCamera(60, this.$webglInnerWidth / window.innerHeight, 0.01, 1e10)
             this.camera.position.z = 0.2
             this.scene = new this.$THREE.Scene()
             this.scene.add(this.camera)
@@ -59,7 +59,7 @@ export default {
                 this.scene.add(mesh)
             })
             var loader2 = new VTKLoader()
-            loader2.load('models/vtk/cube_binary.vtp', (geometry) => {
+            loader2.load('static/models/vtk/cube_binary.vtp', (geometry) => {
                 geometry.computeVertexNormals()
                 geometry.center()
                 var material = new this.$THREE.MeshLambertMaterial({ color: 0x0000ff })
@@ -81,7 +81,7 @@ export default {
             // renderer
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container = document.createElement('div')
             document.getElementsByClassName('webglLoaderVtk-container')[0].appendChild(this.container)
             this.container.appendChild(this.renderer.domElement)

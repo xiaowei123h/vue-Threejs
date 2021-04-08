@@ -23,22 +23,23 @@ export default {
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 2000)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 1, 2000)
             this.camera.position.z = 1000
             this.scene = new this.$THREE.Scene()
             var geometry = new this.$THREE.BoxBufferGeometry(200, 200, 200)
             //
-            var onCube1Loaded = (texture) => {
-                texture.magFilter = this.$THREE.LinearFilter
-                texture.minFilter = this.$THREE.LinearFilter
-                texture.mapping = this.$THREE.CubeReflectionMapping
+            var that = this
+            var onCube1Loaded = function (texture) {
+                texture.magFilter = that.$THREE.LinearFilter
+                texture.minFilter = that.$THREE.LinearFilter
+                texture.mapping = that.$THREE.CubeReflectionMapping
                 material6.needsUpdate = true
             }
-            var onCube2Loaded = (texture) => {
-                texture.magFilter = this.$THREE.LinearFilter
+            var onCube2Loaded = function (texture) {
+                texture.magFilter = that.$THREE.LinearFilter
                 // texture.minFilter = LinearMipmapNearestFilter
-                texture.minFilter = this.$THREE.LinearFilter
-                texture.mapping = this.$THREE.CubeReflectionMapping
+                texture.minFilter = that.$THREE.LinearFilter
+                texture.mapping = that.$THREE.CubeReflectionMapping
                 material8.needsUpdate = true
             }
             //
@@ -114,7 +115,7 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglLoaderTexturePvrtc-container')[0].appendChild(this.renderer.domElement)
             window.addEventListener('resize', this.onWindowResize, false)
         },
@@ -138,5 +139,8 @@ export default {
 <style scoped>
 .webglLoaderTexturePvrtc-container {
     width: 100%;
+}
+#info {
+    margin-left: 0;
 }
 </style>

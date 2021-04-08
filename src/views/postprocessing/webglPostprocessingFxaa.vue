@@ -66,7 +66,7 @@ export default {
             }
             this.scene.add(this.group)
             //
-            this.renderer = new this.$THREE.WebGLRenderer()
+            this.renderer = new this.$THREE.WebGLRenderer({ alpha: true })
             this.renderer.autoClear = false
             this.renderer.setPixelRatio(window.devicePixelRatio)
             this.renderer.setSize((this.container.offsetWidth - 281), this.container.offsetHeight)
@@ -115,8 +115,26 @@ export default {
 <style scoped>
 .webglPostprocessingFxaa-container {
     position: relative;
-    width: calc(100% - 281px);
+    width: 100%;
 }
+#info {
+    background-color: #fff;
+    color: #222;
+}
+
+#info a {
+    color: #08f;
+}
+
+#container {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    bottom: 0px;
+}
+</style>
+
+<style>
 #info {
     background-color: #fff;
     color: #222;

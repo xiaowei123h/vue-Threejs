@@ -84,7 +84,7 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            var width = this.$webglInnerWidth
+            var width = (window.innerWidth - 281)
             var height = window.innerHeight
             this.camera.aspect = width / height
             this.camera.updateProjectionMatrix()
@@ -93,11 +93,11 @@ export default {
             this.cameraOrtho.top = height / 2
             this.cameraOrtho.bottom = - height / 2
             this.cameraOrtho.updateProjectionMatrix()
-            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
+            this.renderer.setSize((window.innerWidth - 281), window.innerHeight)
             this.updateSpritePosition()
         },
         updateSpritePosition() {
-            var halfWidth = this.$webglInnerWidth / 2
+            var halfWidth = (window.innerWidth - 281) / 2
             var halfHeight = window.innerHeight / 2
             var halfImageWidth = this.textureSize / 2
             var halfImageHeight = this.textureSize / 2
@@ -121,7 +121,8 @@ export default {
 </script>
 
 <style scoped>
-.webglFramebufferTexture-vontainer {
+.webglFramebufferTexture-container {
+    position: relative;
     width: 100%;
 }
 #selection {
@@ -133,6 +134,7 @@ export default {
     height: 100%;
     width: 100%;
     top: 0;
+    left: 150px;
     z-index: 999;
 }
 

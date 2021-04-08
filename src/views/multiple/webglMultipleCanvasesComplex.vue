@@ -23,24 +23,43 @@ export default {
         }
     },
     mounted() {
-        this.windowHalfX = window.innerWidth / 2
+        this.windowHalfX = this.$webglInnerWidth / 2
         this.windowHalfY = window.innerHeight / 2
         this.init()
         this.animate()
     },
     methods: {
+        View(canvas, fullWidth, fullHeight, viewX, viewY, viewWidth, viewHeight, THREE, scene, renderer) {
+            canvas.width = viewWidth * window.devicePixelRatio
+            canvas.height = viewHeight * window.devicePixelRatio
+            var context = canvas.getContext('2d')
+            var camera = new THREE.PerspectiveCamera(20, viewWidth / viewHeight, 1, 10000)
+            camera.setViewOffset(fullWidth, fullHeight, viewX, viewY, viewWidth, viewHeight)
+            camera.position.z = 1800
+            this.render = (mouseX, mouseY) => {
+                camera.position.x += (mouseX - camera.position.x) * 0.05
+                camera.position.y += (- mouseY - camera.position.y) * 0.05
+                camera.lookAt(scene.position)
+                renderer.setViewport(0, fullHeight - viewHeight, viewWidth, viewHeight)
+                renderer.render(scene, camera)
+                context.drawImage(renderer.domElement, 0, 0)
+            }
+        },
         init() {
             var canvas1 = document.getElementById('canvas1')
             var canvas2 = document.getElementById('canvas2')
             var canvas3 = document.getElementById('canvas3')
             var fullWidth = 550
             var fullHeight = 600
-            this.views.push(new View(canvas1, fullWidth, fullHeight, 0, 0, canvas1.clientWidth, canvas1.clientHeight))
-            this.views.push(new View(canvas2, fullWidth, fullHeight, 150, 200, canvas2.clientWidth, canvas2.clientHeight))
-            this.views.push(new View(canvas3, fullWidth, fullHeight, 75, 300, canvas3.clientWidth, canvas3.clientHeight))
-            //
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0xffffff)
+            this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
+            this.renderer.setPixelRatio(window.devicePixelRatio)
+            this.renderer.setSize(fullWidth, fullHeight)
+            this.views.push(new this.View(canvas1, fullWidth, fullHeight, 0, 0, canvas1.clientWidth, canvas1.clientHeight, this.$THREE, this.scene, this.renderer))
+            this.views.push(new this.View(canvas2, fullWidth, fullHeight, 150, 200, canvas2.clientWidth, canvas2.clientHeight, this.$THREE, this.scene, this.renderer))
+            this.views.push(new this.View(canvas3, fullWidth, fullHeight, 75, 300, canvas3.clientWidth, canvas3.clientHeight, this.$THREE, this.scene, this.renderer))
+            //
             var light = new this.$THREE.DirectionalLight(0xffffff)
             light.position.set(0, 0, 1).normalize()
             this.scene.add(light)
@@ -115,18 +134,15 @@ export default {
             wireframe = new this.$THREE.Mesh(geometry3, wireframeMaterial)
             mesh.add(wireframe)
             this.scene.add(mesh)
-            renderer = new this.$THREE.WebGLRenderer({ antialias: true })
-            renderer.setPixelRatio(window.devicePixelRatio)
-            renderer.setSize(fullWidth, fullHeight)
-            document.addEventListener('mousemove', onDocumentMouseMove, false)
+            document.addEventListener('mousemove', this.onDocumentMouseMove, false)
         },
         onDocumentMouseMove(event) {
-            this.mouseX = event.clientX - windowHalfX
-            this.mouseY = event.clientY - windowHalfY
+            this.mouseX = event.clientX - this.windowHalfX
+            this.mouseY = event.clientY - this.windowHalfY
         },
         animate() {
             for (var i = 0; i < this.views.length; ++ i) {
-                this.views[ i ].render()
+                this.views[ i ].render(this.mouseX, this.mouseY)
             }
             requestAnimationFrame(this.animate)
         }
@@ -139,10 +155,11 @@ export default {
     width: 100%;
     background-color: #fff;
 }
-body {
+#info {
     color: #444;
+    margin-left: 0;
 }
-a {
+#info a {
     color: #08f;
 }
 #canvas1, #canvas2, #canvas3 {

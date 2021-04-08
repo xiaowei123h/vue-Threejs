@@ -34,7 +34,7 @@ export default {
         }
     },
     mounted() {
-        this.clock = new this.$THREE.Clock()
+        this.clock = new this.$moduleTHREE.Clock()
         this.init()
     },
     methods: {
@@ -48,36 +48,36 @@ export default {
         init() {
 			this.container = document.createElement('div')
 			document.getElementsByClassName('webglLoaderX-container')[0].appendChild(this.container)
-			this.scene = new this.$THREE.Scene()
-			this.scene.add(new this.$THREE.AmbientLight(0xaaaaaa))
+			this.scene = new this.$moduleTHREE.Scene()
+			this.scene.add(new this.$moduleTHREE.AmbientLight(0xaaaaaa))
 			// grid
-			var gridHelper = new this.$THREE.GridHelper(14, 1, 0x303030, 0x303030)
+			var gridHelper = new this.$moduleTHREE.GridHelper(14, 1, 0x303030, 0x303030)
 			this.scene.add(gridHelper)
 			// stats
             this.stats = new this.$Stats()
             this.stats.dom.style.left = '280px'
 			this.container.appendChild(this.stats.dom)
-			this.renderer = new this.$THREE.WebGLRenderer()
+			this.renderer = new this.$moduleTHREE.WebGLRenderer()
 			this.renderer.setPixelRatio(window.devicePixelRatio)
-			this.renderer.setSize(window.innerWidth, window.innerHeight)
+			this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
 			this.renderer.setClearColor(0x666666)
 			this.container.appendChild(this.renderer.domElement)
-			this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000)
+			this.camera = new this.$moduleTHREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 2000)
 			this.camera.position.set(2, 10, - 28)
 			this.camera.up.set(0, 1, 0)
 			this.controls = new OrbitControls(this.camera, this.renderer.domElement)
 			this.controls.target.set(0, 5, 0)
 			this.controls.update()
-			var light = new this.$THREE.DirectionalLight(0xffffff, 1)
+			var light = new this.$moduleTHREE.DirectionalLight(0xffffff, 1)
 			light.position.set(10, 100, - 10).normalize()
 			this.scene.add(light)
-			var light2 = new this.$THREE.DirectionalLight(0x777666, 1)
+			var light2 = new this.$moduleTHREE.DirectionalLight(0x777666, 1)
 			light2.position.set(- 1, - 1, - 1).normalize()
 			this.scene.add(light2)
 			window.addEventListener('resize', this.onWindowResize, false)
 			this.animate()
 			// model loading
-			this.manager = new this.$THREE.LoadingManager()
+			this.manager = new this.$moduleTHREE.LoadingManager()
 			this.manager.onProgress = (item, loaded, total) => {
 				console.log(item, loaded, total)
 			}
@@ -92,8 +92,8 @@ export default {
 				}
 				this.loadAnimation('stand', 0, () => {
 					this.scene.add(this.Models[ 0 ])
-					if (this.Models[ 0 ] instanceof this.$THREE.SkinnedMesh) {
-						this.skeletonHelper = new this.$THREE.SkeletonHelper(this.Models[ 0 ])
+					if (this.Models[ 0 ] instanceof this.$moduleTHREE.SkinnedMesh) {
+						this.skeletonHelper = new this.$moduleTHREE.SkeletonHelper(this.Models[ 0 ])
 						this.scene.add(this.skeletonHelper)
 					}
 					this.actions[ 0 ][ 'stand' ].play()
@@ -137,7 +137,7 @@ export default {
 					}
 					this.actions[ modelId ][ animeName ] = this.Models[ modelId ].animationMixer.clipAction(animeName)
 					if (animeName == 'stand') {
-						this.actions[ modelId ][ animeName ].setLoop(this.$THREE.LoopOnce)
+						this.actions[ modelId ][ animeName ].setLoop(this.$moduleTHREE.LoopOnce)
 					}
 					this.actions[ modelId ][ animeName ].clampWhenFinished = true
 					if (_callback) {
@@ -166,5 +166,8 @@ export default {
 <style scoped>
 .webglLoaderX-container {
     width: 100%;
+}
+#info {
+	margin-left: 35px;
 }
 </style>

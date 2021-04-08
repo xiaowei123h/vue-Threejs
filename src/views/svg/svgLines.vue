@@ -22,12 +22,12 @@ export default {
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(33, window.innerWidth / window.innerHeight, 0.1, 100)
+            this.camera = new this.$moduleTHREE.PerspectiveCamera(33, this.$webglInnerWidth / window.innerHeight, 0.1, 100)
             this.camera.position.z = 10
-            this.scene = new this.$THREE.Scene()
-            this.scene.background = new this.$THREE.Color(0, 0, 0)
+            this.scene = new this.$moduleTHREE.Scene()
+            this.scene.background = new this.$moduleTHREE.Color(0, 0, 0)
             this.renderer = new SVGRenderer()
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('svgLines-container')[0].appendChild(this.renderer.domElement)
             //
             var vertices = []
@@ -38,25 +38,25 @@ export default {
                 var z = Math.cos(v)
                 vertices.push(x, 0, z)
             }
-            var geometry = new this.$THREE.BufferGeometry()
-            geometry.setAttribute('position', new this.$THREE.Float32BufferAttribute(vertices, 3))
+            var geometry = new this.$moduleTHREE.BufferGeometry()
+            geometry.setAttribute('position', new this.$moduleTHREE.Float32BufferAttribute(vertices, 3))
             //
             for (var i = 1; i <= 3; i ++) {
-                var material = new this.$THREE.LineBasicMaterial({
+                var material = new this.$moduleTHREE.LineBasicMaterial({
                     color: Math.random() * 0xffffff,
                     linewidth: 10
                 })
-                var line = new this.$THREE.Line(geometry, material)
+                var line = new this.$moduleTHREE.Line(geometry, material)
                 line.scale.setScalar(i / 3)
                 this.scene.add(line)
             }
-            var material = new this.$THREE.LineDashedMaterial({
+            var material = new this.$moduleTHREE.LineDashedMaterial({
                 color: 'blue',
                 linewidth: 1,
                 dashSize: 10,
                 gapSize: 10
             })
-            var line = new this.$THREE.Line(geometry, material)
+            var line = new this.$moduleTHREE.Line(geometry, material)
             line.scale.setScalar(2)
             this.scene.add(line)
             //

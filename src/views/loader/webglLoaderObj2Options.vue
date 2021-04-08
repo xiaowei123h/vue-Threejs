@@ -13,24 +13,97 @@
 
 <script>
 import { GUI } from '@/components/jsm/libs/dat.gui.module.js'
-import { TrackballControls } from "@/components/jsm/controls/TrackballControls.js"
-import { VertexNormalsHelper } from "@/components/jsm/helpers/VertexNormalsHelper.js"
-import { MTLLoader } from "@/components/jsm/loaders/MTLLoader.js"
-import { MtlObjBridge } from "@/components/jsm/loaders/obj2/bridge/MtlObjBridge.js"
-import { OBJLoader2 } from "@/components/jsm/loaders/OBJLoader2.js"
-import { OBJLoader2Parallel } from "@/components/jsm/loaders/OBJLoader2Parallel.js"
-import { LoadedMeshUserOverride } from "@/components/jsm/loaders/obj2/shared/MeshReceiver.js"
+import { WWOBJLoader2Example } from '@/utils/webglLoaderObj2Options.js'
 export default {
     data() {
         return {
-
+            app: null,
+            wwObjLoader2Control: null,
+            menuDiv: null,
+            gui: null,
+            folderRenderingOptions: null,
+            controlFlat: null,
+            controlDouble: null,
+            folderObjLoader2ParallelOptions: null,
+            controlJsmWorker: null,
+            folderExecution: null,
+            handleExecuteLoading: null,
         }
-    }
+    },
+    beforeDestroy() {
+        this.gui.destroy()
+    },
+    mounted() {
+        this.app = new WWOBJLoader2Example(document.getElementById('example'), this.$THREE)
+        var that = this
+        this.wwObjLoader2Control = {
+            flatShading: this.app.flatShading,
+            doubleSide: this.app.doubleSide,
+            useJsmWorker: this.app.useJsmWorker,
+            blockEvent: function (event) {
+                event.stopPropagation()
+            },
+            disableElement: function (elementHandle) {
+                elementHandle.domElement.addEventListener('click', this.blockEvent, true)
+                elementHandle.domElement.parentElement.style.pointerEvents = 'none'
+                elementHandle.domElement.parentElement.style.opacity = 0.5
+            },
+            executeLoading: function () {
+                that.app.executeLoading()
+                this.disableElement(that.handleExecuteLoading)
+            },
+        }
+        this.menuDiv = document.getElementById('dat')
+        this.gui = new GUI({
+            autoPlace: false,
+            width: 320
+        })
+        this.menuDiv.appendChild(this.gui.domElement)
+        this.folderRenderingOptions = this.gui.addFolder('Rendering Options')
+        this.controlFlat = this.folderRenderingOptions.add(this.wwObjLoader2Control, 'flatShading').name('Flat Shading')
+        this.controlFlat.onChange((value) => {
+            console.log('Setting flatShading to: ' + value)
+            this.app.alterShading()
+        })
+        this.controlDouble = this.folderRenderingOptions.add(this.wwObjLoader2Control, 'doubleSide').name('Double Side Materials')
+        this.controlDouble.onChange((value) => {
+            console.log('Setting doubleSide to: ' + value)
+            this.app.alterDouble()
+        })
+        this.folderObjLoader2ParallelOptions = this.gui.addFolder('OBJLoader2Parallel Options')
+        this.controlJsmWorker = this.folderObjLoader2ParallelOptions.add(this.wwObjLoader2Control, 'useJsmWorker').name('Use Module Workers')
+        this.controlJsmWorker.onChange((value) => {
+            console.log('Setting useJsmWorker to: ' + value)
+            this.app.useJsmWorker = value
+        })
+        this.folderExecution = this.gui.addFolder('Execution')
+        this.handleExecuteLoading = this.folderExecution.add(this.wwObjLoader2Control, 'executeLoading').name('Run')
+        this.handleExecuteLoading.domElement.id = 'startButton'
+        this.folderRenderingOptions.open()
+        this.folderObjLoader2ParallelOptions.open()
+        this.folderExecution.open()
+        window.addEventListener('resize', this.resizeWindow, false)
+        console.log('Starting initialisation phase...')
+        this.app.initGL()
+        this.app.resizeDisplayGL()
+        // kick render loop
+        this.render()
+    },
+    methods: {
+        resizeWindow() {
+            this.app.resizeDisplayGL()
+        },
+        render() {
+            requestAnimationFrame(this.render)
+            this.app.render()
+        }
+    },
 }
 </script>
 
 <style scoped>
 .webglLoaderObj2Options-container {
+    position: relative;
     width: 100%;
 }
 #glFullscreen {

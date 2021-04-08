@@ -27,6 +27,8 @@ export default {
         }
     },
     mounted() {
+        this.clock = new this.$THREE.Clock()
+        this.tempMatrix = new this.$THREE.Matrix4()
         this.init()
 		this.animate()
     },
@@ -36,7 +38,7 @@ export default {
             document.getElementsByClassName('webxrVrCubes-container')[0].appendChild(this.container)
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0x505050)
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 10)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 0.1, 10)
             this.camera.position.set(0, 1.6, 3)
             this.scene.add(this.camera)
             this.room = new this.$THREE.LineSegments(
@@ -69,7 +71,7 @@ export default {
             this.raycaster = new this.$THREE.Raycaster()
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.renderer.xr.enabled = true
             this.container.appendChild(this.renderer.domElement)
@@ -92,9 +94,9 @@ export default {
             });
             this.scene.add(this.controller);
             var controllerModelFactory = new XRControllerModelFactory();
-            controllerGrip = this.renderer.xr.getControllerGrip(0);
-            controllerGrip.add(controllerModelFactory.createControllerModel(controllerGrip));
-            this.scene.add(controllerGrip);
+            this.controllerGrip = this.renderer.xr.getControllerGrip(0);
+            this.controllerGrip.add(controllerModelFactory.createControllerModel(this.controllerGrip));
+            this.scene.add(this.controllerGrip);
             window.addEventListener('resize', this.onWindowResize, false);
             //
             document.getElementsByClassName('webxrVrCubes-container')[0].appendChild(VRButton.createButton(this.renderer));
@@ -122,7 +124,7 @@ export default {
             this.renderer.setAnimationLoop(this.render);
         },
         render() {
-            var delta = clock.getDelta() * 60;
+            var delta = this.clock.getDelta() * 60;
             if (this.controller.userData.isSelecting === true) {
                 var cube = this.room.children[ 0 ];
                 this.room.remove(cube);
@@ -178,6 +180,7 @@ export default {
 
 <style scoped>
 .webxrVrCubes-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -281,18 +281,23 @@ export default {
 
 <style scoped>
 .css3dPeriodictable-container {
-    width: calc(100% - 281);
+    position: relative;
+    width: 100%;
+    background: #000;
 }
-#info a {
+</style>
+
+<style>
+.css3dPeriodictable-container #info a {
     color: #8ff;
 }
-#menu {
+.css3dPeriodictable-container #menu {
     position: absolute;
     bottom: 20px;
     width: 100%;
     text-align: center;
 }
-.element {
+.css3dPeriodictable-container .element {
     width: 120px;
     height: 160px;
     box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
@@ -302,18 +307,18 @@ export default {
     line-height: normal;
     cursor: default;
 }
-.element:hover {
+.css3dPeriodictable-container .element:hover {
     box-shadow: 0px 0px 12px rgba(0,255,255,0.75);
     border: 1px solid rgba(127,255,255,0.75);
 }
-.element .number {
+.css3dPeriodictable-container .element .number {
     position: absolute;
     top: 20px;
     right: 20px;
     font-size: 12px;
     color: rgba(127,255,255,0.75);
 }
-.element .symbol {
+.css3dPeriodictable-container .element .symbol {
     position: absolute;
     top: 40px;
     left: 0px;
@@ -323,7 +328,7 @@ export default {
     color: rgba(255,255,255,0.75);
     text-shadow: 0 0 10px rgba(0,255,255,0.95);
 }
-.element .details {
+.css3dPeriodictable-container .element .details {
     position: absolute;
     bottom: 15px;
     left: 0px;
@@ -331,7 +336,7 @@ export default {
     font-size: 12px;
     color: rgba(127,255,255,0.75);
 }
-button {
+.css3dPeriodictable-container button {
     color: rgba(127,255,255,0.75);
     background: transparent;
     outline: 1px solid rgba(127,255,255,0.75);
@@ -339,10 +344,10 @@ button {
     padding: 5px 10px;
     cursor: pointer;
 }
-button:hover {
+.css3dPeriodictable-container button:hover {
     background-color: rgba(0,255,255,0.5);
 }
-button:active {
+.css3dPeriodictable-container button:active {
     color: #000000;
     background-color: rgba(0,255,255,0.75);
 }

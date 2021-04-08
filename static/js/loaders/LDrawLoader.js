@@ -1154,6 +1154,8 @@ THREE.LDrawLoader = ( function () {
 
 				// Parse the line type
 				var lineType = lp.getToken();
+				console.log('11111')
+				console.log(lineType)
 
 				switch ( lineType ) {
 

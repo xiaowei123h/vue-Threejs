@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { onWindowResize } from '@/utils/common.js'
 import { GUI } from '@/components/jsm/libs/dat.gui.module.js'
 import { GLTFLoader } from '@/components/jsm/loaders/GLTFLoader.js'
 export default {
@@ -47,17 +46,17 @@ export default {
     methods: {
         init() {
             var container = document.getElementById('container')
-            this.camera = new this.$THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$moduleTHREE.PerspectiveCamera(45, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.set( 1, 2, - 3 )
             this.camera.lookAt(0,1,0)
-            this.clock = new this.$THREE.Clock()
-            this.scene = new this.$THREE.Scene()
-            this.scene.background = new this.$THREE.Color(0xa0a0a0)
-            this.scene.fog = new this.$THREE.Fog(0xa0a0a0, 10, 50)
-            var hemiLight = new this.$THREE.HemisphereLight(0xffffff, 0x444444)
+            this.clock = new this.$moduleTHREE.Clock()
+            this.scene = new this.$moduleTHREE.Scene()
+            this.scene.background = new this.$moduleTHREE.Color(0xa0a0a0)
+            this.scene.fog = new this.$moduleTHREE.Fog(0xa0a0a0, 10, 50)
+            var hemiLight = new this.$moduleTHREE.HemisphereLight(0xffffff, 0x444444)
             hemiLight.position.set(0, 20, 0)
             this.scene.add(hemiLight)
-            var dirLight = new this.$THREE.DirectionalLight(0xffffff)
+            var dirLight = new this.$moduleTHREE.DirectionalLight(0xffffff)
             dirLight.position.set(- 3, 10, - 10)
             dirLight.castShadow = true
             dirLight.shadow.camera.top = 2
@@ -67,9 +66,9 @@ export default {
             dirLight.shadow.camera.near = 0.1
             dirLight.shadow.camera.far = 40
             this.scene.add(dirLight)
-            this.scene.add(new this.$THREE.CameraHelper(dirLight.shadow.camera))
+            this.scene.add(new this.$moduleTHREE.CameraHelper(dirLight.shadow.camera))
             // ground
-            var mesh = new this.$THREE.Mesh(new this.$THREE.PlaneBufferGeometry(100, 100), new this.$THREE.MeshPhongMaterial({color: 0x999999, depthWrite: false}))
+            var mesh = new this.$moduleTHREE.Mesh(new this.$moduleTHREE.PlaneBufferGeometry(100, 100), new this.$moduleTHREE.MeshPhongMaterial({color: 0x999999, depthWrite: false}))
             mesh.rotation.x = - Math.PI / 2
             mesh.receiveShadow = true
             // this.scene.add(mesh)
@@ -84,7 +83,7 @@ export default {
                     if(object.isMesh) object.castShadow = true
                 })
                 //
-                this.skeleton = new this.$THREE.SkeletonHelper(this.model)
+                this.skeleton = new this.$moduleTHREE.SkeletonHelper(this.model)
                 this.skeleton.visible = false
                 this.scene.add(this.skeleton)
                 //
@@ -94,7 +93,7 @@ export default {
                 var animations = gltf.animations
                 console.log('this.model')
                 console.log(this.model)
-                this.mixer = new this.$THREE.AnimationMixer(this.model)
+                this.mixer = new this.$moduleTHREE.AnimationMixer(this.model)
                 this.idleAction = this.mixer.clipAction(animations[0])
                 this.walkAction = this.mixer.clipAction(animations[3])
                 this.runAction = this.mixer.clipAction(animations[1])
@@ -102,10 +101,10 @@ export default {
                 this.activateAllActions()
                 this.animate()
             })
-            this.renderer = new this.$THREE.WebGLRenderer({antialias: true})
+            this.renderer = new this.$moduleTHREE.WebGLRenderer({antialias: true})
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
-            this.renderer.outputEncoding = this.$THREE.sRGBEncoding
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
+            this.renderer.outputEncoding = this.$moduleTHREE.sRGBEncoding
             this.renderer.shadowMap.enabled = true
             container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
@@ -272,10 +271,11 @@ export default {
         },
         synchronizeCrossFade(startAction, endAction, duration) {
             this.mixer.addEventListener('loop', onLoopFinished)
+            var that = this
             function onLoopFinished(event) {
                 if (event.action === startAction) {
-                    this.mixer.removeEventListener('loop', onLoopFinished)
-                    this.executeCrossFade(startAction, endAction, duration)
+                    that.mixer.removeEventListener('loop', onLoopFinished)
+                    that.executeCrossFade(startAction, endAction, duration)
                 }
             }
         },
@@ -355,5 +355,8 @@ export default {
 .control-disabled {
     color: #888;
     text-decoration: line-through;
+}
+#info {
+    margin-left: 0;
 }
 </style>

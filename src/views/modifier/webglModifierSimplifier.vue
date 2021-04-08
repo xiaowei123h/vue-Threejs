@@ -74,6 +74,10 @@ export default {
 
 <style scoped>
 .webglModifierSimplifier-container {
+    position: relative;
     width: 100%;
+}
+#info {
+    color: #fff;
 }
 </style>

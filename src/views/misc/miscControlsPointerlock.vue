@@ -1,12 +1,14 @@
 <template>
     <div class="miscControlsPointerlock-container">
-        <div id="instructions">
-            <span style="font-size:36px">Click to play</span>
-            <br /><br />
-            Move: WASD<br/>
-            Jump: SPACE<br/>
-            Look: MOUSE
-        </div>
+        <div id="blocker">
+			<div id="instructions">
+				<span style="font-size:36px">Click to play</span>
+				<br /><br />
+				Move: WASD<br/>
+				Jump: SPACE<br/>
+				Look: MOUSE
+			</div>
+		</div>
     </div>
 </template>
 
@@ -44,7 +46,7 @@ export default {
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$THREE.PerspectiveCamera(75, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.y = 10
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0xffffff)
@@ -159,7 +161,7 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('miscControlsPointerlock-container')[0].appendChild(this.renderer.domElement)
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -206,6 +208,7 @@ export default {
 
 <style scoped>
 .miscControlsPointerlock-container {
+    position: relative;
     width: 100%;
 }
 #blocker {

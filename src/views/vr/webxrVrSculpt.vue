@@ -35,7 +35,7 @@ export default {
             document.getElementsByClassName('webxrVrSculpt-container')[0].appendChild(this.container)
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0x222222)
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.01, 50)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 0.01, 50)
             this.camera.position.set(0, 1.6, 3)
             this.controls = new OrbitControls(this.camera, this.container)
             this.controls.target.set(0, 1.6, 0)
@@ -69,7 +69,7 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.renderer.xr.enabled = true
             this.container.appendChild(this.renderer.domElement)
@@ -100,8 +100,8 @@ export default {
             pivot.name = 'pivot'
             pivot.position.z = - 0.05
             mesh.add(pivot)
-            controller1.add(mesh.clone())
-            controller2.add(mesh.clone())
+            this.controller1.add(mesh.clone())
+            this.controller2.add(mesh.clone())
             //
             window.addEventListener('resize', this.onWindowResize, false)
         },
@@ -180,6 +180,7 @@ export default {
 
 <style scoped>
 .webxrVrSculpt-container {
+    position: relative;
     width: 100%;
 }
 </style>

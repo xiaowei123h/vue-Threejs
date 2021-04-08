@@ -49,10 +49,12 @@ export default {
             }`
         this.maxDistance = Math.pow(120, 2)
         this.clock = new this.$THREE.Clock()
+        this.init()
+		this.animate()
     },
     methods: {
         init() {
-            this.camera = new this.$THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000000)
+            this.camera = new this.$THREE.PerspectiveCamera(75, this.$webglInnerWidth / window.innerHeight, 1, 1000000)
             this.scene = new this.$THREE.Scene()
             // add a skybox background
             var cubeTextureLoader = new this.$THREE.CubeTextureLoader()
@@ -66,7 +68,7 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer()
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglNearestneighbour-container')[0].appendChild(this.renderer.domElement)
             this.controls = new FirstPersonControls(this.camera, this.renderer.domElement)
             this.controls.movementSpeed = 100
@@ -87,13 +89,13 @@ export default {
                 transparent: true
             })
             //create particles with buffer geometry
-            this.positions = new Float32Array(amountOfParticles * 3)
-            this.alphas = new Float32Array(amountOfParticles)
-            _particleGeom = new this.$THREE.BufferGeometry()
-            _particleGeom.setAttribute('position', new this.$THREE.BufferAttribute(this.positions, 3))
-            _particleGeom.setAttribute('alpha', new this.$THREE.BufferAttribute(this.alphas, 1))
-            this.particles = new this.$THREE.Points(_particleGeom, pointShaderMaterial)
-            for (var x = 0; x < amountOfParticles; x ++) {
+            this.positions = new Float32Array(this.amountOfParticles * 3)
+            this.alphas = new Float32Array(this.amountOfParticles)
+            this._particleGeom = new this.$THREE.BufferGeometry()
+            this._particleGeom.setAttribute('position', new this.$THREE.BufferAttribute(this.positions, 3))
+            this._particleGeom.setAttribute('alpha', new this.$THREE.BufferAttribute(this.alphas, 1))
+            this.particles = new this.$THREE.Points(this._particleGeom, pointShaderMaterial)
+            for (var x = 0; x < this.amountOfParticles; x ++) {
                 this.positions[ x * 3 + 0 ] = Math.random() * 1000
                 this.positions[ x * 3 + 1 ] = Math.random() * 1000
                 this.positions[ x * 3 + 2 ] = Math.random() * 1000
@@ -101,7 +103,7 @@ export default {
             }
             var measureStart = new Date().getTime()
             // creating the kdtree takes a lot of time to execute, in turn the nearest neighbour search will be much faster
-            this.kdtree = new TypedArrayUtils.Kdtree(this.positions, distanceFunction, 3)
+            this.kdtree = new TypedArrayUtils.Kdtree(this.positions, this.distanceFunction, 3)
             console.log('TIME building kdtree', new Date().getTime() - measureStart)
             // display this.particles after the kd-tree was generated and the sorting of the positions-array is done
             this.scene.add(this.particles)
@@ -114,7 +116,7 @@ export default {
         animate() {
             requestAnimationFrame(this.animate)
             //
-            displayNearest(this.camera.position)
+            this.displayNearest(this.camera.position)
             this.controls.update(this.clock.getDelta())
             this.renderer.render(this.scene, this.camera)
         },

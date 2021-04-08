@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import '@/components/js/libs/ammo.wasm.js'
 import { OrbitControls } from '@/components/jsm/controls/OrbitControls.js'
 import { ConvexObjectBreaker } from '@/components/jsm/misc/ConvexObjectBreaker.js'
 import { ConvexBufferGeometry } from '@/components/jsm/geometries/ConvexGeometry.js'
@@ -59,11 +58,13 @@ export default {
             this.objectsToRemove[ i ] = null
         }
         this.impactPoint = new this.$THREE.Vector3()
-        this.impactNormal = new this.$THREE.Vector3()
-        Ammo().then((AmmoLib) => {
-			Ammo = AmmoLib
-			this.init()
-			this.animate()
+		this.impactNormal = new this.$THREE.Vector3()
+		this.$nextTick(() => {
+			Ammo().then((AmmoLib) => {
+				Ammo = AmmoLib
+				this.init()
+				this.animate()
+			})
 		})
     },
     methods: {
@@ -75,13 +76,13 @@ export default {
         },
         initGraphics() {
 			this.container = document.getElementById('container')
-			this.camera = new this.$THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.2, 2000)
+			this.camera = new this.$THREE.PerspectiveCamera(60, this.$webglInnerWidth / window.innerHeight, 0.2, 2000)
 			this.scene = new this.$THREE.Scene()
 			this.scene.background = new this.$THREE.Color(0xbfd1e5)
 			this.camera.position.set(- 14, 8, 16)
 			this.renderer = new this.$THREE.WebGLRenderer()
 			this.renderer.setPixelRatio(window.devicePixelRatio)
-			this.renderer.setSize(window.innerWidth, window.innerHeight)
+			this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
 			this.renderer.shadowMap.enabled = true
 			this.container.appendChild(this.renderer.domElement)
 			this.controls = new OrbitControls(this.camera, this.renderer.domElement)
@@ -127,13 +128,13 @@ export default {
 			object.position.copy(pos)
 			object.quaternion.copy(quat)
 			this.convexBreaker.prepareBreakableObject(object, mass, new this.$THREE.Vector3(), new this.$THREE.Vector3(), true)
-			createDebrisFromBreakableObject(object)
+			this.createDebrisFromBreakableObject(object)
         },
         createObjects() {
 			// Ground
 			this.pos.set(0, - 0.5, 0)
 			this.quat.set(0, 0, 0, 1)
-			var ground = createParalellepipedWithPhysics(40, 1, 40, 0, this.pos, this.quat, new this.$THREE.MeshPhongMaterial({ color: 0xFFFFFF }))
+			var ground = this.createParalellepipedWithPhysics(40, 1, 40, 0, this.pos, this.quat, new this.$THREE.MeshPhongMaterial({ color: 0xFFFFFF }))
 			ground.receiveShadow = true
 			this.textureLoader.load("static/textures/grid.png", (texture) => {
 				texture.wrapS = this.$THREE.RepeatWrapping
@@ -147,17 +148,17 @@ export default {
 			var towerHalfExtents = new this.$THREE.Vector3(2, 5, 2)
 			this.pos.set(- 8, 5, 0)
 			this.quat.set(0, 0, 0, 1)
-			this.createObject(towerMass, towerHalfExtents, this.pos, this.quat, createMaterial(0xB03014))
+			this.createObject(towerMass, towerHalfExtents, this.pos, this.quat, this.createMaterial(0xB03014))
 			// Tower 2
 			this.pos.set(8, 5, 0)
 			this.quat.set(0, 0, 0, 1)
-			this.createObject(towerMass, towerHalfExtents, this.pos, this.quat, createMaterial(0xB03214))
+			this.createObject(towerMass, towerHalfExtents, this.pos, this.quat, this.createMaterial(0xB03214))
 			//Bridge
 			var bridgeMass = 100
 			var bridgeHalfExtents = new this.$THREE.Vector3(7, 0.2, 1.5)
 			this.pos.set(0, 10.2, 0)
 			this.quat.set(0, 0, 0, 1)
-			this.createObject(bridgeMass, bridgeHalfExtents, this.pos, this.quat, createMaterial(0xB3B865))
+			this.createObject(bridgeMass, bridgeHalfExtents, this.pos, this.quat, this.createMaterial(0xB3B865))
 			// Stones
 			var stoneMass = 120
 			var stoneHalfExtents = new this.$THREE.Vector3(1, 2, 0.15)
@@ -165,7 +166,7 @@ export default {
 			this.quat.set(0, 0, 0, 1)
 			for (var i = 0; i < numStones; i ++) {
 				this.pos.set(0, 2, 15 * (0.5 - i / (numStones + 1)))
-				this.createObject(stoneMass, stoneHalfExtents, this.pos, this.quat, createMaterial(0xB0B0B0))
+				this.createObject(stoneMass, stoneHalfExtents, this.pos, this.quat, this.createMaterial(0xB0B0B0))
 			}
 			// Mountain
 			var mountainMass = 860
@@ -178,24 +179,24 @@ export default {
 			mountainPoints.push(new this.$THREE.Vector3(mountainHalfExtents.x, - mountainHalfExtents.y, - mountainHalfExtents.z))
 			mountainPoints.push(new this.$THREE.Vector3(- mountainHalfExtents.x, - mountainHalfExtents.y, - mountainHalfExtents.z))
 			mountainPoints.push(new this.$THREE.Vector3(0, mountainHalfExtents.y, 0))
-			var mountain = new this.$THREE.Mesh(new ConvexBufferGeometry(mountainPoints), createMaterial(0xB03814))
-			mountain.position.copy(pos)
-			mountain.quaternion.copy(quat)
+			var mountain = new this.$THREE.Mesh(new ConvexBufferGeometry(mountainPoints), this.createMaterial(0xB03814))
+			mountain.position.copy(this.pos)
+			mountain.quaternion.copy(this.quat)
 			this.convexBreaker.prepareBreakableObject(mountain, mountainMass, new this.$THREE.Vector3(), new this.$THREE.Vector3(), true)
 			this.createDebrisFromBreakableObject(mountain)
         },
         createParalellepipedWithPhysics(sx, sy, sz, mass, pos, quat, material) {
 			var object = new this.$THREE.Mesh(new this.$THREE.BoxBufferGeometry(sx, sy, sz, 1, 1, 1), material)
 			var shape = new Ammo.btBoxShape(new Ammo.btVector3(sx * 0.5, sy * 0.5, sz * 0.5))
-			shape.setMargin(margin)
+			shape.setMargin(this.margin)
 			this.createRigidBody(object, shape, mass, pos, quat)
 			return object
         },
         createDebrisFromBreakableObject(object) {
 			object.castShadow = true
 			object.receiveShadow = true
-			var shape = createConvexHullPhysicsShape(object.geometry.attributes.position.array)
-			shape.setMargin(margin)
+			var shape = this.createConvexHullPhysicsShape(object.geometry.attributes.position.array)
+			shape.setMargin(this.margin)
 			var body = this.createRigidBody(object, shape, object.userData.mass, null, null, object.userData.velocity, object.userData.angularVelocity)
 			// Set pointer back to the three object only in the debris objects
 			var btVecUserData = new Ammo.btVector3(0, 0, 0)
@@ -244,9 +245,9 @@ export default {
 			}
 			object.userData.physicsBody = body
 			object.userData.collided = false
-			scene.add(object)
+			this.scene.add(object)
 			if (mass > 0) {
-				rigidBodies.push(object)
+				this.rigidBodies.push(object)
 				// Disable deactivation
 				body.setActivationState(4)
 			}
@@ -263,18 +264,18 @@ export default {
         initInput() {
 			window.addEventListener('pointerdown', (event) => {
 				this.mouseCoords.set(
-					(event.clientX / window.innerWidth) * 2 - 1,
+					(event.clientX / (window.innerWidth + 281)) * 2 - 1,
 					- (event.clientY / window.innerHeight) * 2 + 1
 				)
-				this.raycaster.setFromCamera(this.mouseCoords, camera)
+				this.raycaster.setFromCamera(this.mouseCoords, this.camera)
 				// Creates a ball and throws it
 				var ballMass = 35
 				var ballRadius = 0.4
-				var ball = new this.$THREE.Mesh(new this.$THREE.SphereBufferGeometry(ballRadius, 14, 10), ballMaterial)
+				var ball = new this.$THREE.Mesh(new this.$THREE.SphereBufferGeometry(ballRadius, 14, 10), this.ballMaterial)
 				ball.castShadow = true
 				ball.receiveShadow = true
 				var ballShape = new Ammo.btSphereShape(ballRadius)
-				ballShape.setMargin(margin)
+				ballShape.setMargin(this.margin)
 				this.pos.copy(this.raycaster.ray.direction)
 				this.pos.add(this.raycaster.ray.origin)
 				this.quat.set(0, 0, 0, 1)
@@ -293,7 +294,7 @@ export default {
 			this.stats.update()
         },
         render() {
-			var deltaTime = clock.getDelta()
+			var deltaTime = this.clock.getDelta()
 			this.updatePhysics(deltaTime)
 			this.renderer.render(this.scene, this.camera)
         },
@@ -301,21 +302,21 @@ export default {
 			// Step world
 			this.physicsWorld.stepSimulation(deltaTime, 10)
 			// Update rigid bodies
-			for (var i = 0, il = rigidBodies.length; i < il; i ++) {
-				var objThree = rigidBodies[ i ]
+			for (var i = 0, il = this.rigidBodies.length; i < il; i ++) {
+				var objThree = this.rigidBodies[ i ]
 				var objPhys = objThree.userData.physicsBody
 				var ms = objPhys.getMotionState()
 				if (ms) {
-					ms.getWorldTransform(transformAux1)
-					var p = transformAux1.getOrigin()
-					var q = transformAux1.getRotation()
+					ms.getWorldTransform(this.transformAux1)
+					var p = this.transformAux1.getOrigin()
+					var q = this.transformAux1.getRotation()
 					objThree.position.set(p.x(), p.y(), p.z())
 					objThree.quaternion.set(q.x(), q.y(), q.z(), q.w())
 					objThree.userData.collided = false
 				}
 			}
-			for (var i = 0, il = dispatcher.getNumManifolds(); i < il; i ++) {
-				var contactManifold = dispatcher.getManifoldByIndexInternal(i)
+			for (var i = 0, il = this.dispatcher.getNumManifolds(); i < il; i ++) {
+				var contactManifold = this.dispatcher.getManifoldByIndexInternal(i)
 				var rb0 = Ammo.castObject(contactManifold.getBody0(), Ammo.btRigidBody)
 				var rb1 = Ammo.castObject(contactManifold.getBody1(), Ammo.btRigidBody)
 				var threeObject0 = Ammo.castObject(rb0.getUserPointer(), Ammo.btVector3).threeObject
@@ -343,8 +344,8 @@ export default {
 							maxImpulse = impulse
 							var pos = contactPoint.get_m_positionWorldOnB()
 							var normal = contactPoint.get_m_normalWorldOnB()
-							impactPoint.set(pos.x(), pos.y(), pos.z())
-							impactNormal.set(normal.x(), normal.y(), normal.z())
+							this.impactPoint.set(pos.x(), pos.y(), pos.z())
+							this.impactNormal.set(normal.x(), normal.y(), normal.z())
 						}
 						break
 					}
@@ -354,7 +355,7 @@ export default {
 				// Subdivision
 				var fractureImpulse = 250
 				if (breakable0 && ! collided0 && maxImpulse > fractureImpulse) {
-					var debris = convexBreaker.subdivideByImpact(threeObject0, impactPoint, impactNormal, 1, 2, 1.5)
+					var debris = this.convexBreaker.subdivideByImpact(threeObject0, this.impactPoint, this.impactNormal, 1, 2, 1.5)
 					var numObjects = debris.length
 					for (var j = 0; j < numObjects; j ++) {
 						var vel = rb0.getLinearVelocity()
@@ -362,13 +363,13 @@ export default {
 						var fragment = debris[ j ]
 						fragment.userData.velocity.set(vel.x(), vel.y(), vel.z())
 						fragment.userData.angularVelocity.set(angVel.x(), angVel.y(), angVel.z())
-						createDebrisFromBreakableObject(fragment)
+						this.createDebrisFromBreakableObject(fragment)
 					}
 					this.objectsToRemove[ this.numObjectsToRemove ++ ] = threeObject0
 					userData0.collided = true
 				}
 				if (breakable1 && ! collided1 && maxImpulse > fractureImpulse) {
-					var debris = convexBreaker.subdivideByImpact(threeObject1, impactPoint, impactNormal, 1, 2, 1.5)
+					var debris = this.convexBreaker.subdivideByImpact(threeObject1, this.impactPoint, this.impactNormal, 1, 2, 1.5)
 					var numObjects = debris.length
 					for (var j = 0; j < numObjects; j ++) {
 						var vel = rb1.getLinearVelocity()
@@ -376,7 +377,7 @@ export default {
 						var fragment = debris[ j ]
 						fragment.userData.velocity.set(vel.x(), vel.y(), vel.z())
 						fragment.userData.angularVelocity.set(angVel.x(), angVel.y(), angVel.z())
-						createDebrisFromBreakableObject(fragment)
+						this.createDebrisFromBreakableObject(fragment)
 					}
 					this.objectsToRemove[ this.numObjectsToRemove ++ ] = threeObject1
 					userData1.collided = true

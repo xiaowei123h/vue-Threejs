@@ -63,12 +63,14 @@ export default {
             //
             var loader = new GLTFLoader()
             loader.load('static/models/gltf/SimpleSkinning.gltf', (gltf) => {
+                console.log(gltf.scene)
+                console.log(this.scene)
                 this.scene.add(gltf.scene)
-                gltf.scene.traverse((child) => {
-                    if (child.isSkinnedMesh) child.castShadow = true
-                })
-                this.mixer = new this.$THREE.AnimationMixer(gltf.scene)
-                this.mixer.clipAction(gltf.animations[ 0 ]).play()
+                // gltf.scene.traverse((child) => {
+                //     if (child.isSkinnedMesh) child.castShadow = true
+                // })
+                // this.mixer = new this.$THREE.AnimationMixer(gltf.scene)
+                // this.mixer.clipAction(gltf.animations[ 0 ]).play()
             })
             //
             this.renderer = new this.$THREE.WebGLRenderer()

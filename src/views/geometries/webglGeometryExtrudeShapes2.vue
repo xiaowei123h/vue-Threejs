@@ -12,7 +12,7 @@ import { OrbitControls } from '@/components/jsm/controls/OrbitControls.js'
 export default {
     data() {
         return {
-            $d3g: null,
+            d3g: {},
             renderer: null,
             stats: null,
             scene: null,
@@ -20,7 +20,7 @@ export default {
         }
     },
     mounted() {
-        this.d3threeD(this.$d3g)
+        this.d3threeD(this.d3g)
         this.init()
         this.animate()
     },
@@ -245,7 +245,7 @@ export default {
             var colors = svgObject.colors
             var center = svgObject.center
             for (var i = 0; i < paths.length; i ++) {
-                var path = this.$d3g.transformSVGPath(paths[ i ])
+                var path = this.d3g.transformSVGPath(paths[ i ])
                 var color = new this.$THREE.Color(colors[ i ])
                 var material = new this.$THREE.MeshLambertMaterial({
                     color: color,
@@ -274,7 +274,7 @@ export default {
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0xb0b0b0)
             //
-            this.camera = new this.$THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$THREE.PerspectiveCamera(50, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.set(0, 0, 200)
             //
             var group = new this.$THREE.Group()
@@ -295,14 +295,14 @@ export default {
             //
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             container.appendChild(this.renderer.domElement)
             //
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
             controls.minDistance = 100
             controls.maxDistance = 1000
             //
-            this.stats = new Stats()
+            this.stats = new this.$Stats()
             this.stats.dom.style.left = '280px'
             container.appendChild(this.stats.dom)
             //

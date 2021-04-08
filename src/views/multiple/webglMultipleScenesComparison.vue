@@ -25,7 +25,7 @@ export default {
         }
     },
     mounted() {
-        this.sliderPos = window.innerWidth / 2
+        this.sliderPos = this.$webglInnerWidth / 2
 		this.init()
     },
     methods: {
@@ -35,7 +35,7 @@ export default {
             this.sceneL.background = new this.$THREE.Color(0xBCD48F)
             this.sceneR = new this.$THREE.Scene()
             this.sceneR.background = new this.$THREE.Color(0x8FBCD4)
-            this.camera = new this.$THREE.PerspectiveCamera(35, (window.innerWidth - 281) / window.innerHeight, 0.1, 100)
+            this.camera = new this.$THREE.PerspectiveCamera(35, this.$webglInnerWidth / window.innerHeight, 0.1, 100)
             this.camera.position.z = 6
             this.controls = new OrbitControls(this.camera, this.container)
             var light = new this.$THREE.HemisphereLight(0xffffff, 0x444444, 1)
@@ -46,7 +46,7 @@ export default {
             this.initSlider()
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize((window.innerWidth - 281), window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.setScissorTest(true)
             this.renderer.setAnimationLoop(this.render)
             this.container.appendChild(this.renderer.domElement)
@@ -87,7 +87,7 @@ export default {
         render() {
             this.renderer.setScissor(0, 0, this.sliderPos, window.innerHeight)
             this.renderer.render(this.sceneL, this.camera)
-            this.renderer.setScissor(this.sliderPos, 0, window.innerWidth, window.innerHeight)
+            this.renderer.setScissor(this.sliderPos, 0, this.$webglInnerWidth, window.innerHeight)
             this.renderer.render(this.sceneR, this.camera)
         }
     },
@@ -98,6 +98,7 @@ export default {
 .webglMultipleScenesComparison-container {
     position: relative;
     width: 100%;
+    height: 100vh;
 }
 .container {
     position: absolute;
@@ -113,6 +114,6 @@ export default {
     opacity: 0.7;
     border-radius: 50%;
     top: calc(50% - 20px);
-    left: calc(50% - 20px);
+    left: calc(50% - 21px);
 }
 </style>

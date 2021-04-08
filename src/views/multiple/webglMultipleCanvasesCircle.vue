@@ -51,15 +51,18 @@ export default {
 			var canvas4 = document.getElementById('canvas4')
 			var canvas5 = document.getElementById('canvas5')
 			var fudge = 0.45 // I don't know why this is needed :-(
-			var rot = 30 * this.$THREE.MathUtils.DEG2RAD
-			this.views.push(new View(canvas1, rot * - 2 * fudge, this.$THREE, this.mouseX, this.mouseY, this.scene))
-			this.views.push(new View(canvas2, rot * - 1 * fudge, this.$THREE, this.mouseX, this.mouseY, this.scene))
-			this.views.push(new View(canvas3, rot *	0 * fudge, this.$THREE, this.mouseX, this.mouseY, this.scene))
-			this.views.push(new View(canvas4, rot *	1 * fudge, this.$THREE, this.mouseX, this.mouseY, this.scene))
-			this.views.push(new View(canvas5, rot *	2 * fudge, this.$THREE, this.mouseX, this.mouseY, this.scene))
+            var rot = 30 * this.$THREE.MathUtils.DEG2RAD
+            this.scene = new this.$THREE.Scene()
+            this.scene.background = new this.$THREE.Color(0xffffff)
+            this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
+			this.renderer.setPixelRatio(window.devicePixelRatio)
+			this.renderer.setSize(200, 300)
+			this.views.push(new View(canvas1, rot * - 2 * fudge, this.$THREE, this.scene, this.renderer))
+			this.views.push(new View(canvas2, rot * - 1 * fudge, this.$THREE, this.scene, this.renderer))
+			this.views.push(new View(canvas3, rot *	0 * fudge, this.$THREE, this.scene, this.renderer))
+			this.views.push(new View(canvas4, rot *	1 * fudge, this.$THREE, this.scene, this.renderer))
+			this.views.push(new View(canvas5, rot *	2 * fudge, this.$THREE, this.scene, this.renderer))
 			//
-			this.scene = new this.$THREE.Scene()
-			this.scene.background = new this.$THREE.Color(0xffffff)
 			var light = new this.$THREE.DirectionalLight(0xffffff)
 			light.position.set(0, 0, 1).normalize()
 			this.scene.add(light)
@@ -110,9 +113,6 @@ export default {
 				mesh.rotation.x = i * 0.5
 				this.scene.add(mesh)
 			}
-			this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
-			this.renderer.setPixelRatio(window.devicePixelRatio)
-			this.renderer.setSize(200, 300)
 			document.addEventListener('mousemove', this.onDocumentMouseMove, false)
         },
         onDocumentMouseMove(event) {
@@ -121,7 +121,7 @@ export default {
         },
         animate() {
 			for (var i = 0; i < this.views.length; ++ i) {
-				this.views[ i ].render()
+				this.views[ i ].render(this.mouseX, this.mouseY)
 			}
 			requestAnimationFrame(this.animate)
 		}
@@ -131,6 +131,7 @@ export default {
 
 <style scoped>
 .webglMultipleCanvasesCircle-container {
+    position: relative;
     width: 100%;
     background-color: #555;
 }

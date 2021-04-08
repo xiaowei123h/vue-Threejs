@@ -47,55 +47,57 @@ export default {
         init() {
             this.container = document.createElement('div')
             document.getElementsByClassName('webglMaterialsPhysicalReflectivity-container')[0].appendChild(this.container)
-            this.camera = new this.$THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 1000)
+            this.camera = new this.$moduleTHREE.PerspectiveCamera(40, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.set(0.0, - 10, 20 * 3.5)
-            this.scene = new this.$THREE.Scene()
-            this.scene.background = new this.$THREE.Color(0x000000)
-            this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
-            this.gemBackMaterial = new this.$THREE.MeshPhysicalMaterial({
+            this.scene = new this.$moduleTHREE.Scene()
+            this.scene.background = new this.$moduleTHREE.Color(0x000000)
+            this.renderer = new this.$moduleTHREE.WebGLRenderer({ antialias: true })
+            this.gemBackMaterial = new this.$moduleTHREE.MeshPhysicalMaterial({
                 map: null,
                 color: 0x0000ff,
                 metalness: 1,
                 roughness: 0,
                 opacity: 0.5,
-                side: this.$THREE.BackSide,
+                side: this.$moduleTHREE.BackSide,
                 transparent: true,
                 envMapIntensity: 5,
                 premultipliedAlpha: true
                 // TODO: Add custom blend mode that modulates background color by this materials color.
             })
-            this.gemFrontMaterial = new this.$THREE.MeshPhysicalMaterial({
+            this.gemFrontMaterial = new this.$moduleTHREE.MeshPhysicalMaterial({
                 map: null,
                 color: 0x0000ff,
                 metalness: 0,
                 roughness: 0,
                 opacity: 0.25,
-                side: this.$THREE.FrontSide,
+                side: this.$moduleTHREE.FrontSide,
                 transparent: true,
                 envMapIntensity: 10,
                 premultipliedAlpha: true
             })
-            var manager = new this.$THREE.LoadingManager()
-            manager.onProgress = (item, loaded, total) => {
+            var manager = new this.$moduleTHREE.LoadingManager()
+            manager.onProgress = function (item, loaded, total) {
                 console.log(item, loaded, total)
             }
             var loader = new OBJLoader(manager)
             loader.load('static/models/obj/emerald.obj', (object) => {
                 object.traverse((child) => {
-                    if (child instanceof this.$THREE.Mesh) {
+                    console.log(child instanceof this.$moduleTHREE.Mesh)
+                    if (child instanceof this.$moduleTHREE.Mesh) {
                         child.material = this.gemBackMaterial
                         var second = child.clone()
                         second.material = this.gemFrontMaterial
-                        var parent = new this.$THREE.Group()
+                        var parent = new this.$moduleTHREE.Group()
                         parent.add(second)
                         parent.add(child)
+                        console.log(parent)
                         this.scene.add(parent)
-                        objects.push(parent)
+                        this.objects.push(parent)
                     }
                 })
             })
             new RGBELoader()
-                .setDataType(this.$THREE.UnsignedByteType)
+                .setDataType(this.$moduleTHREE.UnsignedByteType)
                 .setPath('static/textures/equirectangular/')
                 .load('royal_esplanade_1k.hdr', (hdrEquirect) => {
                     this.hdrCubeRenderTarget = pmremGenerator.fromEquirectangular(hdrEquirect)
@@ -104,28 +106,28 @@ export default {
                     this.gemFrontMaterial.needsUpdate = this.gemBackMaterial.needsUpdate = true
                     hdrEquirect.dispose()
                 })
-            var pmremGenerator = new this.$THREE.PMREMGenerator(this.renderer)
+            var pmremGenerator = new this.$moduleTHREE.PMREMGenerator(this.renderer)
             pmremGenerator.compileEquirectangularShader()
             // Lights
-            this.scene.add(new this.$THREE.AmbientLight(0x222222))
-            var pointLight1 = new this.$THREE.PointLight(0xffffff)
+            this.scene.add(new this.$moduleTHREE.AmbientLight(0x222222))
+            var pointLight1 = new this.$moduleTHREE.PointLight(0xffffff)
             pointLight1.position.set(150, 10, 0)
             pointLight1.castShadow = false
             this.scene.add(pointLight1)
-            var pointLight2 = new this.$THREE.PointLight(0xffffff)
+            var pointLight2 = new this.$moduleTHREE.PointLight(0xffffff)
             pointLight2.position.set(- 150, 0, 0)
             this.scene.add(pointLight2)
-            var pointLight3 = new this.$THREE.PointLight(0xffffff)
+            var pointLight3 = new this.$moduleTHREE.PointLight(0xffffff)
             pointLight3.position.set(0, - 10, - 150)
             this.scene.add(pointLight3)
-            var pointLight4 = new this.$THREE.PointLight(0xffffff)
+            var pointLight4 = new this.$moduleTHREE.PointLight(0xffffff)
             pointLight4.position.set(0, 0, 150)
             this.scene.add(pointLight4)
             this.renderer.setPixelRatio(window.devicePixelRatio)
-            this.renderer.setSize(window.innerWidth, window.innerHeight)
+            this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.renderer.shadowMap.enabled = true
             this.container.appendChild(this.renderer.domElement)
-            this.renderer.outputEncoding = this.$THREE.sRGBEncoding
+            this.renderer.outputEncoding = this.$moduleTHREE.sRGBEncoding
             this.stats = new this.$Stats()
             this.stats.dom.style.left = '280px'
             this.container.appendChild(this.stats.dom)
@@ -154,11 +156,11 @@ export default {
                 this.gemFrontMaterial.reflectivity = this.gemBackMaterial.reflectivity = this.params.reflectivity
                 let newColor = this.gemBackMaterial.color
                 switch (this.params.gemColor) {
-                    case 'Blue': newColor = new this.$THREE.Color(0x000088); break
-                    case 'Red': newColor = new this.$THREE.Color(0x880000); break
-                    case 'Green': newColor = new this.$THREE.Color(0x008800); break
-                    case 'White': newColor = new this.$THREE.Color(0x888888); break
-                    case 'Black': newColor = new this.$THREE.Color(0x0f0f0f); break
+                    case 'Blue': newColor = new this.$moduleTHREE.Color(0x000088); break
+                    case 'Red': newColor = new this.$moduleTHREE.Color(0x880000); break
+                    case 'Green': newColor = new this.$moduleTHREE.Color(0x008800); break
+                    case 'White': newColor = new this.$moduleTHREE.Color(0x888888); break
+                    case 'Black': newColor = new this.$moduleTHREE.Color(0x0f0f0f); break
                 }
                 this.gemBackMaterial.color = this.gemFrontMaterial.color = newColor
             }

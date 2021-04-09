@@ -88,7 +88,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             this.container.style.touchAction = 'none'
             this.container.addEventListener('pointermove', this.onPointerMove, false)
@@ -99,6 +99,7 @@ export default {
             this.windowHalfX = (window.innerWidth - 281) / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onPointerMove(event) {
             if (event.isPrimary === false) return
@@ -138,6 +139,7 @@ export default {
 
 <style scoped>
 .webglPointsWaves-container {
+    position: relative;
     width: 100%;
 }
 </style>

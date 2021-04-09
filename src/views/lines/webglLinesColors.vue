@@ -150,6 +150,7 @@ export default {
 
 <style scoped>
 .webglLinesColors-container {
+    position: relative;
     width: 100%;
 }
 </style>

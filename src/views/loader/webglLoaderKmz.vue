@@ -62,6 +62,7 @@ export default {
 
 <style scoped>
 .webglLoaderKmz-container {
+    position: relative;
     width: 100%;
 }
 </style>

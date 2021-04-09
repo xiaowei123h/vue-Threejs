@@ -93,13 +93,14 @@ export default {
             controls.target.set(0, 10, 0)
             controls.update()
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglShadowmapPointlight-container')[0].appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         generateTexture() {
             var canvas = document.createElement('canvas')
@@ -136,6 +137,7 @@ export default {
 
 <style scoped>
 .webglShadowmapPointlight-container {
+    position: relative;
     width: 100%;
 }
 </style>

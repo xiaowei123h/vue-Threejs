@@ -138,6 +138,7 @@ export default {
 
 <style scoped>
 .webglTonemapping-container {
+    position: relative;
     width: 100%;
 }
 </style>

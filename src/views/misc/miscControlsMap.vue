@@ -94,6 +94,7 @@ export default {
 
 <style scoped>
 .miscControlsMap-container {
+    position: relative;
     width: 100%;
 }
 #info {

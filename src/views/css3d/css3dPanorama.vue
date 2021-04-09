@@ -127,6 +127,7 @@ export default {
 
 <style scoped>
 .css3dPanorama-container {
+    position: relative;
     width: 100%;
 }
 </style>

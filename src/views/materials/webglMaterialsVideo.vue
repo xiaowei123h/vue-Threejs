@@ -182,6 +182,7 @@ export default {
 
 <style scoped>
 .webglMaterialsVideo-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -139,6 +139,7 @@ export default {
 
 <style scoped>
 .webglPostprocessing3dlut-container {
+    position: relative;
     width: 100%;
 }
 </style>

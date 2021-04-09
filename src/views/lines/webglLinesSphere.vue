@@ -115,6 +115,7 @@ export default {
 
 <style scoped>
 .webglLinesSphere-container {
+    position: relative;
     width: 100%;
 }
 </style>

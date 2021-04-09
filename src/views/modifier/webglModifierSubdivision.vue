@@ -68,7 +68,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglModifierSubdivision-container')[0].appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglModifierSubdivision-container')[0].appendChild(this.stats.dom)
             //
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
@@ -109,6 +109,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -124,6 +125,7 @@ export default {
 
 <style scoped>
 .webglModifierSubdivision-container {
+    position: relative;
     width: 100%;
 }
 #info {

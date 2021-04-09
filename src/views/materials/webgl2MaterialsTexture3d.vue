@@ -132,6 +132,7 @@ export default {
 
 <style scoped>
 .webgl2MaterialsTexture3d-container {
+	position: relative;
     width: 100%;
 }
 </style>

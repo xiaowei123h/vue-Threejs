@@ -135,6 +135,7 @@ export default {
 
 <style scoped>
 .webaudioTiming-container {
+	position: relative;
     width: 100%;
 }
 #overlay {

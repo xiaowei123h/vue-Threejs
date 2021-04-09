@@ -142,6 +142,7 @@ export default {
 
 <style scoped>
 .webglLoaderNodes-container {
+    position: relative;
     width: 100%;
 }
 </style>

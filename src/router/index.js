@@ -11,60 +11,60 @@ export default new Router({
             name: 'Index',
             component: Layout,
             children: [
-                {
-                    path: '/webglGeometryText',
-                    name: 'Setone',
-                    component: () => import('@/views/geometries/webglGeometryText'),
-                    meta: {title: 'geometry_text', icon: 'webgl_geometry_text'}
-                },
-                {
-                    path: '/webglGeometryTextStroke',
-                    name: 'webglGeometryTextStroke',
-                    component: () => import('@/views/geometries/webglGeometryTextStroke'),
-                    meta: {title: 'geometry_text_stroke', icon: 'webgl_geometry_text_stroke'}
-                },
-                {
-                    path: '/webglGeometryTextShapes',
-                    name: 'webglGeometryTextShapes',
-                    component: () => import('@/views/geometries/webglGeometryTextShapes'),
-                    meta: {title: 'geometry_text_shapes', icon: 'webgl_geometry_text_shapes'}
-                },
-                {
-                    path: '/webglAnimationCloth',
-                    name: 'webglAnimationCloth',
-                    component: () => import('@/views/animation/webglAnimationCloth'),
-                    meta: {title: 'animation_cloth', icon: 'webgl_animation_cloth'}
-                },
-                {
-                    path: '/webglAnimationKeyframes',
-                    name: 'webglAnimationKeyframes',
-                    component: () => import('@/views/animation/webglAnimationKeyframes'),
-                    meta: {title: 'animation_keyframes', icon: 'webgl_animation_keyframes'}
-                },
-                {
-                    path: '/webglAnimationSkinningMorph',
-                    name: 'webglAnimationSkinningMorph',
-                    component: () => import('@/views/animation/webglAnimationSkinningMorph'),
-                    meta: {title: 'animation_skinning_morph', icon: 'webgl_animation_skinning_morph'}
-                },
-                {
-                    path: '/webglBuffergeometryConstructedFromGeometry',
-                    name: 'webglBuffergeometryConstructedFromGeometry',
-                    component: () => import('@/views/buffergeometry/webglBuffergeometryConstructedFromGeometry'),
-                    meta: {title: 'buffergeometry_constructed_from_geometry', icon: 'webgl_buffergeometry_constructed_from_geometry'}
-                },
-                {
-                    path: '/webglBuffergeometryGlbufferattribute',
-                    name: 'webglBuffergeometryGlbufferattribute',
-                    component: () => import('@/views/buffergeometry/webglBuffergeometryGlbufferattribute'),
-                    meta: {title: 'buffergeometry_glbufferattribute', icon: 'webgl_buffergeometry_glbufferattribute'}
-                },
-                {
-                    path: '/webglBuffergeometryIndexed',
-                    name: 'webglBuffergeometryIndexed',
-                    component: () => import('@/views/buffergeometry/webglBuffergeometryIndexed'),
-                    meta: {title: 'buffergeometry_indexed', icon: 'webgl_buffergeometry_indexed'}
-                },
+                // {
+                //     path: '/webglGeometryText',
+                //     name: 'Setone',
+                //     component: () => import('@/views/geometries/webglGeometryText'),
+                //     meta: {title: 'geometry_text', icon: 'webgl_geometry_text'}
+                // },
+                // {
+                //     path: '/webglGeometryTextStroke',
+                //     name: 'webglGeometryTextStroke',
+                //     component: () => import('@/views/geometries/webglGeometryTextStroke'),
+                //     meta: {title: 'geometry_text_stroke', icon: 'webgl_geometry_text_stroke'}
+                // },
+                // {
+                //     path: '/webglGeometryTextShapes',
+                //     name: 'webglGeometryTextShapes',
+                //     component: () => import('@/views/geometries/webglGeometryTextShapes'),
+                //     meta: {title: 'geometry_text_shapes', icon: 'webgl_geometry_text_shapes'}
+                // },
+                // {
+                //     path: '/webglAnimationCloth',
+                //     name: 'webglAnimationCloth',
+                //     component: () => import('@/views/animation/webglAnimationCloth'),
+                //     meta: {title: 'animation_cloth', icon: 'webgl_animation_cloth'}
+                // },
+                // {
+                //     path: '/webglAnimationKeyframes',
+                //     name: 'webglAnimationKeyframes',
+                //     component: () => import('@/views/animation/webglAnimationKeyframes'),
+                //     meta: {title: 'animation_keyframes', icon: 'webgl_animation_keyframes'}
+                // },
+                // {
+                //     path: '/webglAnimationSkinningMorph',
+                //     name: 'webglAnimationSkinningMorph',
+                //     component: () => import('@/views/animation/webglAnimationSkinningMorph'),
+                //     meta: {title: 'animation_skinning_morph', icon: 'webgl_animation_skinning_morph'}
+                // },
+                // {
+                //     path: '/webglBuffergeometryConstructedFromGeometry',
+                //     name: 'webglBuffergeometryConstructedFromGeometry',
+                //     component: () => import('@/views/buffergeometry/webglBuffergeometryConstructedFromGeometry'),
+                //     meta: {title: 'buffergeometry_constructed_from_geometry', icon: 'webgl_buffergeometry_constructed_from_geometry'}
+                // },
+                // {
+                //     path: '/webglBuffergeometryGlbufferattribute',
+                //     name: 'webglBuffergeometryGlbufferattribute',
+                //     component: () => import('@/views/buffergeometry/webglBuffergeometryGlbufferattribute'),
+                //     meta: {title: 'buffergeometry_glbufferattribute', icon: 'webgl_buffergeometry_glbufferattribute'}
+                // },
+                // {
+                //     path: '/webglBuffergeometryIndexed',
+                //     name: 'webglBuffergeometryIndexed',
+                //     component: () => import('@/views/buffergeometry/webglBuffergeometryIndexed'),
+                //     meta: {title: 'buffergeometry_indexed', icon: 'webgl_buffergeometry_indexed'}
+                // },
                 {
                     path: '/webglBuffergeometryInstancingInterleaved',
                     name: 'webglBuffergeometryInstancingInterleaved',
@@ -1695,7 +1695,7 @@ export default new Router({
                     path: '/webglShadersOcean2',
                     name: 'webglShadersOcean2',
                     component: () => import('@/views/shaders/webglShadersOcean2'),
-                    meta: {title: 'shaders_ocean', icon: 'webgl_shaders_ocean2'}
+                    meta: {title: 'shaders_ocean2', icon: 'webgl_shaders_ocean2'}
                 },
                 {
                     path: '/webglShaderLava',

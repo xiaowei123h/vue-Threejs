@@ -82,6 +82,7 @@ export default {
 
 <style scoped>
 .svgLines-container {
+    position: relative;
     width: 100%;
 }
 svg {

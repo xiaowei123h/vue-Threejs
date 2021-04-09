@@ -57,7 +57,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglCameraCinematic-container')[0].appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglCameraCinematic-container')[0].appendChild(this.stats.dom)
             document.addEventListener('mousemove', this.onDocumentMouseMove, false)
             window.addEventListener('resize', this.onWindowResize, false)
@@ -109,6 +109,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onDocumentMouseMove(event) {
             event.preventDefault()
@@ -158,6 +159,7 @@ export default {
 
 <style scoped>
 .webglCameraCinematic-container {
+    position: relative;
     width: 100%;
     background-color: #fff;
     color: #000;

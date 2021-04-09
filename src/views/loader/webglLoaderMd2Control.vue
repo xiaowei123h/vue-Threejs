@@ -92,7 +92,7 @@ export default {
             this.renderer.shadowMap.type = this.$THREE.PCFSoftShadowMap
             // STATS
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             // EVENTS
             window.addEventListener('resize', this.onWindowResize, false)
@@ -161,6 +161,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onKeyDown(event) {
             switch (event.keyCode) {
@@ -210,6 +211,7 @@ export default {
 
 <style scoped>
 .webglLoaderMd2Control-container {
+    position: relative;
     width: 100%;
     background-color: #fff;
 }

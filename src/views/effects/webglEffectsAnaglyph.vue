@@ -103,6 +103,7 @@ export default {
 
 <style scoped>
 .webglEffectsAnaglyph-container {
+    position: relative;
     width: 100%;
 }
 #info {

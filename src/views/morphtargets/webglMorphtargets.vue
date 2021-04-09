@@ -139,6 +139,7 @@ export default {
 
 <style scoped>
 .webglMorphtargets-container {
+    position: relative;
     width: 100%;
 }
 #info {

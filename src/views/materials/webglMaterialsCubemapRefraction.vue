@@ -69,7 +69,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             var loader = new PLYLoader()
             loader.load('static/models/ply/binary/Lucy100k.ply', (geometry) => {
@@ -83,6 +83,7 @@ export default {
             this.windowHalfX = (window.innerWidth - 281) / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         createScene(geometry, m1, m2, m3) {
             geometry.computeVertexNormals()
@@ -123,6 +124,7 @@ export default {
 
 <style scoped>
 .webglMaterialsCubemapRefraction-container {
+    position: relative;
     width: 100%;
 }
 </style>

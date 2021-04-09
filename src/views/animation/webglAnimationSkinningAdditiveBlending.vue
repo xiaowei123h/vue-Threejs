@@ -125,11 +125,13 @@ export default {
             controls.target.set(0, 1, 0)
             controls.update()
             this.stats = new this.$Stats()
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         activateAction(action) {
             var clip = action.getClip()
@@ -265,6 +267,7 @@ export default {
 
 <style scoped>
 .webglAnimationSkinningAdditiveBlending-container {
+    position: relative;
     width: 100%;
 }
 #info a {

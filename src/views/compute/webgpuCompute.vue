@@ -29,6 +29,7 @@ export default {
 
 <style scoped>
 .webgpuCompute-container {
+    position: relative;
     width: 100%;
 }
 </style>

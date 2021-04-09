@@ -127,6 +127,7 @@ export default {
 
 <style scoped>
 .webglLightprobe-container {
+    position: relative;
     width: 100%;
 }
 </style>

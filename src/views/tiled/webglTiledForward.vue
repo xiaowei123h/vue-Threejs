@@ -117,7 +117,7 @@ export default {
         this.bloom = new UnrealBloomPass(new this.$THREE.Vector2(this.$webglInnerWidth, window.innerHeight), 0.8, 0.6, 0.8)
         this.bloom.renderToScreen = true
         this.stats = new this.$Stats()
-        this.stats.dom.style.left = '280px'
+        this.$statsPosition(this.stats)
         this.container.appendChild(this.stats.dom)
         this.controls = new OrbitControls(this.camera, this.renderer.domElement)
         this.controls.minDistance = 120
@@ -273,6 +273,7 @@ export default {
             this.renderTarget.setSize(window.innerWidth - 281, window.innerHeight)
             this.bloom.setSize(window.innerWidth - 281, window.innerHeight)
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.resizeTiles()
         },
         postEffect(renderer) {
@@ -284,6 +285,7 @@ export default {
 
 <style scoped>
 .webglTiledForward-container {
+    position: relative;
     width: 100%;
 }
 </style>

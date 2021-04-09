@@ -149,6 +149,7 @@ export default {
 
 <style scoped>
 .webglMultipleCanvasesGrid-container {
+    position: relative;
     width: 100%;
     height: 100%;
     background-color: #fff;

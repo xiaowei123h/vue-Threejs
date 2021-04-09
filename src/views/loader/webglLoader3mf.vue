@@ -111,6 +111,7 @@ export default {
 
 <style scoped>
 .webglLoader3mf-container {
+    position: relative;
     width: 100%;
     background-color: #333;
 }

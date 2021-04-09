@@ -139,6 +139,7 @@ export default {
 
 <style scoped>
 .webglLightsSpotlight-container {
+    position: relative;
     width: 100%;
 }
 </style>

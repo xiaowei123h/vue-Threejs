@@ -124,6 +124,7 @@ export default {
 
 <style scoped>
 .webglGeometryExtrudeShapes-container {
+    position: relative;
     width: 100%;
     background-color: #222;
 }

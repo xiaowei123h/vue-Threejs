@@ -130,6 +130,7 @@ export default {
 
 <style scoped>
 .webglLoaderPrwm-container {
+    position: relative;
     width: 100%;
 }
 .notes {

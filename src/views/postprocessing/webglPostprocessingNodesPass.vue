@@ -352,6 +352,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingNodesPass-container {
+    position: relative;
     width: 100%;
 }
 </style>

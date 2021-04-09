@@ -173,7 +173,7 @@ export default {
             torus.castShadow = true
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             // postprocessing
             this.composer = new EffectComposer(this.renderer)
@@ -220,6 +220,7 @@ export default {
             var width = window.innerWidth - 281
             var height = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.composer.setSize(width, height)
             this.effectFXAA.uniforms[ 'resolution' ].value.set(1 / window.innerWidth - 281, 1 / window.innerHeight)
         },
@@ -240,6 +241,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingOutline-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -93,7 +93,7 @@ export default {
             this.renderer.shadowMap.enabled = true
             // STATS
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             // EVENTS
             window.addEventListener('resize', this.onWindowResize, false)
@@ -140,6 +140,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         labelize(text) {
             var parts = text.split(".")
@@ -209,6 +210,7 @@ export default {
 
 <style scoped>
 .webglLoaderMd2-container {
+    position: relative;
     width: 100%;
 }
 </style>

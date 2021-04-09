@@ -116,13 +116,14 @@ export default {
             this.controls.lookSpeed = 0.125
             this.controls.lookVertical = true
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.controls.handleResize()
         },
         generateHeight(width, height) {
@@ -157,6 +158,7 @@ export default {
 
 <style scoped>
 .webglGeometryMinecraft-container {
+    position: relative;
     width: 100%;
     background-color: #bfd1e5;
 }

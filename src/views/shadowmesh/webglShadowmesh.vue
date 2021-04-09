@@ -236,6 +236,7 @@ export default {
 
 <style scoped>
 .webglShadowmesh-container {
+    position: relative;
     width: 100%;
 }
 #info {

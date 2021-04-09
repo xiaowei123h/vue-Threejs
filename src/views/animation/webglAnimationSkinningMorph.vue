@@ -88,11 +88,12 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
             // stats
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         createGUI(model, animations) {
             var states = ['Idle', 'Walking', 'Running', 'Dance', 'Death', 'Sitting', 'Standing']
@@ -171,6 +172,7 @@ export default {
 
 <style scoped>
 .webglAnimationSkinningMorph-container {
+    position: relative;
     width: 100%;
     color: #222;
 }
@@ -182,5 +184,8 @@ export default {
     margin-left: auto;
     margin-right: auto;
     padding: 0 2em;
+}
+#info {
+    margin-left: -280px;
 }
 </style>

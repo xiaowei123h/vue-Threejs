@@ -147,6 +147,7 @@ export default {
 
 <style scoped>
 .miscExporterObj-contaeiner {
+    position: relative;
     width: 100%;
 }
 .floating {

@@ -107,6 +107,7 @@ export default {
 
 <style scoped>
 .webglHelpers-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -98,12 +98,13 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
             this.onWindowResize()
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglLinesFat-container')[0].appendChild(this.stats.dom)
             this.initGui()
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.insetWidth = window.innerHeight / 4 // square
             this.insetHeight = window.innerHeight / 4
             this.camera2.aspect = this.insetWidth / this.insetHeight
@@ -197,6 +198,7 @@ export default {
 
 <style scoped>
 .webglLinesFat-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -85,7 +85,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglPostprocessingProcedural-container')[0].appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             // Setup post processing stage
             this.camera = new this.$THREE.OrthographicCamera(- 1, 1, 1, - 1, 0, 1)
@@ -110,6 +110,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -129,6 +130,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingProcedural-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -145,6 +145,7 @@ export default {
 
 <style scoped>
 .webglVideoKinect-container {
+    position: relative;
     width: 100%;
 }
 </style>

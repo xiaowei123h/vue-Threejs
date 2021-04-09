@@ -46,7 +46,7 @@ export default {
             container.appendChild(this.renderer.domElement)
             window.addEventListener('resize', this.onWindowResize, false)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             //
             this.camera = new this.$THREE.PerspectiveCamera(40, this.$webglInnerWidth / window.innerHeight, 0.1, 100)
@@ -123,6 +123,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         render() {
             var time = - performance.now() / 1000
@@ -139,6 +140,7 @@ export default {
 
 <style scoped>
 .webglMaterialsCar-container {
+    position: relative;
     width: 100%;
 }
 #info {

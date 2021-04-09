@@ -46,7 +46,7 @@ export default {
         init() {
             var container = document.getElementById('container')
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             this.clock = new this.$THREE.Clock()
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
@@ -100,6 +100,7 @@ export default {
             var width = window.innerWidth - 281
             var height = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.composer.setSize(width, height)
         },
         animate() {
@@ -115,6 +116,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingUnrealBloom-container {
+    position: relative;
     width: 100%;
 }
 #info {

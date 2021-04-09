@@ -63,7 +63,7 @@ export default {
 			this.renderer.outputEncoding = this.$THREE.sRGBEncoding
 			//
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
 			this.container.appendChild(this.stats.dom)
 			var controls = new OrbitControls(this.camera, this.container)
 			controls.minDistance = 500
@@ -136,6 +136,7 @@ export default {
         },
         onWindowResize() {
 			this.$onWindowResize(this.camera, this.renderer)
+			this.$statsPosition(this.stats)
         },
         animate() {
 			requestAnimationFrame(this.animate)
@@ -152,6 +153,7 @@ export default {
 
 <style scoped>
 .webglMaterialsSubsurfaceScattering-container {
+	position: relative;
     width: 100%;
 }
 </style>

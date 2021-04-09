@@ -121,7 +121,7 @@ export default {
             this.renderer.setSize(window.innerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             this.container.style.touchAction = 'none'
             this.container.addEventListener('pointerdown', this.onPointerDown, false)
@@ -131,6 +131,7 @@ export default {
         onWindowResize() {
             this.windowHalfX = window.innerWidth / 2
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onPointerDown(event) {
             if (event.isPrimary === false) return
@@ -164,6 +165,7 @@ export default {
 
 <style scoped>
 .webglGeometryNurbs-container {
+    position: relative;
     width: 100%;
     background-color: #f0f0f0;
 }

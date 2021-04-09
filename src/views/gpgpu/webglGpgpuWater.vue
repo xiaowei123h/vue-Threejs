@@ -222,7 +222,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             this.container.style.touchAction = 'none'
             this.container.addEventListener('pointermove', this.onPointerMove, false)
@@ -440,6 +440,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         setMouseCoords(x, y) {
             this.mouseCoords.set((x / this.renderer.domElement.clientWidth) * 2 - 1, - (y / this.renderer.domElement.clientHeight) * 2 + 1)
@@ -486,6 +487,7 @@ export default {
 
 <style scoped>
 .webglGpgpuWater-container {
+    position: relative;
     width: 100%;
 }
 </style>

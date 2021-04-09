@@ -265,6 +265,7 @@ export default {
 
 <style scoped>
 .webglAnimationMultiple-container {
+    position: relative;
     width: 100%;
 }
 </style>

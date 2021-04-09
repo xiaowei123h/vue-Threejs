@@ -187,6 +187,7 @@ export default {
 
 <style scoped>
 .webaudioSandbox-container {
+    position: relative;
     width: 100%;
     background-color: rgba(0, 0, 0, .95);
 }

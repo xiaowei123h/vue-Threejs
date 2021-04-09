@@ -140,6 +140,7 @@ export default {
 
 <style scoped>
 .webglLoaderTextureDds-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -59,13 +59,14 @@ export default {
             this.controls.minDistance = 0.3
             this.controls.maxDistance = 0.3 * 100
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
             window.addEventListener('keypress', this.keyboard)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.controls.handleResize()
         },
         keyboard(ev) {
@@ -97,6 +98,7 @@ export default {
 
 <style scoped>
 .webglLoaderPcd-container {
+    position: relative;
     width: 100%;
 }
 </style>

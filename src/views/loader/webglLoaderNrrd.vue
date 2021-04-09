@@ -119,7 +119,7 @@ export default {
             this.controls.zoomSpeed = 5
             this.controls.panSpeed = 2
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             this.gui = new GUI()
             this.setupInset()
@@ -127,6 +127,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.controls.handleResize()
         },
         animate() {
@@ -166,6 +167,7 @@ export default {
 
 <style scoped>
 .webglLoaderNrrd-container {
+    position: relative;
     width: 100%;
 }
 #inset {

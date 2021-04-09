@@ -63,12 +63,13 @@ export default {
             document.getElementsByClassName('webglLightsPointlights-container')[0].appendChild(this.renderer.domElement)
             //stats
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglLightsPointlights-container')[0].appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -99,6 +100,7 @@ export default {
 
 <style scoped>
 .webglLightsPointlights-container {
+    position: relative;
     width: 100%;
 }
 </style>

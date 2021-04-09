@@ -90,6 +90,7 @@ export default {
 
 <style scoped>
 .webglTestMemory2-container {
+    position: relative;
     width: 100%;
 }
 #info {

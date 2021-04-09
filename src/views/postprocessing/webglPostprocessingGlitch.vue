@@ -84,6 +84,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingGlitch-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -57,6 +57,7 @@ export default {
 
 <style scoped>
 .webglLoaderGcode-container {
+    position: relative;
     width: 100%;
 }
 </style>

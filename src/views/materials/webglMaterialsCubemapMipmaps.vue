@@ -77,6 +77,7 @@ export default {
 
 <style scoped>
 .webglMaterialsCubemapMipmaps-container {
+    position: relative;
     width: 100%;
 }
 </style>

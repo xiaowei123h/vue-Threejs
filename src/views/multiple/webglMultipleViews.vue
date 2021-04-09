@@ -160,9 +160,13 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             document.addEventListener('mousemove', this.onDocumentMouseMove, false)
+            window.addEventListener('resize', this.onWindowResize, false)
+        },
+        onWindowResize() {
+            this.$statsPosition(this.stats)
         },
         onDocumentMouseMove(event) {
             this.mouseX = (event.clientX - this.windowWidth / 2)
@@ -205,7 +209,7 @@ export default {
 
 <style scoped>
 .webglMultipleViews-container {
-    /* position: relative; */
+    position: relative;
     width: 100%;
 }
 </style>

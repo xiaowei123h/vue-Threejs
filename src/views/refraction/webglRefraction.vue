@@ -91,6 +91,7 @@ export default {
 
 <style scoped>
 .webglRefraction-container {
+    position: relative;
     width: 100%;
 }
 </style>

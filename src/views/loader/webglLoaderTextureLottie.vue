@@ -86,6 +86,7 @@ export default {
 
 <style scoped>
 .webglLoaderTextureLottie-container {
+    position: relative;
     width: 100%;
 }
 #info {

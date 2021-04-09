@@ -339,6 +339,7 @@ export default {
 
 <style scoped>
 .webglLoaderGltfExtensions-container {
+    position: relative;
     width: 100%;
 }
 #info {

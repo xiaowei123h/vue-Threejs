@@ -129,7 +129,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -138,6 +138,7 @@ export default {
             this.windowHalfX = (window.innerWidth - 281) / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onDocumentMouseMove(event) {
             this.mouseX = (event.clientX - this.windowHalfX) * 10
@@ -160,6 +161,7 @@ export default {
 
 <style scoped>
 .webglPerformanceNodes-container {
+    position: relative;
     width: 100%;
 }
 #info {

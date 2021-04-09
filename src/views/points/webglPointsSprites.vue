@@ -81,7 +81,7 @@ export default {
             document.getElementsByClassName('webglPointsSprites-container')[0].appendChild(this.renderer.domElement)
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglPointsSprites-container')[0].appendChild(this.stats.dom)
             //
             this.gui = new GUI()
@@ -104,6 +104,7 @@ export default {
             this.windowHalfX = (window.innerWidth - 281) / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onPointerMove(event) {
             if (event.isPrimary === false) return
@@ -139,6 +140,7 @@ export default {
 
 <style scoped>
 .webglPointsSprites-container {
+    position: relative;
     width: 100%;
 }
 </style>

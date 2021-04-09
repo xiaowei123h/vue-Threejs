@@ -41,6 +41,7 @@ export default {
 
 <style scoped>
 .miscUvTests-container {
+    position: relative;
     width: 100%;
     height: 100vh;
     overflow: auto;

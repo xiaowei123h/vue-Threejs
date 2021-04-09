@@ -97,7 +97,7 @@ export default {
             this.renderer.shadowMap.enabled = true
             this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             this.gui = new GUI()
             this.gui.add(this.params, 'uniform')
@@ -175,6 +175,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         addSplineObject(position) {
             var material = new this.$THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff })
@@ -281,6 +282,7 @@ export default {
 
 <style scoped>
 .webglGeometrySplineEditor-container {
+    position: relative;
     width: 100%;
     background-color: #f0f0f0;
 }

@@ -131,6 +131,7 @@ export default {
 
 <style scoped>
 .webaudioOrientation-container {
+	position: relative;
     width: 100%;
 }
 #overlay {

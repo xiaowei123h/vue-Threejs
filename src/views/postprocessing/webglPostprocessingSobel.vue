@@ -103,6 +103,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingSobel-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -143,7 +143,7 @@ export default {
             this.controls.dragToLook = false
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('miscControlsFly-container')[0].appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
             // postprocessing
@@ -157,6 +157,7 @@ export default {
             this.SCREEN_HEIGHT = window.innerHeight
             this.SCREEN_WIDTH = window.innerWidth - 281
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.composer.setSize(this.SCREEN_WIDTH, this.SCREEN_HEIGHT)
         },
         animate() {
@@ -188,6 +189,7 @@ export default {
 
 <style scoped>
 .miscControlsFly-container {
+    position: relative;
     width: 100%;
 }
 #info {

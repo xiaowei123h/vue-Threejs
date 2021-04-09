@@ -50,6 +50,7 @@ export default {
 
 <style scoped>
 .webglGeometryCube-container {
+    position: relative;
     width: 100%;
 }
 </style>

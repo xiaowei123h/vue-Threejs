@@ -150,6 +150,7 @@ export default {
 
 <style scoped>
 .webglMaterialsCompile-container {
+    position: relative;
     width: 100%;
 }
 #waitScreen {

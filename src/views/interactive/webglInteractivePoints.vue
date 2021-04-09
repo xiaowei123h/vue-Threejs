@@ -106,7 +106,7 @@ export default {
             this.mouse = new this.$THREE.Vector2()
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -119,6 +119,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -152,6 +153,7 @@ export default {
 
 <style scoped>
 .webglInteractivePoints-container {
+    position: relative;
     width: 100%;
 }
 </style>

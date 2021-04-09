@@ -35,7 +35,7 @@ export default {
         init() {
             this.container = document.getElementById('container')
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             this.renderer = new this.$THREE.WebGLRenderer({antialias: true})
             this.renderer.setPixelRatio(window.devicePixelRatio)
@@ -81,9 +81,11 @@ export default {
 				that.animate()
 			}, undefined, function(e) {
 				console.error(e)
-			})
+            })
+            window.addEventListener('resize', this.onResize, false)
         },
-        onresize() {
+        onResize() {
+            this.$statsPosition(this.stats)
             this.$onWindowResize(this.camera, this.renderer)
         },
         animate() {
@@ -100,10 +102,14 @@ export default {
 
 <style scoped>
 .webglAnimationKeyframes-container {
+    position: relative;
     background-color: #bfe3dd;
 	color: #000;
 }
 a {
     color: #2983ff;
+}
+#info {
+    margin-left: -160px;
 }
 </style>

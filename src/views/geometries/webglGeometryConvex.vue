@@ -96,6 +96,7 @@ export default {
 
 <style scoped>
 .webglGeometryConvex-container {
+    position: relative;
     width: 100%;
 }
 </style>

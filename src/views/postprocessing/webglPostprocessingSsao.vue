@@ -61,7 +61,7 @@ export default {
                 this.group.add(mesh)
             }
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             var width = this.$webglInnerWidth
             var height = window.innerHeight
@@ -90,6 +90,7 @@ export default {
             var width = window.innerWidth - 281
             var height = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.composer.setSize(width, height)
         },
         animate() {
@@ -110,6 +111,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingSsao-container {
+    position: relative;
     width: 100%;
     background-color: #aaa;
 }

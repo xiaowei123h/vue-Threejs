@@ -149,6 +149,7 @@ export default {
 
 <style scoped>
 .webglNearestneighbour-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -59,7 +59,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight);
             this.container.appendChild(this.renderer.domElement);
             this.stats = new this.$Stats();
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom);
             document.addEventListener('mousemove', this.onDocumentMouseMove, false);
             //
@@ -73,6 +73,7 @@ export default {
             this.camera.bottom = - this.frustumSize / 2;
             this.camera.updateProjectionMatrix();
             this.renderer.setSize((window.innerWidth - 281), window.innerHeight);
+            this.$statsPosition(this.stats)
         },
         onDocumentMouseMove(event) {
             event.preventDefault();
@@ -113,6 +114,7 @@ export default {
 
 <style scoped>
 .webglInteractiveCubesOrtho-container {
+    position: relative;
     width: 100%;
     background-color: #f0f0f0;
 }

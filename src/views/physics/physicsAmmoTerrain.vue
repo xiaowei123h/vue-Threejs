@@ -68,7 +68,7 @@ export default {
             this.renderer.shadowMap.enabled = true
             this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.stats.domElement.style.position = 'absolute'
             this.stats.domElement.style.top = '0px'
             this.container.appendChild(this.stats.domElement)
@@ -119,6 +119,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         initPhysics() {
             // Physics configuration
@@ -304,6 +305,7 @@ export default {
 
 <style scoped>
 .physicsAmmoTerrain-container {
+    position: relative;
     width: 100%;
     color: #333;
 }

@@ -104,6 +104,7 @@ export default {
 
 <style scoped>
 .webglMaterialsShadersFresnel-container {
+    position: relative;
     width: 100%;
 }
 </style>

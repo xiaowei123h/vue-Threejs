@@ -122,6 +122,7 @@ export default {
 
 <style scoped>
 .miscExporterPly-container {
+    position: relative;
     width: 100%;
 }
 </style>

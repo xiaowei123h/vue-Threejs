@@ -365,6 +365,7 @@ export default {
 
 <style scoped>
 .webglShadersTonemapping-container {
+    position: relative;
     width: 100%;
 }
 .label {

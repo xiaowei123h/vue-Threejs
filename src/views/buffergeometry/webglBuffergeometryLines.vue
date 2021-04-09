@@ -70,7 +70,7 @@ export default {
             this.container.appendChild(this.renderer.domElement)
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             //
             this.gui = new GUI()
@@ -81,6 +81,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         generateMorphTargets(geometry) {
             var data = []
@@ -116,6 +117,7 @@ export default {
 
 <style scoped>
 .webglBuffergeometryLines-container {
+    position: relative;
     width: 100%;
 }
 </style>

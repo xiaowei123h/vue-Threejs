@@ -81,6 +81,7 @@ export default {
 
 <style scoped>
 .webglMaterialsNormalmapObjectSpace-container {
+    position: relative;
     width: 100%;
 }
 </style>

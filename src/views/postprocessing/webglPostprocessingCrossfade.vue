@@ -50,6 +50,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             var sceneA = new FXScene("cube", 5000, 1200, 120, new this.$THREE.Vector3(0, - 0.4, 0), 0xffffff, this.$THREE, this.renderer, this.generateGeometry)
             var sceneB = new FXScene("sphere", 500, 2000, 50, new this.$THREE.Vector3(0, 0.2, 0.1), 0x000000, this.$THREE, this.renderer, this.generateGeometry)
@@ -58,6 +59,7 @@ export default {
         },
         onWindowResize() {
             this.renderer.setSize( window.innerWidth - 281, window.innerHeight )
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -135,6 +137,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingCrossfade-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -85,13 +85,14 @@ export default {
             })
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglInstancingModified-container')[0].appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -126,6 +127,7 @@ export default {
 
 <style scoped>
 .webglInstancingModified-container {
+    position: relative;
     width: 100%;
 }
 #info {

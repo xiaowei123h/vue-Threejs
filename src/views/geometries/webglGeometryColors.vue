@@ -112,7 +112,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             document.addEventListener('mousemove', this.onDocumentMouseMove, false)
             //
@@ -122,6 +122,7 @@ export default {
             this.windowHalfX = window.innerWidth / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onDocumentMouseMove(event) {
             this.mouseX = (event.clientX - this.windowHalfX)
@@ -144,6 +145,7 @@ export default {
 
 <style scoped>
 .webglGeometryColors-container {
+    position: relative;
     width: 100%;
     background-color: #fff;
 	color: #444;

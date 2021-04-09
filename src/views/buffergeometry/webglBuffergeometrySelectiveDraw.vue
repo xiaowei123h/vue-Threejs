@@ -70,7 +70,7 @@ export default {
             this.camera.position.z = 3.5
             this.scene.add(new this.$THREE.AmbientLight(0x444444))
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglBuffergeometrySelectiveDraw-container')[0].appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
             this.addLines(1.0)
@@ -81,6 +81,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         addLines(radius) {
             this.geometry = new this.$THREE.BufferGeometry()
@@ -164,6 +165,7 @@ export default {
 
 <style scoped>
 .webglBuffergeometrySelectiveDraw-container {
+    position: relative;
     width: 100%;
 }
 </style>

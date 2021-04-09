@@ -21,7 +21,7 @@ export default {
     },
     mounted() {
         this.stats = new this.$Stats();
-        this.stats.dom.style.left = '280px'
+        this.$statsPosition(this.stats)
         document.getElementsByClassName('webglShadersOcean2-container')[0].appendChild(this.stats.dom);
         this.lastTime = (new Date()).getTime();
         var that = this
@@ -139,6 +139,7 @@ export default {
         this.DEMO.Initialize();
         window.addEventListener('resize', () => {
             this.DEMO.Resize(window.innerWidth - 281, window.innerHeight);
+            this.$statsPosition(this.stats)
         });
         this.DEMO.Resize(window.innerWidth - 281, window.innerHeight);
         this.render()
@@ -158,6 +159,7 @@ export default {
 
 <style scoped>
 .webglShadersOcean2-container {
+    position: relative;
     width: 100%;
 }
 #info {

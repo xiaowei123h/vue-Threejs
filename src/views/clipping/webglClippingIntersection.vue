@@ -109,6 +109,7 @@ export default {
 
 <style scoped>
 .webglClippingIntersection-container {
+    position: relative;
     width: 100%;
 }
 </style>

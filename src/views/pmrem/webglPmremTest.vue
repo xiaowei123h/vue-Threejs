@@ -146,6 +146,7 @@ export default {
 
 <style scoped>
 .webglPmremTest-container {
+    position: relative;
     width: 100%;
 }
 </style>

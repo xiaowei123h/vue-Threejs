@@ -99,6 +99,7 @@ export default {
 
 <style scoped>
 .webglCameraArray-container {
+    position: relative;
     width: 100%;
 }
 </style>

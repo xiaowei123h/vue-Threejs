@@ -27,6 +27,7 @@ export default {
 
 <style scoped>
 .webgpuSandbox-container {
+    position: relative;
     width: 100%;
 }
 </style>

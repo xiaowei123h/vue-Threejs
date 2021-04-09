@@ -113,6 +113,7 @@ export default {
 
 <style scoped>
 .miscExporterStl-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -124,6 +124,7 @@ export default {
 
 <style scoped>
 .webxrVrSandbox-container {
+    position: relative;
     width: 100%;
 }
 </style>

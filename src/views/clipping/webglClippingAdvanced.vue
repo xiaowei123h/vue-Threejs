@@ -210,7 +210,7 @@ export default {
             this.renderer.localClippingEnabled = true
             // Stats
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             // Controls
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
@@ -262,6 +262,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         setObjectWorldMatrix(object, matrix) {
             // set the orientation of an object based on a world matrix
@@ -304,6 +305,7 @@ export default {
 
 <style scoped>
 .webglClippingAdvanced-container {
+    position: relative;
     width: 100%;
 }
 </style>

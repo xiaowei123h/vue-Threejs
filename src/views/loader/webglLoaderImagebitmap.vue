@@ -99,6 +99,7 @@ export default {
 
 <style scoped>
 .webglLoaderImagebitmap-container {
+    position: relative;
     width: 100%;
 }
 </style>

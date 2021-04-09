@@ -93,6 +93,7 @@ export default {
 
 <style scoped>
 .webglLoader3dm-container {
+    position: relative;
     width: 100%;
 }
 #info {

@@ -83,6 +83,7 @@ export default {
 
 <style scoped>
 .css3dSandbox-container {
+    position: relative;
     width: 100%;
 }
 #info {

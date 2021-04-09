@@ -65,6 +65,7 @@ export default {
 
 <style scoped>
 .webglLoaderAmf-container {
+    position: relative;
     width: 100%;
     background-color: #999;
 }

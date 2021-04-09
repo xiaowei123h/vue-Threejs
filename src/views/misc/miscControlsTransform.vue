@@ -151,6 +151,7 @@ export default {
 
 <style scoped>
 .miscControlsTransform-container {
+    position: relative;
     width: 100%;
 }
 </style>

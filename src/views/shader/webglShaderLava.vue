@@ -131,6 +131,7 @@ export default {
 
 <style scoped>
 .webglShaderLava-container {
+    position: relative;
     width: 100%;
 }
 </style>

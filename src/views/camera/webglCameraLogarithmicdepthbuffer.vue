@@ -72,7 +72,7 @@ export default {
                 that.animate()
             })
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             // Resize border allows the user to easily compare effects of logarithmic depth buffer over the whole scene
             this.border = document.getElementById('renderer_border')
@@ -185,6 +185,7 @@ export default {
         },
         onWindowResize() {
             this.updateRendererSizes()
+            this.$statsPosition(this.stats)
         },
         onBorderPointerDown() {
             // activate draggable window resizing bar

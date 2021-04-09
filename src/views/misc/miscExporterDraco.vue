@@ -136,6 +136,7 @@ export default {
 
 <style scoped>
 .miscExporterDraco-container {
+    position: relative;
     width: 100%;
 }
 #info {

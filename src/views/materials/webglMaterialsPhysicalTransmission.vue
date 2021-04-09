@@ -116,7 +116,7 @@ export default {
             this.scene.add(spotLight2)
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
             controls.minDistance = 10
@@ -155,6 +155,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         generateTexture() {
             var canvas = document.createElement('canvas')
@@ -180,6 +181,7 @@ export default {
 
 <style scoped>
 .webglMaterialsPhysicalTransmission-container {
+    position: relative;
     width: 100%;
 }
 </style>

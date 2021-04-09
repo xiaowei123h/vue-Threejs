@@ -100,11 +100,13 @@ export default {
 
 <style scoped>
 .webglGeometryTextShapes-container {
+    position: relative;
     background-color: #f0f0f0;
 	color: #444;
 }
 #info {
     color: #000;
+    margin-left: -135px;
 }
 #info a {
     color: #08f;

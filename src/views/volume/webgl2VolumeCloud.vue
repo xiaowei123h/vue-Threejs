@@ -228,6 +228,7 @@ export default {
 
 <style scoped>
 .webgl2VolumeCloud-container {
+    position: relative;
     width: 100%;
 }
 </style>

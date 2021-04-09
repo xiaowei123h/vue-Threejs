@@ -154,6 +154,7 @@ export default {
 
 <style scoped>
 .webglMirror-container {
+    position: relative;
     width: 100%;
 }
 #info {

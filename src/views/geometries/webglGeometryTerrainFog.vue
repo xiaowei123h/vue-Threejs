@@ -56,13 +56,14 @@ export default {
             this.controls.movementSpeed = 150
             this.controls.lookSpeed = 0.1
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.controls.handleResize()
         },
         generateHeight(width, height) {
@@ -140,6 +141,7 @@ export default {
 
 <style scoped>
 .webglGeometryTerrainFog-container {
+    position: relative;
     width: 100%;
     background-color: #efd1b5;
 }

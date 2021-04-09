@@ -223,6 +223,7 @@ export default {
 
 <style scoped>
 .webglMirrorNodes-container {
+    position: relative;
     width: 100%;
 }
 #info {

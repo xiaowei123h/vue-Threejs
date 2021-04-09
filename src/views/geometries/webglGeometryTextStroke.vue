@@ -103,11 +103,13 @@ export default {
 
 <style scoped>
 .webglGeometryTextStroke-container {
+    position: relative;
     background-color: #f0f0f0;
 	color: #444;
 }
 #info {
     color: #000;
+    margin-left: -170px;
 }
 #info a {
     color: #08f;

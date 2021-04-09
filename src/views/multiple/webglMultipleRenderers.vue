@@ -145,6 +145,7 @@ export default {
 
 <style scoped>
 .webglMultipleRenderers-container {
+    position: relative;
     width: 100%;
 }
 #info {

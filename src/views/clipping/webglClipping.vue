@@ -80,7 +80,7 @@ export default {
             this.scene.add(ground)
             // Stats
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglClipping-container')[0].appendChild(this.stats.dom)
             // Renderer
             this.renderer = new this.$THREE.WebGLRenderer()
@@ -147,6 +147,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             var currentTime = Date.now()
@@ -166,6 +167,7 @@ export default {
 
 <style scoped>
 .webglClipping-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -83,6 +83,7 @@ export default {
 
 <style scoped>
 .webglPanoramaCube-container {
+    position: relative;
     width: 100%;
 }
 </style>

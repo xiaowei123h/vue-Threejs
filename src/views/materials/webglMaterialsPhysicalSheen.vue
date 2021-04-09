@@ -89,7 +89,7 @@ export default {
             );
             this.scene.add(this.directionalLight);
             this.stats = new this.$Stats();
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.stats.domElement.style.position = 'absolute';
             this.stats.domElement.style.top = '0px';
             container.appendChild(this.stats.dom);
@@ -121,6 +121,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate);
@@ -148,6 +149,7 @@ export default {
 
 <style scoped>
 .webglMaterialsPhysicalSheen-container {
+    position: relative;
     width: 100%;
     color: #333;
 }

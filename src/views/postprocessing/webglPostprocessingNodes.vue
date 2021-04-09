@@ -360,6 +360,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingNodes-container {
+    position: relative;
     width: 100%;
 }
 </style>

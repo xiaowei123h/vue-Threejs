@@ -64,6 +64,7 @@ export default {
 
 <style scoped>
 .webglLoaderXyz-container {
+    position: relative;
     width: 100%;
 }
 </style>

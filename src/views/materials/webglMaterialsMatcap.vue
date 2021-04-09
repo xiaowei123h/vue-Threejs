@@ -181,6 +181,7 @@ export default {
 
 <style scoped>
 .webglMaterialsMatcap-container {
+    position: relative;
     width: 100%;
 }
 </style>

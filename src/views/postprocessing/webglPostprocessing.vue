@@ -79,6 +79,7 @@ export default {
 
 <style scoped>
 .webglPostprocessing-container {
+    position: relative;
     width: 100%;
 }
 </style>

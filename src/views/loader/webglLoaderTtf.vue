@@ -186,6 +186,7 @@ export default {
 
 <style scoped>
 .webglLoaderTtf-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -62,7 +62,7 @@ export default {
             this.scene = new this.$THREE.Scene()
             this.scene.background = new this.$THREE.Color(0xffffff)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglShadowContact-container')[0].appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize)
             // add the example meshes
@@ -177,6 +177,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         blurShadow(amount) {
             this.blurPlane.visible = true
@@ -230,6 +231,7 @@ export default {
 
 <style scoped>
 .webglShadowContact-container {
+    position: relative;
     width: 100%;
 }
 #info {

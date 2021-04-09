@@ -189,6 +189,7 @@ export default {
 
 <style scoped>
 .webglRaycastTexture-container {
+	position: relative;
     width: 100%;
     background-color: #fff;
 }

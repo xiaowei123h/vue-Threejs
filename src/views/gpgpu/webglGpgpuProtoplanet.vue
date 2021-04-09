@@ -207,7 +207,7 @@ export default {
             }
             this.initComputeRenderer()
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
             this.initGUI()
@@ -325,6 +325,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.particleUniforms["cameraConstant"].value = this.getCameraConstant(this.camera)
         },
         dynamicValuesChanger() {
@@ -374,6 +375,7 @@ export default {
 
 <style scoped>
 .webglGpgpuProtoplanet-container {
+    position: relative;
     width: 100%;
 }
 #warning {

@@ -72,6 +72,7 @@ export default {
 
 <style scoped>
 .webglLoaderBvh-container {
+    position: relative;
     width: 100%;
     background-color: #eee;
 }

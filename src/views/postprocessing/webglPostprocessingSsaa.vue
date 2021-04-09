@@ -61,7 +61,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglPostprocessingSsaa-container')[0].appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             this.camera = new this.$THREE.PerspectiveCamera(70, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.z = 300
@@ -93,6 +93,7 @@ export default {
             var width = window.innerWidth - 281
             var height = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.composer.setSize(width, height)
         },
         animate() {
@@ -113,6 +114,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingSsaa-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -104,6 +104,7 @@ export default {
 
 <style scoped>
 .css2dLabel-container {
+    position: relative;
     width: 100%;
 }
 .label {

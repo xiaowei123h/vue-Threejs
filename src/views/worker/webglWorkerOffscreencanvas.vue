@@ -61,6 +61,7 @@ export default {
 
 <style scoped>
 .webglWorkerOffscreencanvas-container {
+    position: relative;
     width: 100%;
 }
 </style>

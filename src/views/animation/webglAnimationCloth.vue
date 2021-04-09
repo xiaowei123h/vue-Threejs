@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import * as THREE from 'three'
 import { Cloth, Plane } from '@/utils/animationCloth.js'
 import { GUI } from '@/components/jsm/libs/dat.gui.module.js'
 import { OrbitControls } from '@/components/jsm/controls/OrbitControls.js'
@@ -183,7 +182,7 @@ export default {
             controls.maxDistance = 5000
             // performance monitor
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild( this.stats.dom )
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -218,6 +217,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         initPinsFormation() {
             this.pins = [6]
@@ -319,6 +319,7 @@ export default {
 
 <style scoped>
 .webglAnimationCloth-container {
+    position: relative;
     color: #000;
 }
 a {

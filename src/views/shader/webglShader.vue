@@ -92,6 +92,7 @@ export default {
 
 <style scoped>
 .webglShader-container {
+    position: relative;
     width: 100%;
 }
 </style>

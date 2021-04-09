@@ -77,13 +77,14 @@ export default {
             this.scene.add(this.helper)
             this.container.addEventListener('mousemove', this.onMouseMove, false)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         generateHeight(width, height) {
             var size = width * height, data = new Uint8Array(size),
@@ -168,6 +169,7 @@ export default {
 
 <style scoped>
 .webglGeometryTerrainRaycast-container {
+    position: relative;
     width: 100%;
     background-color: #bfd1e5;
 }

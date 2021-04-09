@@ -112,6 +112,7 @@ export default {
 
 <style scoped>
 .css3dOrthographic-container {
+    position: relative;
     width: 100%;
     background-color: #f0f0f0;
 }

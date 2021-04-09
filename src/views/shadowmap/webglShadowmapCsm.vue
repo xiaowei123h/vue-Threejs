@@ -203,6 +203,7 @@ export default {
 
 <style scoped>
 .webglShadowmapCsm-container {
+    position: relative;
     width: 100%;
 }
 </style>

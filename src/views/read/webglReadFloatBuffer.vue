@@ -112,7 +112,7 @@ export default {
             this.renderer.autoClear = false
             this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             this.valueNode = document.getElementById('values')
             document.addEventListener('mousemove', this.onDocumentMouseMove, false)
@@ -124,6 +124,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.cameraRTT, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -158,6 +159,7 @@ export default {
 
 <style scoped>
 .webglReadFloatBuffer-container {
+    position: relative;
     width: 100%;
 }
 #info {

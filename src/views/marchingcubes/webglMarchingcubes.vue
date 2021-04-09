@@ -84,7 +84,7 @@ export default {
 			controls.maxDistance = 5000
 			// STATS
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
 			this.container.appendChild(this.stats.dom)
 			// GUI
 			this.setupGui()
@@ -93,6 +93,7 @@ export default {
         },
         onWindowResize() {
 			this.$onWindowResize(this.camera, this.renderer)
+			this.$statsPosition(this.stats)
         },
         generateMaterials() {
 			// environment map
@@ -315,6 +316,7 @@ export default {
 
 <style scoped>
 .webglMarchingcubes-container {
+	position: relative;
     width: 100%;
 }
 </style>

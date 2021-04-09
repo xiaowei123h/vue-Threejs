@@ -84,11 +84,12 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
             // stats
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -102,6 +103,7 @@ export default {
 
 <style scoped>
 .webglLoaderVrm-container {
+    position: relative;
     width: 100%;
 }
 </style>

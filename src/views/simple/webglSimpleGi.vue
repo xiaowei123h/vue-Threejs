@@ -69,6 +69,7 @@ export default {
 
 <style scoped>
 .webglSimpleGi-container {
+    position: relative;
     width: 100%;
 }
 </style>

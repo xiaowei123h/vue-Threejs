@@ -98,7 +98,7 @@ export default {
             this.renderer.toneMapping = this.$THREE.ACESFilmicToneMapping
             this.renderer.outputEncoding = this.$THREE.sRGBEncoding
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             this.controls = new OrbitControls(this.camera, this.renderer.domElement)
             this.controls.minDistance = 50
@@ -115,6 +115,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)

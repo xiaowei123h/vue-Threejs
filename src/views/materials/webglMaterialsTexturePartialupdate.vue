@@ -92,6 +92,7 @@ export default {
 
 <style scoped>
 .webglMaterialsTexturePartialupdate-container {
+    position: relative;
     width: 100%;
 }
 </style>

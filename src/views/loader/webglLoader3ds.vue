@@ -69,6 +69,7 @@ export default {
 
 <style scoped>
 .webglLoader3ds-container {
+    position: relative;
     width: 100%;
 }
 </style>

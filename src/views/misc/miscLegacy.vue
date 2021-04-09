@@ -65,6 +65,7 @@ export default {
 
 <style scoped>
 .miscLegacy-container {
+    position: relative;
     width: 100%;
 }
 </style>

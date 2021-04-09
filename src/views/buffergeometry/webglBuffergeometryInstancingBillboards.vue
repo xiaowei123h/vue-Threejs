@@ -113,13 +113,14 @@ export default {
 			this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
 			this.container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
 			this.container.appendChild(this.stats.dom)
 			window.addEventListener('resize', this.onWindowResize, false)
 			return true
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
 			requestAnimationFrame(this.animate)
@@ -139,6 +140,7 @@ export default {
 
 <style scoped>
 .webglBuffergeometryInstancingBillboards-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -152,6 +152,7 @@ export default {
 
 <style scoped>
 .webglMultipleCanvasesComplex-container {
+    position: relative;
     width: 100%;
     background-color: #fff;
 }

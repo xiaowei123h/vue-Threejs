@@ -405,6 +405,7 @@ export default {
 
 <style scoped>
 .miscExporterGltf-container {
+    position: relative;
     width: 100%;
 }
 </style>

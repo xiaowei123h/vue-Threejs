@@ -151,7 +151,7 @@ export default {
             })
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -167,6 +167,7 @@ export default {
             this.camera.bottom = - height
             this.camera.updateProjectionMatrix()
             this.renderer.setSize(width, height)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -211,6 +212,7 @@ export default {
 
 <style scoped>
 .webglMaterialsChannels-container {
+    position: relative;
     width: 100%;
 }
 </style>

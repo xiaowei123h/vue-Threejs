@@ -55,7 +55,7 @@ export default {
 			this.scene.add(gridHelper)
 			// stats
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
 			this.container.appendChild(this.stats.dom)
 			this.renderer = new this.$moduleTHREE.WebGLRenderer()
 			this.renderer.setPixelRatio(window.devicePixelRatio)
@@ -106,6 +106,7 @@ export default {
         },
         onWindowResize() {
 			this.$onWindowResize(this.camera, this.renderer)
+			this.$statsPosition(this.stats)
         },
         animate() {
 			requestAnimationFrame(this.animate)
@@ -165,6 +166,7 @@ export default {
 
 <style scoped>
 .webglLoaderX-container {
+	position: relative;
     width: 100%;
 }
 #info {

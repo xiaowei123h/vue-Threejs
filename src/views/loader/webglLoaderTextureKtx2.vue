@@ -93,6 +93,7 @@ export default {
 
 <style scoped>
 .webglLoaderTextureKtx2-container {
+    position: relative;
     width: 100%;
 }
 #info {

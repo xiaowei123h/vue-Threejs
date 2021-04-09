@@ -155,6 +155,7 @@ export default {
             this.container.appendChild(this.renderer.domElement)
             // STATS
             this.stats = new this.$Stats()
+            this.$statsPosition(this.stats)
             // EVENTS
             this.container.style.touchAction = 'none'
             this.container.addEventListener('pointerdown', this.onPointerDown, false)
@@ -178,6 +179,7 @@ export default {
         onWindowResize() {
             this.windowHalfX = (this.$webglInnerWidth) / 2
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onPointerDown(event) {
             if (event.isPrimary === false) {
@@ -244,12 +246,9 @@ export default {
         },
         loadFont() {
             this.loader = new this.$THREE.FontLoader()
-            console.log(3333333)
             // 'static/fonts/gentilis_bold.typeface.json'
             // this.loader.load('../fonts/' + this.fontName + '_' + this.fontWeight + '.typeface.json', (response) => {
             this.loader.load('static/fonts/' + this.fontName + '_' + this.fontWeight + '.typeface.json', (response) => {
-                console.log(response)
-                console.log('wwwwwwwwwwwwwwwwww')
                 this.font = response
                 this.refreshText()
             })
@@ -352,7 +351,11 @@ export default {
 
 <style scoped>
 .text-container {
+    position: relative;
     width: 100%;
     height: 100%;
+}
+#info {
+    margin-left: -221px;
 }
 </style>

@@ -136,6 +136,7 @@ export default {
 
 <style scoped>
 .webglGeometryColorsLookuptable-container{
+    position: relative;
     width: 100%;
     background-color: #fff;
 	color: #444;

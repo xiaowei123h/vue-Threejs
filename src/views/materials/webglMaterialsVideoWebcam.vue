@@ -78,6 +78,7 @@ export default {
 
 <style scoped>
 .webglMaterialsVideoWebcam-container {
+    position: relative;
     width: 100%;
 }
 </style>

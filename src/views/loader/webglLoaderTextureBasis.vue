@@ -66,6 +66,7 @@ export default {
 
 <style scoped>
 .webglLoaderTextureBasis-container {
+    position: relative;
     width: 100%;
 }
 #info {

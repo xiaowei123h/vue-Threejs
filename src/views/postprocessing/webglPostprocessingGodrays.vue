@@ -74,7 +74,7 @@ export default {
             controls.maxDistance = 500
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -85,6 +85,7 @@ export default {
             var renderTargetWidth = window.innerWidth - 281
             var renderTargetHeight = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.postprocessing.rtTextureColors.setSize(renderTargetWidth, renderTargetHeight)
             this.postprocessing.rtTextureDepth.setSize(renderTargetWidth, renderTargetHeight)
             this.postprocessing.rtTextureDepthMask.setSize(renderTargetWidth, renderTargetHeight)
@@ -254,6 +255,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingGodrays-container {
+    position: relative;
     width: 100%;
 }
 </style>

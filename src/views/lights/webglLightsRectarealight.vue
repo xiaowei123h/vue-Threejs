@@ -136,11 +136,12 @@ export default {
             //
             window.addEventListener('resize', this.onResize, false)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglLightsRectarealight-container')[0].appendChild(this.stats.dom)
         },
         onResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -165,6 +166,7 @@ export default {
 
 <style scoped>
 .webglLightsRectarealight-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -97,6 +97,7 @@ export default {
 
 <style scoped>
 .webglEffectsStereo-container {
+    position: relative;
     width: 100%;
 }
 #info {

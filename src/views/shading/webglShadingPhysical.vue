@@ -183,7 +183,7 @@ export default {
             this.controls.keys = [ 65, 83, 68 ]
             // STATS
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             // EVENTS
             window.addEventListener('resize', this.onWindowResize, false)
@@ -211,6 +211,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.controls.handleResize()
         },
         animate() {
@@ -239,6 +240,7 @@ export default {
 
 <style scoped>
 .webglShadingPhysical-container {
+    position: relative;
     width: 100%;
 }
 #info {

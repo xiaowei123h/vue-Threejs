@@ -80,6 +80,7 @@ export default {
 
 <style scoped>
 .webglEffectsAscii-container {
+    position: relative;
     width: 100%;
 }
 </style>

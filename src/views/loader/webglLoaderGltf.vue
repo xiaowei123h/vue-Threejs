@@ -89,6 +89,7 @@ export default {
 
 <style scoped>
 .webglLoaderGltf-container {
+    position: relative;
     width: 100%;
 }
 </style>

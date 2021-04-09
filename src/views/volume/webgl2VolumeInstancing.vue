@@ -179,6 +179,7 @@ export default {
 
 <style scoped>
 .webgl2VolumeInstancing-container {
+    position: relative;
     width: 100%;
 }
 </style>

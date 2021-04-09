@@ -79,6 +79,7 @@ export default {
 
 <style scoped>
 .teacherManage-container {
+    position: relative;
     width: 100%;
 }
 #info {

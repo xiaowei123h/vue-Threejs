@@ -130,6 +130,7 @@ export default {
 
 <style scoped>
 .webglPanoramaEquirectangular-container {
+    position: relative;
     width: 100%;
 }
 </style>

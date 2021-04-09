@@ -76,7 +76,7 @@ export default {
             this.container.appendChild(this.renderer.domElement)
             if (this.statsEnabled) {
                 this.stats = new this.$Stats()
-                this.stats.dom.style.left = '280px'
+                this.$statsPosition(this.stats)
                 this.container.appendChild(this.stats.dom)
             }
             document.addEventListener('mousemove', this.onDocumentMouseMove, false)
@@ -87,6 +87,7 @@ export default {
             this.windowHalfX = (window.innerWidth - 281) / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         generateTexture(r, g, b) {
             var canvas = document.createElement('canvas')
@@ -128,6 +129,7 @@ export default {
 
 <style scoped>
 .webglSandbox-container {
+    position: relative;
     width: 100%;
 }
 </style>

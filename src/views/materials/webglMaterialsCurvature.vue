@@ -233,6 +233,7 @@ export default {
 
 <style scoped>
 .webglMaterialsCurvature-container {
+    position: relative;
     width: 100%;
 }
 </style>

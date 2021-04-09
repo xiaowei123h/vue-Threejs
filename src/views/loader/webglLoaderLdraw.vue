@@ -240,6 +240,7 @@ export default {
 
 <style scoped>
 .webglLoaderLdraw-container {
+    position: relative;
     width: 100%;
 }
 #info {

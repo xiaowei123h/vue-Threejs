@@ -207,7 +207,7 @@ export default {
             this.gui.add(this.config, 'saveImage').name('Save Image')
             this.gui.add(this.config, 'resolution', [ '256', '512', '800', 'full' ]).name('Resolution').onChange(this.onWindowResize)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglRaymarchingReflect-container')[0].appendChild(this.stats.dom)
         },
         onWindowResize() {
@@ -215,7 +215,8 @@ export default {
                 this.renderer.setSize(window.innerWidth - 281, window.innerHeight)
             } else {
                 this.renderer.setSize(this.config.resolution, this.config.resolution)
-            }
+			}
+			this.$statsPosition(this.stats)
             this.camera.aspect = this.canvas.width / this.canvas.height
             this.camera.updateProjectionMatrix()
             this.material.uniforms.resolution.value.set(this.canvas.width, this.canvas.height)
@@ -235,6 +236,7 @@ export default {
 
 <style scoped>
 .webglRaymarchingReflect-container {
+	position: relative;
     width: 100%;
 }
 #container {

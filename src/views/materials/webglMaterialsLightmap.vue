@@ -102,7 +102,7 @@ export default {
             this.controls.enableZoom = false
             // STATS
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             // MODEL
             this.loader = new this.$THREE.ObjectLoader()
@@ -120,11 +120,15 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         }
     }
 }
 </script>
 
 <style scoped>
-
+.webglMLightmap-container {
+    position: relative;
+    width: 100%;
+}
 </style>

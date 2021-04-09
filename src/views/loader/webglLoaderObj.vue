@@ -103,6 +103,7 @@ export default {
 
 <style scoped>
 .webglLoaderObj-container {
+    position: relative;
     width: 100%;
 }
 #info {

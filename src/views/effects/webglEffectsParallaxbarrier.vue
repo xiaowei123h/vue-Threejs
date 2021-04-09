@@ -103,6 +103,7 @@ export default {
 
 <style scoped>
 .webglEffectsParallaxbarrier-container {
+    position: relative;
     width: 100%;
 }
 #info {

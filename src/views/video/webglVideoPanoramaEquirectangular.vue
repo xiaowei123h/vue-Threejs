@@ -100,6 +100,7 @@ export default {
 
 <style scoped>
 .webglVideoPanoramaEquirectangular-container {
+    position: relative;
     width: 100%;
     touch-action: none;
 }

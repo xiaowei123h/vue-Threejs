@@ -129,6 +129,7 @@ export default {
 
 <style scoped>
 .miscControlsDrag-container {
+    position: relative;
     width: 100%;
 }
 #info {

@@ -65,6 +65,7 @@ export default {
 
 <style scoped>
 .webglLoaderMdd-container {
+    position: relative;
     width: 100%;
 }
 </style>

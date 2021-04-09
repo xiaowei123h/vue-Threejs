@@ -160,6 +160,7 @@ export default {
 
 <style scoped>
 .webglSprites-container {
+    position: relative;
     width: 100%;
 }
 </style>

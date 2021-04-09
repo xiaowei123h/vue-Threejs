@@ -55,7 +55,7 @@ export default {
             this.container.appendChild(this.renderer.domElement)
             this.composer = new EffectComposer(this.renderer)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
             this.createScene()
@@ -69,6 +69,7 @@ export default {
             this.scene.userData.camera.updateProjectionMatrix()
             this.renderer.setSize((window.innerWidth - 281), window.innerHeight)
             this.composer.setSize((window.innerWidth - 281), window.innerHeight)
+            this.$statsPosition(this.stats)
         },
         createGUI() {
             if (this.gui) {
@@ -513,6 +514,7 @@ export default {
 
 <style scoped>
 .webglLightningstrike-container {
+    position: relative;
     width: 100%;
 }
 </style>

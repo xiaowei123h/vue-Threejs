@@ -88,12 +88,13 @@ export default {
             this.composer.addPass(this.effectFocus)
             //stats
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.camera.lookAt(this.scene.position)
             this.composer.setSize(window.innerWidth - 281, window.innerHeight)
             this.effectFocus.uniforms[ "screenWidth" ].value = (window.innerWidth - 281) * window.devicePixelRatio
@@ -243,6 +244,7 @@ export default {
 
 <style scoped>
 .webglPointsDynamic-container {
+    position: relative;
     width: 100%;
 }
 </style>

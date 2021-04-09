@@ -111,13 +111,14 @@ export default {
             this.controls.keys = [ 65, 83, 68 ]
             // STATS
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.controls.handleResize()
         },
         animate() {
@@ -149,6 +150,7 @@ export default {
 
 <style scoped>
 .webglLightsPointlights2-container {
+    position: relative;
     width: 100%;
 }
 </style>

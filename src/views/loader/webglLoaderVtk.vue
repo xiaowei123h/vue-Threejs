@@ -91,13 +91,14 @@ export default {
             this.controls.maxDistance = 0.5
             this.controls.rotateSpeed = 5.0
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.controls.handleResize()
         },
         animate() {
@@ -112,6 +113,7 @@ export default {
 
 <style scoped>
 .webglLoaderVtk-container {
+    position: relative;
     width: 100%;
 }
 </style>

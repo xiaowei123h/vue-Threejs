@@ -113,13 +113,14 @@ export default {
             this.controls.staticMoving = true
             this.controls.dynamicDampingFactor = 0.3
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
             this.renderer.domElement.addEventListener('mousemove', this.onMouseMove)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onMouseMove(e) {
             this.mouse.x = e.clientX - 281
@@ -170,6 +171,7 @@ export default {
 
 <style scoped>
 .webglInteractiveCubesGpu-container {
+    position: relative;
     width: 100%;
     background-color: #fff;
 }

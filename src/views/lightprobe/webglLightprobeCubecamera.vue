@@ -83,6 +83,7 @@ export default {
 
 <style scoped>
 .webglLightprobeCubecamera-container {
+    position: relative;
     width: 100%;
 }
 </style>

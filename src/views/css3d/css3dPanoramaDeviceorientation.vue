@@ -97,6 +97,7 @@ export default {
 
 <style scoped>
 .css3dPanoramaDeviceorientation-container {
+    position: relative;
     width: 100%;
     background: #000;
     height: 100vh;

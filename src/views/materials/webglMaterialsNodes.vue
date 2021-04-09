@@ -2199,6 +2199,7 @@ export default {
 
 <style scoped>
 .webglMaterialsNodes-container {
+    position: relative;
     width: 100%;
 }
 </style>

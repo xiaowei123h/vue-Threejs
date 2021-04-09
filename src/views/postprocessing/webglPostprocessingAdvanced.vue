@@ -106,7 +106,7 @@ export default {
             this.container.appendChild(this.renderer.domElement)
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             //
             var shaderBleach = BleachBypassShader
@@ -213,6 +213,7 @@ export default {
             this.renderScene.uniforms[ "tDiffuse" ].value = this.composerScene.renderTarget2.texture
             this.quadBG.scale.set((window.innerWidth - 281), window.innerHeight, 1)
             this.quadMask.scale.set((window.innerWidth - 281) / 2, window.innerHeight / 2, 1)
+            this.$statsPosition(this.stats)
         },
         createMesh(geometry, scene, scale) {
             var diffuseMap = new this.$THREE.TextureLoader().load("static/models/gltf/LeePerrySmith/Map-COL.jpg")
@@ -256,6 +257,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingAdvanced-container {
+    position: relative;
     width: 100%;
 }
 </style>

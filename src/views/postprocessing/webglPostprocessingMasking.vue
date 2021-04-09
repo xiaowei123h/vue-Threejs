@@ -96,6 +96,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingMasking-container {
+    position: relative;
     width: 100%;
 }
 </style>

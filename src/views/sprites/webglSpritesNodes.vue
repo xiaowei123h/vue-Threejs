@@ -192,6 +192,7 @@ export default {
 
 <style scoped>
 .webglSpritesNodes-container {
+    position: relative;
     width: 100%;
 }
 </style>

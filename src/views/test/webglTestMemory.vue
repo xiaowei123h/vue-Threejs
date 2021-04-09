@@ -68,6 +68,7 @@ export default {
 
 <style scoped>
 .webglTestMemory-container {
+    position: relative;
     width: 100%;
 }
 #info {

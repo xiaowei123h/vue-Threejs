@@ -149,13 +149,14 @@ export default {
             //
             if (this.statsEnabled) {
                 this.stats = new this.$Stats()
-                this.stats.dom.style.left = '280px'
+                this.$statsPosition(this.stats)
                 this.container.appendChild(this.stats.dom)
             }
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         updateGroupGeometry(mesh, lineSegments, geometry, data) {
             if (geometry.isGeometry) {
@@ -190,6 +191,7 @@ export default {
 
 <style scoped>
 .webglBuffergeometryCompression-container {
+    position: relative;
     width: 100%
 }
 </style>

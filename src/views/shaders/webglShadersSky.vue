@@ -104,6 +104,7 @@ export default {
 
 <style scoped>
 .webglShadersSky-container {
+    position: relative;
     width: 100%;
 }
 </style>

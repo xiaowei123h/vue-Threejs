@@ -291,6 +291,7 @@ export default {
 
 <style scoped>
 .miscExporterCollada-container {
+    position: relative;
     width: 100%;
 }
 </style>

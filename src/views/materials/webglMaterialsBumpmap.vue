@@ -79,7 +79,7 @@ export default {
             //
             if (this.statsEnabled) {
                 this.stats = new this.$Stats()
-                this.stats.dom.style.left = '280px'
+                this.$statsPosition(this.stats)
                 this.container.appendChild(this.stats.dom)
             }
             // EVENTS
@@ -96,6 +96,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onDocumentMouseMove(event) {
             this.mouseX = (event.clientX - this.windowHalfX)
@@ -121,6 +122,7 @@ export default {
 
 <style scoped>
 .webglMaterialsBumpmap-container {
+    position: relative;
     width: 100%;
 }
 </style>

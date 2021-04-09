@@ -88,7 +88,7 @@ export default {
             document.getElementsByClassName('webglDepthTexture-container')[0].appendChild(this.renderer.domElement)
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglDepthTexture-container')[0].appendChild(this.stats.dom)
             this.camera = new this.$THREE.PerspectiveCamera(70, this.$webglInnerWidth / window.innerHeight, 0.01, 50)
             this.camera.position.z = 4
@@ -163,6 +163,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             var dpr = this.renderer.getPixelRatio()
             this.target.setSize(this.$webglInnerWidth * dpr, window.innerHeight * dpr)
         },
@@ -186,6 +187,7 @@ export default {
 
 <style scoped>
 .webglDepthTexture-container {
+    position: relative;
     width: 100%;
 }
 #error {

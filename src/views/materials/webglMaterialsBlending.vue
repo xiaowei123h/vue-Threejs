@@ -129,6 +129,7 @@ export default {
 
 <style scoped>
 .webglMaterialsBlending-container {
+    position: relative;
     width: 100%;
     margin: 0px;
     background-color: #000000;

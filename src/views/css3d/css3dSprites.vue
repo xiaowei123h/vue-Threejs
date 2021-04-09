@@ -136,6 +136,7 @@ export default {
 
 <style scoped>
 .css3dSprites-container {
+    position: relative;
     width: 100%;
 }
 #info {

@@ -70,7 +70,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('miscControlsTrackball-container')[0].appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('miscControlsTrackball-container')[0].appendChild(this.stats.dom)
             //
             this.gui = new GUI()
@@ -100,6 +100,7 @@ export default {
             this.orthographicCamera.updateProjectionMatrix()
             this.renderer.setSize((window.innerWidth - 281), window.innerHeight)
             this.controls.handleResize()
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -117,6 +118,7 @@ export default {
 
 <style scoped>
 .miscControlsTrackball-container {
+    position: relative;
     width: 100%;
 }
 #info {

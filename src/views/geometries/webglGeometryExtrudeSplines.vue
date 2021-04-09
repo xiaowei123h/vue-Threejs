@@ -165,7 +165,7 @@ export default {
             this.container.appendChild(this.renderer.domElement)
             // stats
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             // dat.GUI
             this.gui = new GUI({ width: 300 })
@@ -204,6 +204,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -247,6 +248,7 @@ export default {
 
 <style scoped>
 .webglGeometryExtrudeSplines-container {
+    position: relative;
     width: 100%;
     background-color: #f0f0f0;
 	color: #444;

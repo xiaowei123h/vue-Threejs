@@ -86,7 +86,7 @@ export default {
             this.container.appendChild(this.renderer.domElement)
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             // COMPOSER
             this.renderer.autoClear = false
@@ -119,6 +119,7 @@ export default {
             var width = window.innerWidth - 281
             var height = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.composer.setSize(width, height)
             this.effectFXAA.uniforms[ 'resolution' ].value.set(1 / width, 1 / height)
         },
@@ -146,6 +147,7 @@ export default {
 
 <style scoped>
 .webglMaterialsNormalmap-container {
+    position: relative;
     width: 100%;
 }
 </style>

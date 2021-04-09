@@ -116,6 +116,7 @@ export default {
 
 <style scoped>
 .webglBuffergeometryMorphtargets-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -126,6 +126,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingPixel-container {
+    position: relative;
     width: 100%;
 }
 </style>

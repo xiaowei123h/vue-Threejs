@@ -91,6 +91,7 @@ export default {
 
 <style scoped>
 .webglMaterialsTextureCanvas-container {
+    position: relative;
     width: 100%;
 }
 #drawing-canvas {

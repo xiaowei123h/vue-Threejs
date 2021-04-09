@@ -234,6 +234,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingUnrealBloomSelective-container {
+    position: relative;
     width: 100%;
 }
 </style>

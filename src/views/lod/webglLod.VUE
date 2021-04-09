@@ -90,6 +90,7 @@ export default {
 
 <style scoped>
 .webglLod-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -108,6 +108,7 @@ export default {
 
 <style scoped>
 .webaudioVisualizer-container {
+    position: relative;
     width: 100%;
 }
 #overlay {

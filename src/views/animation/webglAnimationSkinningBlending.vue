@@ -108,12 +108,13 @@ export default {
             this.renderer.shadowMap.enabled = true
             container.appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         createPanel() {
             this.gui = new GUI({width: 310})
@@ -338,6 +339,7 @@ export default {
 
 <style scoped>
 .webglAnimationSkinningBlending-container {
+    position: relative;
     width: 100%;
 }
 #info a {

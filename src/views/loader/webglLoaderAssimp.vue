@@ -49,7 +49,7 @@ export default {
             controls.minDistance = 750
             controls.maxDistance = 2500
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             var loader = new AssimpLoader()
             loader.load('static/models/assimp/octaminator/Octaminator.assimp', (result) => {
@@ -64,6 +64,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate, this.renderer.domElement)
@@ -77,6 +78,7 @@ export default {
 
 <style scoped>
 .webglLoaderAssimp-container {
+    position: relative;
     width: 100%;
 }
 #info {

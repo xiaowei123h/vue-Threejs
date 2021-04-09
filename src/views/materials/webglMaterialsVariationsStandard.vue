@@ -122,7 +122,7 @@ export default {
             pmremGenerator.compileEquirectangularShader()
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
             controls.minDistance = 200
@@ -131,6 +131,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -153,6 +154,7 @@ export default {
 
 <style scoped>
 .webglMaterialsVariationsStandard-container {
+    position: relative;
     width: 100%;
 }
 </style>

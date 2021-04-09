@@ -246,6 +246,7 @@ export default {
 
 <style scoped>
 .webglGeometryTeapot-container {
+    position: relative;
     width: 100%;
 }
 </style>

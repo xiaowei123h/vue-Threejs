@@ -138,6 +138,7 @@ export default {
 
 <style scoped>
 .webglLoaderTexturePvrtc-container {
+    position: relative;
     width: 100%;
 }
 #info {

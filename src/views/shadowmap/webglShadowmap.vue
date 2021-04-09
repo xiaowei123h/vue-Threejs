@@ -88,6 +88,7 @@ export default {
             this.controls.lookAt(this.scene.position)
             // STATS
             this.stats = new this.$Stats()
+            this.$statsPosition(this.stats)
             //container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -97,6 +98,7 @@ export default {
             this.SCREEN_WIDTH = window.innerWidth - 281
             this.SCREEN_HEIGHT = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.controls.handleResize()
         },
         onKeyDown(event) {
@@ -238,6 +240,7 @@ export default {
 
 <style scoped>
 .webglShadowmap-container {
+    position: relative;
     width: 100%;
 }
 </style>

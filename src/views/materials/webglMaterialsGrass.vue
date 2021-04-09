@@ -86,6 +86,7 @@ export default {
 
 <style scoped>
 .webglMaterialsGrass-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -73,13 +73,14 @@ export default {
             document.getElementsByClassName('webglInstancingRaycast-container')[0].appendChild(this.renderer.domElement)
             new OrbitControls(this.camera, this.renderer.domElement)
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglInstancingRaycast-container')[0].appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
             document.addEventListener('mousemove', this.onMouseMove, false)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onMouseMove(event) {
             event.preventDefault()
@@ -107,6 +108,7 @@ export default {
 
 <style scoped>
 .webglInstancingRaycast-container {
+    position: relative;
     width: 100%;
 }
 </style>

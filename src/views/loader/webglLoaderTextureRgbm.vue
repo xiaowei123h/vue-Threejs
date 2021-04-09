@@ -75,6 +75,7 @@ export default {
 
 <style scoped>
 .webglLoaderTextureRgbm-container {
+    position: relative;
     width: 100%;
 }
 </style>

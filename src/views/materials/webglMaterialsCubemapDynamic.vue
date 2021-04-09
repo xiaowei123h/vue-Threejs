@@ -148,6 +148,7 @@ export default {
 
 <style scoped>
 .webglMaterialsCubemapDynamic-container {
+    position: relative;
     width: 100%;
     touch-action: none;
 }

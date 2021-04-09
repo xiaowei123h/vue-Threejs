@@ -123,8 +123,12 @@ export default {
             controls.update()
             this.clock = new this.$THREE.Clock()
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglShadowmapViewer-container')[0].appendChild(this.stats.dom)
+            window.addEventListener('resize', this.onWindowResize, false)
+        },
+        onWindowResize() {
+            this.$statsPosition(this.stats)
         },
         resizeShadowMapViewers() {
             var size = this.$webglInnerWidth * 0.15
@@ -166,6 +170,7 @@ export default {
 
 <style scoped>
 .webglShadowmapViewer-container {
+    position: relative;
     width: 100%;
 }
 </style>

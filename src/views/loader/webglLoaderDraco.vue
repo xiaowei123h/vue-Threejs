@@ -93,6 +93,7 @@ export default {
 
 <style scoped>
 .webglLoaderDraco-container {
+	position: relative;
     width: 100%;
 }
 #info {

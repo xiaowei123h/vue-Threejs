@@ -68,7 +68,7 @@ export default {
             this.effect = new OutlineEffect(this.renderer)
             // STATS
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             // model
             function onProgress(xhr) {
@@ -138,6 +138,7 @@ export default {
             this.camera.aspect = (window.innerWidth - 281) / window.innerHeight
             this.camera.updateProjectionMatrix()
             this.effect.setSize(window.innerWidth - 281, window.innerHeight)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -155,6 +156,7 @@ export default {
 
 <style scoped>
 .webglLoaderMmd-container {
+    position: relative;
     width: 100%;
     background-color: #fff;
 }

@@ -75,7 +75,7 @@ export default {
             this.controls.enableDamping = true
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglMathObb-container')[0].appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -112,6 +112,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -153,6 +154,7 @@ export default {
 
 <style scoped>
 .webglMathObb-container {
+    position: relative;
     width: 100%;
 }
 #info {

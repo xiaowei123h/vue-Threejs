@@ -100,7 +100,7 @@ export default {
             this.container.appendChild(this.renderer.domElement)
             // STATS1
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             document.addEventListener('mousemove', this.onDocumentMouseMove, false)
             window.addEventListener('resize', this.onWindowResize, false)
@@ -115,6 +115,7 @@ export default {
             this.windowHalfX = (window.innerWidth - 281) / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)

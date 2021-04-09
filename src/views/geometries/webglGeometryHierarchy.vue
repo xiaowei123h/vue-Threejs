@@ -54,7 +54,7 @@ export default {
             document.getElementsByClassName('webglGeometryHierarchy-container')[0].appendChild(this.renderer.domElement)
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglGeometryHierarchy-container')[0].appendChild(this.stats.dom)
             //
             document.addEventListener('mousemove', this.onDocumentMouseMove, false)
@@ -65,6 +65,7 @@ export default {
             this.windowHalfX = window.innerWidth / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         onDocumentMouseMove(event) {
             this.mouseX = (event.clientX - this.windowHalfX) * 10
@@ -94,6 +95,7 @@ export default {
 
 <style scoped>
 .webglGeometryHierarchy-container {
+    position: relative;
     width: 100%;
 }
 </style>

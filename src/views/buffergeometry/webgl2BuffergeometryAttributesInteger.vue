@@ -125,6 +125,7 @@ export default {
 
 <style scoped>
 .webgl2BuffergeometryAttributesInteger-container {
+    position: relative;
     width: 100%;
 }
 </style>

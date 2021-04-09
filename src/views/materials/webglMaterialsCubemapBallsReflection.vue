@@ -89,6 +89,7 @@ export default {
 
 <style scoped>
 .webglMaterialsCubemapBallsReflection-container {
+    position: relative;
     width: 100%;
 }
 </style>

@@ -142,11 +142,12 @@ export default {
             controls.update()
             this.clock = new this.$THREE.Clock()
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
-            document.body.appendChild(this.stats.dom)
+            this.$statsPosition(this.stats)
+            document.getElementsByClassName('webglShadowmapVsm-container')[0].appendChild(this.stats.dom)
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -172,6 +173,7 @@ export default {
 
 <style scoped>
 .webglShadowmapVsm-container {
+    position: relative;
     width: 100%;
 }
 </style>

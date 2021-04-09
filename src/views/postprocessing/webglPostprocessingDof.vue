@@ -101,7 +101,7 @@ export default {
             this.initPostprocessing()
             this.renderer.autoClear = false
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             container.style.touchAction = 'none'
             container.addEventListener('pointermove', this.onPointerMove, false)
@@ -134,6 +134,7 @@ export default {
             this.width = window.innerWidth - 281
             this.height = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.postprocessing.composer.setSize(this.width, this.height)
         },
         initPostprocessing() {
@@ -176,6 +177,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingDof-container {
+    position: relative;
     width: 100%;
 }
 </style>

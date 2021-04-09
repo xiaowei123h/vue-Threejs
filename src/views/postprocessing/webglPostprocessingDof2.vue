@@ -144,7 +144,7 @@ export default {
             this.scene.add(directionalLight2)
             this.initPostprocessing()
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             this.container.style.touchAction = 'none'
             this.container.addEventListener('pointermove', this.onPointerMove, false)
@@ -205,6 +205,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.windowHalfX = (window.innerWidth - 281) / 2
             this.windowHalfY = window.innerHeight / 2
             this.postprocessing.rtTextureDepth.setSize((window.innerWidth - 281), window.innerHeight)
@@ -322,6 +323,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingDof2-container {
+    position: relative;
     width: 100%;
 }
 </style>

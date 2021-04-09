@@ -80,12 +80,16 @@ export default {
             container.appendChild(this.renderer.domElement)
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             var controls = new OrbitControls(this.camera, this.renderer.domElement)
             controls.enablePan = false
             controls.minDistance = 5
             controls.maxDistance = 50
+            window.addEventListener('resize', this.onWindowResize, false)
+        },
+        onWindowResize() {
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -102,6 +106,7 @@ export default {
 
 <style scoped>
 .webglSkinningSimple-container {
+    position: relative;
     width: 100%;
 }
 </style>

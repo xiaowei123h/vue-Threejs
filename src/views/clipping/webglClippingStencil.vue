@@ -161,7 +161,7 @@ export default {
             this.scene.add(ground)
             // Stats
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglClippingStencil-container')[0].appendChild(this.stats.dom)
             // Renderer
             this.renderer = new this.$THREE.WebGLRenderer({ antialias: true })
@@ -207,6 +207,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
         },
         animate() {
             var delta = this.clock.getDelta()
@@ -235,6 +236,7 @@ export default {
 
 <style scoped>
 .webglClippingStencil-container {
+    position: relative;
     width: 100%;
 }
 #info {

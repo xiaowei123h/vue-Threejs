@@ -42,7 +42,7 @@ export default {
             this.camera = new this.$THREE.PerspectiveCamera(75, this.$webglInnerWidth / window.innerHeight, 1, 1000)
             this.camera.position.z = 12
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             document.getElementsByClassName('webglPostprocessingRgbHalftone-container')[0].appendChild(this.renderer.domElement)
             document.getElementsByClassName('webglPostprocessingRgbHalftone-container')[0].appendChild(this.stats.dom)
             // camera controls
@@ -107,6 +107,7 @@ export default {
             window.onresize = () => {
                 // resize this.composer
                 this.$onWindowResize(this.camera, this.renderer)
+                this.$statsPosition(this.stats)
                 this.composer.setSize(window.innerWidth - 281, window.innerHeight)
             }
             // GUI
@@ -160,6 +161,7 @@ export default {
 
 <style scoped>
 .webglPostprocessingRgbHalftone-container {
+    position: relative;
     width: 100%;
 }
 </style>

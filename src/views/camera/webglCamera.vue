@@ -98,7 +98,7 @@ export default {
             this.renderer.autoClear = false
             //
             this.stats = new this.$Stats()
-            this.stats.dom.style.left = '280px'
+            this.$statsPosition(this.stats)
             this.container.appendChild(this.stats.dom)
             //
             window.addEventListener('resize', this.onWindowResize, false)
@@ -130,6 +130,7 @@ export default {
             this.cameraOrtho.top = this.frustumSize / 2
             this.cameraOrtho.bottom = - this.frustumSize / 2
             this.cameraOrtho.updateProjectionMatrix()
+            this.$statsPosition(this.stats)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -172,6 +173,7 @@ export default {
 
 <style scoped>
 .webglCamera-container {
+    position: relative;
     width: 100%;
 }
 b {

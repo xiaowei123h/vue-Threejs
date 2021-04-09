@@ -83,6 +83,7 @@ export default {
 
 <style scoped>
 .miscControlsOrbit-container {
+    position: relative;
     width: 100%;
 }
 #info {

@@ -88,6 +88,7 @@ export default {
 
 <style scoped>
 .webglLoaderLwo-container {
+    position: relative;
     width: 100%;
 }
 </style>

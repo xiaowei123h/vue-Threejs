@@ -114,6 +114,7 @@ export default {
 
 <style scoped>
 .webglMaterialsEnvmaps-container {
+    position: relative;
     width: 100%;
 }
 </style>

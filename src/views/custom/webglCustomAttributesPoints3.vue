@@ -1,5 +1,5 @@
 <template>
-    <div class="webglCustomAttributesPoints2-container">
+    <div class="webglCustomAttributesPoints3-container">
         <div id="info"><a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - custom attributes example - billboards - alphatest</div>
 		<div id="container"></div>
     </div>
@@ -185,7 +185,7 @@ export default {
 </script>
 
 <style scoped>
-.webglCustomAttributesPoints2-contianer {
+.webglCustomAttributesPoints3-container {
     position: relative;
     width: 100%;
 }

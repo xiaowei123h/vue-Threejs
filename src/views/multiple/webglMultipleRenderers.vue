@@ -151,7 +151,6 @@ export default {
 #info {
     background-color: #fff;
     color: #444;
-    margin-left: 0;
 }
 #info a {
     color: #08f;

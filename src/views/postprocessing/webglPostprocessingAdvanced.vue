@@ -195,24 +195,30 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            this.halfWidth = (window.innerWidth - 281) / 2
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.halfWidth = (window.innerWidth - x) / 2
             this.halfHeight = window.innerHeight / 2
-            this.cameraPerspective.aspect = (window.innerWidth - 281) / window.innerHeight
+            this.cameraPerspective.aspect = (window.innerWidth - x) / window.innerHeight
             this.cameraPerspective.updateProjectionMatrix()
             this.cameraOrtho.left = - this.halfWidth
             this.cameraOrtho.right = this.halfWidth
             this.cameraOrtho.top = this.halfHeight
             this.cameraOrtho.bottom = - this.halfHeight
             this.cameraOrtho.updateProjectionMatrix()
-            this.renderer.setSize((window.innerWidth - 281), window.innerHeight)
+            this.renderer.setSize((window.innerWidth - x), window.innerHeight)
             this.composerScene.setSize(this.halfWidth * 2, this.halfHeight * 2)
             this.composer1.setSize(this.halfWidth, this.halfHeight)
             this.composer2.setSize(this.halfWidth, this.halfHeight)
             this.composer3.setSize(this.halfWidth, this.halfHeight)
             this.composer4.setSize(this.halfWidth, this.halfHeight)
             this.renderScene.uniforms[ "tDiffuse" ].value = this.composerScene.renderTarget2.texture
-            this.quadBG.scale.set((window.innerWidth - 281), window.innerHeight, 1)
-            this.quadMask.scale.set((window.innerWidth - 281) / 2, window.innerHeight / 2, 1)
+            this.quadBG.scale.set((window.innerWidth - x), window.innerHeight, 1)
+            this.quadMask.scale.set((window.innerWidth - x) / 2, window.innerHeight / 2, 1)
             this.$statsPosition(this.stats)
         },
         createMesh(geometry, scene, scale) {

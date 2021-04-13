@@ -68,8 +68,14 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
             this.$onWindowResize(this.camera, this.renderer)
-            this.renderer2.setSize(window.innerWidth - 281, window.innerHeight)
+            this.renderer2.setSize(window.innerWidth - x, window.innerHeight)
         },
         animate() {
             requestAnimationFrame(this.animate)

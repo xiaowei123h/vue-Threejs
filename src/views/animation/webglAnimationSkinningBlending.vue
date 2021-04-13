@@ -358,7 +358,4 @@ export default {
     color: #888;
     text-decoration: line-through;
 }
-#info {
-    margin-left: 0;
-}
 </style>

@@ -123,7 +123,13 @@ export default {
             this.$statsPosition(this.stats)
         },
         onMouseMove(e) {
-            this.mouse.x = e.clientX - 281
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.mouse.x = e.clientX - x
             this.mouse.y = e.clientY
         },
         animate() {

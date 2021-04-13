@@ -102,6 +102,7 @@ export default {
         },
         onWindowResize() {
             this.$onWindowResize(this.camera, this.renderer)
+            this.$statsPosition(this.stats)
             this.resizeShadowMapViewers()
             this.dirLightShadowMapViewer.updateForWindowResize()
             this.spotLightShadowMapViewer.updateForWindowResize()
@@ -126,9 +127,6 @@ export default {
             this.$statsPosition(this.stats)
             document.getElementsByClassName('webglShadowmapViewer-container')[0].appendChild(this.stats.dom)
             window.addEventListener('resize', this.onWindowResize, false)
-        },
-        onWindowResize() {
-            this.$statsPosition(this.stats)
         },
         resizeShadowMapViewers() {
             var size = this.$webglInnerWidth * 0.15

@@ -166,7 +166,7 @@ export default {
 </script>
 
 <style scoped>
-.webglCustomAttributesPoints2-contianer {
+.webglCustomAttributesPoints2-container {
     position: relative;
     width: 100%;
 }

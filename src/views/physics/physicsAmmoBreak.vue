@@ -59,13 +59,8 @@ export default {
         }
         this.impactPoint = new this.$THREE.Vector3()
 		this.impactNormal = new this.$THREE.Vector3()
-		this.$nextTick(() => {
-			Ammo().then((AmmoLib) => {
-				Ammo = AmmoLib
-				this.init()
-				this.animate()
-			})
-		})
+		this.init()
+		this.animate()
     },
     methods: {
         init() {
@@ -114,14 +109,14 @@ export default {
         },
         initPhysics() {
 			// Physics configuration
-			this.collisionConfiguration = new Ammo.btDefaultCollisionConfiguration()
-			this.dispatcher = new Ammo.btCollisionDispatcher(this.collisionConfiguration)
-			this.broadphase = new Ammo.btDbvtBroadphase()
-			this.solver = new Ammo.btSequentialImpulseConstraintSolver()
-			this.physicsWorld = new Ammo.btDiscreteDynamicsWorld(this.dispatcher, this.broadphase, this.solver, this.collisionConfiguration)
-			this.physicsWorld.setGravity(new Ammo.btVector3(0, - this.gravityConstant, 0))
-			this.transformAux1 = new Ammo.btTransform()
-			this.tempBtVec3_1 = new Ammo.btVector3(0, 0, 0)
+			this.collisionConfiguration = new this.$Ammo.btDefaultCollisionConfiguration()
+			this.dispatcher = new this.$Ammo.btCollisionDispatcher(this.collisionConfiguration)
+			this.broadphase = new this.$Ammo.btDbvtBroadphase()
+			this.solver = new this.$Ammo.btSequentialImpulseConstraintSolver()
+			this.physicsWorld = new this.$Ammo.btDiscreteDynamicsWorld(this.dispatcher, this.broadphase, this.solver, this.collisionConfiguration)
+			this.physicsWorld.setGravity(new this.$Ammo.btVector3(0, - this.gravityConstant, 0))
+			this.transformAux1 = new this.$Ammo.btTransform()
+			this.tempBtVec3_1 = new this.$Ammo.btVector3(0, 0, 0)
         },
         createObject(mass, halfExtents, pos, quat, material) {
 			var object = new this.$THREE.Mesh(new this.$THREE.BoxBufferGeometry(halfExtents.x * 2, halfExtents.y * 2, halfExtents.z * 2), material)
@@ -187,7 +182,7 @@ export default {
         },
         createParalellepipedWithPhysics(sx, sy, sz, mass, pos, quat, material) {
 			var object = new this.$THREE.Mesh(new this.$THREE.BoxBufferGeometry(sx, sy, sz, 1, 1, 1), material)
-			var shape = new Ammo.btBoxShape(new Ammo.btVector3(sx * 0.5, sy * 0.5, sz * 0.5))
+			var shape = new this.$Ammo.btBoxShape(new this.$Ammo.btVector3(sx * 0.5, sy * 0.5, sz * 0.5))
 			shape.setMargin(this.margin)
 			this.createRigidBody(object, shape, mass, pos, quat)
 			return object
@@ -199,7 +194,7 @@ export default {
 			shape.setMargin(this.margin)
 			var body = this.createRigidBody(object, shape, object.userData.mass, null, null, object.userData.velocity, object.userData.angularVelocity)
 			// Set pointer back to the three object only in the debris objects
-			var btVecUserData = new Ammo.btVector3(0, 0, 0)
+			var btVecUserData = new this.$Ammo.btVector3(0, 0, 0)
 			btVecUserData.threeObject = object
 			body.setUserPointer(btVecUserData)
         },
@@ -208,7 +203,7 @@ export default {
 			this.physicsWorld.removeRigidBody(object.userData.physicsBody)
         },
         createConvexHullPhysicsShape(coords) {
-			var shape = new Ammo.btConvexHullShape()
+			var shape = new this.$Ammo.btConvexHullShape()
 			for (var i = 0, il = coords.length; i < il; i += 3) {
 				this.tempBtVec3_1.setValue(coords[ i ], coords[ i + 1 ], coords[ i + 2 ])
 				var lastOne = (i >= (il - 3))
@@ -227,21 +222,21 @@ export default {
 			} else {
 				quat = object.quaternion
 			}
-			var transform = new Ammo.btTransform()
+			var transform = new this.$Ammo.btTransform()
 			transform.setIdentity()
-			transform.setOrigin(new Ammo.btVector3(pos.x, pos.y, pos.z))
-			transform.setRotation(new Ammo.btQuaternion(quat.x, quat.y, quat.z, quat.w))
-			var motionState = new Ammo.btDefaultMotionState(transform)
-			var localInertia = new Ammo.btVector3(0, 0, 0)
+			transform.setOrigin(new this.$Ammo.btVector3(pos.x, pos.y, pos.z))
+			transform.setRotation(new this.$Ammo.btQuaternion(quat.x, quat.y, quat.z, quat.w))
+			var motionState = new this.$Ammo.btDefaultMotionState(transform)
+			var localInertia = new this.$Ammo.btVector3(0, 0, 0)
 			physicsShape.calculateLocalInertia(mass, localInertia)
-			var rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, motionState, physicsShape, localInertia)
-			var body = new Ammo.btRigidBody(rbInfo)
+			var rbInfo = new this.$Ammo.btRigidBodyConstructionInfo(mass, motionState, physicsShape, localInertia)
+			var body = new this.$Ammo.btRigidBody(rbInfo)
 			body.setFriction(0.5)
 			if (vel) {
-				body.setLinearVelocity(new Ammo.btVector3(vel.x, vel.y, vel.z))
+				body.setLinearVelocity(new this.$Ammo.btVector3(vel.x, vel.y, vel.z))
 			}
 			if (angVel) {
-				body.setAngularVelocity(new Ammo.btVector3(angVel.x, angVel.y, angVel.z))
+				body.setAngularVelocity(new this.$Ammo.btVector3(angVel.x, angVel.y, angVel.z))
 			}
 			object.userData.physicsBody = body
 			object.userData.collided = false
@@ -263,8 +258,14 @@ export default {
         },
         initInput() {
 			window.addEventListener('pointerdown', (event) => {
+				var x
+				if (window.innerWidth >= 640) {
+					x = 281
+				} else {
+					x = 0
+				}
 				this.mouseCoords.set(
-					(event.clientX / (window.innerWidth + 281)) * 2 - 1,
+					((event.clientX - x) / (window.innerWidth - x)) * 2 - 1,
 					- (event.clientY / window.innerHeight) * 2 + 1
 				)
 				this.raycaster.setFromCamera(this.mouseCoords, this.camera)
@@ -274,7 +275,7 @@ export default {
 				var ball = new this.$THREE.Mesh(new this.$THREE.SphereBufferGeometry(ballRadius, 14, 10), this.ballMaterial)
 				ball.castShadow = true
 				ball.receiveShadow = true
-				var ballShape = new Ammo.btSphereShape(ballRadius)
+				var ballShape = new this.$Ammo.btSphereShape(ballRadius)
 				ballShape.setMargin(this.margin)
 				this.pos.copy(this.raycaster.ray.direction)
 				this.pos.add(this.raycaster.ray.origin)
@@ -282,7 +283,7 @@ export default {
 				var ballBody = this.createRigidBody(ball, ballShape, ballMass, this.pos, this.quat)
 				this.pos.copy(this.raycaster.ray.direction)
 				this.pos.multiplyScalar(24)
-				ballBody.setLinearVelocity(new Ammo.btVector3(this.pos.x, this.pos.y, this.pos.z))
+				ballBody.setLinearVelocity(new this.$Ammo.btVector3(this.pos.x, this.pos.y, this.pos.z))
 			}, false)
         },
         onWindowResize() {
@@ -318,10 +319,10 @@ export default {
 			}
 			for (var i = 0, il = this.dispatcher.getNumManifolds(); i < il; i ++) {
 				var contactManifold = this.dispatcher.getManifoldByIndexInternal(i)
-				var rb0 = Ammo.castObject(contactManifold.getBody0(), Ammo.btRigidBody)
-				var rb1 = Ammo.castObject(contactManifold.getBody1(), Ammo.btRigidBody)
-				var threeObject0 = Ammo.castObject(rb0.getUserPointer(), Ammo.btVector3).threeObject
-				var threeObject1 = Ammo.castObject(rb1.getUserPointer(), Ammo.btVector3).threeObject
+				var rb0 = this.$Ammo.castObject(contactManifold.getBody0(), this.$Ammo.btRigidBody)
+				var rb1 = this.$Ammo.castObject(contactManifold.getBody1(), this.$Ammo.btRigidBody)
+				var threeObject0 = this.$Ammo.castObject(rb0.getUserPointer(), this.$Ammo.btVector3).threeObject
+				var threeObject1 = this.$Ammo.castObject(rb1.getUserPointer(), this.$Ammo.btVector3).threeObject
 				if (! threeObject0 && ! threeObject1) {
 					continue
 				}

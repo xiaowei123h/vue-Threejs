@@ -144,4 +144,7 @@ export default {
 .webglGeometryColorsLookuptable-container a {
     color: red;
 }
+#info {
+    color: #444;
+}
 </style>

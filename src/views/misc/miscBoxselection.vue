@@ -26,24 +26,39 @@ export default {
         this.animate()
         this.selectionBox = new SelectionBox(this.camera, this.scene)
         this.helper = new SelectionHelper(this.selectionBox, this.renderer, 'selectBox')
-        console.log(this.helper)
         document.addEventListener('pointerdown', (event) => {
+            var x, y
+            if (window.innerWidth >= 640) {
+                x = 281
+                y = 0
+            } else {
+                x = 0
+                y = 49
+            }
             for (var item of this.selectionBox.collection) {
                 item.material.emissive.set(0x000000)
             }
             this.selectionBox.startPoint.set(
-                ((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1,
-                - (event.clientY / window.innerHeight) * 2 + 1,
+                ((event.clientX - x) / (window.innerWidth - x)) * 2 - 1,
+                - ((event.clientY - y) / window.innerHeight) * 2 + 1,
                 0.5)
         })
         document.addEventListener('pointermove', (event) => {
+            var x, y
+            if (window.innerWidth >= 640) {
+                x = 281
+                y = 0
+            } else {
+                x = 0
+                y = 49
+            }
             if (this.helper.isDown) {
                 for (var i = 0; i < this.selectionBox.collection.length; i ++) {
                     this.selectionBox.collection[ i ].material.emissive.set(0x000000)
                 }
                 this.selectionBox.endPoint.set(
-                    ((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1,
-                    - (event.clientY / window.innerHeight) * 2 + 1,
+                    ((event.clientX - x) / (window.innerWidth - x)) * 2 - 1,
+                    - ((event.clientY - y) / window.innerHeight) * 2 + 1,
                     0.5)
                 var allSelected = this.selectionBox.select()
                 for (var i = 0; i < allSelected.length; i ++) {
@@ -53,9 +68,17 @@ export default {
             }
         })
         document.addEventListener('pointerup', (event) => {
+            var x, y
+            if (window.innerWidth >= 640) {
+                x = 281
+                y = 0
+            } else {
+                x = 0
+                y = 49
+            }
             this.selectionBox.endPoint.set(
-                ((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1,
-                - (event.clientY / window.innerHeight) * 2 + 1,
+                ((event.clientX - x) / (window.innerWidth - x)) * 2 - 1,
+                - ((event.clientY - y) / window.innerHeight) * 2 + 1,
                 0.5)
             var allSelected = this.selectionBox.select()
             for (var i = 0; i < allSelected.length; i ++) {

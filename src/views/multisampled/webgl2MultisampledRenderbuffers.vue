@@ -94,13 +94,25 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
             this.$onWindowResize(this.camera, this.renderer)
-            this.composer1.setSize(window.innerWidth - 281, window.innerHeight)
-            this.composer2.setSize(window.innerWidth - 281, window.innerHeight)
+            this.composer1.setSize(window.innerWidth - x, window.innerHeight)
+            this.composer2.setSize(window.innerWidth - x, window.innerHeight)
         },
         animate() {
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
             requestAnimationFrame(this.animate)
-            var halfWidth = (window.innerWidth - 281) / 2
+            var halfWidth = (window.innerWidth - x) / 2
             this.group.rotation.y += this.clock.getDelta() * 0.1
             this.renderer.setScissorTest(true)
             this.renderer.setScissor(0, 0, halfWidth - 1, window.innerHeight)

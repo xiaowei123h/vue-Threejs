@@ -86,6 +86,11 @@ export default {
             this.createMenu()
             //
             window.addEventListener('resize', this.onWindowResize, false)
+            if (window.innerWidth >= 640) {
+                document.getElementById('menu').style.bottom = '20px'
+            } else {
+                document.getElementById('menu').style.bottom = '69px'
+            }
         },
         generateButtonCallback(url) {
             return () => {
@@ -165,8 +170,19 @@ export default {
             })
         },
         onWindowResize() {
+            if (window.innerWidth >= 640) {
+                document.getElementById('menu').style.bottom = '20px'
+            } else {
+                document.getElementById('menu').style.bottom = '69px'
+            }
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
             this.$onWindowResize(this.camera, this.renderer)
-            this.labelRenderer.setSize(window.innerWidth - 281, window.innerHeight)
+            this.labelRenderer.setSize(window.innerWidth - x, window.innerHeight)
             this.render()
         },
         animate() {

@@ -96,7 +96,6 @@ export default {
 #info {
     background-color: #fff;
     color: #000;
-    margin-left: 45px;
 }
 #info a {
     color: #08f;

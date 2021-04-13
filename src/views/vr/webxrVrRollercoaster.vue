@@ -153,8 +153,18 @@ export default {
             this.lookAt = new this.$THREE.Vector3()
             this.prevTime = performance.now()
             this.renderer.setAnimationLoop(this.render)
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrRollercoaster-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrRollercoaster-container')[0].style.height = 'calc(100vh - 49px)'
+            }
         },
         onWindowResize() {
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrRollercoaster-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrRollercoaster-container')[0].style.height = 'calc(100vh - 49px)'
+            }
             this.$onWindowResize(this.camera, this.renderer)
         },
         render() {

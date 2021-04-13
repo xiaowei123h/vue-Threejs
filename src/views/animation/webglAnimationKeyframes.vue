@@ -109,7 +109,4 @@ export default {
 a {
     color: #2983ff;
 }
-#info {
-    margin-left: -160px;
-}
 </style>

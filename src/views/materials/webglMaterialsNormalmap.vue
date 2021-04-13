@@ -124,7 +124,13 @@ export default {
             this.effectFXAA.uniforms[ 'resolution' ].value.set(1 / width, 1 / height)
         },
         onDocumentMouseMove(event) {
-            this.mouseX = (event.clientX - this.windowHalfX)
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.mouseX = (event.clientX - x - this.windowHalfX)
             this.mouseY = (event.clientY - this.windowHalfY)
         },
         animate() {

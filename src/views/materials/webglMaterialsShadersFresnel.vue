@@ -79,7 +79,13 @@ export default {
             this.$onWindowResize(this.camera, this.renderer)
         },
         onDocumentMouseMove(event) {
-            this.mouseX = (event.clientX - this.windowHalfX) * 10;
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.mouseX = (event.clientX - x - this.windowHalfX) * 10;
             this.mouseY = (event.clientY - this.windowHalfY) * 10;
         },
         animate() {

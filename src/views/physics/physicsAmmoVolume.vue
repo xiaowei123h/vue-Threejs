@@ -46,11 +46,8 @@ export default {
         this.ballMaterial = new this.$THREE.MeshPhongMaterial({ color: 0x202020 })
         this.pos = new this.$THREE.Vector3()
         this.quat = new this.$THREE.Quaternion()
-        Ammo().then((AmmoLib) => {
-            Ammo = AmmoLib
-            this.init()
-            this.animate()
-        })
+        this.init()
+        this.animate()
     },
     methods: {
         init() {
@@ -98,16 +95,16 @@ export default {
         },
         initPhysics() {
             // Physics configuration
-            var collisionConfiguration = new Ammo.btSoftBodyRigidBodyCollisionConfiguration()
-            var dispatcher = new Ammo.btCollisionDispatcher(collisionConfiguration)
-            var broadphase = new Ammo.btDbvtBroadphase()
-            var solver = new Ammo.btSequentialImpulseConstraintSolver()
-            var softBodySolver = new Ammo.btDefaultSoftBodySolver()
-            this.physicsWorld = new Ammo.btSoftRigidDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration, softBodySolver)
-            this.physicsWorld.setGravity(new Ammo.btVector3(0, this.gravityConstant, 0))
-            this.physicsWorld.getWorldInfo().set_m_gravity(new Ammo.btVector3(0, this.gravityConstant, 0))
-            this.transformAux1 = new Ammo.btTransform()
-            this.softBodyHelpers = new Ammo.btSoftBodyHelpers()
+            var collisionConfiguration = new this.$Ammo.btSoftBodyRigidBodyCollisionConfiguration()
+            var dispatcher = new this.$Ammo.btCollisionDispatcher(collisionConfiguration)
+            var broadphase = new this.$Ammo.btDbvtBroadphase()
+            var solver = new this.$Ammo.btSequentialImpulseConstraintSolver()
+            var softBodySolver = new this.$Ammo.btDefaultSoftBodySolver()
+            this.physicsWorld = new this.$Ammo.btSoftRigidDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration, softBodySolver)
+            this.physicsWorld.setGravity(new this.$Ammo.btVector3(0, this.gravityConstant, 0))
+            this.physicsWorld.getWorldInfo().set_m_gravity(new this.$Ammo.btVector3(0, this.gravityConstant, 0))
+            this.transformAux1 = new this.$Ammo.btTransform()
+            this.softBodyHelpers = new this.$Ammo.btSoftBodyHelpers()
         },
         createObjects() {
             // Ground
@@ -210,7 +207,7 @@ export default {
             volumeSoftBody.get_m_materials().at(0).set_m_kLST(0.9)
             volumeSoftBody.get_m_materials().at(0).set_m_kAST(0.9)
             volumeSoftBody.setTotalMass(mass, false)
-            Ammo.castObject(volumeSoftBody, Ammo.btCollisionObject).getCollisionShape().setMargin(this.margin)
+            this.$Ammo.castObject(volumeSoftBody, this.$Ammo.btCollisionObject).getCollisionShape().setMargin(this.margin)
             this.physicsWorld.addSoftBody(volumeSoftBody, 1, - 1)
             volume.userData.physicsBody = volumeSoftBody
             // Disable deactivation
@@ -219,7 +216,7 @@ export default {
         },
         createParalellepiped(sx, sy, sz, mass, pos, quat, material) {
             var threeObject = new this.$THREE.Mesh(new this.$THREE.BoxBufferGeometry(sx, sy, sz, 1, 1, 1), material)
-            var shape = new Ammo.btBoxShape(new Ammo.btVector3(sx * 0.5, sy * 0.5, sz * 0.5))
+            var shape = new this.$Ammo.btBoxShape(new this.$Ammo.btVector3(sx * 0.5, sy * 0.5, sz * 0.5))
             shape.setMargin(this.margin)
             this.createRigidBody(threeObject, shape, mass, pos, quat)
             return threeObject
@@ -227,15 +224,15 @@ export default {
         createRigidBody(threeObject, physicsShape, mass, pos, quat) {
             threeObject.position.copy(pos)
             threeObject.quaternion.copy(quat)
-            var transform = new Ammo.btTransform()
+            var transform = new this.$Ammo.btTransform()
             transform.setIdentity()
-            transform.setOrigin(new Ammo.btVector3(pos.x, pos.y, pos.z))
-            transform.setRotation(new Ammo.btQuaternion(quat.x, quat.y, quat.z, quat.w))
-            var motionState = new Ammo.btDefaultMotionState(transform)
-            var localInertia = new Ammo.btVector3(0, 0, 0)
+            transform.setOrigin(new this.$Ammo.btVector3(pos.x, pos.y, pos.z))
+            transform.setRotation(new this.$Ammo.btQuaternion(quat.x, quat.y, quat.z, quat.w))
+            var motionState = new this.$Ammo.btDefaultMotionState(transform)
+            var localInertia = new this.$Ammo.btVector3(0, 0, 0)
             physicsShape.calculateLocalInertia(mass, localInertia)
-            var rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, motionState, physicsShape, localInertia)
-            var body = new Ammo.btRigidBody(rbInfo)
+            var rbInfo = new this.$Ammo.btRigidBodyConstructionInfo(mass, motionState, physicsShape, localInertia)
+            var body = new this.$Ammo.btRigidBody(rbInfo)
             threeObject.userData.physicsBody = body
             this.scene.add(threeObject)
             if (mass > 0) {
@@ -248,9 +245,15 @@ export default {
         },
         initInput() {
             window.addEventListener('pointerdown', (event) => {
+                var x
+				if (window.innerWidth >= 640) {
+					x = 281
+				} else {
+					x = 0
+				}
                 if (! this.clickRequest) {
                     this.mouseCoords.set(
-                        (event.clientX / (window.innerWidth + 281)) * 2 - 1,
+                        ((event.clientX - x) / (window.innerWidth - x)) * 2 - 1,
                         - (event.clientY / window.innerHeight) * 2 + 1
                 )
                     this.clickRequest = true
@@ -266,7 +269,7 @@ export default {
                 var ball = new this.$THREE.Mesh(new this.$THREE.SphereBufferGeometry(ballRadius, 18, 16), this.ballMaterial)
                 ball.castShadow = true
                 ball.receiveShadow = true
-                var ballShape = new Ammo.btSphereShape(ballRadius)
+                var ballShape = new this.$Ammo.btSphereShape(ballRadius)
                 ballShape.setMargin(this.margin)
                 this.pos.copy(this.raycaster.ray.direction)
                 this.pos.add(this.raycaster.ray.origin)
@@ -275,7 +278,7 @@ export default {
                 ballBody.setFriction(0.5)
                 this.pos.copy(this.raycaster.ray.direction)
                 this.pos.multiplyScalar(14)
-                ballBody.setLinearVelocity(new Ammo.btVector3(this.pos.x, this.pos.y, this.pos.z))
+                ballBody.setLinearVelocity(new this.$Ammo.btVector3(this.pos.x, this.pos.y, this.pos.z))
                 this.clickRequest = false
             }
         },

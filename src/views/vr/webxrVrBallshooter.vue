@@ -112,6 +112,11 @@ export default {
             this.scene.add(this.controllerGrip2)
             //
             window.addEventListener('resize', this.onWindowResize, false)
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrBallshooter-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrBallshooter-container')[0].style.height = 'calc(100vh - 49px)'
+            }
         },
         buildController(data) {
             var geometry, material
@@ -129,6 +134,11 @@ export default {
             }
         },
         onWindowResize() {
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrBallshooter-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrBallshooter-container')[0].style.height = 'calc(100vh - 49px)'
+            }
             this.$onWindowResize(this.camera, this.renderer)
         },
         handleController(controller) {

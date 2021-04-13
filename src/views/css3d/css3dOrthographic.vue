@@ -92,14 +92,20 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            var aspect = (window.innerWidth - 281) / window.innerHeight
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            var aspect = (window.innerWidth - x) / window.innerHeight
             this.camera.left = - this.frustumSize * aspect / 2
             this.camera.right = this.frustumSize * aspect / 2
             this.camera.top = this.frustumSize / 2
             this.camera.bottom = - this.frustumSize / 2
             this.camera.updateProjectionMatrix()
-            this.renderer.setSize((window.innerWidth - 281), window.innerHeight)
-            this.renderer2.setSize((window.innerWidth - 281), window.innerHeight)
+            this.renderer.setSize((window.innerWidth - x), window.innerHeight)
+            this.renderer2.setSize((window.innerWidth - x), window.innerHeight)
         },
         animate() {
             requestAnimationFrame(this.animate)

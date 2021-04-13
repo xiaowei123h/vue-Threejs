@@ -58,7 +58,13 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            this.renderer.setSize( window.innerWidth - 281, window.innerHeight )
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.renderer.setSize( window.innerWidth - x, window.innerHeight )
             this.$statsPosition(this.stats)
         },
         animate() {

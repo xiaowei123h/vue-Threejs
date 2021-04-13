@@ -153,4 +153,7 @@ export default {
 .webglGeometryColors-container a {
     color: #08f;
 }
+#info {
+    color: #444;
+}
 </style>

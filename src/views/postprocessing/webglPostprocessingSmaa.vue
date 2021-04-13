@@ -34,7 +34,7 @@ export default {
             this.renderer.setSize(this.$webglInnerWidth, window.innerHeight)
             document.getElementsByClassName('webglPostprocessingSmaa-container')[0].appendChild(this.renderer.domElement)
             this.stats = new this.$Stats()
-            tthis.$statsPosition(this.stats)
+            this.$statsPosition(this.stats)
             container.appendChild(this.stats.dom)
             //
             this.camera = new this.$THREE.PerspectiveCamera(70, this.$webglInnerWidth / window.innerHeight, 1, 1000)
@@ -59,7 +59,13 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            var width = window.innerWidth - 281
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            var width = window.innerWidth - x
             var height = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
             this.$statsPosition(this.stats)

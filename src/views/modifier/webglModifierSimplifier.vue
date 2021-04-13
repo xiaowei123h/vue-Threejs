@@ -25,6 +25,7 @@ export default {
             info.style.position = 'absolute'
             info.style.top = '10px'
             info.style.width = '100%'
+            info.style.color = '#fff'
             info.style.textAlign = 'center'
             info.innerHTML = '<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - Vertex Reduction using SimplifyModifier'
             document.getElementsByClassName('webglModifierSimplifier-container')[0].appendChild(info)
@@ -76,8 +77,5 @@ export default {
 .webglModifierSimplifier-container {
     position: relative;
     width: 100%;
-}
-#info {
-    color: #fff;
 }
 </style>

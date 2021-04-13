@@ -38,7 +38,8 @@ export default {
             var info = document.createElement('div')
             info.style.position = 'absolute'
             info.style.top = '10px'
-            info.style.left = '281px'
+            info.style.left = '0'
+            info.style.color = '#fff'
             info.style.width = '100%'
             info.style.textAlign = 'center'
             info.innerHTML = '<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - Edge Split modifier'

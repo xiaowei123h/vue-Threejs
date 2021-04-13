@@ -112,8 +112,14 @@ export default {
             this.$statsPosition(this.stats)
         },
         onDocumentMouseMove(event) {
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
             event.preventDefault()
-            this.mouse.x = (event.clientX / this.$webglInnerWidth) * 2 - 1
+            this.mouse.x = ((event.clientX - x) / (window.innerWidth - x)) * 2 - 1
             this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
         },
         animate() {

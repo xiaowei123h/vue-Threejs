@@ -90,7 +90,13 @@ export default {
             this.controls.keys = [ 65, 83, 68 ]
         },
         onWindowResize() {
-            var aspect = (window.innerWidth - 281) / window.innerHeight
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            var aspect = (window.innerWidth - x) / window.innerHeight
             this.perspectiveCamera.aspect = aspect
             this.perspectiveCamera.updateProjectionMatrix()
             this.orthographicCamera.left = - this.frustumSize * aspect / 2
@@ -98,7 +104,7 @@ export default {
             this.orthographicCamera.top = this.frustumSize / 2
             this.orthographicCamera.bottom = - this.frustumSize / 2
             this.orthographicCamera.updateProjectionMatrix()
-            this.renderer.setSize((window.innerWidth - 281), window.innerHeight)
+            this.renderer.setSize((window.innerWidth - x), window.innerHeight)
             this.controls.handleResize()
             this.$statsPosition(this.stats)
         },

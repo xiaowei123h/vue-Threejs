@@ -65,14 +65,26 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            this.windowHalfX = (window.innerWidth - 281) / 2
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.windowHalfX = (window.innerWidth - x) / 2
             this.windowHalfY = window.innerHeight / 2
-            this.camera.aspect = (window.innerWidth - 281) / window.innerHeight
+            this.camera.aspect = (window.innerWidth - x) / window.innerHeight
             this.camera.updateProjectionMatrix()
-            this.effect.setSize((window.innerWidth - 281), window.innerHeight)
+            this.effect.setSize((window.innerWidth - x), window.innerHeight)
         },
         onDocumentMouseMove(event) {
-            this.mouseX = (event.clientX - 281 - this.windowHalfX) * 10
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.mouseX = (event.clientX - x - this.windowHalfX) * 10
             this.mouseY = (event.clientY - this.windowHalfY) * 10
         },
         animate() {
@@ -99,8 +111,5 @@ export default {
 .webglEffectsStereo-container {
     position: relative;
     width: 100%;
-}
-#info {
-    margin-left: 0;
 }
 </style>

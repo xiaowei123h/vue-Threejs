@@ -154,8 +154,14 @@ export default {
             this.composer.addPass(effectFilm)
         },
         onWindowResize() {
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
             this.SCREEN_HEIGHT = window.innerHeight
-            this.SCREEN_WIDTH = window.innerWidth - 281
+            this.SCREEN_WIDTH = window.innerWidth - x
             this.$onWindowResize(this.camera, this.renderer)
             this.$statsPosition(this.stats)
             this.composer.setSize(this.SCREEN_WIDTH, this.SCREEN_HEIGHT)

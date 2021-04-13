@@ -106,13 +106,25 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onDocumentMouseMove(event) {
-            this.mouseX = (event.clientX - this.windowHalfX)
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.mouseX = (event.clientX - x - this.windowHalfX)
             this.mouseY = (event.clientY - this.windowHalfY)
         },
         onWindowResize() {
-            this.SCREEN_WIDTH = window.innerWidth - 281
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.SCREEN_WIDTH = window.innerWidth - x
             this.SCREEN_HEIGHT = window.innerHeight
-            this.windowHalfX = (window.innerWidth - 281) / 2
+            this.windowHalfX = (window.innerWidth - x) / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
             this.$statsPosition(this.stats)

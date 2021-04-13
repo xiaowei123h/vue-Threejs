@@ -158,7 +158,6 @@ export default {
 #info {
     position: absolute;
     top: 0px; width: 100%;
-    left: 281px;
     padding: 5px;
 }
 </style>

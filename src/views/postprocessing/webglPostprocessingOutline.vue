@@ -195,9 +195,17 @@ export default {
             this.renderer.domElement.addEventListener('pointermove', onPointerMove, false)
             var that = this
             function onPointerMove(event) {
+                var x, y
+                if (window.innerWidth >= 640) {
+                    x = 281
+                    y = 0
+                } else {
+                    x = 0
+                    y = 49
+                }
                 if (event.isPrimary === false) return
-                that.mouse.x = (event.clientX / this.$webglInnerWidth) * 2 - 1
-                that.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
+                that.mouse.x = ((event.clientX - x) / (window.innerWidth - x)) * 2 - 1
+                that.mouse.y = - ((event.clientY - y) / window.innerHeight) * 2 + 1
                 checkIntersection()
             }
             function addSelectedObject(object) {
@@ -217,12 +225,18 @@ export default {
             }
         },
         onWindowResize() {
-            var width = window.innerWidth - 281
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            var width = window.innerWidth - x
             var height = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
             this.$statsPosition(this.stats)
             this.composer.setSize(width, height)
-            this.effectFXAA.uniforms[ 'resolution' ].value.set(1 / window.innerWidth - 281, 1 / window.innerHeight)
+            this.effectFXAA.uniforms[ 'resolution' ].value.set(1 / (window.innerWidth - x), 1 / window.innerHeight)
         },
         animate() {
             requestAnimationFrame(this.animate)

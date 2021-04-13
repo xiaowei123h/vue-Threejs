@@ -138,10 +138,22 @@ export default {
         };
         this.DEMO.Initialize();
         window.addEventListener('resize', () => {
-            this.DEMO.Resize(window.innerWidth - 281, window.innerHeight);
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.DEMO.Resize(window.innerWidth - x, window.innerHeight);
             this.$statsPosition(this.stats)
         });
-        this.DEMO.Resize(window.innerWidth - 281, window.innerHeight);
+        var x
+        if (window.innerWidth >= 640) {
+            x = 281
+        } else {
+            x = 0
+        }
+        this.DEMO.Resize(window.innerWidth - x, window.innerHeight);
         this.render()
     },
     beforeDestroy() {
@@ -161,8 +173,5 @@ export default {
 .webglShadersOcean2-container {
     position: relative;
     width: 100%;
-}
-#info {
-    margin-left: 0;
 }
 </style>

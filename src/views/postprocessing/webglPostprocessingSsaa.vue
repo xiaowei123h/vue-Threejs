@@ -71,7 +71,7 @@ export default {
             var mesh1 = new this.$THREE.Mesh(geometry, material1)
             mesh1.position.x = - 100
             this.scene.add(mesh1)
-            var texture = new this.$THREE.TextureLoader().load("textures/brick_diffuse.jpg")
+            var texture = new this.$THREE.TextureLoader().load("static/textures/brick_diffuse.jpg")
             texture.minFilter = this.$THREE.NearestFilter
             texture.magFilter = this.$THREE.NearestFilter
             texture.anisotropy = 1
@@ -90,7 +90,13 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            var width = window.innerWidth - 281
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            var width = window.innerWidth - x
             var height = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
             this.$statsPosition(this.stats)

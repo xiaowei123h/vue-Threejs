@@ -158,7 +158,6 @@ export default {
     color: #08f;
 }
 #info {
-    margin-left: 0;
     color: #444;
 }
 #centerer {

@@ -115,8 +115,14 @@ export default {
 			this.render()
         },
         onWindowResize() {
-			this.renderer.setSize(window.innerWidth - 281, window.innerHeight)
-			var aspect = (window.innerWidth - 281 )/ window.innerHeight
+			var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+			this.renderer.setSize(window.innerWidth - x, window.innerHeight)
+			var aspect = (window.innerWidth - x )/ window.innerHeight
 			var frustumHeight = this.camera.top - this.camera.bottom
 			this.camera.left = - frustumHeight * aspect / 2
 			this.camera.right = frustumHeight * aspect / 2

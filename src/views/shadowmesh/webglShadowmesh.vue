@@ -239,7 +239,4 @@ export default {
     position: relative;
     width: 100%;
 }
-#info {
-    left: calc(50% + 140.5px);
-}
 </style>

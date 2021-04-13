@@ -24,6 +24,7 @@ export default {
             var info = document.createElement('div')
             info.style.position = 'absolute'
             info.style.top = '10px'
+            info.style.left = '90px'
             info.style.width = 'calc(100%-281px)'
             info.style.textAlign = 'center'
             info.style.color = '#fff'

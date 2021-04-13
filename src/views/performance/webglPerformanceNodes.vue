@@ -135,7 +135,13 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            this.windowHalfX = (window.innerWidth - 281) / 2
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.windowHalfX = (window.innerWidth - x) / 2
             this.windowHalfY = window.innerHeight / 2
             this.$onWindowResize(this.camera, this.renderer)
             this.$statsPosition(this.stats)
@@ -163,8 +169,5 @@ export default {
 .webglPerformanceNodes-container {
     position: relative;
     width: 100%;
-}
-#info {
-    margin-left: 0;
 }
 </style>

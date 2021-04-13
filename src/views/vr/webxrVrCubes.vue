@@ -100,6 +100,11 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false);
             //
             document.getElementsByClassName('webxrVrCubes-container')[0].appendChild(VRButton.createButton(this.renderer));
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrCubes-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrCubes-container')[0].style.height = 'calc(100vh - 49px)'
+            }
         },
         buildController(data) {
             var geometry, material;
@@ -118,6 +123,11 @@ export default {
 
         },
         onWindowResize() {
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrCubes-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrCubes-container')[0].style.height = 'calc(100vh - 49px)'
+            }
             this.$onWindowResize(this.camera, this.renderer)
         },
         animate() {

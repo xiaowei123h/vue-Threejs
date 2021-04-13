@@ -37,11 +37,8 @@ export default {
     },
     mounted() {
         this.clock = new this.$THREE.Clock()
-        Ammo().then((AmmoLib) => {
-			Ammo = AmmoLib
-			this.init()
-			this.animate()
-		})
+        this.init()
+		this.animate()
     },
     methods: {
         init() {
@@ -90,15 +87,15 @@ export default {
         },
         initPhysics() {
 			// Physics configuration
-			this.collisionConfiguration = new Ammo.btSoftBodyRigidBodyCollisionConfiguration()
-			this.dispatcher = new Ammo.btCollisionDispatcher(this.collisionConfiguration)
-			this.broadphase = new Ammo.btDbvtBroadphase()
-			this.solver = new Ammo.btSequentialImpulseConstraintSolver()
-			this.softBodySolver = new Ammo.btDefaultSoftBodySolver()
-			this.physicsWorld = new Ammo.btSoftRigidDynamicsWorld(this.dispatcher, this.broadphase, this.solver, this.collisionConfiguration, this.softBodySolver)
-			this.physicsWorld.setGravity(new Ammo.btVector3(0, this.gravityConstant, 0))
-			this.physicsWorld.getWorldInfo().set_m_gravity(new Ammo.btVector3(0, this.gravityConstant, 0))
-			this.transformAux1 = new Ammo.btTransform()
+			this.collisionConfiguration = new this.$Ammo.btSoftBodyRigidBodyCollisionConfiguration()
+			this.dispatcher = new this.$Ammo.btCollisionDispatcher(this.collisionConfiguration)
+			this.broadphase = new this.$Ammo.btDbvtBroadphase()
+			this.solver = new this.$Ammo.btSequentialImpulseConstraintSolver()
+			this.softBodySolver = new this.$Ammo.btDefaultSoftBodySolver()
+			this.physicsWorld = new this.$Ammo.btSoftRigidDynamicsWorld(this.dispatcher, this.broadphase, this.solver, this.collisionConfiguration, this.softBodySolver)
+			this.physicsWorld.setGravity(new this.$Ammo.btVector3(0, this.gravityConstant, 0))
+			this.physicsWorld.getWorldInfo().set_m_gravity(new this.$Ammo.btVector3(0, this.gravityConstant, 0))
+			this.transformAux1 = new this.$Ammo.btTransform()
         },
         createObjects() {
 			var pos = new this.$THREE.Vector3()
@@ -122,7 +119,7 @@ export default {
 			var ball = new this.$THREE.Mesh(new this.$THREE.SphereBufferGeometry(ballRadius, 20, 20), new this.$THREE.MeshPhongMaterial({ color: 0x202020 }))
 			ball.castShadow = true
 			ball.receiveShadow = true
-			var ballShape = new Ammo.btSphereShape(ballRadius)
+			var ballShape = new this.$Ammo.btSphereShape(ballRadius)
 			ballShape.setMargin(this.margin)
 			pos.set(- 3, 2, 0)
 			quat.set(0, 0, 0, 1)
@@ -189,15 +186,15 @@ export default {
 			this.rope.receiveShadow = true
 			this.scene.add(this.rope)
 			// Rope physic object
-			var softBodyHelpers = new Ammo.btSoftBodyHelpers()
-			var ropeStart = new Ammo.btVector3(ropePos.x, ropePos.y, ropePos.z)
-			var ropeEnd = new Ammo.btVector3(ropePos.x, ropePos.y + ropeLength, ropePos.z)
+			var softBodyHelpers = new this.$Ammo.btSoftBodyHelpers()
+			var ropeStart = new this.$Ammo.btVector3(ropePos.x, ropePos.y, ropePos.z)
+			var ropeEnd = new this.$Ammo.btVector3(ropePos.x, ropePos.y + ropeLength, ropePos.z)
 			var ropeSoftBody = softBodyHelpers.CreateRope(this.physicsWorld.getWorldInfo(), ropeStart, ropeEnd, ropeNumSegments - 1, 0)
 			var sbConfig = ropeSoftBody.get_m_cfg()
 			sbConfig.set_viterations(10)
 			sbConfig.set_piterations(10)
 			ropeSoftBody.setTotalMass(ropeMass, false)
-			Ammo.castObject(ropeSoftBody, Ammo.btCollisionObject).getCollisionShape().setMargin(this.margin * 3)
+			this.$Ammo.castObject(ropeSoftBody, this.$Ammo.btCollisionObject).getCollisionShape().setMargin(this.margin * 3)
             this.physicsWorld.addSoftBody(ropeSoftBody, 1, - 1)
 			this.rope.userData.physicsBody = ropeSoftBody
 			// Disable deactivation
@@ -225,15 +222,15 @@ export default {
 			ropeSoftBody.appendAnchor(0, ball.userData.physicsBody, true, influence)
 			ropeSoftBody.appendAnchor(ropeNumSegments, arm.userData.physicsBody, true, influence)
 			// Hinge varraint to move the arm
-			var pivotA = new Ammo.btVector3(0, pylonHeight * 0.5, 0)
-			var pivotB = new Ammo.btVector3(0, - 0.2, - armLength * 0.5)
-			var axis = new Ammo.btVector3(0, 1, 0)
-			this.hinge = new Ammo.btHingeConstraint(pylon.userData.physicsBody, arm.userData.physicsBody, pivotA, pivotB, axis, axis, true)
+			var pivotA = new this.$Ammo.btVector3(0, pylonHeight * 0.5, 0)
+			var pivotB = new this.$Ammo.btVector3(0, - 0.2, - armLength * 0.5)
+			var axis = new this.$Ammo.btVector3(0, 1, 0)
+			this.hinge = new this.$Ammo.btHingeConstraint(pylon.userData.physicsBody, arm.userData.physicsBody, pivotA, pivotB, axis, axis, true)
 			this.physicsWorld.addConstraint(this.hinge, true)
         },
         createParalellepiped(sx, sy, sz, mass, pos, quat, material) {
 			var threeObject = new this.$THREE.Mesh(new this.$THREE.BoxBufferGeometry(sx, sy, sz, 1, 1, 1), material)
-			var shape = new Ammo.btBoxShape(new Ammo.btVector3(sx * 0.5, sy * 0.5, sz * 0.5))
+			var shape = new this.$Ammo.btBoxShape(new this.$Ammo.btVector3(sx * 0.5, sy * 0.5, sz * 0.5))
 			shape.setMargin(this.margin)
 			this.createRigidBody(threeObject, shape, mass, pos, quat)
 			return threeObject
@@ -241,15 +238,15 @@ export default {
         createRigidBody(threeObject, physicsShape, mass, pos, quat) {
 			threeObject.position.copy(pos)
 			threeObject.quaternion.copy(quat)
-			var transform = new Ammo.btTransform()
+			var transform = new this.$Ammo.btTransform()
 			transform.setIdentity()
-			transform.setOrigin(new Ammo.btVector3(pos.x, pos.y, pos.z))
-			transform.setRotation(new Ammo.btQuaternion(quat.x, quat.y, quat.z, quat.w))
-			var motionState = new Ammo.btDefaultMotionState(transform)
-			var localInertia = new Ammo.btVector3(0, 0, 0)
+			transform.setOrigin(new this.$Ammo.btVector3(pos.x, pos.y, pos.z))
+			transform.setRotation(new this.$Ammo.btQuaternion(quat.x, quat.y, quat.z, quat.w))
+			var motionState = new this.$Ammo.btDefaultMotionState(transform)
+			var localInertia = new this.$Ammo.btVector3(0, 0, 0)
 			physicsShape.calculateLocalInertia(mass, localInertia)
-			var rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, motionState, physicsShape, localInertia)
-			var body = new Ammo.btRigidBody(rbInfo)
+			var rbInfo = new this.$Ammo.btRigidBodyConstructionInfo(mass, motionState, physicsShape, localInertia)
+			var body = new this.$Ammo.btRigidBody(rbInfo)
 			threeObject.userData.physicsBody = body
 			this.scene.add(threeObject)
 			if (mass > 0) {

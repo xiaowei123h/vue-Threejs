@@ -141,8 +141,18 @@ export default {
             this.controller2.add(line.clone())
             //
             window.addEventListener('resize', this.onWindowResize, false)
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrHandinputProfiles-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrHandinputProfiles-container')[0].style.height = 'calc(100vh - 49px)'
+            }
         },
         onWindowResize() {
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrHandinputProfiles-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrHandinputProfiles-container')[0].style.height = 'calc(100vh - 49px)'
+            }
             this.$onWindowResize(this.camera, this.renderer)
         },
         animate() {

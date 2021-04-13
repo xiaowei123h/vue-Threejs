@@ -133,13 +133,19 @@ export default {
             })
         },
         onWindowResize() {
-            var aspect = (window.innerWidth - 281) / window.innerHeight
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            var aspect = (window.innerWidth - x) / window.innerHeight
             this.cameraPersp.aspect = aspect
             this.cameraPersp.updateProjectionMatrix()
             this.cameraOrtho.left = this.cameraOrtho.bottom * aspect
             this.cameraOrtho.right = this.cameraOrtho.top * aspect
             this.cameraOrtho.updateProjectionMatrix()
-            this.renderer.setSize((window.innerWidth - 281), window.innerHeight)
+            this.renderer.setSize((window.innerWidth - x), window.innerHeight)
             this.render()
         },
         render() {

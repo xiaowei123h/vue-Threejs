@@ -148,9 +148,3 @@ export default {
     color: #0f0;
 }
 </style>
-
-<style>
-.miscExporterDraco-container #info {
-    margin-left: 0;
-}
-</style>

@@ -135,8 +135,16 @@ export default {
             var that = this
             function checkIntersection(x, y) {
                 if (that.mesh === undefined) return
-                that.mouse.x = ((x - 281) / that.$webglInnerWidth) * 2 - 1
-                that.mouse.y = - (y / window.innerHeight) * 2 + 1
+                var xx, yy
+                if (window.innerWidth >= 640) {
+                    xx = 281
+                    yy = 0
+                } else {
+                    xx = 0
+                    yy = 49
+                }
+                that.mouse.x = ((x - xx) / that.$webglInnerWidth) * 2 - 1
+                that.mouse.y = - ((y - yy) / window.innerHeight) * 2 + 1
                 that.raycaster.setFromCamera(that.mouse, that.camera)
                 that.raycaster.intersectObject(that.mesh, false, that.intersects)
                 if (that.intersects.length > 0) {
@@ -219,8 +227,5 @@ export default {
 .webglDecals-container {
     position: relative;
     width: 100%;
-}
-#info {
-    margin-left: 0;
 }
 </style>

@@ -160,10 +160,6 @@ export default {
     color: #08f;
 }
 
-.webglMultipleElementsText-container #info {
-    left: 0px;
-}
-
 .webglMultipleElementsText-container .view {
     width: 5in;
     height: 5in;

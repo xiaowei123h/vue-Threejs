@@ -215,7 +215,7 @@ export default {
 </script>
 
 <style scoped>
-.webglShadersVector-contianer {
+.webglShadersVector-container {
     position: relative;
     width: 100%;
 }

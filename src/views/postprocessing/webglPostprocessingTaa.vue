@@ -109,7 +109,13 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            var width = window.innerWidth - 281
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            var width = window.innerWidth - x
             var height = window.innerHeight
             this.$onWindowResize(this.camera, this.renderer)
             this.$statsPosition(this.stats)

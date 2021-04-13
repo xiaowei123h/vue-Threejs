@@ -16,7 +16,6 @@
 </template>
 
 <script>
-// import { Ammo } from '@/utils/ammo.wasm.js'
 import { OutlineEffect } from '@/components/jsm/effects/OutlineEffect.js'
 import { MMDLoader } from '@/components/jsm/loaders/MMDLoader.js'
 import { MMDAnimationHelper } from '@/components/jsm/animation/MMDAnimationHelper.js'
@@ -38,10 +37,8 @@ export default {
     },
     methods: {
         handleStartButton() {
-            Ammo().then(() => {
-                this.init()
-                this.animate()
-            })
+            this.init()
+            this.animate()
         },
         init() {
             var overlay = document.getElementById('overlay')
@@ -103,9 +100,15 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            this.camera.aspect = (window.innerWidth - 281) / window.innerHeight
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.camera.aspect = (window.innerWidth - x) / window.innerHeight
             this.camera.updateProjectionMatrix()
-            this.effect.setSize((window.innerWidth - 281), window.innerHeight)
+            this.effect.setSize((window.innerWidth - x), window.innerHeight)
         },
         animate() {
             requestAnimationFrame(this.animate)
@@ -132,7 +135,6 @@ export default {
     line-height: 100vh;
 }
 #info {
-    margin-left: -175px;
     color: #444;
 }
 #info a {

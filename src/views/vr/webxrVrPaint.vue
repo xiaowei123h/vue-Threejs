@@ -119,8 +119,18 @@ export default {
             this.controller2.add(mesh.clone())
             //
             window.addEventListener('resize', this.onWindowResize, false)
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrPaint-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrPaint-container')[0].style.height = 'calc(100vh - 49px)'
+            }
         },
         onWindowResize() {
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrPaint-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrPaint-container')[0].style.height = 'calc(100vh - 49px)'
+            }
             this.$onWindowResize(this.camera, this.renderer)
         },
         handleController(controller) {

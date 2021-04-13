@@ -104,10 +104,16 @@ export default {
                         rect.right < 0 || rect.left > this.renderer.domElement.clientWidth) {
                     return // it's off screen
                 }
+                var x
+                if (window.innerWidth >= 640) {
+                    x = 281
+                } else {
+                    x = 0
+                }
                 // set the viewport
                 var width = rect.right - rect.left
                 var height = rect.bottom - rect.top
-                var left = rect.left - 281
+                var left = rect.left - x
                 var bottom = this.renderer.domElement.clientHeight - rect.bottom
                 this.renderer.setViewport(left, bottom, width, height)
                 this.renderer.setScissor(left, bottom, width, height)
@@ -129,6 +135,7 @@ export default {
     height: 100vh;
     background-color: #fff;
     color: #444;
+    overflow-y: auto;
 }
 
 </style>

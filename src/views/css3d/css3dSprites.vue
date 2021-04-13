@@ -147,9 +147,3 @@ export default {
     color: #48f;
 }
 </style>
-
-<style>
-.css3dSprites-container #info {
-    margin-left: 0;
-}
-</style>

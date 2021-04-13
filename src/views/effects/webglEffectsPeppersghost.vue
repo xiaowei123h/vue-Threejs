@@ -68,9 +68,15 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            this.camera.aspect = (window.innerWidth - 281) / window.innerHeight
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.camera.aspect = (window.innerWidth - x) / window.innerHeight
             this.camera.updateProjectionMatrix()
-            this.effect.setSize((window.innerWidth - 281), window.innerHeight)
+            this.effect.setSize((window.innerWidth - x), window.innerHeight)
         },
         animate() {
             requestAnimationFrame(this.animate)

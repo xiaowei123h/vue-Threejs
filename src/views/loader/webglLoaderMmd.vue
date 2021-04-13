@@ -34,11 +34,8 @@ export default {
     },
     mounted() {
         this.clock = new this.$moduleTHREE.Clock()
-        Ammo().then((AmmoLib) => {
-            Ammo = AmmoLib
-            this.init()
-            this.animate()
-        })
+        this.init()
+        this.animate()
     },
     beforeDestroy() {
         this.gui.destroy()
@@ -135,9 +132,15 @@ export default {
             }
         },
         onWindowResize() {
-            this.camera.aspect = (window.innerWidth - 281) / window.innerHeight
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.camera.aspect = (window.innerWidth - x) / window.innerHeight
             this.camera.updateProjectionMatrix()
-            this.effect.setSize(window.innerWidth - 281, window.innerHeight)
+            this.effect.setSize(window.innerWidth - x, window.innerHeight)
             this.$statsPosition(this.stats)
         },
         animate() {

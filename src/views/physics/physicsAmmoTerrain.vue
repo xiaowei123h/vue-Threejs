@@ -48,11 +48,8 @@ export default {
         this.terrainHalfWidth = this.terrainWidth / 2
 		this.terrainHalfDepth = this.terrainDepth / 2
         this.timeNextSpawn = this.time + this.objectTimePeriod
-        Ammo().then((AmmoLib) => {
-            Ammo = AmmoLib
-            this.init()
-            this.animate()
-        })
+        this.init()
+        this.animate()
     },
     methods: {
         init() {
@@ -123,24 +120,24 @@ export default {
         },
         initPhysics() {
             // Physics configuration
-            this.collisionConfiguration = new Ammo.btDefaultCollisionConfiguration()
-            this.dispatcher = new Ammo.btCollisionDispatcher(this.collisionConfiguration)
-            this.broadphase = new Ammo.btDbvtBroadphase()
-            this.solver = new Ammo.btSequentialImpulseConstraintSolver()
-            this.physicsWorld = new Ammo.btDiscreteDynamicsWorld(this.dispatcher, this.broadphase, this.solver, this.collisionConfiguration)
-            this.physicsWorld.setGravity(new Ammo.btVector3(0, - 6, 0))
+            this.collisionConfiguration = new this.$Ammo.btDefaultCollisionConfiguration()
+            this.dispatcher = new this.$Ammo.btCollisionDispatcher(this.collisionConfiguration)
+            this.broadphase = new this.$Ammo.btDbvtBroadphase()
+            this.solver = new this.$Ammo.btSequentialImpulseConstraintSolver()
+            this.physicsWorld = new this.$Ammo.btDiscreteDynamicsWorld(this.dispatcher, this.broadphase, this.solver, this.collisionConfiguration)
+            this.physicsWorld.setGravity(new this.$Ammo.btVector3(0, - 6, 0))
             // Create the terrain body
             var groundShape = this.createTerrainShape()
-            var groundTransform = new Ammo.btTransform()
+            var groundTransform = new this.$Ammo.btTransform()
             groundTransform.setIdentity()
             // Shifts the terrain, since bullet re-centers it on its bounding box.
-            groundTransform.setOrigin(new Ammo.btVector3(0, (this.terrainMaxHeight + this.terrainMinHeight) / 2, 0))
+            groundTransform.setOrigin(new this.$Ammo.btVector3(0, (this.terrainMaxHeight + this.terrainMinHeight) / 2, 0))
             var groundMass = 0
-            var groundLocalInertia = new Ammo.btVector3(0, 0, 0)
-            var groundMotionState = new Ammo.btDefaultMotionState(groundTransform)
-            var groundBody = new Ammo.btRigidBody(new Ammo.btRigidBodyConstructionInfo(groundMass, groundMotionState, groundShape, groundLocalInertia))
+            var groundLocalInertia = new this.$Ammo.btVector3(0, 0, 0)
+            var groundMotionState = new this.$Ammo.btDefaultMotionState(groundTransform)
+            var groundBody = new this.$Ammo.btRigidBody(new this.$Ammo.btRigidBodyConstructionInfo(groundMass, groundMotionState, groundShape, groundLocalInertia))
             this.physicsWorld.addRigidBody(groundBody)
-            this.transformAux1 = new Ammo.btTransform()
+            this.transformAux1 = new this.$Ammo.btTransform()
         },
         generateHeight(width, depth, minHeight, maxHeight) {
             // Generates the height data (a sinus wave)
@@ -172,22 +169,22 @@ export default {
             var hdt = "PHY_FLOAT"
             // Set this to your needs (inverts the triangles)
             var flipQuadEdges = false
-            // Creates height data buffer in Ammo heap
-            this.ammoHeightData = Ammo._malloc(4 * this.terrainWidth * this.terrainDepth)
-            // Copy the javascript height data array to the Ammo one.
+            // Creates height data buffer in this.$Ammo heap
+            this.ammoHeightData = this.$Ammo._malloc(4 * this.terrainWidth * this.terrainDepth)
+            // Copy the javascript height data array to the this.$Ammo one.
             var p = 0
             var p2 = 0
             for (var j = 0; j < this.terrainDepth; j ++) {
                 for (var i = 0; i < this.terrainWidth; i ++) {
                     // write 32-bit float data to memory
-                    Ammo.HEAPF32[ this.ammoHeightData + p2 >> 2 ] = this.heightData[ p ]
+                    this.$Ammo.HEAPF32[ this.ammoHeightData + p2 >> 2 ] = this.heightData[ p ]
                     p ++
                     // 4 bytes/float
                     p2 += 4
                 }
             }
             // Creates the heightfield physics shape
-            var heightFieldShape = new Ammo.btHeightfieldTerrainShape(
+            var heightFieldShape = new this.$Ammo.btHeightfieldTerrainShape(
                 this.terrainWidth,
                 this.terrainDepth,
                 this.ammoHeightData,
@@ -201,7 +198,7 @@ export default {
             // Set horizontal scale
             var scaleX = this.terrainWidthExtents / (this.terrainWidth - 1)
             var scaleZ = this.terrainDepthExtents / (this.terrainDepth - 1)
-            heightFieldShape.setLocalScaling(new Ammo.btVector3(scaleX, 1, scaleZ))
+            heightFieldShape.setLocalScaling(new this.$Ammo.btVector3(scaleX, 1, scaleZ))
             heightFieldShape.setMargin(0.05)
             return heightFieldShape
         },
@@ -218,7 +215,7 @@ export default {
                     // Sphere
                     radius = 1 + Math.random() * objectSize
                     threeObject = new this.$THREE.Mesh(new this.$THREE.SphereBufferGeometry(radius, 20, 20), this.createObjectMaterial())
-                    shape = new Ammo.btSphereShape(radius)
+                    shape = new this.$Ammo.btSphereShape(radius)
                     shape.setMargin(margin)
                     break
                 case 2:
@@ -227,7 +224,7 @@ export default {
                     var sy = 1 + Math.random() * objectSize
                     var sz = 1 + Math.random() * objectSize
                     threeObject = new this.$THREE.Mesh(new this.$THREE.BoxBufferGeometry(sx, sy, sz, 1, 1, 1), this.createObjectMaterial())
-                    shape = new Ammo.btBoxShape(new Ammo.btVector3(sx * 0.5, sy * 0.5, sz * 0.5))
+                    shape = new this.$Ammo.btBoxShape(new this.$Ammo.btVector3(sx * 0.5, sy * 0.5, sz * 0.5))
                     shape.setMargin(margin)
                     break
                 case 3:
@@ -235,7 +232,7 @@ export default {
                     radius = 1 + Math.random() * objectSize
                     height = 1 + Math.random() * objectSize
                     threeObject = new this.$THREE.Mesh(new this.$THREE.CylinderBufferGeometry(radius, radius, height, 20, 1), this.createObjectMaterial())
-                    shape = new Ammo.btCylinderShape(new Ammo.btVector3(radius, height * 0.5, radius))
+                    shape = new this.$Ammo.btCylinderShape(new this.$Ammo.btVector3(radius, height * 0.5, radius))
                     shape.setMargin(margin)
                     break
                 default:
@@ -243,20 +240,20 @@ export default {
                     radius = 1 + Math.random() * objectSize
                     height = 2 + Math.random() * objectSize
                     threeObject = new this.$THREE.Mesh(new this.$THREE.ConeBufferGeometry(radius, height, 20, 2), this.createObjectMaterial())
-                    shape = new Ammo.btConeShape(radius, height)
+                    shape = new this.$Ammo.btConeShape(radius, height)
                     break
             }
             threeObject.position.set((Math.random() - 0.5) * this.terrainWidth * 0.6, this.terrainMaxHeight + objectSize + 2, (Math.random() - 0.5) * this.terrainDepth * 0.6)
             var mass = objectSize * 5
-            var localInertia = new Ammo.btVector3(0, 0, 0)
+            var localInertia = new this.$Ammo.btVector3(0, 0, 0)
             shape.calculateLocalInertia(mass, localInertia)
-            var transform = new Ammo.btTransform()
+            var transform = new this.$Ammo.btTransform()
             transform.setIdentity()
             var pos = threeObject.position
-            transform.setOrigin(new Ammo.btVector3(pos.x, pos.y, pos.z))
-            var motionState = new Ammo.btDefaultMotionState(transform)
-            var rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, motionState, shape, localInertia)
-            var body = new Ammo.btRigidBody(rbInfo)
+            transform.setOrigin(new this.$Ammo.btVector3(pos.x, pos.y, pos.z))
+            var motionState = new this.$Ammo.btDefaultMotionState(transform)
+            var rbInfo = new this.$Ammo.btRigidBodyConstructionInfo(mass, motionState, shape, localInertia)
+            var body = new this.$Ammo.btRigidBody(rbInfo)
             threeObject.userData.physicsBody = body
             threeObject.receiveShadow = true
             threeObject.castShadow = true

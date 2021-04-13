@@ -185,7 +185,4 @@ export default {
     margin-right: auto;
     padding: 0 2em;
 }
-#info {
-    margin-left: -280px;
-}
 </style>

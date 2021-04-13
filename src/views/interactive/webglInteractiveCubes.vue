@@ -68,9 +68,17 @@ export default {
             this.$statsPosition(this.stats)
         },
         onDocumentMouseMove(event) {
+            var x, y
+            if (window.innerWidth >= 640) {
+                x = 281
+                y = 0
+            } else {
+                x = 0
+                y = 49
+            }
             event.preventDefault()
-            this.mouse.x = ((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1
-            this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1
+            this.mouse.x = ((event.clientX - x) / (window.innerWidth - x)) * 2 - 1
+            this.mouse.y = - ((event.clientY - y) / window.innerHeight) * 2 + 1
         },
         animate() {
             requestAnimationFrame(this.animate)

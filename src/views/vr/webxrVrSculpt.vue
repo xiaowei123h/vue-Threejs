@@ -74,6 +74,11 @@ export default {
             this.renderer.xr.enabled = true
             this.container.appendChild(this.renderer.domElement)
             document.getElementsByClassName('webxrVrSculpt-container')[0].appendChild(VRButton.createButton(this.renderer))
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrSculpt-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrSculpt-container')[0].style.height = 'calc(100vh - 49px)'
+            }
             // controllers
             function onSelectStart() {
                 this.userData.isSelecting = true
@@ -135,6 +140,11 @@ export default {
             ]
         },
         onWindowResize() {
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrSculpt-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrSculpt-container')[0].style.height = 'calc(100vh - 49px)'
+            }
             this.$onWindowResize(this.camera, this.renderer)
         },
         animate() {

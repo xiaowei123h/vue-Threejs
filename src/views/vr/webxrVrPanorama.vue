@@ -49,6 +49,11 @@ export default {
             skyBoxR.layers.set(2)
             this.scene.add(skyBoxR)
             window.addEventListener('resize', this.onWindowResize, false)
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrPanorama-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrPanorama-container')[0].style.height = 'calc(100vh - 49px)'
+            }
         },
         getTexturesFromAtlasFile(atlasImgUrl, tilesNum) {
             var textures = []
@@ -72,6 +77,11 @@ export default {
             return textures
         },
         onWindowResize() {
+            if (window.innerWidth >= 640) {
+                document.getElementsByClassName('webxrVrPanorama-container')[0].style.height = '100vh'
+            } else {
+                document.getElementsByClassName('webxrVrPanorama-container')[0].style.height = 'calc(100vh - 49px)'
+            }
             this.$onWindowResize(this.camera, this.renderer)
         },
         animate() {

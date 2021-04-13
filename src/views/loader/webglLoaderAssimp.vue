@@ -81,7 +81,4 @@ export default {
     position: relative;
     width: 100%;
 }
-#info {
-    margin-left: -50px;
-}
 </style>

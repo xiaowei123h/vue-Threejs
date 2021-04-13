@@ -91,7 +91,13 @@ export default {
             this.animate()
         },
         onResize() {
-            this.renderer.setSize(window.innerWidth - 281, window.innerHeight)
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.renderer.setSize(window.innerWidth - x, window.innerHeight)
         },
         animate() {
             requestAnimationFrame(this.animate)

@@ -76,8 +76,16 @@ export default {
             this.$onWindowResize(this.camera, this.renderer)
         },
         onDocumentMouseMove(event) {
+            var x, y
+            if (window.innerWidth >= 640) {
+                x = 281
+                y = 0
+            } else {
+                x = 0
+                y = 49
+            }
             event.preventDefault()
-            this.mouse.set(((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1, - (event.clientY / window.innerHeight) * 2 + 1)
+            this.mouse.set(((event.clientX - x) / (window.innerWidth - x)) * 2 - 1, - ((event.clientY - y) / window.innerHeight) * 2 + 1)
             this.raycaster.setFromCamera(this.mouse, this.camera)
             var intersects = this.raycaster.intersectObjects(this.objects)
             if (intersects.length > 0) {
@@ -88,8 +96,16 @@ export default {
             this.render()
         },
         onDocumentMouseDown(event) {
+            var x, y
+            if (window.innerWidth >= 640) {
+                x = 281
+                y = 0
+            } else {
+                x = 0
+                y = 49
+            }
             event.preventDefault()
-            this.mouse.set(((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1, - (event.clientY / window.innerHeight) * 2 + 1)
+            this.mouse.set(((event.clientX - x) / (window.innerWidth - x)) * 2 - 1, - ((event.clientY - y) / window.innerHeight) * 2 + 1)
             this.raycaster.setFromCamera(this.mouse, this.camera)
             var intersects = this.raycaster.intersectObjects(this.objects)
             if (intersects.length > 0) {

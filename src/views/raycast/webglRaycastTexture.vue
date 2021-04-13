@@ -194,7 +194,7 @@ export default {
     background-color: #fff;
 }
 #info {
-    color: #444;
+	color: #444;
 }
 
 #info a {

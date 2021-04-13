@@ -117,7 +117,13 @@ export default {
             }
         },
         onWindowResize() {
-            this.SCREEN_WIDTH = window.innerWidth - 281
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            this.SCREEN_WIDTH = window.innerWidth - x
             this.SCREEN_HEIGHT = window.innerHeight
             this.aspect = this.SCREEN_WIDTH / this.SCREEN_HEIGHT
             this.renderer.setSize(this.SCREEN_WIDTH, this.SCREEN_HEIGHT)
@@ -178,8 +184,5 @@ export default {
 }
 b {
     color: lightgreen;
-}
-#info {
-    margin-left: 0;
 }
 </style>

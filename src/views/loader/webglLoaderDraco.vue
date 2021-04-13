@@ -96,7 +96,4 @@ export default {
 	position: relative;
     width: 100%;
 }
-#info {
-	margin-left: 60px;
-}
 </style>

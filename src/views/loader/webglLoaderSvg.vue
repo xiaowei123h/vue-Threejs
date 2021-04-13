@@ -173,7 +173,4 @@ export default {
     width: 100%;
     background-color: #b0b0b0;
 }
-#info {
-    margin-left: 0;
-}
 </style>

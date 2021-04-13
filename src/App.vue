@@ -21,8 +21,8 @@ html, body {
 #info {
     position: absolute;
     top: 0px;
-    left: 50%;
-    margin-left: -90px;
+    left: 0;
+    width: 100%;
     color: #fff;
     font-size: 13px;
     letter-spacing: 1px;

@@ -157,9 +157,15 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            var width = window.innerWidth - 281
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            var width = window.innerWidth - x
             var height = window.innerHeight
-            var aspect = (window.innerWidth - 281) / window.innerHeight
+            var aspect = (window.innerWidth - x) / window.innerHeight
             this.camera.aspect = aspect
             this.camera.left = - height * aspect
             this.camera.right = height * aspect

@@ -115,7 +115,4 @@ export default {
     width: 100%;
     background-color: #333;
 }
-#info {
-    margin-left: 0;
-}
 </style>

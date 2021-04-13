@@ -66,19 +66,33 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false);
         },
         onWindowResize() {
-            var aspect = (window.innerWidth - 281) / window.innerHeight;
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            var aspect = (window.innerWidth - x) / window.innerHeight;
             this.camera.left = - this.frustumSize * aspect / 2;
             this.camera.right = this.frustumSize * aspect / 2;
             this.camera.top = this.frustumSize / 2;
             this.camera.bottom = - this.frustumSize / 2;
             this.camera.updateProjectionMatrix();
-            this.renderer.setSize((window.innerWidth - 281), window.innerHeight);
+            this.renderer.setSize((window.innerWidth - x), window.innerHeight);
             this.$statsPosition(this.stats)
         },
         onDocumentMouseMove(event) {
+            var x, y
+            if (window.innerWidth >= 640) {
+                x = 281
+                y = 0
+            } else {
+                x = 0
+                y = 49
+            }
             event.preventDefault();
-            this.mouse.x = ((event.clientX - 281) / (window.innerWidth - 281)) * 2 - 1;
-            this.mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+            this.mouse.x = ((event.clientX - x) / (window.innerWidth - x)) * 2 - 1;
+            this.mouse.y = - ((event.clientY - y) / window.innerHeight) * 2 + 1;
         },
         animate() {
             requestAnimationFrame(this.animate);

@@ -57,12 +57,18 @@ export default {
             window.addEventListener('resize', this.onWindowResize, false)
         },
         onWindowResize() {
-            var aspect = (window.innerWidth - 281) / window.innerHeight
+            var x
+            if (window.innerWidth >= 640) {
+                x = 281
+            } else {
+                x = 0
+            }
+            var aspect = (window.innerWidth - x) / window.innerHeight
             var frustumHeight = this.camera.top - this.camera.bottom
             this.camera.left = - frustumHeight * aspect / 2
             this.camera.right = frustumHeight * aspect / 2
             this.camera.updateProjectionMatrix()
-            this.renderer.setSize(window.innerWidth - 281, window.innerHeight)
+            this.renderer.setSize(window.innerWidth - x, window.innerHeight)
             this.render()
         },
         render() {

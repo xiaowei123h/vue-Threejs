@@ -20,6 +20,10 @@ Vue.prototype.$Stats = Stats
 Vue.prototype.$WEBGL = WEBGL
 Vue.prototype.$onWindowResize = onWindowResize
 Vue.prototype.$statsPosition = statsPosition
+
+Ammo().then((AmmoLib) => {
+    Vue.prototype.$Ammo = AmmoLib
+})
 // Vue.prototype.$webglInnerWidth = window.innerWidth - 281
 
 if (window.innerWidth >= 640) {
